@@ -23,6 +23,22 @@ public class SettingsActivity extends Activity
         passwordET = (EditText) findViewById(R.id.passwordEditText);
         datestampET = (EditText) findViewById(R.id.datestampEditText);
 
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+
+        if(prefs.contains("firstName"))
+            firstNameET.setText(prefs.getString("firstName", null));
+
+        if(prefs.contains("lastName"))
+            lastNameET.setText(prefs.getString("lastName",null));
+
+        if(prefs.contains("email"))
+            emailET.setText(prefs.getString("email", null));
+
+        if(prefs.contains("password"))
+            passwordET.setText(prefs.getString("password", null));
+
+        if(prefs.contains("datestamp"))
+            datestampET.setText(prefs.getString("datestamp", null));
     }
 
     public void saveSettings(View view)
@@ -31,7 +47,7 @@ public class SettingsActivity extends Activity
         SharedPreferences.Editor editor = prefs.edit();
 
         editor.putString("firstName", firstNameET.getText().toString());
-        editor.putString("lastname", lastNameET.getText().toString());
+        editor.putString("lastName", lastNameET.getText().toString());
         editor.putString("email", emailET.getText().toString());
         editor.putString("password", passwordET.getText().toString());
         editor.putString("datestamp", datestampET.getText().toString());
