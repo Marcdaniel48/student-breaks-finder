@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">DawsonBestFinder</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="search">Search</string>
+    <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="office">Office</string>
+    <string name="local">Local</string>
+    <string name="default_value">--</string>
+    <string name="sectors">Sectors</string>
+    <string name="positions">Positions</string>
+    <string name="departments">Departments</string>
+    <string name="call">Call</string>
 </resources>
