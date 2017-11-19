@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">DawsonBestFinder</string>
 
+    <string name="settings">Settings</string>
     <string name="settings_firstname">First name:</string>
     <string name="settings_lastname">Last name:</string>
     <string name="settings_email">Email address:</string>
