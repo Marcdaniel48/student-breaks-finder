@@ -9,6 +9,10 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class SettingsActivity extends Activity
 {
     EditText firstNameET, lastNameET, emailET, passwordET, datestampET;
@@ -53,6 +57,9 @@ public class SettingsActivity extends Activity
         editor.putString("lastName", lastNameET.getText().toString());
         editor.putString("email", emailET.getText().toString());
         editor.putString("password", passwordET.getText().toString());
+
+        Date date = new Date();
+        datestampET.setText(date.toString());
         editor.putString("datestamp", datestampET.getText().toString());
     }
 
