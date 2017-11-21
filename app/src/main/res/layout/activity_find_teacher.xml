@@ -14,7 +14,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/tvFirstName"
+                android:id="@+id/etFirstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -23,7 +23,7 @@
                 android:text="@string/first_name" />
 
             <EditText
-                android:id="@+id/tvLastName"
+                android:id="@+id/etLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -33,11 +33,20 @@
 
         </LinearLayout>
 
+        <RadioButton
+            android:id="@+id/rbExactSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="@string/exact_search" />
+
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="searchClick"
             android:text="@string/search" />
 
     </LinearLayout>

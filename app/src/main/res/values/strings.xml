@@ -12,4 +12,5 @@
     <string name="positions">Positions</string>
     <string name="departments">Departments</string>
     <string name="call">Call</string>
+    <string name="exact_search">Exact Search</string>
 </resources>
