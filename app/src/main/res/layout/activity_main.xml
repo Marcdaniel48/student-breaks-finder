@@ -61,7 +61,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/addCalendarBtn"
+                android:id="@+id/addCalendarButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -69,7 +69,7 @@
                 app:srcCompat="@drawable/addCalendarBtn" />
 
             <ImageButton
-                android:id="@+id/notesBtn"
+                android:id="@+id/notesButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -86,7 +86,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/weatherButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -94,7 +94,7 @@
                 app:srcCompat="@drawable/weatherBtn" />
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/academicCalendarButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

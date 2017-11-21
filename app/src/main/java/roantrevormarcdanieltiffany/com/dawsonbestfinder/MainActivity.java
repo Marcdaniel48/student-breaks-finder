@@ -13,7 +13,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onDawsonButton() {
-
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
     public void onClassCancellations() {
