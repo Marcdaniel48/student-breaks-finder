@@ -8,20 +8,13 @@
 
     <TableRow>
 
-        <Button
-            android:id="@+id/menuButton"
+        <ImageButton
+            android:id="@+id/dawsonButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Menu" />
-    </TableRow>
+            android:layout_height="170dp"
+            app:srcCompat="@drawable/dawsonlogo"
+            android:scaleType="fitXY" />
 
-    <TableRow>
-
-        <ImageView
-            android:id="@+id/dawsonLogo"
-            android:layout_width="wrap_content"
-            android:layout_height="142dp"
-            app:srcCompat="@drawable/dawsonlogo" />
     </TableRow>
 
     <TableRow android:layout_height="169dp">
@@ -37,7 +30,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:orientation="horizontal"
             android:scaleType="fitXY">
 
@@ -64,7 +57,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:orientation="horizontal">
 
             <ImageButton
@@ -89,7 +82,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="160dp"
             android:orientation="horizontal">
 
             <ImageButton
