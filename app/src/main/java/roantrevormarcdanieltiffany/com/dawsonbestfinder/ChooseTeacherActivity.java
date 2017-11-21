@@ -18,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ChooseTeacherActivity extends MenuActivity{
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+    protected static final String TEACHER_INDEXES = "teacherIndexes";
 
     /**
      * When invoked, will set up the activity.

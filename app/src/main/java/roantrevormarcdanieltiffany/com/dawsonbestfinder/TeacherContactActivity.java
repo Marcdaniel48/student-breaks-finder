@@ -19,6 +19,7 @@ public class TeacherContactActivity extends MenuActivity {
     private Context context;
     private TeacherContactFragment teacherContactFragment;
     private Bundle extras;
+    protected static final String TEACHER_ID = "teacherId";
 
     /**
      * Called when the activity is starting.  This is where most initialization
