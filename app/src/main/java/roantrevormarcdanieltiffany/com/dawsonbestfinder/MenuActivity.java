@@ -7,10 +7,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Menu;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
-
 /**
- * Created by mrtvor on 2017-11-20.
+ * Menu Activity containing about, and settings items
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 
 public class MenuActivity extends AppCompatActivity {
@@ -20,6 +23,12 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Invoked when user selects a menu item and shows selected intent
+     *
+     * @param item
+     * @return true if passed
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
@@ -34,6 +43,12 @@ public class MenuActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Called whenever a menu item is selected.
+     *
+     * @param menu
+     * @return true if successful
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -41,11 +56,17 @@ public class MenuActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Display about activity
+     */
     private void displayAbout() {
 //        Intent intent = new Intent(this, AboutActivity.class);
 //        startActivity(intent);
     }
 
+    /**
+     * Display settings activity
+     */
     private void displaySettings() {
 //        Intent intent = new Intent(this, SettingsActivity.class);
 //        startActivity(intent);
