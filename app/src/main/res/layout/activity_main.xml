@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/classCancelBtn" />
+                app:srcCompat="@drawable/classcancelbtn" />
 
             <ImageButton
                 android:id="@+id/findTeachButton"
@@ -48,7 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/findTeachBtn" />
+                app:srcCompat="@drawable/findteachbtn" />
         </LinearLayout>
 
     </TableRow>
@@ -66,7 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/addCalendarBtn" />
+                app:srcCompat="@drawable/addcalendarbtn" />
 
             <ImageButton
                 android:id="@+id/notesButton"
@@ -74,7 +74,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/notesBtn" />
+                app:srcCompat="@drawable/notesbtn" />
         </LinearLayout>
     </TableRow>
 
@@ -91,7 +91,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/weatherBtn" />
+                app:srcCompat="@drawable/weatherbtn" />
 
             <ImageButton
                 android:id="@+id/academicCalendarButton"
@@ -99,7 +99,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/academicCalendarBtn" />
+                app:srcCompat="@drawable/academiccalendarbtn" />
         </LinearLayout>
     </TableRow>
 
