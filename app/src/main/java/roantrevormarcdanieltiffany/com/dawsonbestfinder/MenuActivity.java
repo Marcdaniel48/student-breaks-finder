@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class MenuActivity extends AppCompatActivity {
      * Display settings activity
      */
     private void displaySettings() {
-//        Intent intent = new Intent(this, SettingsActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
     }
 }

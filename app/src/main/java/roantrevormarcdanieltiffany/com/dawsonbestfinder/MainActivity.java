@@ -1,7 +1,9 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 
 /**
@@ -29,8 +31,10 @@ public class MainActivity extends MenuActivity {
     /**
      * Will fire an intent taking user to dawson homepage
      */
-    public void onDawsonButton() {
+    public void onDawsonButton(View v) {
+        String url = "https://dawsoncollege.qc.ca";
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(url));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
@@ -39,42 +43,42 @@ public class MainActivity extends MenuActivity {
     /**
      * Will fire an intent taking user to class cancellations activity
      */
-    public void onClassCancellations() {
+    public void onClassCancellations(View v) {
         //Intent i = new Intent();
     }
 
     /**
      * Will fire an intent taking user to find teacher activity
      */
-    public void onFindTeacher() {
+    public void onFindTeacher(View v) {
         //Intent i = new Intent();
     }
 
     /**
      * Will fire an intent taking user to add to calendar activity
      */
-    public void onAddToCalendar() {
+    public void onAddToCalendar(View v) {
         //Intent i = new Intent();
     }
 
     /**
      * Will fire an intent taking user to notes activity
      */
-    public void onNotes() {
+    public void onNotes(View v) {
         //Intent i = new Intent();
     }
 
     /**
      * Will fire an intent taking user to weather activity
      */
-    public void onWeather() {
+    public void onWeather(View v) {
         //Intent i = new Intent();
     }
 
     /**
      * Will fire an intent taking user to academic calendar activity
      */
-    public void onAcademicCalendar() {
+    public void onAcademicCalendar(View v) {
         //Intent i = new Intent();
     }
 }

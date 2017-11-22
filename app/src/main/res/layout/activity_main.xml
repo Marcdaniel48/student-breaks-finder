@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:adjustViewBounds="true"
+        android:onClick="onDawsonButton"
         android:scaleType="fitXY"
         app:srcCompat="@drawable/dawsonlogo" />
 
@@ -38,6 +39,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:fadingEdge="none|horizontal"
+            android:onClick="onClassCancellations"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/classcancelbtn" />
 
@@ -47,6 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:onClick="onFindTeacher"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/findteachbtn" />
     </LinearLayout>
@@ -64,6 +67,7 @@
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:cropToPadding="true"
+            android:onClick="onAddToCalendar"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/addcalendarbtn" />
 
@@ -73,6 +77,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:onClick="onNotes"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/notesbtn" />
     </LinearLayout>
@@ -89,6 +94,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
+            android:onClick="onWeather"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/weatherbtn" />
 
@@ -98,6 +104,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:cropToPadding="true"
+            android:onClick="onAcademicCalendar"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/academiccalendarbtn" />
     </LinearLayout>
