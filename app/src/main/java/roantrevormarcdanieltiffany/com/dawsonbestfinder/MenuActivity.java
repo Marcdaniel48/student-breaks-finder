@@ -1,13 +1,11 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,29 +13,69 @@ import java.util.List;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 /**
- * Created by sirMerr on 2017-11-19.
+ * Menu Activity containing about, and settings items
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 
 public class MenuActivity extends AppCompatActivity {
-    private static final String TAG = MenuActivity.class.getSimpleName();
-    private SharedPreferences sharedPreferences;
-    protected static List<Teacher> teachers = new ArrayList<>();
+    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+    protected List<Teacher> teachers = new ArrayList<>();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "Called onCreate");
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_menu);
-
-        // @todo: Get Shared Preferences for settings (and any other)
-        // sharedPreferences = getSharedPreferences()
     }
 
-    public void createFragments(Fragment fragment) {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.linearLayout, fragment);
-        transaction.commit();
+    /**
+     * Invoked when user selects a menu item and shows selected intent
+     *
+     * @param item
+     * @return true if passed
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.aboutItem:
+                displayAbout();
+                return true;
+            case R.id.settingsItem:
+                displaySettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Called whenever a menu item is selected.
+     *
+     * @param menu
+     * @return true if successful
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate((int)R.layout.menu, menu);
+        return true;
+    }
+
+    /**
+     * Display about activity
+     */
+    private void displayAbout() {
+//        Intent intent = new Intent(this, AboutActivity.class);
+//        startActivity(intent);
+    }
+
+    /**
+     * Display settings activity
+     */
+    private void displaySettings() {
+//        Intent intent = new Intent(this, SettingsActivity.class);
+//        startActivity(intent);
     }
 }
