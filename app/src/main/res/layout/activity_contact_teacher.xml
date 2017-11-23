@@ -32,7 +32,7 @@
             <TableRow
                 android:id="@+id/trFullName"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvFullName"
@@ -46,6 +46,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:inputType="textPersonName"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="false"
                     android:text="@string/default_value" />
 
             </TableRow>
@@ -53,7 +55,7 @@
             <TableRow
                 android:id="@+id/trEmail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvEmail"
@@ -74,7 +76,7 @@
             <TableRow
                 android:id="@+id/trOffice"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvOffice"
@@ -95,7 +97,7 @@
             <TableRow
                 android:id="@+id/trLocal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvLocal"
@@ -115,7 +117,7 @@
             <TableRow
                 android:id="@+id/trSectors"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvSectors"
@@ -136,7 +138,7 @@
             <TableRow
                 android:id="@+id/trPositions"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvPositions"
@@ -156,7 +158,7 @@
             <TableRow
                 android:id="@+id/trDepartments"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvDepartments"

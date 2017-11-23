@@ -1,12 +1,15 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -118,6 +121,7 @@ public class TeacherContactFragment extends Fragment {
         EditText etOffice = teacherContactActivity.findViewById(R.id.etOffice);
         EditText etPositions = teacherContactActivity.findViewById(R.id.etPositions);
         EditText etSectors = teacherContactActivity.findViewById(R.id.etSectors);
+        Button btnCall = teacherContactActivity.findViewById(R.id.btnCall);
 
         etFullName.setText(teacher.getFull_name());
         etEmail.setText(teacher.getEmail());
@@ -126,5 +130,18 @@ public class TeacherContactFragment extends Fragment {
         etOffice.setText(teacher.getOffice());
         etPositions.setText(teacher.getPositions().toString());
         etSectors.setText(teacher.getSectors().toString());
+
+        btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (teacher.getLocal().length() > 0) {
+                    Intent intent = new Intent(Intent.ACTION_DIAL);
+                    intent.setData(Uri.parse("tel:" + teacher.getLocal()));
+                    if (intent.resolveActivity(teacherContactActivity.getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
     }
 }
