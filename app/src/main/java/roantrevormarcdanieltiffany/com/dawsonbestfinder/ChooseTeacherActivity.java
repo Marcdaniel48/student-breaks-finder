@@ -1,21 +1,18 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
-import android.widget.ListView;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by sirMerr on 2017-11-18.
+ * Activity which displays a ListView of teachers
+ * matching the search done by the user in FindTeacherActivity.
+ * The user can choose which teacher they want to see more information about,
+ * which will open TeacherContactActivity
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class ChooseTeacherActivity extends MenuActivity{
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
     protected static final String TEACHER_INDEXES = "teacherIndexes";

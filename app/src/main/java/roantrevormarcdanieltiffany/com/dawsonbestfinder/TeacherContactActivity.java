@@ -1,21 +1,22 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.view.View;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherContactFragment;
 
 /**
- * Created by sirMerr on 2017-11-19.
+ * Activity which connects the TeacherContactFragment
+ * to FindTeacherActivity
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class TeacherContactActivity extends FindTeacherActivity {
     private static final String TAG = TeacherContactActivity.class.getSimpleName();
 

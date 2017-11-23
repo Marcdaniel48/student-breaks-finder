@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Teacher bean based on json file
- * given for this assignment
+ * Teacher bean based on json file given for this assignment
  *
- * @since 2017-11-19.
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class Teacher {
     private String first_name;

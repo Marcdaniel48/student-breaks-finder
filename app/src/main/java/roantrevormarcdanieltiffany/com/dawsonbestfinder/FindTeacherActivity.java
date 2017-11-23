@@ -32,9 +32,17 @@ import java.util.List;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 /**
- * Created by sirMerr on 2017-11-18.
+ * Activity which allows the user to search for a teacher with a first name,
+ * last name and either an exact or "like" search. It looks through the data
+ * in our Firebase database and launches either ChooseTeacherActivity if there
+ * are more than 1 teachers found from the search, or TeacherContactActivity
+ * if there is only 1 or 0.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class FindTeacherActivity extends MenuActivity {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
@@ -43,7 +51,7 @@ public class FindTeacherActivity extends MenuActivity {
     private String password = "admindsa-dabesteam";
     private Context context;
     private EditText etFirstName, etLastName;
-    private RadioButton rbExactSearch, rbLikeSearch;
+    private RadioButton rbExactSearch;
     protected List<Teacher> teachers = new ArrayList<>();
 
 
@@ -63,7 +71,6 @@ public class FindTeacherActivity extends MenuActivity {
         etFirstName =  findViewById(R.id.etFirstName);
         etLastName =  findViewById(R.id.etLastName);
         rbExactSearch = findViewById(R.id.rbExactSearch);
-        rbLikeSearch = findViewById(R.id.rbLikeSearch);
 
         authFirebase();
         getDB();

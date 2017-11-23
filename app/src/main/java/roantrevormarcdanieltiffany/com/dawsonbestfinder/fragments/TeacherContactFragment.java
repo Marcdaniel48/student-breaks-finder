@@ -13,19 +13,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.TeacherContactActivity;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 /**
- * Created by sirMerr on 2017-11-18.
+ * Fragment which displays all information about a teacher
+ * and allows the user to launch an intent to call them (ACTION_DIAL)
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class TeacherContactFragment extends Fragment {
     private static final String TAG = TeacherContactFragment.class.getSimpleName();
-
     private Bundle bundle;
     private TeacherContactActivity teacherContactActivity;
     private Teacher teacher;
@@ -99,7 +101,6 @@ public class TeacherContactFragment extends Fragment {
             teacher.setOffice(bundle.getString(TeacherContactActivity.OFFICE));
             showTeacher();
         }
-
     }
 
     /**
@@ -111,9 +112,10 @@ public class TeacherContactFragment extends Fragment {
         tvNone.setText(R.string.no_teacher_found);
     }
     /**
-     * Show teacher in layout
+     * Show teacher fragment
      */
     private void showTeacher() {
+        Log.d(TAG, "Called showTeacher()");
         EditText etFullName = teacherContactActivity.findViewById(R.id.etFullName);
         EditText etEmail = teacherContactActivity.findViewById(R.id.etEmail);
         EditText etLocal = teacherContactActivity.findViewById(R.id.etLocal);
@@ -134,8 +136,13 @@ public class TeacherContactFragment extends Fragment {
         btnCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG, "Called btnCall->onClick()");
                 if (teacher.getLocal().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
+                    /**
+                     * @todo Check what is the phone number that we are supposed to be inputing for call intent.
+                     * @body  As of right now, the intent opens the call screen with the teacher's local, check specs for more info.
+                     */
                     intent.setData(Uri.parse("tel:" + teacher.getLocal()));
                     if (intent.resolveActivity(teacherContactActivity.getPackageManager()) != null) {
                         startActivity(intent);

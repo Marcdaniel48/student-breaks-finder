@@ -14,6 +14,11 @@ import java.util.Date;
  * SettingsActivity.class
  *
  * Class that handles the logic for the settings activity.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class SettingsActivity extends Activity
 {
