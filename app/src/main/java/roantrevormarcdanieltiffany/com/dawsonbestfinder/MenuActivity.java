@@ -82,15 +82,4 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
-
-    /**
-     * Inserts the given fragment into the content view using
-     * the fragment manager.
-     */
-    public void createFragments(Fragment fragment) {
-        FragmentManager manager = getFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.linearLayout, fragment);
-        transaction.commit();
-    }
 }

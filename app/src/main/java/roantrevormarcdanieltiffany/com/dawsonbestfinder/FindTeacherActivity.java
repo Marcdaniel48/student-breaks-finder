@@ -1,5 +1,8 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -258,5 +261,16 @@ public class FindTeacherActivity extends MenuActivity {
         }
 
         return teacherIndexes;
+    }
+
+    /**
+     * Inserts the given fragment into the content view using
+     * the fragment manager.
+     */
+    public void createFragments(Fragment fragment) {
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.teachersContent, fragment);
+        transaction.commit();
     }
 }

@@ -13,7 +13,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherContact
  * Created by sirMerr on 2017-11-19.
  */
 
-public class TeacherContactActivity extends MenuActivity {
+public class TeacherContactActivity extends FindTeacherActivity {
     private static final String TAG = TeacherContactActivity.class.getSimpleName();
 
     private Context context;
