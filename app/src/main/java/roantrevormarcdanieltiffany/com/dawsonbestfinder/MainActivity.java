@@ -51,7 +51,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to find teacher activity
      */
     public void onFindTeacher(View v) {
-        //Intent i = new Intent();
+        Intent intent = new Intent(this, FindTeacherActivity.class);
+        startActivity(intent);
     }
 
     /**
