@@ -1,5 +1,8 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -78,5 +81,16 @@ public class MenuActivity extends AppCompatActivity {
     private void displaySettings() {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
+    }
+
+    /**
+     * Inserts the given fragment into the content view using
+     * the fragment manager.
+     */
+    public void createFragments(Fragment fragment) {
+        FragmentManager manager = getFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.linearLayout, fragment);
+        transaction.commit();
     }
 }

@@ -13,6 +13,9 @@ public class Teacher {
     private String first_name;
     private String last_name;
     private String full_name;
+    private String bio;
+    private String image;
+    private String website;
     private String local;
     private String office;
     private String email;
@@ -42,8 +45,11 @@ public class Teacher {
      *      Teacher's positions (ex: Lab Technician)
      * @param sectors
      *      Teacher's sectors (ex: Sector: Creative & Applied Arts)
+     * @param bio
+     * @param website
+     * @param image
      */
-    public Teacher(String firstName, String lastName, String fullName, String local, String office, String email, List<String> departments, List<String> positions, List<String> sectors) {
+    public Teacher(String firstName, String lastName, String fullName, String local, String office, String email, List<String> departments, List<String> positions, List<String> sectors, String bio, String website, String image) {
         this.first_name = firstName;
         this.last_name = lastName;
         this.full_name = fullName;
@@ -53,13 +59,41 @@ public class Teacher {
         this.departments = departments;
         this.positions = positions;
         this.sectors = sectors;
+        this.bio = bio;
+        this.image = image;
+        this.website = website;
     }
 
     /**
      * Default constructor
      */
     public Teacher() {
-        this("","","","","","",new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
+        this("","","","","","",new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>(), "", "", "");
+    }
+
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public String getFirst_name() {
@@ -147,6 +181,12 @@ public class Teacher {
             return false;
         if (getFull_name() != null ? !getFull_name().equals(teacher.getFull_name()) : teacher.getFull_name() != null)
             return false;
+        if (getBio() != null ? !getBio().equals(teacher.getBio()) : teacher.getBio() != null)
+            return false;
+        if (getImage() != null ? !getImage().equals(teacher.getImage()) : teacher.getImage() != null)
+            return false;
+        if (getWebsite() != null ? !getWebsite().equals(teacher.getWebsite()) : teacher.getWebsite() != null)
+            return false;
         if (getLocal() != null ? !getLocal().equals(teacher.getLocal()) : teacher.getLocal() != null)
             return false;
         if (getOffice() != null ? !getOffice().equals(teacher.getOffice()) : teacher.getOffice() != null)
@@ -165,6 +205,9 @@ public class Teacher {
         int result = getFirst_name() != null ? getFirst_name().hashCode() : 0;
         result = 31 * result + (getLast_name() != null ? getLast_name().hashCode() : 0);
         result = 31 * result + (getFull_name() != null ? getFull_name().hashCode() : 0);
+        result = 31 * result + (getBio() != null ? getBio().hashCode() : 0);
+        result = 31 * result + (getImage() != null ? getImage().hashCode() : 0);
+        result = 31 * result + (getWebsite() != null ? getWebsite().hashCode() : 0);
         result = 31 * result + (getLocal() != null ? getLocal().hashCode() : 0);
         result = 31 * result + (getOffice() != null ? getOffice().hashCode() : 0);
         result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
@@ -180,6 +223,9 @@ public class Teacher {
                 "first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", full_name='" + full_name + '\'' +
+                ", bio='" + bio + '\'' +
+                ", image='" + image + '\'' +
+                ", website='" + website + '\'' +
                 ", local='" + local + '\'' +
                 ", office='" + office + '\'' +
                 ", email='" + email + '\'' +

@@ -39,7 +39,7 @@ public class FindTeacherActivity extends MenuActivity {
     private String password = "admindsa-dabesteam";
     private Context context;
     private EditText etFirstName, etLastName;
-    private RadioButton rbExactSearch;
+    private RadioButton rbExactSearch, rbLikeSearch;
 
     /**
      * When invoked, will set up the activity.
@@ -57,6 +57,7 @@ public class FindTeacherActivity extends MenuActivity {
         etFirstName =  findViewById(R.id.etFirstName);
         etLastName =  findViewById(R.id.etLastName);
         rbExactSearch = findViewById(R.id.rbExactSearch);
+        rbLikeSearch = findViewById(R.id.rbLikeSearch);
 
         authFirebase();
         getDB();
@@ -150,7 +151,7 @@ public class FindTeacherActivity extends MenuActivity {
         if (teachers.isEmpty()) {
             Log.d(TAG, "The teachers array is empty. Getting out.");
             return;
-        } else if (checkFields()) {
+        } else if (!checkFields()) {
             return;
         }
 
@@ -174,6 +175,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @return true if one is filled, false if both are empty
      */
     private boolean checkFields() {
+        Log.d(TAG, "Called checkFields()");
         if (etFirstName.getText().length() == 0 && etLastName.getText().length() == 0) {
             Log.d(TAG, "Both first and last name fields are empty.");
             // Changes underline to red and does nothing
@@ -204,6 +206,9 @@ public class FindTeacherActivity extends MenuActivity {
      * @param teacherIndexes array of indexes of found teachers
      */
     private void startCorrectActivity(ArrayList<Integer> teacherIndexes) {
+        Log.d(TAG, "Called startCorrectActivity(ArrayList<Integer> teacherIndexes)");
+        Log.d(TAG, "Teacher Indexes size: " + teacherIndexes.size());
+
         if (teacherIndexes.isEmpty()) {
             Intent i = new Intent(context, TeacherContactActivity.class);
             i.putExtra(TeacherContactActivity.TEACHER_ID, -1);
@@ -229,6 +234,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @return Array of integers or empty array
      */
     private ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
+        Log.d(TAG, "Called search(boolean exactSearch, String firstName, String lastName)");
         ArrayList<Integer> teacherIndexes = new ArrayList<>();
 
         if (exactSearch) {

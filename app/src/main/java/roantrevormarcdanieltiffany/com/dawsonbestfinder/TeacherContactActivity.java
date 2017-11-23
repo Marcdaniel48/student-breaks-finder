@@ -55,5 +55,6 @@ public class TeacherContactActivity extends MenuActivity {
         this.extras = getIntent().getExtras();
 
         teacherContactFragment = new TeacherContactFragment();
+        createFragments(teacherContactFragment);
     }
 }

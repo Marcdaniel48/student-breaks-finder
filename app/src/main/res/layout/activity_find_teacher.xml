@@ -20,7 +20,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="@string/first_name" />
+                android:hint="@string/first_name" />
 
             <EditText
                 android:id="@+id/etLastName"
@@ -29,22 +29,35 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="@string/last_name" />
+                android:hint="@string/last_name" />
 
         </LinearLayout>
 
-        <RadioButton
-            android:id="@+id/rbExactSearch"
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="@string/exact_search" />
+            android:layout_height="match_parent" >
+
+            <RadioButton
+                android:id="@+id/rbExactSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="@string/exact_search" />
+
+            <RadioButton
+                android:id="@+id/rbLikeSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/like_search" />
+        </RadioGroup>
 
         <Button
             android:id="@+id/btnSearch"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:onClick="searchClick"
             android:text="@string/search" />
