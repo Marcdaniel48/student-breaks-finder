@@ -27,4 +27,6 @@
     <string name="about">About</string>
     <string name="auth_failed">Failed to Sign In to Firebase</string>
     <string name="like_search">Like Search</string>
+    <string name="default_none" />
+    <string name="no_teacher_found">No Teacher Found</string>
 </resources>

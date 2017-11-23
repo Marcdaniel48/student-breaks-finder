@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherContactFragment;
 
 /**
@@ -19,7 +20,16 @@ public class TeacherContactActivity extends FindTeacherActivity {
     private Context context;
     private TeacherContactFragment teacherContactFragment;
     private Bundle extras;
-    protected static final String TEACHER_ID = "teacherId";
+    public static final String TEACHER_ID = "teacherId";
+    public static final String FULL_NAME = "fullName";
+    public static final String BIO = "bio";
+    public static final String LOCAL = "local";
+    public static final String OFFICE = "office";
+    public static final String EMAIL = "email";
+    public static final String DEPARTMENTS = "departments";
+    public static final String WEBSITE = "website";
+    public static final String SECTORS = "sectors";
+    public static final String POSITIONS = "positions";
 
     /**
      * Called when the activity is starting.  This is where most initialization

@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
@@ -43,6 +44,8 @@ public class FindTeacherActivity extends MenuActivity {
     private Context context;
     private EditText etFirstName, etLastName;
     private RadioButton rbExactSearch, rbLikeSearch;
+    protected List<Teacher> teachers = new ArrayList<>();
+
 
     /**
      * When invoked, will set up the activity.
@@ -217,8 +220,19 @@ public class FindTeacherActivity extends MenuActivity {
             i.putExtra(TeacherContactActivity.TEACHER_ID, -1);
             startActivity(i);
         } else if (teacherIndexes.size() == 1) {
+            Teacher teacher = teachers.get(teacherIndexes.get(0));
             Intent i = new Intent(context, TeacherContactActivity.class);
             i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndexes.get(0));
+            i.putExtra(TeacherContactActivity.FULL_NAME, teacher.getFull_name());
+            i.putExtra(TeacherContactActivity.BIO, teacher.getBio());
+            i.putExtra(TeacherContactActivity.LOCAL, teacher.getLocal());
+            i.putExtra(TeacherContactActivity.WEBSITE, teacher.getWebsite());
+            i.putExtra(TeacherContactActivity.OFFICE, teacher.getOffice());
+            i.putExtra(TeacherContactActivity.EMAIL, teacher.getEmail());
+            i.putStringArrayListExtra(TeacherContactActivity.DEPARTMENTS, (ArrayList<String>) teacher.getDepartments());
+            i.putStringArrayListExtra(TeacherContactActivity.SECTORS, (ArrayList<String>) teacher.getSectors());
+            i.putStringArrayListExtra(TeacherContactActivity.POSITIONS, (ArrayList<String>) teacher.getPositions());
+
             startActivity(i);
         } else {
             // At this point, there are more than 1 teacher found

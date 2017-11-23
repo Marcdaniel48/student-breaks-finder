@@ -11,6 +11,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tvNone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/default_none" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

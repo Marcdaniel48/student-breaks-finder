@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.TeacherContactActivity;
@@ -74,23 +77,36 @@ public class TeacherContactFragment extends Fragment {
 
         bundle = teacherContactActivity.getIntent().getExtras();
 
-        String teacherId =  bundle.getString("teacherId");
+        teacher = new Teacher();
 
-        getTeacher(teacherId);
+        int teacherId =  bundle.getInt(TeacherContactActivity.TEACHER_ID);
+        Log.d(TAG, "Teacher ID: " + teacherId);
+
+        if (teacherId == -1) {
+            showNone();
+        } else {
+            teacher.setBio(bundle.getString(TeacherContactActivity.BIO));
+            teacher.setFull_name(bundle.getString(TeacherContactActivity.FULL_NAME));
+            teacher.setWebsite(bundle.getString(TeacherContactActivity.WEBSITE));
+            teacher.setEmail(bundle.getString(TeacherContactActivity.EMAIL));
+            teacher.setLocal(bundle.getString(TeacherContactActivity.LOCAL));
+            teacher.setDepartments(bundle.getStringArrayList(TeacherContactActivity.DEPARTMENTS));
+            teacher.setPositions(bundle.getStringArrayList(TeacherContactActivity.POSITIONS));
+            teacher.setSectors(bundle.getStringArrayList(TeacherContactActivity.SECTORS));
+            teacher.setOffice(bundle.getString(TeacherContactActivity.OFFICE));
+            showTeacher();
+        }
 
     }
 
     /**
-     * Make teacher object from teacher id
-     * @param teacherId
+     * Shows message that no teacher with these specs were found
      */
-    private void getTeacher(String teacherId) {
-        Log.d(TAG, "Called getTeacher");
-        Log.d(TAG, "TeacherId: " + teacherId);
+    private void showNone() {
+        TextView tvNone = teacherContactActivity.findViewById(R.id.tvNone);
 
-        // @todo Connect to Firebase to get teacher
+        tvNone.setText(R.string.no_teacher_found);
     }
-
     /**
      * Show teacher in layout
      */

@@ -27,7 +27,6 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 public class MenuActivity extends AppCompatActivity {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
-    protected List<Teacher> teachers = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
