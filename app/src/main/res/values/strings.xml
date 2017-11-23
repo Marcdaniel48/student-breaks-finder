@@ -25,4 +25,5 @@
     <string name="settings_back_dialog_yes">Yes</string>
     <string name="settings_back_dialog_no">No</string>
     <string name="about">About</string>
+    <string name="auth_failed">Failed to Sign In to Firebase</string>
 </resources>

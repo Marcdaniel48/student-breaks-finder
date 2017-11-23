@@ -1,18 +1,22 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
@@ -30,7 +33,10 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 public class FindTeacherActivity extends MenuActivity {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private String email = "letiffany.nguyen@gmail.com";
+    private String password = "admindsa-dabesteam";
     private Context context;
     private EditText etFirstName, etLastName;
     private RadioButton rbExactSearch;
@@ -45,19 +51,68 @@ public class FindTeacherActivity extends MenuActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_find_teacher);
         context = this.getApplicationContext();
 
         etFirstName =  findViewById(R.id.etFirstName);
         etLastName =  findViewById(R.id.etLastName);
         rbExactSearch = findViewById(R.id.rbExactSearch);
-        
+
+        authFirebase();
         getDB();
+    }
+
+    /**
+     * Initiate FirebaseAuth and AUthStateListener to track
+     * whenever a user signs in or out
+     */
+    private void authFirebase() {
+        mAuth = FirebaseAuth.getInstance();
+        signIn(email, password);
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+    }
+
+    /**
+     * Signs into firebase with email and password
+     * @param email
+     * @param password
+     */
+    private void signIn(String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Toast.makeText(FindTeacherActivity.this, R.string.auth_failed,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     private void getDB() {
         Log.d(TAG, "Called getDB()");
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("teachers");
 
         // Read from the database
@@ -71,8 +126,6 @@ public class FindTeacherActivity extends MenuActivity {
                 for (DataSnapshot teacherSnap: dataSnapshot.getChildren()) {
                     teachers.add(teacherSnap.getValue(Teacher.class));
                 }
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
             }
 
             @Override
@@ -183,7 +236,7 @@ public class FindTeacherActivity extends MenuActivity {
             // Whole name must be correct
             for (int i = 0; i < teachers.size(); i++) {
                 // @todo The exact search to be defined better
-                if (teachers.get(i).getFullName().equals(firstName + " " + lastName)) {
+                if (teachers.get(i).getFull_name().equals(firstName + " " + lastName)) {
                     teacherIndexes.add(i);
                 }
             }
@@ -191,8 +244,8 @@ public class FindTeacherActivity extends MenuActivity {
             Log.d(TAG, "In like search");
             // First/Last name must contain the fields provided
             for (int i = 0; i < teachers.size(); i++) {
-                if ((firstName.length() > 0 && teachers.get(i).getFirstName().matches(firstName))
-                        || (lastName.length() > 0 && teachers.get(i).getLastName().matches(lastName))) {
+                if ((firstName.length() > 0 && teachers.get(i).getFirst_name().matches(firstName))
+                        || (lastName.length() > 0 && teachers.get(i).getLast_name().matches(lastName))) {
                     teacherIndexes.add(i);
                 }
             }

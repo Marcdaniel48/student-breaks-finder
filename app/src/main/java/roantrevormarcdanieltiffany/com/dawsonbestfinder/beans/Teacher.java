@@ -10,9 +10,9 @@ import java.util.List;
  * @since 2017-11-19.
  */
 public class Teacher {
-    private String firstName;
-    private String lastName;
-    private String fullName;
+    private String first_name;
+    private String last_name;
+    private String full_name;
     private String local;
     private String office;
     private String email;
@@ -44,9 +44,9 @@ public class Teacher {
      *      Teacher's sectors (ex: Sector: Creative & Applied Arts)
      */
     public Teacher(String firstName, String lastName, String fullName, String local, String office, String email, List<String> departments, List<String> positions, List<String> sectors) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.fullName = fullName;
+        this.first_name = firstName;
+        this.last_name = lastName;
+        this.full_name = fullName;
         this.local = local;
         this.office = office;
         this.email = email;
@@ -62,28 +62,28 @@ public class Teacher {
         this("","","","","","",new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>());
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFull_name() {
+        return full_name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
     }
 
     public String getLocal() {
@@ -141,11 +141,11 @@ public class Teacher {
 
         Teacher teacher = (Teacher) o;
 
-        if (getFirstName() != null ? !getFirstName().equals(teacher.getFirstName()) : teacher.getFirstName() != null)
+        if (getFirst_name() != null ? !getFirst_name().equals(teacher.getFirst_name()) : teacher.getFirst_name() != null)
             return false;
-        if (getLastName() != null ? !getLastName().equals(teacher.getLastName()) : teacher.getLastName() != null)
+        if (getLast_name() != null ? !getLast_name().equals(teacher.getLast_name()) : teacher.getLast_name() != null)
             return false;
-        if (getFullName() != null ? !getFullName().equals(teacher.getFullName()) : teacher.getFullName() != null)
+        if (getFull_name() != null ? !getFull_name().equals(teacher.getFull_name()) : teacher.getFull_name() != null)
             return false;
         if (getLocal() != null ? !getLocal().equals(teacher.getLocal()) : teacher.getLocal() != null)
             return false;
@@ -162,9 +162,9 @@ public class Teacher {
 
     @Override
     public int hashCode() {
-        int result = getFirstName() != null ? getFirstName().hashCode() : 0;
-        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
-        result = 31 * result + (getFullName() != null ? getFullName().hashCode() : 0);
+        int result = getFirst_name() != null ? getFirst_name().hashCode() : 0;
+        result = 31 * result + (getLast_name() != null ? getLast_name().hashCode() : 0);
+        result = 31 * result + (getFull_name() != null ? getFull_name().hashCode() : 0);
         result = 31 * result + (getLocal() != null ? getLocal().hashCode() : 0);
         result = 31 * result + (getOffice() != null ? getOffice().hashCode() : 0);
         result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
@@ -177,9 +177,9 @@ public class Teacher {
     @Override
     public String toString() {
         return "Teacher{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", fullName='" + fullName + '\'' +
+                "first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", full_name='" + full_name + '\'' +
                 ", local='" + local + '\'' +
                 ", office='" + office + '\'' +
                 ", email='" + email + '\'' +

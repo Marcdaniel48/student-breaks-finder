@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.TeacherContactActivity;
@@ -104,7 +103,7 @@ public class TeacherContactFragment extends Fragment {
         EditText etPositions = teacherContactActivity.findViewById(R.id.etPositions);
         EditText etSectors = teacherContactActivity.findViewById(R.id.etSectors);
 
-        etFullName.setText(teacher.getFullName());
+        etFullName.setText(teacher.getFull_name());
         etEmail.setText(teacher.getEmail());
         etLocal.setText(teacher.getLocal());
         etDepartment.setText(teacher.getDepartments().toString());
