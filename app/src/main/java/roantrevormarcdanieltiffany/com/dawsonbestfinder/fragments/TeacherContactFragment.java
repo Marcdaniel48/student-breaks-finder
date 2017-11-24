@@ -2,6 +2,7 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -129,6 +130,7 @@ public class TeacherContactFragment extends Fragment {
         TextView tvImage = teacherContactActivity.findViewById(R.id.etImage);
         TextView tvBio = teacherContactActivity.findViewById(R.id.etBio);
 
+        // Set text views to the teacher's info
         tvFullName.setText(teacher.getFull_name());
         tvEmail.setText(teacher.getEmail());
         tvLocal.setText(teacher.getLocal());
@@ -140,6 +142,7 @@ public class TeacherContactFragment extends Fragment {
         tvImage.setText(teacher.getImage());
         tvBio.setText(teacher.getBio());
 
+        // Set onclick on local to start call intent
         tvLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,5 +160,8 @@ public class TeacherContactFragment extends Fragment {
                 }
             }
         });
+
+        // Underline to make it more visible that this is clickable
+        tvLocal.setPaintFlags(tvLocal.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
     }
 }
