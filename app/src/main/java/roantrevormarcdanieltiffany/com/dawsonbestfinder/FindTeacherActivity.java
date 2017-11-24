@@ -254,8 +254,14 @@ public class FindTeacherActivity extends MenuActivity {
             Log.d(TAG, "In exact search.");
             // Whole name must be correct
             for (int i = 0; i < teachers.size(); i++) {
-                // @todo The exact search to be defined better
-                if (teachers.get(i).getFull_name().equals(firstName + " " + lastName)) {
+                String holderFirstName = teachers.get(i).getFirst_name();
+                String holderLastName = teachers.get(i).getLast_name();
+
+                // Add teacher index to array if the full name is the same
+                // or the first or last name are exact if only one of them is specified
+                if (teachers.get(i).getFull_name().equals(firstName + " " + lastName)
+                        || (holderFirstName.length() > 0 && holderFirstName.equals(firstName) && holderLastName.length() < 0)
+                        || (holderLastName.length() > 0 && holderLastName.equals(lastName) && holderFirstName.length() < 0)) {
                     teacherIndexes.add(i);
                 }
             }
@@ -263,8 +269,8 @@ public class FindTeacherActivity extends MenuActivity {
             Log.d(TAG, "In like search");
             // First/Last name must contain the fields provided
             for (int i = 0; i < teachers.size(); i++) {
-                if ((firstName.length() > 0 && teachers.get(i).getFirst_name().matches(firstName))
-                        || (lastName.length() > 0 && teachers.get(i).getLast_name().matches(lastName))) {
+                if ((firstName.length() > 0 && teachers.get(i).getFirst_name().matches(".*"+ firstName + ".*"))
+                        || (lastName.length() > 0 && teachers.get(i).getLast_name().matches(".*"+ lastName + ".*"))) {
                     teacherIndexes.add(i);
                 }
             }
