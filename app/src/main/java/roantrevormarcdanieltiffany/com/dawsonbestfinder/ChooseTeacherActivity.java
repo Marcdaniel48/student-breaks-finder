@@ -13,7 +13,7 @@ import android.os.Bundle;
  * @author Marc-Daniel Dialogo
  * @author Trevor Eames
  */
-public class ChooseTeacherActivity extends MenuActivity{
+public class ChooseTeacherActivity extends FindTeacherActivity{
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
     protected static final String TEACHER_INDEXES = "teacherIndexes";
 

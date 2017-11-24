@@ -40,14 +40,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/full_name" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etFullName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
                     android:selectAllOnFocus="false"
                     android:singleLine="false"
+                    android:textColor="@color/colorAccent"
                     android:text="@string/default_value" />
 
             </TableRow>
@@ -63,12 +63,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/email" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textEmailAddress"
+                    android:textColor="@color/colorAccent"
                     android:text="@string/default_value" />
 
             </TableRow>
@@ -84,12 +84,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/office" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etOffice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:textColor="@color/colorAccent"
                     android:text="@string/default_value" />
 
             </TableRow>
@@ -105,12 +105,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/local" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etLocal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:textColor="@color/colorAccent"
                     android:text="@string/default_value" />
             </TableRow>
 
@@ -125,12 +125,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/sectors" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etSectors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:textColor="@color/colorAccent"
                     android:text="@string/default_value" />
 
             </TableRow>
@@ -146,12 +146,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/positions" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etPositions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:textColor="@color/colorAccent"
                     android:text="@string/default_value" />
             </TableRow>
 
@@ -166,12 +166,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/departments" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etDepartments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName"
+                    android:textColor="@color/colorAccent"
                     android:text="@string/default_value" />
             </TableRow>
         </TableLayout>

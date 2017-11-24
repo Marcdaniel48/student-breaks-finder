@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
@@ -119,13 +118,13 @@ public class TeacherContactFragment extends Fragment {
      */
     private void showTeacher() {
         Log.d(TAG, "Called showTeacher()");
-        EditText etFullName = teacherContactActivity.findViewById(R.id.etFullName);
-        EditText etEmail = teacherContactActivity.findViewById(R.id.etEmail);
-        EditText etLocal = teacherContactActivity.findViewById(R.id.etLocal);
-        EditText etDepartment = teacherContactActivity.findViewById(R.id.etDepartments);
-        EditText etOffice = teacherContactActivity.findViewById(R.id.etOffice);
-        EditText etPositions = teacherContactActivity.findViewById(R.id.etPositions);
-        EditText etSectors = teacherContactActivity.findViewById(R.id.etSectors);
+        TextView etFullName = teacherContactActivity.findViewById(R.id.etFullName);
+        TextView etEmail = teacherContactActivity.findViewById(R.id.etEmail);
+        TextView etLocal = teacherContactActivity.findViewById(R.id.etLocal);
+        TextView etDepartment = teacherContactActivity.findViewById(R.id.etDepartments);
+        TextView etOffice = teacherContactActivity.findViewById(R.id.etOffice);
+        TextView etPositions = teacherContactActivity.findViewById(R.id.etPositions);
+        TextView etSectors = teacherContactActivity.findViewById(R.id.etSectors);
         Button btnCall = teacherContactActivity.findViewById(R.id.btnCall);
 
         etFullName.setText(teacher.getFull_name());
