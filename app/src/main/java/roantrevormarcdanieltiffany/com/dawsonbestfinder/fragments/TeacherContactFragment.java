@@ -162,7 +162,7 @@ public class TeacherContactFragment extends Fragment {
         tvLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "Called btnCall->onClick()");
+                Log.d(TAG, "Called tvLocal->onClick()");
                 if (teacher.getLocal().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
                     /**
@@ -170,6 +170,24 @@ public class TeacherContactFragment extends Fragment {
                      * @body  As of right now, the intent opens the call screen with the teacher's local, check specs for more info.
                      */
                     intent.setData(Uri.parse("tel:" + teacher.getLocal()));
+                    if (intent.resolveActivity(teacherContactActivity.getPackageManager()) != null) {
+                        startActivity(intent);
+                    }
+                }
+            }
+        });
+
+        tvEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Called tvEmail->onClick()");
+                Log.d(TAG, "Called email length: " + teacher.getEmail().length());
+                if (teacher.getEmail().length() > 0) {
+                    Intent intent = new Intent(Intent.ACTION_SENDTO);
+                    intent.setData(Uri.parse("mailto:"));
+
+                    intent.putExtra(Intent.EXTRA_EMAIL, new String[] {teacher.getEmail()});
+                    intent.putExtra(Intent.EXTRA_SUBJECT, "from: dabestfinder");
                     if (intent.resolveActivity(teacherContactActivity.getPackageManager()) != null) {
                         startActivity(intent);
                     }
