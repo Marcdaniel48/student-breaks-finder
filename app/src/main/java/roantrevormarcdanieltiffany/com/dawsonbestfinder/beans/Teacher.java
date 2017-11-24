@@ -1,5 +1,7 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
 
+import android.text.Html;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,7 +141,7 @@ public class Teacher {
     }
 
     public String getEmail() {
-        return email;
+        return Html.fromHtml(email).toString();
     }
 
     public void setEmail(String email) {
