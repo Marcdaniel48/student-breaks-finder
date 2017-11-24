@@ -28,6 +28,8 @@ public class NotesActivity extends Activity
         notesDBH = NotesDBHelper.getNotesDBHelper(this);
 
         lvNotes = (ListView) findViewById(R.id.listViewNotes);
+        
+        updateUI();
     }
 
     private void updateUI()
