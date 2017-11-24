@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -19,6 +21,8 @@ public class NotesActivity extends Activity
     private ListView lvNotes;
     private ArrayAdapter<String> adapter;
 
+    EditText etNewNote;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -28,8 +32,10 @@ public class NotesActivity extends Activity
         notesDBH = NotesDBHelper.getNotesDBHelper(this);
 
         lvNotes = (ListView) findViewById(R.id.listViewNotes);
-        
+
         updateUI();
+
+        etNewNote = (EditText) findViewById(R.id.newNote);
     }
 
     private void updateUI()
@@ -41,22 +47,34 @@ public class NotesActivity extends Activity
 
         while(cursor.moveToNext())
         {
-            noteList.add(cursor.getString(cursor.getColumnIndex(notesDBH.COLUMN_NOTE)));
+            int index = cursor.getColumnIndex(notesDBH.COLUMN_NOTE);
+            noteList.add(cursor.getString(index));
         }
 
         if(adapter == null)
         {
             adapter = new ArrayAdapter<String>(this, R.layout.item_note, R.id.note, noteList);
             lvNotes.setAdapter(adapter);
+            System.out.println("Adapter is null If: " + adapter.getItem(1));
         }
         else
         {
             adapter.clear();
             adapter.addAll(noteList);
             adapter.notifyDataSetChanged();
+            System.out.println("Else: " + adapter.toString());
         }
 
         cursor.close();
         db.close();
+    }
+
+    public void addNote(View view)
+    {
+        if(!etNewNote.getText().toString().equals(""))
+        {
+            notesDBH.insertNewNote(etNewNote.getText().toString());
+            updateUI();
+        }
     }
 }

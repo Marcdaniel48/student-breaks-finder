@@ -4,16 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <ListView
+        android:id="@+id/listViewNotes"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <ListView
-            android:id="@+id/listViewNotes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+        android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,6 +16,7 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/newNote"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -30,6 +26,7 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="addNote"
             android:text="@string/notes_add" />
 
     </LinearLayout>
