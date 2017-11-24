@@ -78,7 +78,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to academic calendar activity
      */
     public void onAcademicCalendar(View v) {
-        //Intent i = new Intent();
+        Intent i = new Intent(this, AcademicCalendarActivity.class);
+        startActivity(i);
     }
 }
 

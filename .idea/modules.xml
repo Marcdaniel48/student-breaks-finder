@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
-=======
-      <module fileurl="file://D:\Marc\Dawson2\Fall2017\AndroidStudioProjects\dsa-dabesteam\DawsonFriendFinder.iml" filepath="D:\Marc\Dawson2\Fall2017\AndroidStudioProjects\dsa-dabesteam\DawsonFriendFinder.iml" />
->>>>>>> cd989f47424a70b63637bfa61b75d178ae1177e3
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dsa-dabesteam.iml" filepath="$PROJECT_DIR$/dsa-dabesteam.iml" />
     </modules>
