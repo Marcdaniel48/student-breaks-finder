@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">DawsonBestFinder</string>
+
     <string name="settings">Settings</string>
+    <string name="settings_firstname">First name:</string>
+    <string name="settings_lastname">Last name:</string>
+    <string name="settings_email">Email address:</string>
+    <string name="settings_password">Password:</string>
+    <string name="settings_datestamp">Updated:</string>
+    <string name="settings_save">Save</string>
+    <string name="settings_back_dialog_message">Are you sure you want to quit? Unsaved changes will be discarded.</string>
+    <string name="settings_back_dialog_title">Quit</string>
+    <string name="settings_back_dialog_yes">Yes</string>
+    <string name="settings_back_dialog_no">No</string>
+
     <string name="about">About</string>
 </resources>
