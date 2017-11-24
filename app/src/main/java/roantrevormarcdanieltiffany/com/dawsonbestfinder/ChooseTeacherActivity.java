@@ -43,6 +43,7 @@ public class ChooseTeacherActivity extends FindTeacherActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "called onCreate()");
         setContentView(R.layout.activity_choose_teacher);
         context = this.getApplicationContext();
 
@@ -67,14 +68,18 @@ public class ChooseTeacherActivity extends FindTeacherActivity{
         }
         Log.d(TAG, "Called setListView()");
 
+        // This is accessed within inner class and needs to be final
         final List<Teacher> foundTeachers = new ArrayList<>();
         List<String> foundTeachersNames = new ArrayList<>();
 
+        // Find teachers from @code{teachers} array that we want
+        // and their full names
         for (int index:teacherIndexes) {
             foundTeachers.add(teachers.get(index));
             foundTeachersNames.add(teachers.get(index).getFull_name());
         }
 
+        // Set adapter
         adapterString = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, foundTeachersNames);
         lv.setAdapter(adapterString);
 

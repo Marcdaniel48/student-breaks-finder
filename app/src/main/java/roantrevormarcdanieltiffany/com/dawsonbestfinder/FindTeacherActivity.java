@@ -102,6 +102,7 @@ public class FindTeacherActivity extends MenuActivity {
 
     /**
      * Signs into firebase with email and password
+     *
      * @param email
      * @param password
      */
@@ -124,6 +125,10 @@ public class FindTeacherActivity extends MenuActivity {
                 });
     }
 
+    /**
+     * Connects to and gets the teachers from the
+     * firebase database
+     */
     private void getDB() {
         Log.d(TAG, "Called getDB()");
 
@@ -290,6 +295,12 @@ public class FindTeacherActivity extends MenuActivity {
         transaction.commit();
     }
 
+    /**
+     * Displays info about the teacher
+     *
+     * @param teacher
+     * @param teacherIndex
+     */
     protected void showTeacherContactActivity(Teacher teacher, int teacherIndex) {
         Intent i = new Intent(context,TeacherContactActivity.class);
         i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndex);

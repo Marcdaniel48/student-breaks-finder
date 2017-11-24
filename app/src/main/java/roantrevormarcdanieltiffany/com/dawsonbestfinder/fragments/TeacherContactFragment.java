@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -132,6 +131,7 @@ public class TeacherContactFragment extends Fragment {
      * Shows message that no teacher with these specs were found
      */
     private void showNone() {
+        Log.d(TAG, "Called showNone()");
         TextView tvNone = teacherContactActivity.findViewById(R.id.tvNone);
 
         tvNone.setText(R.string.no_teacher_found);
@@ -177,11 +177,11 @@ public class TeacherContactFragment extends Fragment {
             }
         });
 
+        // Add onclick to email to open email app
         tvEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Called tvEmail->onClick()");
-                Log.d(TAG, "Called email length: " + teacher.getEmail().length());
                 if (teacher.getEmail().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_SENDTO);
                     intent.setData(Uri.parse("mailto:"));
