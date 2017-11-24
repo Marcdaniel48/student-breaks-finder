@@ -52,8 +52,7 @@ public class FindTeacherActivity extends MenuActivity {
     private Context context;
     private EditText etFirstName, etLastName;
     private RadioButton rbExactSearch;
-    protected List<Teacher> teachers = new ArrayList<>();
-
+    protected static List<Teacher> teachers = new ArrayList<>();
 
     /**
      * When invoked, will set up the activity.
@@ -72,8 +71,10 @@ public class FindTeacherActivity extends MenuActivity {
         etLastName =  findViewById(R.id.etLastName);
         rbExactSearch = findViewById(R.id.rbExactSearch);
 
-        authFirebase();
-        getDB();
+        if (teachers.isEmpty()) {
+            authFirebase();
+            getDB();
+        }
     }
 
     /**
@@ -228,23 +229,11 @@ public class FindTeacherActivity extends MenuActivity {
             startActivity(i);
         } else if (teacherIndexes.size() == 1) {
             Teacher teacher = teachers.get(teacherIndexes.get(0));
-            Intent i = new Intent(context, TeacherContactActivity.class);
-            i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndexes.get(0));
-            i.putExtra(TeacherContactActivity.FULL_NAME, teacher.getFull_name());
-            i.putExtra(TeacherContactActivity.BIO, teacher.getBio());
-            i.putExtra(TeacherContactActivity.LOCAL, teacher.getLocal());
-            i.putExtra(TeacherContactActivity.WEBSITE, teacher.getWebsite());
-            i.putExtra(TeacherContactActivity.OFFICE, teacher.getOffice());
-            i.putExtra(TeacherContactActivity.EMAIL, teacher.getEmail());
-            i.putStringArrayListExtra(TeacherContactActivity.DEPARTMENTS, (ArrayList<String>) teacher.getDepartments());
-            i.putStringArrayListExtra(TeacherContactActivity.SECTORS, (ArrayList<String>) teacher.getSectors());
-            i.putStringArrayListExtra(TeacherContactActivity.POSITIONS, (ArrayList<String>) teacher.getPositions());
-
-            startActivity(i);
+            showTeacherContactActivity(teacher, 0);
         } else {
             // At this point, there are more than 1 teacher found
             Intent i = new Intent(context, ChooseTeacherActivity.class);
-            i.putExtra(ChooseTeacherActivity.TEACHER_INDEXES, teacherIndexes);
+            i.putIntegerArrayListExtra(ChooseTeacherActivity.TEACHER_INDEXES, teacherIndexes);
             startActivity(i);
         }
     }
@@ -293,5 +282,21 @@ public class FindTeacherActivity extends MenuActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.teachersContent, fragment);
         transaction.commit();
+    }
+
+    protected void showTeacherContactActivity(Teacher teacher, int teacherIndex) {
+        Intent i = new Intent(context,TeacherContactActivity.class);
+        i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndex);
+        i.putExtra(TeacherContactActivity.FULL_NAME, teacher.getFull_name());
+        i.putExtra(TeacherContactActivity.BIO, teacher.getBio());
+        i.putExtra(TeacherContactActivity.LOCAL, teacher.getLocal());
+        i.putExtra(TeacherContactActivity.WEBSITE, teacher.getWebsite());
+        i.putExtra(TeacherContactActivity.OFFICE, teacher.getOffice());
+        i.putExtra(TeacherContactActivity.EMAIL, teacher.getEmail());
+        i.putStringArrayListExtra(TeacherContactActivity.DEPARTMENTS, (ArrayList<String>) teacher.getDepartments());
+        i.putStringArrayListExtra(TeacherContactActivity.SECTORS, (ArrayList<String>) teacher.getSectors());
+        i.putStringArrayListExtra(TeacherContactActivity.POSITIONS, (ArrayList<String>) teacher.getPositions());
+
+        startActivity(i);
     }
 }
