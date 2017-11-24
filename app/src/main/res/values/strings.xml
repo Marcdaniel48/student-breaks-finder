@@ -13,5 +13,7 @@
     <string name="settings_back_dialog_yes">Yes</string>
     <string name="settings_back_dialog_no">No</string>
 
+    <string name="notes_add">Add note</string>
+
     <string name="about">About</string>
 </resources>
