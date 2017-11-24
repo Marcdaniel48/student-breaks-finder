@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
@@ -31,6 +32,17 @@ public class TeacherContactFragment extends Fragment {
     private Bundle bundle;
     private TeacherContactActivity teacherContactActivity;
     private Teacher teacher;
+    private TextView tvFullName;
+    private TextView tvEmail;
+    private TextView tvLocal;
+    private TextView tvDepartment;
+    private TextView tvOffice;
+    private TextView tvPositions;
+    private TextView tvSectors;
+    private TextView tvWebsite;
+    private TextView tvImage;
+    private TextView tvBio;
+    private TableLayout tl;
 
     /**
      * Inflates layout with layout of TeacherContactActivity
@@ -87,6 +99,19 @@ public class TeacherContactFragment extends Fragment {
         int teacherId =  bundle.getInt(TeacherContactActivity.TEACHER_ID);
         Log.d(TAG, "Teacher ID: " + teacherId);
 
+        // Bind views
+        tvFullName = teacherContactActivity.findViewById(R.id.etFullName);
+        tvEmail = teacherContactActivity.findViewById(R.id.etEmail);
+        tvLocal = teacherContactActivity.findViewById(R.id.etLocal);
+        tvDepartment = teacherContactActivity.findViewById(R.id.etDepartments);
+        tvOffice = teacherContactActivity.findViewById(R.id.etOffice);
+        tvPositions = teacherContactActivity.findViewById(R.id.etPositions);
+        tvSectors = teacherContactActivity.findViewById(R.id.etSectors);
+        tvWebsite = teacherContactActivity.findViewById(R.id.etWebsite);
+        tvImage = teacherContactActivity.findViewById(R.id.etImage);
+        tvBio = teacherContactActivity.findViewById(R.id.etBio);
+        tl = teacherContactActivity.findViewById(R.id.tl);
+
         if (teacherId == -1) {
             showNone();
         } else {
@@ -110,6 +135,7 @@ public class TeacherContactFragment extends Fragment {
         TextView tvNone = teacherContactActivity.findViewById(R.id.tvNone);
 
         tvNone.setText(R.string.no_teacher_found);
+        tl.setVisibility(TableLayout.GONE);
     }
     /**
      * Show teacher fragment
@@ -119,16 +145,6 @@ public class TeacherContactFragment extends Fragment {
      */
     private void showTeacher() {
         Log.d(TAG, "Called showTeacher()");
-        TextView tvFullName = teacherContactActivity.findViewById(R.id.etFullName);
-        TextView tvEmail = teacherContactActivity.findViewById(R.id.etEmail);
-        TextView tvLocal = teacherContactActivity.findViewById(R.id.etLocal);
-        TextView tvDepartment = teacherContactActivity.findViewById(R.id.etDepartments);
-        TextView tvOffice = teacherContactActivity.findViewById(R.id.etOffice);
-        TextView tvPositions = teacherContactActivity.findViewById(R.id.etPositions);
-        TextView tvSectors = teacherContactActivity.findViewById(R.id.etSectors);
-        TextView tvWebsite = teacherContactActivity.findViewById(R.id.etWebsite);
-        TextView tvImage = teacherContactActivity.findViewById(R.id.etImage);
-        TextView tvBio = teacherContactActivity.findViewById(R.id.etBio);
 
         // Set text views to the teacher's info
         tvFullName.setText(teacher.getFull_name());

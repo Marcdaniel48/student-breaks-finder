@@ -15,7 +15,10 @@
             android:id="@+id/tvNone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/default_none" />
+            android:layout_marginTop="10dp"
+            android:text="@string/default_none"
+            android:textAlignment="center"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -27,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp">
+            android:layout_marginRight="10dp"
+            android:id="@+id/tl">
 
             <TableRow
                 android:id="@+id/trFullName"
