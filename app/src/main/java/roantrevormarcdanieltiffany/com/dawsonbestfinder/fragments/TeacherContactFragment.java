@@ -197,5 +197,7 @@ public class TeacherContactFragment extends Fragment {
 
         // Underline to make it more visible that this is clickable
         tvLocal.setPaintFlags(tvLocal.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        tvEmail.setPaintFlags(tvEmail.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+
     }
 }
