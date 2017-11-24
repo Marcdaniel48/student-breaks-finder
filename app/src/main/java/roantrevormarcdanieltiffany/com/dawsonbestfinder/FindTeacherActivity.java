@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class FindTeacherActivity extends MenuActivity {
     private Context context;
     private EditText etFirstName, etLastName;
     private RadioButton rbExactSearch;
+    private Button bSearch;
     protected static List<Teacher> teachers = new ArrayList<>();
 
     /**
@@ -70,8 +72,10 @@ public class FindTeacherActivity extends MenuActivity {
         etFirstName =  findViewById(R.id.etFirstName);
         etLastName =  findViewById(R.id.etLastName);
         rbExactSearch = findViewById(R.id.rbExactSearch);
+        bSearch = findViewById(R.id.btnSearch);
 
         if (teachers.isEmpty()) {
+            bSearch.setEnabled(false);
             authFirebase();
             getDB();
         }
@@ -146,6 +150,8 @@ public class FindTeacherActivity extends MenuActivity {
                 for (DataSnapshot teacherSnap: dataSnapshot.getChildren()) {
                     teachers.add(teacherSnap.getValue(Teacher.class));
                 }
+
+                bSearch.setEnabled(true);
             }
 
             @Override
