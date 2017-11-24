@@ -259,9 +259,9 @@ public class FindTeacherActivity extends MenuActivity {
 
                 // Add teacher index to array if the full name is the same
                 // or the first or last name are exact if only one of them is specified
-                if (teachers.get(i).getFull_name().equals(firstName + " " + lastName)
-                        || (holderFirstName.length() > 0 && holderFirstName.equals(firstName) && holderLastName.length() < 0)
-                        || (holderLastName.length() > 0 && holderLastName.equals(lastName) && holderFirstName.length() < 0)) {
+                if (teachers.get(i).getFull_name().matches(firstName + " " + lastName)
+                        || (firstName.length() > 0 && holderFirstName.matches(firstName))
+                        || (lastName.length() > 0 && holderLastName.matches(lastName))) {
                     teacherIndexes.add(i);
                 }
             }
