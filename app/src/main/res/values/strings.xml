@@ -29,4 +29,7 @@
     <string name="like_search">Like Search</string>
     <string name="default_none" />
     <string name="no_teacher_found">No Teacher Found</string>
+    <string name="website">Website</string>
+    <string name="bio">Bio</string>
+    <string name="image">Image</string>
 </resources>

@@ -118,24 +118,29 @@ public class TeacherContactFragment extends Fragment {
      */
     private void showTeacher() {
         Log.d(TAG, "Called showTeacher()");
-        TextView etFullName = teacherContactActivity.findViewById(R.id.etFullName);
-        TextView etEmail = teacherContactActivity.findViewById(R.id.etEmail);
-        TextView etLocal = teacherContactActivity.findViewById(R.id.etLocal);
-        TextView etDepartment = teacherContactActivity.findViewById(R.id.etDepartments);
-        TextView etOffice = teacherContactActivity.findViewById(R.id.etOffice);
-        TextView etPositions = teacherContactActivity.findViewById(R.id.etPositions);
-        TextView etSectors = teacherContactActivity.findViewById(R.id.etSectors);
-        Button btnCall = teacherContactActivity.findViewById(R.id.btnCall);
+        TextView tvFullName = teacherContactActivity.findViewById(R.id.etFullName);
+        TextView tvEmail = teacherContactActivity.findViewById(R.id.etEmail);
+        TextView tvLocal = teacherContactActivity.findViewById(R.id.etLocal);
+        TextView tvDepartment = teacherContactActivity.findViewById(R.id.etDepartments);
+        TextView tvOffice = teacherContactActivity.findViewById(R.id.etOffice);
+        TextView tvPositions = teacherContactActivity.findViewById(R.id.etPositions);
+        TextView tvSectors = teacherContactActivity.findViewById(R.id.etSectors);
+        TextView tvWebsite = teacherContactActivity.findViewById(R.id.etWebsite);
+        TextView tvImage = teacherContactActivity.findViewById(R.id.etImage);
+        TextView tvBio = teacherContactActivity.findViewById(R.id.etBio);
 
-        etFullName.setText(teacher.getFull_name());
-        etEmail.setText(teacher.getEmail());
-        etLocal.setText(teacher.getLocal());
-        etDepartment.setText(teacher.getDepartments().toString());
-        etOffice.setText(teacher.getOffice());
-        etPositions.setText(teacher.getPositions().toString());
-        etSectors.setText(teacher.getSectors().toString());
+        tvFullName.setText(teacher.getFull_name());
+        tvEmail.setText(teacher.getEmail());
+        tvLocal.setText(teacher.getLocal());
+        tvDepartment.setText(teacher.getDepartments().toString());
+        tvOffice.setText(teacher.getOffice());
+        tvPositions.setText(teacher.getPositions().toString());
+        tvSectors.setText(teacher.getSectors().toString());
+        tvWebsite.setText(teacher.getWebsite());
+        tvImage.setText(teacher.getImage());
+        tvBio.setText(teacher.getBio());
 
-        btnCall.setOnClickListener(new View.OnClickListener() {
+        tvLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "Called btnCall->onClick()");
