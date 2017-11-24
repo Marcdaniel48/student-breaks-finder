@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 import java.util.ArrayList;
 
@@ -30,11 +29,8 @@ public class NotesActivity extends Activity
         setContentView(R.layout.activity_notes);
 
         notesDBH = NotesDBHelper.getNotesDBHelper(this);
-
         lvNotes = (ListView) findViewById(R.id.listViewNotes);
-
         updateUI();
-
         etNewNote = (EditText) findViewById(R.id.newNote);
     }
 
@@ -55,14 +51,12 @@ public class NotesActivity extends Activity
         {
             adapter = new ArrayAdapter<String>(this, R.layout.item_note, R.id.note, noteList);
             lvNotes.setAdapter(adapter);
-            System.out.println("Adapter is null If: " + adapter.getItem(1));
         }
         else
         {
             adapter.clear();
             adapter.addAll(noteList);
             adapter.notifyDataSetChanged();
-            System.out.println("Else: " + adapter.toString());
         }
 
         cursor.close();
