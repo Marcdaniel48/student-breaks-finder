@@ -25,7 +25,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.database.NotesDBHelper;
 public class NotesActivity extends Activity
 {
     // SQLite database helper class for the notes.
-    private static NotesDBHelper notesDBH;
+    private NotesDBHelper notesDBH;
 
     // Displays the notes.
     private ListView lvNotes;
@@ -47,7 +47,7 @@ public class NotesActivity extends Activity
         notesDBH = NotesDBHelper.getNotesDBHelper(this);
 
         // Assigns lvNotes to the ListView found in activity_notes.xml
-        lvNotes = (ListView) findViewById(R.id.listViewNotes);
+        lvNotes = findViewById(R.id.listViewNotes);
 
         // OnClick listener for when a note in the notes list view is clicked on.
         lvNotes.setOnItemClickListener(openNoteOnClick);
@@ -56,7 +56,7 @@ public class NotesActivity extends Activity
         updateUI();
 
         // Assigns etNewNote to the EditText field found in activity_notes.xml
-        etNewNote = (EditText) findViewById(R.id.newNote);
+        etNewNote = findViewById(R.id.newNote);
     }
 
     /**

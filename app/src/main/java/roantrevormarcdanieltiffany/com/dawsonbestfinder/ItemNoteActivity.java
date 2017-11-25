@@ -24,7 +24,7 @@ public class ItemNoteActivity extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_itemnotes);
 
-        tvFullNote = (TextView) findViewById(R.id.tvItemNote);
+        tvFullNote = findViewById(R.id.tvItemNote);
 
         /**
          * This activity is only opened through the Notes activity.
