@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,6 +31,7 @@ public class NotesActivity extends Activity
 
         notesDBH = NotesDBHelper.getNotesDBHelper(this);
         lvNotes = (ListView) findViewById(R.id.listViewNotes);
+        lvNotes.setOnItemClickListener(openQuoteOnClick);
         updateUI();
         etNewNote = (EditText) findViewById(R.id.newNote);
     }
@@ -71,4 +73,13 @@ public class NotesActivity extends Activity
             updateUI();
         }
     }
+
+    private AdapterView.OnItemClickListener openQuoteOnClick = new AdapterView.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
+        {
+            
+        }
+    };
 }
