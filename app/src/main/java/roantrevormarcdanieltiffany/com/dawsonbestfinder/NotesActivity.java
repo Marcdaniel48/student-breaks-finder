@@ -31,7 +31,7 @@ public class NotesActivity extends Activity
 
         notesDBH = NotesDBHelper.getNotesDBHelper(this);
         lvNotes = (ListView) findViewById(R.id.listViewNotes);
-        lvNotes.setOnItemClickListener(openQuoteOnClick);
+        lvNotes.setOnItemClickListener(openNoteOnClick);
         updateUI();
         etNewNote = (EditText) findViewById(R.id.newNote);
     }
@@ -74,12 +74,12 @@ public class NotesActivity extends Activity
         }
     }
 
-    private AdapterView.OnItemClickListener openQuoteOnClick = new AdapterView.OnItemClickListener()
+    private AdapterView.OnItemClickListener openNoteOnClick = new AdapterView.OnItemClickListener()
     {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
         {
-            
+            String fullNote = (String)adapterView.getItemAtPosition(position);
         }
     };
 }
