@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="roantrevormarcdanieltiffany.com.dawsonbestfinder">
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
     <application
         android:allowBackup="true"
@@ -25,10 +26,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsActivity"></activity>
-        <activity android:name=".FindTeacherActivity"></activity>
-        <activity android:name=".TeacherContactActivity"></activity>
-        <activity android:name=".ChooseTeacherActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".FindTeacherActivity" />
+        <activity android:name=".TeacherContactActivity" />
+        <activity android:name=".ChooseTeacherActivity" />
+        <activity android:name=".CalendarActivity" />
     </application>
 
 </manifest>

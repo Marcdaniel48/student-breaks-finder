@@ -59,7 +59,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to add to calendar activity
      */
     public void onAddToCalendar(View v) {
-        //Intent i = new Intent();
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
     }
 
     /**
