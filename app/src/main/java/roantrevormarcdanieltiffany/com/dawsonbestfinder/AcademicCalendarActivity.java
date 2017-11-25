@@ -2,23 +2,30 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
+import android.webkit.WebViewFragment;
 
 /**
  * Created by mrtvor on 2017-11-24.
  */
 
-public class AcademicCalendarActivity extends Activity {
+public class AcademicCalendarActivity extends WebViewFragment {
 
-    private WebView webView;
+    private final static String TAG ="FRAG-WEBVIEIWFRAGMENT";
+    String url = "https://www.dawsoncollege.qc.ca/registrar/";
+
+    public static AcademicCalendarActivity newInstance(String season, String year) {
+        Log.v(TAG, "Creating new instance: " + season + " " + year);
+        AcademicCalendarActivity fragment = new AcademicCalendarActivity();
+
+        Bundle args = new Bundle();
+        args.putString("season", season);
+        args.putString("year", year);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_academiccalendar);
-
-        webView = findViewById(R.id.webview);
-        String url = "https://www.dawsoncollege.qc.ca/registrar/fall-2017-day-division/";
-        webView.loadUrl(url);
-
     }
 }
