@@ -36,16 +36,19 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "called onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
     }
 
     public void showTimePickerDialog(View view) {
+        Log.d(TAG, "called showTimePickerDialog()");
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
     public void showDatePickerDialog(View view) {
+        Log.d(TAG, "called showDatePickerDialog()");
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
     }
@@ -59,6 +62,7 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
      */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Log.d(TAG, "called onDateSet()");
         //do some stuff for example write on log and update TextField on activity
         Log.d(TAG,"Date = " + year);
     }
@@ -73,17 +77,20 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
      */
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Log.d(TAG, "called onTimeSet()");
         //do some stuff for example write on log and update TextField on activity
         Log.d(TAG,"Time = " + hourOfDay + ":" + minute);
         Log.d(TAG, "After start time: " + clickedStart);
     }
 
     public void clickStartTime(View view) {
+        Log.d(TAG, "called clickStartTime()");
         showTimePickerDialog(view);
         clickedStart = true;
     }
 
     public void clickEndTime(View view) {
+        Log.d(TAG, "called clickEndTime()");
         showTimePickerDialog(view);
         clickedStart = false;
     }
