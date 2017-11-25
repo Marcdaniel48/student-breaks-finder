@@ -88,10 +88,41 @@ public class AcademicCalendarActivity extends WebViewFragment {
         }
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        Log.d(TAG, "FRAG onAttach()");
+        super.onAttach(activity);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
 
         Log.d(TAG, "onCreate(): " + getShownSeason() + getShownYear());
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "FRAG onDestroy()");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onDetach() {
+        Log.d(TAG, "FRAH onDetach()");
+        super.onDetach();
+    }
+
+    @Override
+    public void onPause() {
+        Log.d(TAG, "FRAG onPause(): " + getShownSeason() + getShownYear());
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "FRAG onStop(): " + getShownSeason() + getShownYear());
+        super.onStop();
     }
 }
