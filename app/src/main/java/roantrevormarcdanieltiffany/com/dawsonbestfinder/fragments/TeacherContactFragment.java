@@ -140,8 +140,6 @@ public class TeacherContactFragment extends Fragment {
     /**
      * Show teacher fragment
      *
-     * @todo Find out and implement what to show for teacher's image
-     * @body Ex: `"image": "faugustin.jpg"`, do we just show this string? There's no url.
      */
     private void showTeacher() {
         Log.d(TAG, "Called showTeacher()");
