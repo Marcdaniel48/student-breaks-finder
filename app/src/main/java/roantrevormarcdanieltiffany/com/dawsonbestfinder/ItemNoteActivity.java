@@ -30,7 +30,10 @@ public class ItemNoteActivity extends Activity
     public void deleteNote(View view)
     {
         NotesDBHelper notesDBH = NotesDBHelper.getNotesDBHelper(this);
-        
+
+        notesDBH.deleteNote(tvFullNote.getText().toString());
+
+        finish();
     }
 
 }

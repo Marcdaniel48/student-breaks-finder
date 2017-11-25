@@ -72,6 +72,8 @@ public class NotesActivity extends Activity
         {
             notesDBH.insertNewNote(etNewNote.getText().toString());
             updateUI();
+
+            etNewNote.setText("");
         }
     }
 
@@ -88,4 +90,11 @@ public class NotesActivity extends Activity
             startActivity(i);
         }
     };
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        updateUI();
+    }
 }

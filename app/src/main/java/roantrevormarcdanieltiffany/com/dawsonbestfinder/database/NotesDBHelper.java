@@ -68,6 +68,6 @@ public class NotesDBHelper extends SQLiteOpenHelper
 
     public int deleteNote(String note)
     {
-        return getWritableDatabase().delete(TABLE_NOTES, COLUMN_NOTE + = "=?", new String[] {String.valueOf(note)});
+        return getWritableDatabase().delete(TABLE_NOTES, COLUMN_NOTE + "=?", new String[] {String.valueOf(note)});
     }
 }
