@@ -3,7 +3,9 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.webkit.WebViewFragment;
 
 /**
@@ -14,6 +16,7 @@ public class AcademicCalendarActivity extends WebViewFragment {
 
     private final static String TAG ="FRAG-WEBVIEIWFRAGMENT";
     String url = "https://www.dawsoncollege.qc.ca/registrar/";
+    String fullUrl = "https://www.dawsoncollege.qc.ca/registrar/fall-2017-day-division/";
 
     public static AcademicCalendarActivity newInstance(String season, String year) {
         Log.v(TAG, "Creating new instance: " + season + " " + year);
@@ -26,6 +29,69 @@ public class AcademicCalendarActivity extends WebViewFragment {
         return fragment;
     }
 
+    public String getShownSeason() {
+        String season = "";
+        Bundle args = getArguments();
+        if(args.getString("season") != null) {
+            season = args.getString("season","fall");
+        }
+
+        return season;
+    }
+
+    public String getShownYear() {
+        String year = "";
+        Bundle args = getArguments();
+        if(args.getString("year") != null) {
+            year = args.getString("year", "2017");
+        }
+
+        return year;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "FRAG onResume(): " + getShownSeason() + getShownYear());
+    }
+
+    @Override
+    public void onStart() {
+        Log.d(TAG, "FRAG onStart: " + getShownSeason() + getShownYear());
+        super.onStart();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        Log.d(TAG, "FRAG onActivityCreated(): " + getShownSeason() + getShownYear());
+        super.onActivityCreated(savedInstanceState);
+
+        String season = getShownSeason();
+        String year = getShownYear();
+
+        WebView webview = getWebView();
+        webview.setPadding(2,2,2,2);
+        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setUseWideViewPort(true);
+        webview.setWebViewClient(new WebViewClient());
+
+        webview.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+
+        if(season != "" && year != "") {
+            if(season == "summer") {
+                webview.loadUrl(url + season + "-" + year + "/");
+            } else {
+                webview.loadUrl(url + season + "-" + year + "-day-division/");
+            }
+        } else {
+            webview.loadUrl(fullUrl);
+        }
+    }
+
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate()");
+        super.onCreate(savedInstanceState);
+
+        Log.d(TAG, "onCreate(): " + getShownSeason() + getShownYear());
     }
 }
