@@ -110,7 +110,7 @@ public class AcademicCalendarFragment extends WebViewFragment {
 
     @Override
     public void onDetach() {
-        Log.d(TAG, "FRAH onDetach()");
+        Log.d(TAG, "FRAG onDetach()");
         super.onDetach();
     }
 

@@ -5,6 +5,10 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 /**
  * Created by mrtvor on 2017-11-24.
@@ -13,10 +17,30 @@ import android.util.Log;
 public class AcademicCalendarViewActivity extends Activity {
     private final static String TAG = "FRAG-CALENDARACTIVITY";
 
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate()");
+
+        spinner = findViewById(R.id.yearSpinner);
+        adapter = ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         if(savedInstanceState == null) {
             AcademicCalendarFragment calendar = new AcademicCalendarFragment();

@@ -14,4 +14,15 @@
     <string name="settings_back_dialog_no">No</string>
 
     <string name="about">About</string>
+
+    <string name="fallButton">Fall</string>
+    <string name="winterButton">Winter</string>
+    <string name="summerButton">Summer</string>
+    <string-array name="years">
+        <item>2014</item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+    </string-array>
 </resources>
