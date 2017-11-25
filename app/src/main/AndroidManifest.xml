@@ -26,6 +26,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".FindTeacherActivity"></activity>
+        <activity android:name=".TeacherContactActivity"></activity>
+        <activity android:name=".ChooseTeacherActivity"></activity>
     </application>
 
 </manifest>
