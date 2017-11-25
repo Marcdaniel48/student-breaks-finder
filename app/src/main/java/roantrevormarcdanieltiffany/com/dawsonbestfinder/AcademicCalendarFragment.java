@@ -12,15 +12,15 @@ import android.webkit.WebViewFragment;
  * Created by mrtvor on 2017-11-24.
  */
 
-public class AcademicCalendarActivity extends WebViewFragment {
+public class AcademicCalendarFragment extends WebViewFragment {
 
     private final static String TAG ="FRAG-WEBVIEIWFRAGMENT";
     String url = "https://www.dawsoncollege.qc.ca/registrar/";
     String fullUrl = "https://www.dawsoncollege.qc.ca/registrar/fall-2017-day-division/";
 
-    public static AcademicCalendarActivity newInstance(String season, String year) {
+    public static AcademicCalendarFragment newInstance(String season, String year) {
         Log.v(TAG, "Creating new instance: " + season + " " + year);
-        AcademicCalendarActivity fragment = new AcademicCalendarActivity();
+        AcademicCalendarFragment fragment = new AcademicCalendarFragment();
 
         Bundle args = new Bundle();
         args.putString("season", season);
