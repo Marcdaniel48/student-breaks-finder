@@ -2,7 +2,10 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.database.NotesDBHelper;
 
 public class ItemNoteActivity extends Activity
 {
@@ -22,6 +25,12 @@ public class ItemNoteActivity extends Activity
             String note = getIntent().getStringExtra("note");
             tvFullNote.setText(note);
         }
+    }
+
+    public void deleteNote(View view)
+    {
+        NotesDBHelper notesDBH = NotesDBHelper.getNotesDBHelper(this);
+        
     }
 
 }
