@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.DatePickerFragment;
@@ -27,6 +28,10 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TimePickerFrag
 public class CalendarActivity extends MenuActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
     private boolean clickedStart;
+    private EditText etDate;
+    private EditText etStartTime;
+    private EditText etStopTime;
+
     /**
      * When invoked, will set up the activity.
      * Assigns the list view, get the data from firebase
@@ -39,6 +44,10 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
         Log.d(TAG, "called onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
+
+        etDate = findViewById(R.id.etDate);
+        etStartTime = findViewById(R.id.etStartTime);
+        etStopTime = findViewById(R.id.etStopTime);
     }
 
     public void showTimePickerDialog(View view) {
@@ -63,8 +72,8 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Log.d(TAG, "called onDateSet()");
-        //do some stuff for example write on log and update TextField on activity
         Log.d(TAG,"Date = " + year);
+        etDate.setText(dayOfMonth + "/" + month + "/" + year);
     }
 
     /**
@@ -78,9 +87,14 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Log.d(TAG, "called onTimeSet()");
-        //do some stuff for example write on log and update TextField on activity
         Log.d(TAG,"Time = " + hourOfDay + ":" + minute);
         Log.d(TAG, "After start time: " + clickedStart);
+
+        if (clickedStart) {
+            etStartTime.setText(hourOfDay + ":" + minute);
+        } else {
+            etStopTime.setText(hourOfDay + ":" + minute);
+        }
     }
 
     public void clickStartTime(View view) {

@@ -8,34 +8,62 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="20dp">
 
         <EditText
             android:id="@+id/etEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/event_title"
-            android:text="@string/default_none" />
+            android:inputType="textPersonName" />
 
-        <Button
+        <EditText
+            android:id="@+id/etDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="showDatePickerDialog"
-            android:text="@string/pick_date" />
+            android:focusable="false"
+            android:hint="@string/pick_date"
+            android:inputType="date"
+            android:onClick="showDatePickerDialog" />
 
-        <Button
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="clickStartTime"
-            android:text="@string/pick_start_time" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="clickEndTime"
-            android:text="@string/pick_end_time" />
+            <EditText
+                android:id="@+id/etStartTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="@string/pick_start_time"
+                android:inputType="time"
+                android:onClick="clickStartTime" />
+
+            <TextView
+                android:id="@+id/tvArrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.3"
+                android:text="@string/arrow"
+                android:textAlignment="center"
+                android:textSize="24sp" />
+
+            <EditText
+                android:id="@+id/etStopTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:hint="@string/pick_end_time"
+                android:inputType="time"
+                android:onClick="clickEndTime" />
+        </LinearLayout>
 
         <Button
             android:layout_width="match_parent"
