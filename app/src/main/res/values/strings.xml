@@ -39,4 +39,6 @@
     <string name="add_to_calendar">Add to Calendar</string>
     <string name="event_title">Event Title</string>
     <string name="arrow">→</string>
+    <string name="event_description">Description</string>
+    <string name="event_location">Location</string>
 </resources>

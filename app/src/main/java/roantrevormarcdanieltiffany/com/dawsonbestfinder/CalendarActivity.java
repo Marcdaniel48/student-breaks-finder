@@ -27,7 +27,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TimePickerFrag
  * The user can specify a date, start time, end time
  * and the event itself. Uses a calendar provider
  *
- * @see "https://developer.android.com/guide/topics/providers/calendar-provider.html"
+ * {@see https://developer.android.com/guide/topics/providers/calendar-provider.html}
  *
  * @author Tiffany Le-Nguyen
  * @author Roan Chamberlain
@@ -37,8 +37,10 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TimePickerFrag
 public class CalendarActivity extends MenuActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
     private boolean clickedStart;
-    private EditText eventTitle;
+    private EditText etTitle;
     private EditText etDate;
+    private EditText etDescription;
+    private EditText etLocation;
     private EditText etStartTime;
     private EditText etStopTime;
     private int year, month, day, startHour, startMinute, endHour, endMinute;
@@ -59,15 +61,29 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
         etDate = findViewById(R.id.etDate);
         etStartTime = findViewById(R.id.etStartTime);
         etStopTime = findViewById(R.id.etStopTime);
-        eventTitle = findViewById(R.id.etEvent);
+        etTitle = findViewById(R.id.etEventTitle);
+        etDescription = findViewById(R.id.etEventDescription);
+        etLocation = findViewById(R.id.etEventLocation);
     }
 
+    /**
+     * Shows  {@code DialogFragment}, {@code TimePickerFragment},
+     * in which the user can select a time
+     *
+     * @param view
+     */
     public void showTimePickerDialog(View view) {
         Log.d(TAG, "called showTimePickerDialog()");
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
 
+    /**
+     * Shows {@code DialogFragment}, {@code DatePickerFragment},
+     * in which the user can select a date
+     *
+     * @param view
+     */
     public void showDatePickerDialog(View view) {
         Log.d(TAG, "called showDatePickerDialog()");
         DialogFragment newFragment = new DatePickerFragment();
@@ -138,12 +154,24 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
         }
     }
 
+    /**
+     * Handler for start time. Opens the time picker dialog
+     * and changes {@code clickedStart} to true.
+     *
+     * @param view
+     */
     public void clickStartTime(View view) {
         Log.d(TAG, "called clickStartTime()");
         showTimePickerDialog(view);
         clickedStart = true;
     }
 
+    /**
+     * Handler for end time EditText. Opens the time picker dialog
+     * and changes @code{clickStart} to false
+     *
+     * @param view
+     */
     public void clickEndTime(View view) {
         Log.d(TAG, "called clickEndTime()");
         showTimePickerDialog(view);
@@ -151,26 +179,38 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     }
 
     /**
-     * @todo Check what to put inside calendar event (title/description/location/etc)
+     * Handler which adds an event to the default Calendar.
+     *
+     * NOTE: This does not do validation since it's a picker and
+     * the default Calendar automatically handles if the time range
+     * is incorrect or if the user does not fill something.
+     * It also does NOT automatically insert the event in the calendar,
+     * but rather lets the user decide if they want to add it instead.
+     * If we wanted to write to the Calendar, we would have to add that
+     * permission to the manifest and change this method a bit.
+     *
+     * @todo Check what to put inside calendar event
+     * @body For now it's title, description and location.
+     *
      * @param view
      */
     public void clickAddToCalendar(View view) {
         Log.d(TAG, "called clickAddToCalendar()");
+        // Prep event
         Calendar beginTime = Calendar.getInstance();
         beginTime.set(year, month, day, startHour, startMinute);
         Calendar endTime = Calendar.getInstance();
         endTime.set(year, month, day, endHour, endMinute);
 
+        // Set intent and put extras
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                 .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                .putExtra(CalendarContract.Events.TITLE, eventTitle.getText().toString());
+                .putExtra(CalendarContract.Events.TITLE, etTitle.getText().toString())
+                .putExtra(CalendarContract.Events.DESCRIPTION, etDescription.getText().toString())
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, etLocation.getText().toString());
 
-        /**
-         *                 .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
-         .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym");
-         */
         startActivity(intent);
 
     }

@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.DatePicker;
 
 import java.util.Calendar;
 
@@ -13,14 +12,27 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.CalendarActivity;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
 
 /**
- * Created by sirMerr on 2017-11-24.
+ * Fragment that extends {@code DialogFragment} and returns a {@code DatePickerDialog}
+ * from the fragment's {@code onCreateDialogMethod()} with the parent's {@code CalendarActivity}
+ * listener
+ *
+ * In part from {@see https://developer.android.com/guide/topics/ui/controls/pickers.html}
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class DatePickerFragment extends DialogFragment {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
 
-    private CalendarActivity calendarActivity;
-
+    /**
+     * Custom {@code Dialog} Container
+     *
+     * @param savedInstanceState
+     * @return {@code Dialog}
+     *      with parent listener
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.d(TAG, "Called onCreateDialog");

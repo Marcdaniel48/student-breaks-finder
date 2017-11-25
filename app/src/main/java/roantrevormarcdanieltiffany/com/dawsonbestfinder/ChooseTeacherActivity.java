@@ -72,7 +72,7 @@ public class ChooseTeacherActivity extends FindTeacherActivity{
         final List<Teacher> foundTeachers = new ArrayList<>();
         List<String> foundTeachersNames = new ArrayList<>();
 
-        // Find teachers from @code{teachers} array that we want
+        // Find teachers from {@code teachers} array that we want
         // and their full names
         for (int index:teacherIndexes) {
             foundTeachers.add(teachers.get(index));

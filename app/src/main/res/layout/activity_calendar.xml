@@ -14,12 +14,34 @@
         tools:layout_editor_absoluteY="20dp">
 
         <EditText
-            android:id="@+id/etEvent"
+            android:id="@+id/etEventTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/event_title"
             android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/etEventDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/event_description"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/etEventLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/event_location" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
 
         <EditText
             android:id="@+id/etDate"

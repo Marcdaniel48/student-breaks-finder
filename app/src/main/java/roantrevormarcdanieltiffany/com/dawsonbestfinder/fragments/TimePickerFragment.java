@@ -14,9 +14,11 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.CalendarActivity;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
 
 /**
- * TimePicker fragment that extends DialogFragment and returns a TimePickerDialog
- * from the fragment's onCreateDialogMethod()
+ * Fragment that extends {@code DialogFragment} and returns a {@code TimePickerDialog}
+ * from the fragment's {@code onCreateDialogMethod()} with the parent's {@code CalendarActivity}
+ * listener
  *
+ * In part from {@see https://developer.android.com/guide/topics/ui/controls/pickers.html}
  *
  * @author Tiffany Le-Nguyen
  * @author Roan Chamberlain
@@ -26,6 +28,13 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
 public class TimePickerFragment extends DialogFragment {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
 
+    /**
+     * Custom {@code Dialog} Container
+     *
+     * @param savedInstanceState
+     * @return {@code Dialog}
+     *      with parent listener
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Log.d(TAG, "Called onCreateDialog");
