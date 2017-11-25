@@ -32,7 +32,6 @@
     <string name="website">Website</string>
     <string name="bio">Bio</string>
     <string name="image">Image</string>
-    <string name="pick_time">Pick Start Time</string>
     <string name="pick_start_time">Pick Start Time</string>
     <string name="pick_end_time">Pick End Time</string>
     <string name="pick_date">Pick Date</string>
