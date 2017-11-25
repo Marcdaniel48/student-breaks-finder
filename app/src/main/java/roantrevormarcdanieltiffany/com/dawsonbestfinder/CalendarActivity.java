@@ -43,6 +43,19 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     private EditText etLocation;
     private EditText etStartTime;
     private EditText etStopTime;
+    public final static String CAL_YEAR = "calYear";
+    public final static String CAL_MONTH = "calMonth";
+    public final static String CAL_DAY = "calDay";
+    public final static String CAL_START_HOUR = "calStartHour";
+    public final static String CAL_START_MINUTE = "calStartMinute";
+    public final static String CAL_END_HOUR = "calEndHour";
+    public final static String CAL_END_MINUTE = "calEndMinute";
+    public final static String CAL_EVT_TITLE = "calEvtTitle";
+    public final static String CAL_EVT_DESCRIPTION = "calEvtDescription";
+    public final static String CAL_EVT_LOCATION = "calEvtLocation";
+    public final static String CAL_CLICKED_START = "calClickedStart";
+
+
     private int year, month, day, startHour, startMinute, endHour, endMinute;
 
     /**
@@ -64,6 +77,16 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
         etTitle = findViewById(R.id.etEventTitle);
         etDescription = findViewById(R.id.etEventDescription);
         etLocation = findViewById(R.id.etEventLocation);
+
+        if (savedInstanceState != null) {
+            year = savedInstanceState.getInt(CAL_YEAR);
+            month = savedInstanceState.getInt(CAL_MONTH);
+            day = savedInstanceState.getInt(CAL_DAY);
+            startMinute = savedInstanceState.getInt(CAL_START_MINUTE);
+            startHour = savedInstanceState.getInt(CAL_START_HOUR);
+            endMinute = savedInstanceState.getInt(CAL_END_MINUTE);
+            endHour = savedInstanceState.getInt(CAL_END_HOUR);
+        }
     }
 
     /**
@@ -212,6 +235,30 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, etLocation.getText().toString());
 
         startActivity(intent);
+    }
+
+    /**
+     * Save values to state
+     *
+     * @param outState
+     */
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "called onSaveInstanceState()");
+        super.onSaveInstanceState(outState);
+
+
+        outState.putInt(CAL_DAY, day);
+        outState.putInt(CAL_MONTH, month);
+        outState.putInt(CAL_YEAR, year);
+        outState.putInt(CAL_START_MINUTE, startMinute);
+        outState.putInt(CAL_START_HOUR, startHour);
+        outState.putInt(CAL_END_HOUR, endHour);
+        outState.putInt(CAL_END_MINUTE, endMinute);
+        outState.putString(CAL_EVT_TITLE, etTitle.getText().toString());
+        outState.putString(CAL_EVT_DESCRIPTION, etDescription.getText().toString());
+        outState.putString(CAL_EVT_LOCATION, etLocation.getText().toString());
+        outState.putBoolean(CAL_CLICKED_START, clickedStart);
 
     }
 }
