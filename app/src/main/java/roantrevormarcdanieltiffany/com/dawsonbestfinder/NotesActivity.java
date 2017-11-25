@@ -1,6 +1,7 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ public class NotesActivity extends Activity
 
         if(adapter == null)
         {
-            adapter = new ArrayAdapter<String>(this, R.layout.item_note, R.id.note, noteList);
+            adapter = new ArrayAdapter<String>(this, R.layout.listview_note, R.id.note, noteList);
             lvNotes.setAdapter(adapter);
         }
         else
@@ -80,6 +81,11 @@ public class NotesActivity extends Activity
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id)
         {
             String fullNote = (String)adapterView.getItemAtPosition(position);
+
+            Intent i = new Intent(NotesActivity.this, ItemNoteActivity.class);
+            i.putExtra("note", fullNote);
+
+            startActivity(i);
         }
     };
 }

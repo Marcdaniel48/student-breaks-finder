@@ -15,5 +15,7 @@
 
     <string name="notes_add">Add note</string>
 
+    <string name="itemnotes_delete">Delete note</string>
+
     <string name="about">About</string>
 </resources>
