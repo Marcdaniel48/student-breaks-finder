@@ -86,6 +86,10 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
             startHour = savedInstanceState.getInt(CAL_START_HOUR);
             endMinute = savedInstanceState.getInt(CAL_END_MINUTE);
             endHour = savedInstanceState.getInt(CAL_END_HOUR);
+            clickedStart = savedInstanceState.getBoolean(CAL_CLICKED_START);
+            etTitle.setText(savedInstanceState.getString(CAL_EVT_TITLE));
+            etDescription.setText(savedInstanceState.getString(CAL_EVT_DESCRIPTION));
+            etLocation.setText(savedInstanceState.getString(CAL_EVT_LOCATION));
         }
     }
 
