@@ -12,7 +12,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.DatePickerFragment;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TimePickerFragment;
@@ -79,11 +84,23 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Log.d(TAG, "called onDateSet()");
-        Log.d(TAG,"Date = " + year);
-        etDate.setText(dayOfMonth + "/" + month + "/" + year);
         this.year = year;
         this.month = month;
-        this.day = dayOfMonth;
+        day = dayOfMonth;
+
+        // Format date to display
+        DateFormat sdf = new SimpleDateFormat("dd/mm/yyyy", Locale.getDefault());
+        Date date = null;
+        try {
+            date = sdf.parse(dayOfMonth + "/" + month + "/" + year);
+        } catch (ParseException e) {
+            Log.e(TAG, e.getMessage());
+        }
+
+        String formattedDate = sdf.format(date);
+
+        // Display date
+        etDate.setText(formattedDate);
     }
 
     /**
@@ -97,15 +114,25 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Log.d(TAG, "called onTimeSet()");
-        Log.d(TAG,"Time = " + hourOfDay + ":" + minute);
-        Log.d(TAG, "After start time: " + clickedStart);
 
+        // Format time to display
+        DateFormat sdf = new SimpleDateFormat("hh:mm", Locale.getDefault());
+        Date date = null;
+        try {
+            date = sdf.parse(hourOfDay + ":" + minute);
+        } catch (ParseException e) {
+            Log.e(TAG, e.getMessage());
+        }
+
+        String time = sdf.format(date);
+
+        // Display on EditText clicked
         if (clickedStart) {
-            etStartTime.setText(hourOfDay + ":" + minute);
+            etStartTime.setText(time);
             this.startHour = hourOfDay;
             this.startMinute = minute;
         } else {
-            etStopTime.setText(hourOfDay + ":" + minute);
+            etStopTime.setText(time);
             this.endHour = hourOfDay;
             this.endMinute = minute;
         }
@@ -128,6 +155,7 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
      * @param view
      */
     public void clickAddToCalendar(View view) {
+        Log.d(TAG, "called clickAddToCalendar()");
         Calendar beginTime = Calendar.getInstance();
         beginTime.set(year, month, day, startHour, startMinute);
         Calendar endTime = Calendar.getInstance();
