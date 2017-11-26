@@ -28,6 +28,9 @@
         <activity android:name=".SettingsActivity"></activity>
         <activity android:name=".NotesActivity"></activity>
         <activity android:name=".ItemNoteActivity"></activity>
+        <activity android:name=".FindTeacherActivity"></activity>
+        <activity android:name=".TeacherContactActivity"></activity>
+        <activity android:name=".ChooseTeacherActivity"></activity>
     </application>
 
 </manifest>
