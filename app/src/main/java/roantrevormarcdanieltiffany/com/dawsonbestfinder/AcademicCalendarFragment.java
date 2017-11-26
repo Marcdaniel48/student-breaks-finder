@@ -30,20 +30,24 @@ public class AcademicCalendarFragment extends WebViewFragment {
     }
 
     public String getShownSeason() {
-        String season = "";
+        String season = "fall";
         Bundle args = getArguments();
-        if(args.getString("season") != null) {
-            season = args.getString("season","fall");
+        if(args != null) {
+            if (args.getString("season") != null) {
+                season = args.getString("season", "fall");
+            }
         }
 
         return season;
     }
 
     public String getShownYear() {
-        String year = "";
+        String year = "2017";
         Bundle args = getArguments();
-        if(args.getString("year") != null) {
-            year = args.getString("year", "2017");
+        if(args != null) {
+            if (args.getString("year") != null) {
+                year = args.getString("year", "2017");
+            }
         }
 
         return year;
@@ -99,7 +103,7 @@ public class AcademicCalendarFragment extends WebViewFragment {
         Log.d(TAG, "onCreate()");
         super.onCreate(savedInstanceState);
 
-        Log.d(TAG, "onCreate(): " + getShownSeason() + getShownYear());
+        //Log.d(TAG, "onCreate(): " + getShownSeason() + getShownYear());
     }
 
     @Override
