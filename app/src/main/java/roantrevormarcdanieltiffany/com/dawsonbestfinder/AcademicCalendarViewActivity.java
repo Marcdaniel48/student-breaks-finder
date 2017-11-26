@@ -23,6 +23,7 @@ public class AcademicCalendarViewActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_calendarfragment);
         Log.d(TAG, "onCreate()");
 
         spinner = findViewById(R.id.yearSpinner);
@@ -33,7 +34,7 @@ public class AcademicCalendarViewActivity extends Activity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                
+
             }
 
             @Override

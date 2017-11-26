@@ -46,4 +46,10 @@
             android:layout_weight="1" />
 
     </LinearLayout>
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="roantrevormarcdanieltiffany.com.dawsonbestfinder.AcademicCalendarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
