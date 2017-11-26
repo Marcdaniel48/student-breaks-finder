@@ -30,6 +30,8 @@
         <activity android:name=".TeacherContactActivity" />
         <activity android:name=".ChooseTeacherActivity" />
         <activity android:name=".CalendarActivity" />
+        <activity android:name=".NotesActivity" />
+        <activity android:name=".ItemNoteActivity" />
     </application>
 
 </manifest>

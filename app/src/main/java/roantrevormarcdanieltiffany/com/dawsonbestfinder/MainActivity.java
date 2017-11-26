@@ -67,7 +67,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to notes activity
      */
     public void onNotes(View v) {
-        //Intent i = new Intent();
+        Intent i = new Intent(this, NotesActivity.class);
+        startActivity(i);
     }
 
     /**

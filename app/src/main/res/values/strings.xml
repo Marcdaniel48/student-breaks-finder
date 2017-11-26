@@ -24,6 +24,8 @@
     <string name="settings_back_dialog_title">Quit</string>
     <string name="settings_back_dialog_yes">Yes</string>
     <string name="settings_back_dialog_no">No</string>
+    <string name="notes_add">Add note</string>
+    <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>
     <string name="auth_failed">Failed to Sign In to Firebase</string>
     <string name="like_search">Like Search</string>
