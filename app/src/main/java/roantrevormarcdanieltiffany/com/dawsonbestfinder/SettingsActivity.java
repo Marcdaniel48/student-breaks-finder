@@ -83,7 +83,7 @@ public class SettingsActivity extends Activity
         Date date = new Date();
         etDatestamp.setText(date.toString());
         editor.putString(DATESTAMP, etDatestamp.getText().toString());
-        editor.apply();
+        editor.commit();
     }
 
     /**
