@@ -25,8 +25,14 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
+
         <activity android:name=".SettingsActivity" />
         <activity android:name=".AcademicCalendarViewActivity" />
+        <activity android:name=".NotesActivity"></activity>
+        <activity android:name=".ItemNoteActivity"></activity>
+        <activity android:name=".FindTeacherActivity"></activity>
+        <activity android:name=".TeacherContactActivity"></activity>
+        <activity android:name=".ChooseTeacherActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

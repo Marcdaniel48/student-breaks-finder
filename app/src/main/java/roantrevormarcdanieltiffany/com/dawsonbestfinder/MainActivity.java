@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+
 /**
- * ain activity that displays all the image buttons, the menu, and
+ * Main activity that displays all the image buttons, the menu, and
  * the current temperature
  *
  * @author Tiffany Le-Nguyen
@@ -18,6 +19,7 @@ import android.widget.TextView;
 public class MainActivity extends MenuActivity {
 
     TextView tempView = null;
+    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
 
     /**
      * When invoke, will set up the activity
@@ -57,7 +59,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to find teacher activity
      */
     public void onFindTeacher(View v) {
-        //Intent i = new Intent();
+        Intent intent = new Intent(this, FindTeacherActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -71,7 +74,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to notes activity
      */
     public void onNotes(View v) {
-        //Intent i = new Intent();
+        Intent i = new Intent(this, NotesActivity.class);
+        startActivity(i);
     }
 
     /**

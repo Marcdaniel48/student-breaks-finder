@@ -14,10 +14,20 @@ import java.util.Date;
  * SettingsActivity.class
  *
  * Class that handles the logic for the settings activity.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class SettingsActivity extends Activity
 {
     EditText etFirstName, etLastName, etEmail, etPassword, etDatestamp;
+    protected static final String FIRST_NAME = "firstName";
+    protected static final String LAST_NAME = "lastName";
+    protected static final String EMAIL = "email";
+    protected static final String PASSWORD = "password";
+    protected static final String DATESTAMP = "datestamp";
 
     /**
      * When the activity is created, call super.onCreate, then look into SharedPreferences for saved user information.
@@ -32,28 +42,28 @@ public class SettingsActivity extends Activity
 
         setContentView(R.layout.activity_settings);
 
-        etFirstName = (EditText) findViewById(R.id.firstNameEditText);
-        etLastName = (EditText) findViewById(R.id.lastNameEditText);
-        etEmail = (EditText) findViewById(R.id.emailEditText);
-        etPassword = (EditText) findViewById(R.id.passwordEditText);
-        etDatestamp = (EditText) findViewById(R.id.datestampEditText);
+        etFirstName = findViewById(R.id.firstNameEditText);
+        etLastName = findViewById(R.id.lastNameEditText);
+        etEmail = findViewById(R.id.emailEditText);
+        etPassword = findViewById(R.id.passwordEditText);
+        etDatestamp = findViewById(R.id.datestampEditText);
 
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
-        if(prefs.contains("firstName"))
-            etFirstName.setText(prefs.getString("firstName", ""));
+        if(prefs.contains(FIRST_NAME))
+            etFirstName.setText(prefs.getString(FIRST_NAME, ""));
 
-        if(prefs.contains("lastName"))
-            etLastName.setText(prefs.getString("lastName",""));
+        if(prefs.contains(LAST_NAME))
+            etLastName.setText(prefs.getString(LAST_NAME,""));
 
-        if(prefs.contains("email"))
-            etEmail.setText(prefs.getString("email", ""));
+        if(prefs.contains(EMAIL))
+            etEmail.setText(prefs.getString(EMAIL, ""));
 
-        if(prefs.contains("password"))
-            etPassword.setText(prefs.getString("password", ""));
+        if(prefs.contains(PASSWORD))
+            etPassword.setText(prefs.getString(PASSWORD, ""));
 
-        if(prefs.contains("datestamp"))
-            etDatestamp.setText(prefs.getString("datestamp", ""));
+        if(prefs.contains(DATESTAMP))
+            etDatestamp.setText(prefs.getString(DATESTAMP, ""));
     }
 
     /**
@@ -65,14 +75,15 @@ public class SettingsActivity extends Activity
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putString("firstName", etFirstName.getText().toString());
-        editor.putString("lastName", etLastName.getText().toString());
-        editor.putString("email", etEmail.getText().toString());
-        editor.putString("password", etPassword.getText().toString());
+        editor.putString(FIRST_NAME, etFirstName.getText().toString());
+        editor.putString(LAST_NAME, etLastName.getText().toString());
+        editor.putString(EMAIL, etEmail.getText().toString());
+        editor.putString(PASSWORD, etPassword.getText().toString());
 
         Date date = new Date();
         etDatestamp.setText(date.toString());
-        editor.putString("datestamp", etDatestamp.getText().toString());
+        editor.putString(DATESTAMP, etDatestamp.getText().toString());
+        editor.apply();
     }
 
     /**
