@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * ain activity that displays all the image buttons, the menu, and
@@ -16,6 +17,8 @@ import android.view.View;
  */
 public class MainActivity extends MenuActivity {
 
+    TextView tempView = null;
+
     /**
      * When invoke, will set up the activity
      *
@@ -25,6 +28,10 @@ public class MainActivity extends MenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tempView = (TextView) findViewById(R.id.temperatureTextView);
+
+        getTemp();
     }
 
     /**
@@ -80,6 +87,13 @@ public class MainActivity extends MenuActivity {
     public void onAcademicCalendar(View v) {
         Intent i = new Intent(this, AcademicCalendarViewActivity.class);
         startActivity(i);
+    }
+
+    public void getTemp() {
+        TemperatureFetcher fetch = new TemperatureFetcher();
+        String temp = fetch.getTemperatureData();
+
+        tempView.setText(temp);
     }
 }
 
