@@ -34,4 +34,12 @@
     <string name="website">Website</string>
     <string name="bio">Bio</string>
     <string name="image">Image</string>
+    <string name="pick_start_time">Pick Start Time</string>
+    <string name="pick_end_time">Pick End Time</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="add_to_calendar">Add to Calendar</string>
+    <string name="event_title">Event Title</string>
+    <string name="arrow">→</string>
+    <string name="event_description">Description</string>
+    <string name="event_location">Location</string>
 </resources>
