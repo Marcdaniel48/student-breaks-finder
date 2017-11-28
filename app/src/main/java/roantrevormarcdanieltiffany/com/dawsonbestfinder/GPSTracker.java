@@ -6,12 +6,14 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 /**
@@ -32,6 +34,7 @@ public class GPSTracker extends Service implements LocationListener {
     double latitude;
     double longitude;
 
+    private final static String TAG = GPSTracker.class.getSimpleName();
     private static final long MIN_DISTANCE_BW_UPDATES = 1000; // 1KM
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60; //1 minute
 
@@ -39,10 +42,14 @@ public class GPSTracker extends Service implements LocationListener {
 
     public GPSTracker(Context context) {
         this.mContext = context;
-        getLocation();
     }
 
-    @SuppressLint("MissingPermission")
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.d(TAG, "onCreate()");
+    }
+
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
@@ -50,15 +57,16 @@ public class GPSTracker extends Service implements LocationListener {
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-            if(!isGPSEnabled && !isNetworkEnabled) {
+            if (!isGPSEnabled && !isNetworkEnabled) {
 
             } else {
                 this.canGetLocation = true;
 
-                if(isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_BW_UPDATES, this);
-                    Log.d("Network", "Netowrk");
-
+                if (isNetworkEnabled) {
+                    if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_BW_UPDATES, this);
+                        Log.d("Network", "Netowrk");
+                    }
                     if(locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if(location != null) {
@@ -97,6 +105,9 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     public double getLatitude() {
+
+        location = getLocation();
+
         if(location != null) {
             latitude = location.getLatitude();
         }
@@ -104,6 +115,9 @@ public class GPSTracker extends Service implements LocationListener {
     }
 
     public double getLongitude() {
+
+        location = getLocation();
+
         if(location != null) {
             longitude = location.getLongitude();
         }

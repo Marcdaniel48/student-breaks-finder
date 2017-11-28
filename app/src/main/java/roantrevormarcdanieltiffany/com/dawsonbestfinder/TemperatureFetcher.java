@@ -23,6 +23,7 @@ public class TemperatureFetcher extends Activity {
     GPSTracker userGps = new GPSTracker(TemperatureFetcher.this);
 
     public String getTemperatureData() {
+
         double latitude = userGps.getLatitude();
         double longitude = userGps.getLongitude();
         String key = "9b2d274f8b8845c5f9596502a83fb343";
@@ -41,18 +42,18 @@ public class TemperatureFetcher extends Activity {
 
             StringBuffer buff = new StringBuffer();
             stream = conn.getInputStream();
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(stream));
+            BufferedReader buffRead = new BufferedReader(new InputStreamReader(stream));
             String line = null;
-            while((line = buffer.readLine()) != null)
+            while((line = buffRead.readLine()) != null)
                 buff.append(line + "rn");
 
             stream.close();
             conn.disconnect();
 
-            JSONObject obj = new JSONObject(buffer.toString());
-            JSONArray main = obj.getJSONArray("main");
-            JSONObject contents = main.getJSONObject(0);
-            String temp = contents.getString("temp");
+            Log.d(TAG, "STREAM PASSED");
+            JSONObject obj = new JSONObject(buff.toString());
+            JSONObject main = obj.getJSONObject("main");
+            String temp = main.getString("temp");
             Log.d(TAG, "TEMPERATURE: " + temp);
 
             return temp;

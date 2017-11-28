@@ -27,7 +27,6 @@
     <string name="notes_add">Add note</string>
     <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>
-<<<<<<< HEAD
 
     <string name="fallButton">Fall</string>
     <string name="winterButton">Winter</string>
@@ -39,7 +38,6 @@
         <item>2017</item>
         <item>2018</item>
     </string-array>
-=======
     <string name="auth_failed">Failed to Sign In to Firebase</string>
     <string name="like_search">Like Search</string>
     <string name="default_none" />
@@ -47,5 +45,4 @@
     <string name="website">Website</string>
     <string name="bio">Bio</string>
     <string name="image">Image</string>
->>>>>>> 620b4ac050619ebd938ccc5d5d3b8497c31e7d6b
 </resources>
