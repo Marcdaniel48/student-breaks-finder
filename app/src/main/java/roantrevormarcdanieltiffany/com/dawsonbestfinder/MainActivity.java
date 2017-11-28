@@ -3,6 +3,7 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -43,7 +44,9 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to class cancellations activity
      */
     public void onClassCancellations(View v) {
-        //Intent i = new Intent();
+        Log.d("BUTTON PRESS HANDLER", "Button clicked");
+        Intent cci = new Intent(MainActivity.this, CancelledClassActivity.class);
+        MainActivity.this.startActivity(cci);
     }
 
     /**
