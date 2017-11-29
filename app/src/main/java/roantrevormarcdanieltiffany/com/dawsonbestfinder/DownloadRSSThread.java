@@ -4,6 +4,12 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
 
+import org.w3c.dom.DOMImplementation;
+import org.w3c.dom.Document;
+import org.xml.sax.EntityResolver;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -16,6 +22,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
 
 
 /**
@@ -53,6 +61,7 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
             List<CancelledClass> classes = xmlParser.parseStream(is);
 
             Log.d(TAG, "doInBackground: classes is this long " + classes.size());
+
 
 
 
