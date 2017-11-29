@@ -42,4 +42,6 @@
     <string name="arrow">→</string>
     <string name="event_description">Description</string>
     <string name="event_location">Location</string>
+    <string name="city_name">City Name</string>
+    <string name="show_forecast">Show Forecast</string>
 </resources>

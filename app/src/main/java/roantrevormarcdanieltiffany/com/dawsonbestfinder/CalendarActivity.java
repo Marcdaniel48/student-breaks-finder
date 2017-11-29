@@ -35,7 +35,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TimePickerFrag
  * @author Trevor Eames
  */
 public class CalendarActivity extends MenuActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+    private static final String TAG = CalendarActivity.class.getSimpleName();
     private boolean clickedStart;
     private EditText etTitle;
     private EditText etDate;
@@ -43,17 +43,17 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     private EditText etLocation;
     private EditText etStartTime;
     private EditText etStopTime;
-    public final static String CAL_YEAR = "calYear";
-    public final static String CAL_MONTH = "calMonth";
-    public final static String CAL_DAY = "calDay";
-    public final static String CAL_START_HOUR = "calStartHour";
-    public final static String CAL_START_MINUTE = "calStartMinute";
-    public final static String CAL_END_HOUR = "calEndHour";
-    public final static String CAL_END_MINUTE = "calEndMinute";
-    public final static String CAL_EVT_TITLE = "calEvtTitle";
-    public final static String CAL_EVT_DESCRIPTION = "calEvtDescription";
-    public final static String CAL_EVT_LOCATION = "calEvtLocation";
-    public final static String CAL_CLICKED_START = "calClickedStart";
+    public static final String CAL_YEAR = "calYear";
+    public static final String CAL_MONTH = "calMonth";
+    public static final String CAL_DAY = "calDay";
+    public static final String CAL_START_HOUR = "calStartHour";
+    public static final String CAL_START_MINUTE = "calStartMinute";
+    public static final String CAL_END_HOUR = "calEndHour";
+    public static final String CAL_END_MINUTE = "calEndMinute";
+    public static final String CAL_EVT_TITLE = "calEvtTitle";
+    public static final String CAL_EVT_DESCRIPTION = "calEvtDescription";
+    public static final String CAL_EVT_LOCATION = "calEvtLocation";
+    public static final String CAL_CLICKED_START = "calClickedStart";
 
 
     private int year, month, day, startHour, startMinute, endHour, endMinute;
@@ -250,7 +250,6 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     public void onSaveInstanceState(Bundle outState) {
         Log.d(TAG, "called onSaveInstanceState()");
         super.onSaveInstanceState(outState);
-
 
         outState.putInt(CAL_DAY, day);
         outState.putInt(CAL_MONTH, month);
