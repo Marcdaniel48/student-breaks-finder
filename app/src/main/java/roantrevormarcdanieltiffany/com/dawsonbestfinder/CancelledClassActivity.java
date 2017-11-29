@@ -46,6 +46,10 @@ public class CancelledClassActivity extends AppCompatActivity {
 
     }
 
+    private void HandleRSSString(String string){
+
+    }
+
 }
 
 

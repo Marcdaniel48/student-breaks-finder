@@ -2,6 +2,10 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -22,7 +28,7 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
 
 
     protected void onPostExecute(String result){
-        Log.d(TAG, "onpostExecute ran");
+
     }
 
     @Override
@@ -31,8 +37,8 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
         try{
             URL myurl = new URL(url[0]);
             HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
-            conn.setReadTimeout(1000 );
-            conn.setConnectTimeout(1500);
+            conn.setReadTimeout(10000 );
+            conn.setConnectTimeout(15000);
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.connect();
@@ -41,7 +47,16 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
                 return "Got error code : " + response;
             }
             InputStream is = conn.getInputStream();
-            int bytesRead = 0;
+
+            XmlParser xmlParser = new XmlParser();
+
+            List<CancelledClass> classes = xmlParser.parseStream(is);
+
+            Log.d(TAG, "doInBackground: classes is this long " + classes.size());
+
+
+
+            /*int bytesRead = 0;
             int totalRead = 0;
             byte[] buffer = new byte[1024];
             BufferedInputStream bis = new BufferedInputStream(is);
@@ -58,11 +73,25 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
 
             Log.d(TAG, "The result is : " + result);
             return result;
+            *//*
+            List result = parseStream(is);
+            Log.d(TAG, "After parseStream gets called");
+            return "filler string";
+            */
+
+
+
 
 
         }catch(IOException e){
             Log.e(TAG, "you got an exception: " + e);
             return "error please see log";
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
         }
+        return "hello";
     }
+
+
+
 }
