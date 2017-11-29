@@ -26,6 +26,7 @@
     <string name="settings_back_dialog_no">No</string>
     <string name="settings_validation_emptyfields">You cannot leave any fields empty!</string>
     <string name="settings_validation_saved">User information has been saved!</string>
+    <string name="settings_validation_invalidEmail">Entered email address is invalid!</string>
     <string name="notes_add">Add note</string>
     <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>

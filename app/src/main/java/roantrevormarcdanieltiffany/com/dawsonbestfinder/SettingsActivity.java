@@ -79,21 +79,28 @@ public class SettingsActivity extends Activity
     {
         if(!emptyInputFields())
         {
-            SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
+            if(isEmail(etEmail.getText().toString())) {
+                SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
 
-            editor.putString(FIRST_NAME, etFirstName.getText().toString());
-            editor.putString(LAST_NAME, etLastName.getText().toString());
-            editor.putString(EMAIL, etEmail.getText().toString());
-            editor.putString(PASSWORD, etPassword.getText().toString());
+                editor.putString(FIRST_NAME, etFirstName.getText().toString());
+                editor.putString(LAST_NAME, etLastName.getText().toString());
+                editor.putString(EMAIL, etEmail.getText().toString());
+                editor.putString(PASSWORD, etPassword.getText().toString());
 
-            Date date = new Date();
-            etDatestamp.setText(date.toString());
-            editor.putString(DATESTAMP, etDatestamp.getText().toString());
-            editor.commit();
+                Date date = new Date();
+                etDatestamp.setText(date.toString());
+                editor.putString(DATESTAMP, etDatestamp.getText().toString());
+                editor.commit();
 
-            tvValidationMessage.setTextColor(getResources().getColor(R.color.colorBlack));
-            tvValidationMessage.setText(getResources().getString(R.string.settings_validation_saved));
+                tvValidationMessage.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvValidationMessage.setText(getResources().getString(R.string.settings_validation_saved));
+            }
+            else
+            {
+                tvValidationMessage.setTextColor(getResources().getColor(R.color.colorRed));
+                tvValidationMessage.setText(getResources().getString(R.string.settings_validation_invalidEmail));
+            }
         }
         else
         {
@@ -149,6 +156,23 @@ public class SettingsActivity extends Activity
             return true;
 
         if(etPassword.getText().toString().isEmpty() || etPassword.getText().toString().trim().isEmpty())
+            return true;
+
+        return false;
+    }
+
+    /**
+     * Takes in a String and checks if it is a valid email. If it isn't, return false.
+     * @param email
+     * @return
+     */
+    public boolean isEmail(String email)
+    {
+        // Regex string adapted from an answer in https://stackoverflow.com/questions/8204680/java-regex-email
+        // by Jason Buberel --> https://stackoverflow.com/users/202275/jason-buberel
+        String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
+
+        if(email.matches(emailRegex))
             return true;
 
         return false;
