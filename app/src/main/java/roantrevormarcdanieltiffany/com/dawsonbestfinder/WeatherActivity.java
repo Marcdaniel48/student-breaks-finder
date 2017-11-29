@@ -108,6 +108,13 @@ public class WeatherActivity extends MenuActivity {
         protected void onPostExecute(String[] strings) {
             Log.d(TAG, "called onPostExecute()");
 //            super.onPostExecute(strings);
+
+            for (String data: strings) {
+                Log.d(TAG, data);
+            }
+            if (strings != null) {
+                tvTestData.setText(strings[0]);
+            }
         }
     }
 }
