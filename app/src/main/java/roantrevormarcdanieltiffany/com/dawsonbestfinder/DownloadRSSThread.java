@@ -56,12 +56,13 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
             }
             InputStream is = conn.getInputStream();
 
-            XmlParser xmlParser = new XmlParser();
+            /*XmlParser xmlParser = new XmlParser();
 
             List<CancelledClass> classes = xmlParser.parseStream(is);
 
             Log.d(TAG, "doInBackground: classes is this long " + classes.size());
-
+*/
+            parseXML(is);
 
 
 
@@ -100,6 +101,59 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
         }
         return "hello";
     }
+
+    private List<CancelledClass> parseXML(InputStream stream) throws XmlPullParserException, IOException{
+        String title = null;
+        boolean isClass = false;
+        List<CancelledClass> classes = new ArrayList<>();
+        try{
+            XmlPullParser parser = Xml.newPullParser();
+            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+            parser.setInput(stream, null);
+            parser.nextTag();
+
+            while(parser.next() != parser.END_DOCUMENT){
+                int typeOfTag = parser.getEventType();
+                String name = parser.getName();
+                if(name == null)
+                    continue;
+                switch(typeOfTag){
+                    case XmlPullParser.START_TAG:
+                        if(name.equalsIgnoreCase("item")){
+                            isClass = true;
+                            continue;
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        if(name.equalsIgnoreCase("item")){
+                            isClass = false;
+                        }
+                        continue;
+                }
+                String result = " ";
+                if(parser.next() == XmlPullParser.TEXT){
+                    result = parser.getText();
+                    parser.nextTag();
+                }
+                if(name.equalsIgnoreCase("title")){
+                    title = result;
+                }
+                if(title != null){
+                    if(isClass){
+                        CancelledClass cancelledClass = new CancelledClass(title);
+                        classes.add(cancelledClass);
+                    }
+                    title = null;
+                    isClass = false;
+                }
+            }
+            return classes;
+        }finally {
+            stream.close();
+        }
+    }
+
+
 
 
 
