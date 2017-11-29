@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.Date;
 
@@ -23,6 +24,9 @@ import java.util.Date;
 public class SettingsActivity extends Activity
 {
     EditText etFirstName, etLastName, etEmail, etPassword, etDatestamp;
+    TextView tvValidationMessage;
+
+    // For retrieving data from SharedPreferences.
     protected static final String FIRST_NAME = "firstName";
     protected static final String LAST_NAME = "lastName";
     protected static final String EMAIL = "email";
@@ -47,6 +51,7 @@ public class SettingsActivity extends Activity
         etEmail = findViewById(R.id.emailEditText);
         etPassword = findViewById(R.id.passwordEditText);
         etDatestamp = findViewById(R.id.datestampEditText);
+        tvValidationMessage = (TextView) findViewById(R.id.validationMessageTextView);
 
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
@@ -72,18 +77,29 @@ public class SettingsActivity extends Activity
      */
     public void saveSettings(View view)
     {
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
+        if(!emptyInputFields())
+        {
+            SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
 
-        editor.putString(FIRST_NAME, etFirstName.getText().toString());
-        editor.putString(LAST_NAME, etLastName.getText().toString());
-        editor.putString(EMAIL, etEmail.getText().toString());
-        editor.putString(PASSWORD, etPassword.getText().toString());
+            editor.putString(FIRST_NAME, etFirstName.getText().toString());
+            editor.putString(LAST_NAME, etLastName.getText().toString());
+            editor.putString(EMAIL, etEmail.getText().toString());
+            editor.putString(PASSWORD, etPassword.getText().toString());
 
-        Date date = new Date();
-        etDatestamp.setText(date.toString());
-        editor.putString(DATESTAMP, etDatestamp.getText().toString());
-        editor.commit();
+            Date date = new Date();
+            etDatestamp.setText(date.toString());
+            editor.putString(DATESTAMP, etDatestamp.getText().toString());
+            editor.commit();
+
+            tvValidationMessage.setTextColor(getResources().getColor(R.color.colorBlack));
+            tvValidationMessage.setText(getResources().getString(R.string.settings_validation_saved));
+        }
+        else
+        {
+            tvValidationMessage.setTextColor(getResources().getColor(R.color.colorRed));
+            tvValidationMessage.setText(getResources().getString(R.string.settings_validation_emptyfields));
+        }
     }
 
     /**
@@ -113,6 +129,29 @@ public class SettingsActivity extends Activity
         builder.setMessage(R.string.settings_back_dialog_message).setTitle(R.string.settings_back_dialog_title);
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * Checks if any of the EditText fields for the user information are empty. Return true if there is an empty field.
+     *
+     * @return
+     */
+    public boolean emptyInputFields()
+    {
+
+        if(etFirstName.getText().toString().isEmpty() || etFirstName.getText().toString().trim().isEmpty())
+            return true;
+
+        if(etLastName.getText().toString().isEmpty() || etLastName.getText().toString().trim().isEmpty())
+            return true;
+
+        if(etEmail.getText().toString().isEmpty() || etEmail.getText().toString().trim().isEmpty())
+            return true;
+
+        if(etPassword.getText().toString().isEmpty() || etPassword.getText().toString().trim().isEmpty())
+            return true;
+
+        return false;
     }
 
 }
