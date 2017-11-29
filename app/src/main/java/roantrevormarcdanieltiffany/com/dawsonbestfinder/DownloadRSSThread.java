@@ -62,7 +62,7 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
 
             Log.d(TAG, "doInBackground: classes is this long " + classes.size());
 */
-            parseXML(is);
+            List<CancelledClass> cancelledClasses = parseXML(is);
 
 
 
@@ -104,6 +104,10 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
 
     private List<CancelledClass> parseXML(InputStream stream) throws XmlPullParserException, IOException{
         String title = null;
+        String course = null;
+        String date = null;
+        String teacher = null;
+
         boolean isClass = false;
         List<CancelledClass> classes = new ArrayList<>();
         try{
@@ -135,15 +139,35 @@ public class DownloadRSSThread extends AsyncTask<String, Void, String> {
                     result = parser.getText();
                     parser.nextTag();
                 }
-                if(name.equalsIgnoreCase("title")){
-                    title = result;
+
+                switch(name){
+                    case "title":
+                        title = result;
+                        break;
+                    case "course":
+                        course = result;
+                        break;
+                    case "teacher" :
+                        teacher = result;
+                        break;
+                    case "datecancelled":
+                        date = result;
+                        break;
                 }
-                if(title != null){
+
+                /*if(name.equalsIgnoreCase("title")){
+                    title = result;
+                }*/
+                if(title != null && course != null && teacher != null && date != null){
                     if(isClass){
-                        CancelledClass cancelledClass = new CancelledClass(title);
+                        CancelledClass cancelledClass = new CancelledClass(title, course, teacher, date);
                         classes.add(cancelledClass);
                     }
                     title = null;
+                    course = null;
+                    teacher = null;
+                    date = null;
+
                     isClass = false;
                 }
             }

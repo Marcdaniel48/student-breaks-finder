@@ -73,7 +73,7 @@ public class XmlParser {
                 skipXMLElement(parser);
             }
         }
-        return new CancelledClass(title);
+        return new CancelledClass(title, title, title, title);
     }
 
     private String readTitle(XmlPullParser parser) throws IOException, XmlPullParserException{
