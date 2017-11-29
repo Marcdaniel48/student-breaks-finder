@@ -1,9 +1,11 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.net.URL;
@@ -27,6 +29,8 @@ public class WeatherActivity extends MenuActivity {
     private static final String TAG = WeatherActivity.class.getSimpleName();
 
     private TextView tvTestData;
+    private ListView lvForecast;
+    private LinearLayout llWeather;
 
     /**
      *
@@ -39,8 +43,11 @@ public class WeatherActivity extends MenuActivity {
         setContentView(R.layout.activity_weather);
 
         tvTestData = findViewById(R.id.tvTestData);
+        lvForecast = findViewById(R.id.lvForecast);
+        llWeather = findViewById(R.id.llWeather);
 
-        loadUVIData();
+        // Only show weather on button click
+        llWeather.setVisibility(LinearLayout.GONE);
     }
 
     /**
@@ -55,6 +62,10 @@ public class WeatherActivity extends MenuActivity {
         double lon = -122.37;
 
         new OpenWeatherTask().execute(String.valueOf(lat),String.valueOf(lon));
+    }
+
+    public void clickForecast(View view) {
+        loadUVIData();
     }
 
     /**
@@ -82,7 +93,7 @@ public class WeatherActivity extends MenuActivity {
             Log.d(TAG, "called doInBackground()");
             if (strings.length == 0) {
                 Log.d(TAG, "No params");
-                return null;
+                return new String[]{};
             }
 
             String lat = strings[0];
@@ -95,7 +106,7 @@ public class WeatherActivity extends MenuActivity {
                 return OpenWeather.getUviValueFromJSON(WeatherActivity.this, json);
             } catch (Exception err) {
                 Log.e(TAG, err.getLocalizedMessage());
-                return null;
+                return new String[]{};
             }
         }
 
@@ -107,14 +118,12 @@ public class WeatherActivity extends MenuActivity {
         @Override
         protected void onPostExecute(String[] strings) {
             Log.d(TAG, "called onPostExecute()");
-//            super.onPostExecute(strings);
 
             for (String data: strings) {
                 Log.d(TAG, data);
             }
-            if (strings != null) {
-                tvTestData.setText(strings[0]);
-            }
+
+            tvTestData.setText(strings[0]);
         }
     }
 }

@@ -1,15 +1,12 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.api;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
-import android.util.JsonReader;
 import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -32,8 +29,10 @@ public class OpenWeather {
     private static final String ERROR_MESSAGE = "cod";
 
     // Params to pass to query
+    static final String Q_PARAM = "q";
     static final String LAT_PARAM = "lat";
     static final String LON_PARAM = "lon";
+    static final String MODE_PARAM = "json";
 
     // Response keys
     static final String VALUE_KEY = "value";
@@ -74,6 +73,12 @@ public class OpenWeather {
             Log.d(TAG, err.getMessage());
             return null;
         }
+    }
+
+    public static URL buildUrl(String cityName) {
+        Log.d(TAG, "called buildUrl()");
+        Uri builtUri = Uri.parse(OPEN_WEATHER_UVI_URL).buildUpon()
+                .appendQueryParameter()
     }
 
     /**
