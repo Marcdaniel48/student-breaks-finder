@@ -72,6 +72,7 @@ public class SettingsActivity extends Activity
     }
 
     /**
+     * Saves user information.
      * Takes the values found in the EditText fields and stores them in SharedPreferences.
      * @param view
      */
@@ -96,12 +97,14 @@ public class SettingsActivity extends Activity
                 tvValidationMessage.setTextColor(getResources().getColor(R.color.colorBlack));
                 tvValidationMessage.setText(getResources().getString(R.string.settings_validation_saved));
             }
+            // If the entered email is invalid, warn the user and don't save.
             else
             {
                 tvValidationMessage.setTextColor(getResources().getColor(R.color.colorRed));
                 tvValidationMessage.setText(getResources().getString(R.string.settings_validation_invalidEmail));
             }
         }
+        // If any input fields are empty, warn the user and don't save.
         else
         {
             tvValidationMessage.setTextColor(getResources().getColor(R.color.colorRed));
