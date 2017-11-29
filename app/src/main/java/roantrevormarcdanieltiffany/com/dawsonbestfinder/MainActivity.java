@@ -1,8 +1,13 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.*;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,7 +38,14 @@ public class MainActivity extends MenuActivity {
 
         tempView = (TextView) findViewById(R.id.temperatureTextView);
 
-        getTemp();
+
+        permissionCheck();
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()) {
+            Log.d(TAG, "Can get location!");
+            getTemp(gps.getLatitude(), gps.getLongitude());
+        }
+
     }
 
     /**
@@ -93,11 +105,25 @@ public class MainActivity extends MenuActivity {
         startActivity(i);
     }
 
-    public void getTemp() {
+    public void getTemp(double lat, double lon) {
         TemperatureFetcher fetch = new TemperatureFetcher();
-        String temp = fetch.getTemperatureData();
+        String temp = fetch.getTemperatureData(lat, lon);
 
         tempView.setText(temp);
+    }
+
+    public boolean permissionCheck() {
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        } else {
+            ActivityCompat.requestPermissions(this, new String[] {
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION },
+                    0);
+        };
+        return true;
     }
 }
 

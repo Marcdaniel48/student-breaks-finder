@@ -1,5 +1,7 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.*;
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Service;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 /**
@@ -42,6 +45,7 @@ public class GPSTracker extends Service implements LocationListener {
 
     public GPSTracker(Context context) {
         this.mContext = context;
+        getLocation();
     }
 
     @Override
@@ -50,6 +54,7 @@ public class GPSTracker extends Service implements LocationListener {
         Log.d(TAG, "onCreate()");
     }
 
+    @SuppressLint("MissingPermission")
     public Location getLocation() {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
@@ -58,15 +63,14 @@ public class GPSTracker extends Service implements LocationListener {
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGPSEnabled && !isNetworkEnabled) {
-
+                //no available network provider
             } else {
                 this.canGetLocation = true;
 
                 if (isNetworkEnabled) {
-                    if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_BW_UPDATES, this);
                         Log.d("Network", "Netowrk");
-                    }
+
                     if(locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if(location != null) {
@@ -106,7 +110,7 @@ public class GPSTracker extends Service implements LocationListener {
 
     public double getLatitude() {
 
-        location = getLocation();
+        //location = getLocation();
 
         if(location != null) {
             latitude = location.getLatitude();
@@ -116,7 +120,7 @@ public class GPSTracker extends Service implements LocationListener {
 
     public double getLongitude() {
 
-        location = getLocation();
+        //location = getLocation();
 
         if(location != null) {
             longitude = location.getLongitude();

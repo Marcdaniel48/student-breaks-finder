@@ -1,6 +1,10 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.app.Activity;
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -16,16 +20,26 @@ import java.net.URL;
  * Created by mrtvor on 2017-11-26.
  */
 
-public class TemperatureFetcher extends Activity {
+public class TemperatureFetcher extends Service {
 
     private final static String TAG = TemperatureFetcher.class.getSimpleName();
     private final static String weatherUrl = "http://api.openweathermap.org/data/2.5/weather?";
-    GPSTracker userGps = new GPSTracker(TemperatureFetcher.this);
+    //GPSTracker userGps;
 
-    public String getTemperatureData() {
+    public TemperatureFetcher() {
+         //userGps = new GPSTracker(this);
+    }
 
-        double latitude = userGps.getLatitude();
-        double longitude = userGps.getLongitude();
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.d(TAG, "onCreate()");
+    }
+
+    public String getTemperatureData(double latitude, double longitude) {
+
+//        double latitude = userGps.getLatitude();
+//        double longitude = userGps.getLongitude();
         String key = "9b2d274f8b8845c5f9596502a83fb343";
 
         Log.d(TAG, "LAT: " + latitude + ", LONG: " + longitude);
@@ -62,5 +76,11 @@ public class TemperatureFetcher extends Activity {
         }
 
         return "Temperature unattainable";
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 }
