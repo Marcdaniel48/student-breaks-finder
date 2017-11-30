@@ -51,7 +51,7 @@ public class SettingsActivity extends Activity
         etEmail = findViewById(R.id.emailEditText);
         etPassword = findViewById(R.id.passwordEditText);
         etDatestamp = findViewById(R.id.datestampEditText);
-        tvValidationMessage = (TextView) findViewById(R.id.validationMessageTextView);
+        tvValidationMessage = findViewById(R.id.validationMessageTextView);
 
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
@@ -149,16 +149,11 @@ public class SettingsActivity extends Activity
     public boolean emptyInputFields()
     {
 
-        if(etFirstName.getText().toString().isEmpty() || etFirstName.getText().toString().trim().isEmpty())
-            return true;
-
-        if(etLastName.getText().toString().isEmpty() || etLastName.getText().toString().trim().isEmpty())
-            return true;
-
-        if(etEmail.getText().toString().isEmpty() || etEmail.getText().toString().trim().isEmpty())
-            return true;
-
-        if(etPassword.getText().toString().isEmpty() || etPassword.getText().toString().trim().isEmpty())
+        if(
+                etFirstName.getText().toString().trim().isEmpty() ||
+                etLastName.getText().toString().trim().isEmpty() ||
+                etEmail.getText().toString().trim().isEmpty() ||
+                etPassword.getText().toString().trim().isEmpty())
             return true;
 
         return false;
@@ -175,10 +170,7 @@ public class SettingsActivity extends Activity
         // by Jason Buberel --> https://stackoverflow.com/users/202275/jason-buberel
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
-        if(email.matches(emailRegex))
-            return true;
-
-        return false;
+        return email.matches(emailRegex);
     }
 
 }
