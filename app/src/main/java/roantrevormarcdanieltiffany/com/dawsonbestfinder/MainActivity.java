@@ -1,6 +1,7 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -83,6 +84,22 @@ public class MainActivity extends MenuActivity {
      */
     public void onAcademicCalendar(View v) {
         //Intent i = new Intent();
+    }
+
+    /**
+     * Checks if the app has been used before. If a device runs this app for the first time, return true.
+     * The way first startup is determined is by checking SharedPreferences for any user information.
+     *
+     * @return
+     */
+    public boolean firstStartUp()
+    {
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+
+        if(prefs.contains("firstName") && prefs.contains("lastName") && prefs.contains("email") && prefs.contains("password") && prefs.contains("datestamp"))
+            return false;
+
+        return true;
     }
 }
 
