@@ -123,6 +123,7 @@ public class WeatherActivity extends MenuActivity {
                 Log.d(TAG, data);
             }
 
+            llWeather.setVisibility(LinearLayout.VISIBLE);
             tvTestData.setText(strings[0]);
         }
     }

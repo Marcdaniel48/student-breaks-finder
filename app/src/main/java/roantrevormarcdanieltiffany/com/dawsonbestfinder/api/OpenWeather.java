@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,6 +13,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 
@@ -22,20 +26,36 @@ import java.util.Scanner;
 public class OpenWeather {
     private static final String TAG = OpenWeather.class.getSimpleName();
 
-    private static final String OPEN_WEATHER_UVI_URL = "http://api.openweathermap.org/data/2.5/uvi?appid=8116230ada270186d54714add001180f";
+    // API app id
+    private static final String APP_ID = "8116230ada270186d54714add001180f";
+
+    // Open Weather API url
+    private static final String OPEN_WEATHER_UVI_URL = "http://api.openweathermap.org/data/2.5/uvi?appid="+APP_ID;
+    private static String OPEN_WEATHER_FORECAST_URL = "api.openweathermap.org/data/2.5/forecast?appid="+APP_ID;
+
     // The format we want our API to return
     private static final String FORMAT = "json";
+
     // If there is error openweather api will have this in json
     private static final String ERROR_MESSAGE = "cod";
 
-    // Params to pass to query
-    static final String Q_PARAM = "q";
+    // Params to pass to uvi query
     static final String LAT_PARAM = "lat";
     static final String LON_PARAM = "lon";
-    static final String MODE_PARAM = "json";
+
+    // Params to pass to forecast query
+    static final String Q_PARAM = "q";
 
     // Response keys
     static final String VALUE_KEY = "value";
+    static final String MAIN_KEY = "main";
+    static final String TEMP_KEY = "temp";
+    static final String WEATHER_KEY = "weather";
+    static final String CLOUDS_KEY = "clouds";
+    static final String WIND_KEY = "wind";
+    static final String RAIN_KEY = "rain";
+    static final String LIST_KEY = "list";
+    static final String DT_TXT_KEY = "dt_txt";
 
     private Context context;
 
@@ -75,10 +95,20 @@ public class OpenWeather {
         }
     }
 
-    public static URL buildUrl(String cityName) {
+    public static URL buildForecastUrl(String cityName, String code) {
         Log.d(TAG, "called buildUrl()");
-        Uri builtUri = Uri.parse(OPEN_WEATHER_UVI_URL).buildUpon()
-                .appendQueryParameter()
+        Uri builtUri = Uri.parse(OPEN_WEATHER_FORECAST_URL).buildUpon()
+                .appendQueryParameter(Q_PARAM, cityName + "," + code)
+                .build();
+
+        try {
+            URL url = new URL(builtUri.toString());
+            Log.d(TAG, "Built URI" + url);
+            return url;
+        } catch (MalformedURLException err) {
+            Log.d(TAG, err.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -124,9 +154,13 @@ public class OpenWeather {
 
             switch (errorCode) {
                 case HttpURLConnection.HTTP_OK:
+                    Log.e(TAG, "Successful Call to UVI API");
                     break;
                 case HttpURLConnection.HTTP_NOT_FOUND:
                     Log.e(TAG, "Could not find location");
+                    break;
+                case HttpURLConnection.HTTP_UNAUTHORIZED:
+                    Log.e(TAG, "Wrong APP ID");
                     break;
                 default:
                     Log.e(TAG, "Something is wrong on their side");
@@ -135,5 +169,54 @@ public class OpenWeather {
         }
 
         return new String[] {uviJSON.getString(VALUE_KEY)};
+    }
+
+    public static String[] getForecastFromJSON(String jsonResponse) throws JSONException {
+        // Get the hour we want
+        Calendar rightNow = Calendar.getInstance();
+        String hour = rightNow.get(Calendar.HOUR_OF_DAY) + ":00:00";
+
+        JSONObject json = new JSONObject(jsonResponse);
+
+        if (json.has(ERROR_MESSAGE)) {
+            int errorCode = json.getInt(ERROR_MESSAGE);
+
+            switch (errorCode) {
+                case HttpURLConnection.HTTP_OK:
+                    Log.e(TAG, "Successful Call to Forecast API");
+                    break;
+                case HttpURLConnection.HTTP_NOT_FOUND:
+                    Log.e(TAG, "Could not find location");
+                    break;
+                case HttpURLConnection.HTTP_UNAUTHORIZED:
+                    Log.e(TAG, "Wrong APP ID");
+                    break;
+                default:
+                    Log.e(TAG, "Something is wrong on their side");
+                    break;
+            }
+        }
+
+        JSONArray forecastArr = json.getJSONArray(LIST_KEY);
+
+        String[] parsedWeatherData = new String[forecastArr.length()];
+
+        for (int i = 0; i < forecastArr.length(); i++) {
+            String date;
+            String highAndLow;
+
+            // Get JSON object representing the day
+            JSONObject dayForecast = forecastArr.getJSONObject(i);
+
+            // Only take objects whose hour is the one we want
+            if (dayForecast.getString(DT_TXT_KEY).matches("*"+hour+"$")) {
+                JSONObject mainObj = dayForecast.getJSONObject(MAIN_KEY);
+                JSONObject weatherObj = dayForecast.getJSONArray(WEATHER_KEY).getJSONObject(0);
+
+            }
+
+        }
+
+        return parsedWeatherData;
     }
 }
