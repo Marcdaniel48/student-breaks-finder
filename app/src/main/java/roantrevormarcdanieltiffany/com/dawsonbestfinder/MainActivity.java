@@ -1,15 +1,20 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.*;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import java.net.URL;
+
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 
 
 /**
@@ -36,16 +41,16 @@ public class MainActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tempView = (TextView) findViewById(R.id.temperatureTextView);
+        tempView = findViewById(R.id.temperatureTextView);
 
 
-        permissionCheck();
-        GPSTracker gps = new GPSTracker(this);
-        if(gps.canGetLocation()) {
-            Log.d(TAG, "Can get location!");
-            getTemp(gps.getLatitude(), gps.getLongitude());
+        if(permissionCheck()) {
+            GPSTracker gps = new GPSTracker(this);
+            if (gps.canGetLocation()) {
+                Log.d(TAG, "Can get location!");
+                loadTempData();
+            }
         }
-
     }
 
     /**
@@ -105,13 +110,11 @@ public class MainActivity extends MenuActivity {
         startActivity(i);
     }
 
-    public void getTemp(double lat, double lon) {
-        TemperatureFetcher fetch = new TemperatureFetcher();
-        String temp = fetch.getTemperatureData(lat, lon);
-
-        tempView.setText(temp);
-    }
-
+    /**
+     * Verifies whether or not the user has required permission for accessing
+     * locaiton, if not will request them.
+     * @return
+     */
     public boolean permissionCheck() {
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
@@ -122,8 +125,84 @@ public class MainActivity extends MenuActivity {
                     android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION },
                     0);
-        };
+        }
         return true;
+    }
+
+    /**
+     * Fetches latitude and logitude from shared preferences, and then runs GetTempTask
+     * inner class.
+     */
+    public void loadTempData() {
+        Log.d(TAG, "loadTempData()");
+        double lat = PreferenceManager.getDefaultSharedPreferences(this).getFloat("lat", 0);
+        double lon = PreferenceManager.getDefaultSharedPreferences(this).getFloat("lon", 0);
+
+        new GetTempTask().execute(String.valueOf(lat), String.valueOf(lon));
+    }
+
+    /**
+     * Class that extends AsyncTask so as to perform network ops on a non-main thread
+     */
+    public class GetTempTask extends AsyncTask<String, Void, String[]> {
+
+        /**
+         * Using a background thread will take the parameters passed, which
+         * will be latitude and longitude, and will perform the HttpUrlConnection
+         * methods which are required.
+         *
+         * @param strings Task params
+         * @return Temperature
+         */
+        @Override
+        protected String[] doInBackground(String... strings) {
+            Log.d(TAG, "doInBackground()");
+            if(strings.length == 0) {
+                Log.d(TAG, "No params:");
+                return new String[] {"failed"};
+            }
+
+            String lat = strings[0];
+            String lon = strings[1];
+
+            if(lat == null || lon == null){
+                Log.e(TAG, "Null params");
+                return new String[] {"failed"};
+            }
+
+            URL url = OpenWeather.buildTempUrl(lat, lon);
+
+            try {
+                String response = OpenWeather.getResponseFromHttpUrl(url);
+                Log.d(TAG, response);
+
+                String temp = OpenWeather.getTempValueFromJSON(response);
+                Log.d(TAG, temp);
+
+                return new String[] {temp};
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new String[] {"failed"};
+            }
+        }
+
+        /**
+         * Will set the tempView
+         * @param strings
+         */
+        @Override
+        protected void onPostExecute(String[] strings) {
+            Log.d(TAG, "onPostExecute()");
+            Log.d(TAG, strings[0]);
+
+            double temp = Double.parseDouble(strings[0]);
+            temp = temp - 273.15;
+            int roundTemp = (int) Math.round(temp);
+
+            if(strings[0] != null) {
+                tempView.setText(roundTemp + "\u00b0" + "C");
+            }
+        }
     }
 }
 

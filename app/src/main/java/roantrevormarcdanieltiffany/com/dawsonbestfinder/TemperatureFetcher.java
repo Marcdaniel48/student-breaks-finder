@@ -1,13 +1,8 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.app.Activity;
-import android.app.Service;
-import android.content.Intent;
-import android.os.IBinder;
-import android.support.annotation.Nullable;
+import android.os.AsyncTask;
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -20,35 +15,32 @@ import java.net.URL;
  * Created by mrtvor on 2017-11-26.
  */
 
-public class TemperatureFetcher extends Service {
+public class TemperatureFetcher extends AsyncTask<String, Void, String[]> {
 
     private final static String TAG = TemperatureFetcher.class.getSimpleName();
-    private final static String weatherUrl = "http://api.openweathermap.org/data/2.5/weather?";
-    //GPSTracker userGps;
-
-    public TemperatureFetcher() {
-         //userGps = new GPSTracker(this);
-    }
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        Log.d(TAG, "onCreate()");
-    }
+    protected String[] doInBackground(String... strings) {
+        Log.d(TAG, "doInBackground()");
 
-    public String getTemperatureData(double latitude, double longitude) {
+        if(strings.length <= 1 || strings.length > 2) {
+            Log.d(TAG, "Invalid number of params passed");
+            return null;
+        }
 
-//        double latitude = userGps.getLatitude();
-//        double longitude = userGps.getLongitude();
+        double latitude = Double.parseDouble(strings[0]);
+        double longitude = Double.parseDouble(strings[1]);
+        String weatherUrl = "http://api.openweathermap.org/data/2.5/weather?";
+
         String key = "9b2d274f8b8845c5f9596502a83fb343";
 
         Log.d(TAG, "LAT: " + latitude + ", LONG: " + longitude);
 
-        HttpURLConnection conn = null;
-        InputStream stream = null;
+        HttpURLConnection conn ;
+        InputStream stream;
 
         try {
-            conn = (HttpURLConnection) (new URL(weatherUrl+"lat="+latitude+"&lon="+longitude+"&APPID="+key)).openConnection();
+            conn = (HttpURLConnection) (new URL(weatherUrl+"lat="+latitude+"&lon="+longitude+"&appid="+key)).openConnection();
             conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.setDoOutput(true);
@@ -70,17 +62,11 @@ public class TemperatureFetcher extends Service {
             String temp = main.getString("temp");
             Log.d(TAG, "TEMPERATURE: " + temp);
 
-            return temp;
+            return new String[] {temp};
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return "Temperature unattainable";
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+        return new String[] {"Temperature unattainable"};
     }
 }
