@@ -9,8 +9,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
 
 /**
  * Activity which has a widget to input the city & use a spinner
@@ -62,6 +65,7 @@ public class WeatherActivity extends MenuActivity {
         double lon = -122.37;
 
         new OpenWeatherTask().execute(String.valueOf(lat),String.valueOf(lon));
+        new OpenWeatherForecast().execute("Montreal", "CA");
     }
 
     public void clickForecast(View view) {
@@ -72,7 +76,7 @@ public class WeatherActivity extends MenuActivity {
      * Class that extends AsyncTask to perform network requests
      */
     public class OpenWeatherTask extends AsyncTask<String, Void, String[]> {
-        private final String TAG = WeatherActivity.class.getSimpleName();
+        private final String TAG = OpenWeatherTask.class.getSimpleName();
 
         /**
          * Override this method to perform a computation on a background thread. The
@@ -125,6 +129,62 @@ public class WeatherActivity extends MenuActivity {
 
             llWeather.setVisibility(LinearLayout.VISIBLE);
             tvTestData.setText(strings[0]);
+        }
+    }
+
+    /**
+     * Class that extends AsyncTask to perform network requests
+     */
+    public class OpenWeatherForecast extends AsyncTask<String, Void, List<Forecast>> {
+        private final String TAG = OpenWeatherForecast.class.getSimpleName();
+
+        /**
+         * Override this method to perform a computation on a background thread. The
+         * specified parameters are the parameters passed to {@link #execute}
+         * by the caller of this task.
+         * <p>
+         * This method can call {@link #publishProgress} to publish updates
+         * on the UI thread.
+         *
+         * @param strings The parameters of the task.
+         * @return A result, defined by the subclass of this task.
+         * @see #onPreExecute()
+         * @see #onPostExecute
+         * @see #publishProgress
+         */
+        @Override
+        protected List<Forecast> doInBackground(String... strings) {
+            Log.d(TAG, "called doInBackground()");
+            if (strings.length == 0) {
+                Log.d(TAG, "No params");
+                return new ArrayList<>();
+            }
+
+            String cityName = strings[0];
+            String countryCode = strings[1];
+
+            URL url = OpenWeather.buildForecastUrl(cityName, countryCode);
+
+            try {
+                Log.d(TAG, "Url!!: " + url);
+                String json = OpenWeather.getResponseFromHttpUrl(url);
+                return OpenWeather.getForecastFromJSON(json);
+            } catch (Exception err) {
+                Log.e(TAG, err.getLocalizedMessage());
+                return new ArrayList<>();
+            }
+        }
+
+        /**
+         * Overrides {@code onPostExecute} to display results
+         *
+         * @param forecasts
+         */
+        @Override
+        protected void onPostExecute(List<Forecast> forecasts) {
+            Log.d(TAG, "called onPostExecute()");
+
+            Log.d(TAG, "Forecast list: " + forecasts);
         }
     }
 }

@@ -36,7 +36,7 @@ public class OpenWeather {
 
     // Open Weather API url
     private static final String OPEN_WEATHER_UVI_URL = "http://api.openweathermap.org/data/2.5/uvi?appid="+APP_ID;
-    private static String OPEN_WEATHER_FORECAST_URL = "api.openweathermap.org/data/2.5/forecast?appid="+APP_ID;
+    private static String OPEN_WEATHER_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?appid="+APP_ID;
 
     // The format we want our API to return
     private static final String FORMAT = "json";
@@ -116,14 +116,14 @@ public class OpenWeather {
     }
 
     public static URL buildForecastUrl(String cityName, String code) {
-        Log.d(TAG, "called buildUrl()");
+        Log.d(TAG, "called buildForecastUrl()");
         Uri builtUri = Uri.parse(OPEN_WEATHER_FORECAST_URL).buildUpon()
                 .appendQueryParameter(Q_PARAM, cityName + "," + code)
                 .build();
 
         try {
             URL url = new URL(builtUri.toString());
-            Log.d(TAG, "Built URI" + url);
+            Log.d(TAG, "Built URI: " + url);
             return url;
         } catch (MalformedURLException err) {
             Log.d(TAG, err.getMessage());
@@ -141,6 +141,7 @@ public class OpenWeather {
      */
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         Log.d(TAG, "called getResponseFromHttpUrl()");
+        Log.d(TAG, "URL: " + url);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
         // try-with-resources ensures the resources will be closed
@@ -192,9 +193,12 @@ public class OpenWeather {
     }
 
     public static List<Forecast> getForecastFromJSON(String jsonResponse) throws JSONException {
+        Log.d(TAG, "called getForecastFromJSON()");
         // Get the hour we want
         Calendar rightNow = Calendar.getInstance();
         String hour = rightNow.get(Calendar.HOUR_OF_DAY) + ":00:00";
+
+        Log.d(TAG, "Hour of the day: " + hour);
 
         JSONObject json = new JSONObject(jsonResponse);
 
@@ -225,7 +229,8 @@ public class OpenWeather {
             JSONObject dayForecast = forecastArr.getJSONObject(i);
 
             // Only take objects whose hour is the one we want
-            if (dayForecast.getString(DT_TXT_KEY).matches("*"+hour+"$")) {
+            if (dayForecast.getString(DT_TXT_KEY).matches("(.*)"+hour+"$")) {
+                Log.d(TAG, "Matches hour: " + dayForecast);
                 Forecast forecast = getForecastFromDay(dayForecast);
                 forecasts.add(forecast);
             }
