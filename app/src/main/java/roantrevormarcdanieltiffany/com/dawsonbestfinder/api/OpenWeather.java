@@ -202,6 +202,7 @@ public class OpenWeather {
     public static List<Forecast> getForecastFromJSON(String jsonResponse) throws JSONException {
         Log.d(TAG, "called getForecastFromJSON()");
 
+        Log.d(TAG, "response: " + jsonResponse);
         // Get the hour
         Calendar rightNow = Calendar.getInstance();
         int hourParsed = rightNow.get(Calendar.HOUR_OF_DAY);
@@ -212,8 +213,14 @@ public class OpenWeather {
             hourParsed-= modulus3 == 1 ? 1 : -1;
         }
 
+        String hour;
+
         // Make same format as DT_TXT
-        String hour = hourParsed + ":00:00";
+        if (hourParsed == 24) {
+            hour = "00:00:00";
+        } else {
+            hour = hourParsed + ":00:00";
+        }
 
         Log.d(TAG, "Hour of the day: " + hour);
 
