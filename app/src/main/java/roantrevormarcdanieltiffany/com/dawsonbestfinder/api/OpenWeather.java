@@ -82,16 +82,11 @@ public class OpenWeather {
     static final String LIST_KEY = "list";
     static final String DT_TXT_KEY = "dt_txt";
 
-    private Context context;
-
     /**
      * Instantiate class that will handle OpenWeather API calls
-     *
-     * @param context
      */
-    public OpenWeather(Context context) {
+    public OpenWeather() {
         Log.d(TAG, "called OpenWeather()");
-        this.context = context;
     }
 
     /**
@@ -166,13 +161,13 @@ public class OpenWeather {
      * Parses JSON and returns the value for the uvi
      * (ultraviolet index)
      *
-     * @param context
      * @param jsonResponse
      *      JSON response from api
      * @return double UVI value
      * @throws JSONException
      */
-    public static String[] getUviValueFromJSON(Context context, String jsonResponse) throws JSONException{
+    public static String[] getUviValueFromJSON(String jsonResponse) throws JSONException{
+        Log.d(TAG, "called getUviValueFromJSON()");
         JSONObject uviJSON = new JSONObject(jsonResponse);
 
         if (uviJSON.has(ERROR_MESSAGE)) {
@@ -327,6 +322,10 @@ public class OpenWeather {
 
         if (weatherObj.has(WEATHER_DESCRIPTION_KEY)) {
             forecast.setWeatherDescription(weatherObj.getString(WEATHER_DESCRIPTION_KEY));
+        }
+
+        if (weatherObj.has(WEATHER_ICON_KEY)) {
+            forecast.setWeatherIcon(weatherObj.getString(WEATHER_ICON_KEY));
         }
 
         if (dayForecast.has(CLOUDS_KEY) && dayForecast.getJSONObject(CLOUDS_KEY).has(CLOUDS_ALL_KEY)) {

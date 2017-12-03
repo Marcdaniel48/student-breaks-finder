@@ -142,7 +142,7 @@ public class WeatherActivity extends MenuActivity {
 
             try {
                 String json = OpenWeather.getResponseFromHttpUrl(url);
-                return OpenWeather.getUviValueFromJSON(WeatherActivity.this, json);
+                return OpenWeather.getUviValueFromJSON(json);
             } catch (Exception err) {
                 Log.e(TAG, err.getLocalizedMessage());
                 return new String[]{};
