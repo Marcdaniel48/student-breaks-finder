@@ -163,11 +163,7 @@ public class TeacherContactFragment extends Fragment {
                 Log.d(TAG, "Called tvLocal->onClick()");
                 if (teacher.getLocal().length() > 0) {
                     Intent intent = new Intent(Intent.ACTION_DIAL);
-                    /**
-                     * @todo Check what is the phone number that we are supposed to be inputing for call intent.
-                     * @body  As of right now, the intent opens the call screen with the teacher's local, check specs for more info.
-                     */
-                    intent.setData(Uri.parse("tel:" + teacher.getLocal()));
+                    intent.setData(Uri.parse("tel:15149348731," + teacher.getLocal()));
                     if (intent.resolveActivity(teacherContactActivity.getPackageManager()) != null) {
                         startActivity(intent);
                     }

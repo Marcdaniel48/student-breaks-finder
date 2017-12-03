@@ -216,8 +216,6 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
      * If we wanted to write to the Calendar, we would have to add that
      * permission to the manifest and change this method a bit.
      *
-     * @todo Check what to put inside calendar event
-     * @body For now it's title, description and location.
      *
      * @param view
      */
