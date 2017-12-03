@@ -1,9 +1,0 @@
-
-Fsquid:S1068"+Remove this unused "context" private field.(êİç8øÉ†Í,
-Tsquid:UselessImportCheck"+Remove this unused import 'java.sql.Array'.(Õø‹ù8øÉ†Í,
-Ksquid:S1068"*Remove this unused "FORMAT" private field.(íÊÊşÿÿÿÿ8øÉ†Í,
-ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(®öä¨şÿÿÿÿ8€Ñ‘Í,
-Tsquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü8øÉ†Í,
-…squid:S3008"dRename this field "OPEN_WEATHER_FORECAST_URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¸´‰İıÿÿÿÿ8øÉ†Í,
-Wsquid:UselessImportCheck"/Remove this unused import 'java.sql.Timestamp'.(èò½+8øÉ†Í,
-Jsquid:S1172".Remove this unused method parameter "context".(‡øºŸ8øÉ†Í,
