@@ -53,6 +53,13 @@ public class SettingsActivity extends Activity
         etDatestamp = findViewById(R.id.datestampEditText);
         tvValidationMessage = findViewById(R.id.validationMessageTextView);
 
+        // Restores state for validation message and validation message text color
+        if(savedInstanceState != null && savedInstanceState.getString("validationMessage") != null && savedInstanceState.getInt("validationMessageColor") != 0)
+        {
+            tvValidationMessage.setTextColor(savedInstanceState.getInt("validationMessageColor"));
+            tvValidationMessage.setText(savedInstanceState.getString("validationMessage"));
+        }
+
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
         if(prefs.contains(FIRST_NAME))
@@ -171,6 +178,19 @@ public class SettingsActivity extends Activity
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
         return email.matches(emailRegex);
+    }
+
+    /**
+     * Puts the current validation message and its text color into saved instance state.
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("validationMessage", tvValidationMessage.getText().toString());
+        outState.putInt("validationMessageColor", tvValidationMessage.getCurrentTextColor());
     }
 
 }
