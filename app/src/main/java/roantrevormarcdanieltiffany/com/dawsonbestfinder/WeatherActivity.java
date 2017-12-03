@@ -21,10 +21,10 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
 
 /**
- * Activity which has a widget to input the city & use a spinner
- * for the ISO 3166 country codes, default to Montreal,CA.
- * Have a button to display the UV index and the 5 day forecast
- * This can be in the same Activity/Fragment or launch a new one
+ * Activity which has a widget to input the city & uses a spinner
+ * for the ISO 3166 country codes (default is Montreal,CA) .
+ * It has a button handler to display the UV index and the 5 day forecast
+ * which displays in the same activity
  *
  * {@see https://developer.android.com/guide/topics/providers/calendar-provider.html}
  *
