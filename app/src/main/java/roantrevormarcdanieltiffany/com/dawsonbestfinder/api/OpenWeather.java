@@ -36,7 +36,7 @@ public class OpenWeather {
 
     // Open Weather API url
     private static final String OPEN_WEATHER_UVI_URL = "http://api.openweathermap.org/data/2.5/uvi?appid="+APP_ID;
-    private static String OPEN_WEATHER_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?appid="+APP_ID;
+    private static String OPEN_WEATHER_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric&appid="+APP_ID;
 
     // The format we want our API to return
     private static final String FORMAT = "json";
@@ -194,9 +194,19 @@ public class OpenWeather {
 
     public static List<Forecast> getForecastFromJSON(String jsonResponse) throws JSONException {
         Log.d(TAG, "called getForecastFromJSON()");
-        // Get the hour we want
+
+        // Get the hour
         Calendar rightNow = Calendar.getInstance();
-        String hour = rightNow.get(Calendar.HOUR_OF_DAY) + ":00:00";
+        int hourParsed = rightNow.get(Calendar.HOUR_OF_DAY);
+        int modulus3 = hourParsed % 3;
+
+        if (modulus3 != 0 ) {
+            // Make sure it's every 3 hours (Ex: 10am -> 9am, 11am -> 12am)
+            hourParsed-= modulus3 == 1 ? 1 : -1;
+        }
+
+        // Make same format as DT_TXT
+        String hour = hourParsed + ":00:00";
 
         Log.d(TAG, "Hour of the day: " + hour);
 
@@ -251,6 +261,9 @@ public class OpenWeather {
         JSONObject weatherObj = dayForecast.getJSONArray(WEATHER_KEY).getJSONObject(0);
 
         Forecast forecast = new Forecast();
+
+        Log.d(TAG, "DT_TXT_KEY: " + dayForecast.getString(DT_TXT_KEY));
+        forecast.setDay(dayForecast.getString(DT_TXT_KEY));
 
         if (mainObj.has(TEMP_KEY)) {
             forecast.setTemperature(mainObj.getDouble(TEMP_KEY));

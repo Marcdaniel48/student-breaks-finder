@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -185,6 +186,10 @@ public class WeatherActivity extends MenuActivity {
             Log.d(TAG, "called onPostExecute()");
 
             Log.d(TAG, "Forecast list: " + forecasts);
+
+            ArrayAdapter<Forecast> adapter = new ArrayAdapter<>(WeatherActivity.this, android.R.layout.simple_list_item_1, forecasts);
+
+            lvForecast.setAdapter(adapter);
         }
     }
 }

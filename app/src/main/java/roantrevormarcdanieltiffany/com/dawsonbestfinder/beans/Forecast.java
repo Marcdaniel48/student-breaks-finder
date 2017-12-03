@@ -1,5 +1,14 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
 
+import android.util.Log;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
+
 /**
  * Forecast API response that we want to display
  *
@@ -12,6 +21,8 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
  * @author Trevor Eames
  */
 public class Forecast {
+    private static final String TAG = Forecast.class.getSimpleName();
+    private String day;
     private double temperature;
     private double temperatureMin;
     private double temperatureMax;
@@ -32,12 +43,14 @@ public class Forecast {
     private double rainMM3h;
     // Snow volume for last 3 hours
     private double snowVol3h;
+    private static final String formatter = "%-22s%15s%n";
 
     public Forecast() {
-        this(-1,-1,-1,-1,-1,-1,-1,-1,-1,"","","",-1,-1,-1,-1,-1);
+        this("",-1,-1,-1,-1,-1,-1,-1,-1,-1,"","","",-1,-1,-1,-1,-1);
     }
 
-    public Forecast(double temperature, double temperatureMin, double temperatureMax, double pressure, double seaLevel, double grndLevel, double humidity, double temperatureKf, int weatherId, String weatherMain, String weatherDescription, String weatherIcon, double cloudsAllPercentage, double windSpeed, double windDeg, double rainMM3h, double snowVol3h) {
+    public Forecast(String day, double temperature, double temperatureMin, double temperatureMax, double pressure, double seaLevel, double grndLevel, double humidity, double temperatureKf, int weatherId, String weatherMain, String weatherDescription, String weatherIcon, double cloudsAllPercentage, double windSpeed, double windDeg, double rainMM3h, double snowVol3h) {
+        this.day = day;
         this.temperature = temperature;
         this.temperatureMin = temperatureMin;
         this.temperatureMax = temperatureMax;
@@ -55,6 +68,14 @@ public class Forecast {
         this.windDeg = windDeg;
         this.rainMM3h = rainMM3h;
         this.snowVol3h = snowVol3h;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public double getTemperature() {
@@ -215,6 +236,8 @@ public class Forecast {
         if (Double.compare(forecast.getWindDeg(), getWindDeg()) != 0) return false;
         if (Double.compare(forecast.getRainMM3h(), getRainMM3h()) != 0) return false;
         if (Double.compare(forecast.getSnowVol3h(), getSnowVol3h()) != 0) return false;
+        if (getDay() != null ? !getDay().equals(forecast.getDay()) : forecast.getDay() != null)
+            return false;
         if (getWeatherMain() != null ? !getWeatherMain().equals(forecast.getWeatherMain()) : forecast.getWeatherMain() != null)
             return false;
         if (getWeatherDescription() != null ? !getWeatherDescription().equals(forecast.getWeatherDescription()) : forecast.getWeatherDescription() != null)
@@ -226,8 +249,9 @@ public class Forecast {
     public int hashCode() {
         int result;
         long temp;
+        result = getDay() != null ? getDay().hashCode() : 0;
         temp = Double.doubleToLongBits(getTemperature());
-        result = (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(getTemperatureMin());
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(getTemperatureMax());
@@ -260,25 +284,37 @@ public class Forecast {
     }
 
     @Override
-    public String toString() {
-        return "Forecast{" +
-                "temperature=" + temperature +
-                ", temperatureMin=" + temperatureMin +
-                ", temperatureMax=" + temperatureMax +
-                ", pressure=" + pressure +
-                ", seaLevel=" + seaLevel +
-                ", grndLevel=" + grndLevel +
-                ", humidity=" + humidity +
-                ", temperatureKf=" + temperatureKf +
-                ", weatherId=" + weatherId +
-                ", weatherMain='" + weatherMain + '\'' +
-                ", weatherDescription='" + weatherDescription + '\'' +
-                ", weatherIcon='" + weatherIcon + '\'' +
-                ", cloudsAllPercentage=" + cloudsAllPercentage +
-                ", windSpeed=" + windSpeed +
-                ", windDeg=" + windDeg +
-                ", rainMM3h=" + rainMM3h +
-                ", snowVol3h=" + snowVol3h +
-                '}';
+    public String toString(){
+        // 2017-12-03 21:00:00
+        DateFormat actualDateFormat = new SimpleDateFormat("yyyy-MM-dd k:00:00");
+        DateFormat dateFormat = new SimpleDateFormat("EEEE, dd, MMMM  k:00");
+
+        String parsedDay = day;
+
+        try {
+            Log.d(TAG, "Parsed?: " + actualDateFormat.parse(day));
+            parsedDay = dateFormat.format(actualDateFormat.parse(day));
+        } catch (ParseException err) {
+            Log.d(TAG, err.getMessage());
+        }
+
+        return  parsedDay + "\n\n" +
+                String.format(formatter,"Temperature:", temperature + " °C") +
+                String.format(formatter,"Min Temperature:", temperatureMin + " °C") +
+                String.format(formatter,"TemperatureMax:", temperatureMax + " °C") +
+                String.format(formatter,"Pressure:", pressure) +
+                String.format(formatter,"Sea Level:", seaLevel) +
+                String.format(formatter,"Grnd Level:", grndLevel) +
+                String.format(formatter,"Humidity:", humidity) +
+                String.format(formatter,"Temperature Kf:", temperatureKf) +
+                String.format(formatter,"Weather Id:", weatherId) +
+                String.format(formatter,"Weather Main:", weatherMain) +
+                String.format(formatter,"Weather Description:", weatherDescription) +
+                String.format(formatter,"Weather Icon:", weatherIcon) +
+                String.format(formatter,"Clouds Percentage:", cloudsAllPercentage + " %") +
+                String.format(formatter,"Wind Speed:", windSpeed + " m/s")+
+                String.format(formatter,"Wind Deg:", windDeg) +
+                String.format(formatter,"Rain mm (3h):", rainMM3h + " mm") +
+                String.format(formatter,"Snow Volume (3h):", snowVol3h + " mm");
     }
 }
