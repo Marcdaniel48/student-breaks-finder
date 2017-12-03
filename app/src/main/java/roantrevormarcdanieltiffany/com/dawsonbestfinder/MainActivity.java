@@ -27,6 +27,20 @@ public class MainActivity extends MenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+
+        // If it's the first time the user has started the app, open the settings activity so that the user can input his or her account information.
+        if(!prefs.contains("first_startup"))
+        {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("first_startup", false);
+            editor.commit();
+
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     /**
@@ -84,22 +98,6 @@ public class MainActivity extends MenuActivity {
      */
     public void onAcademicCalendar(View v) {
         //Intent i = new Intent();
-    }
-
-    /**
-     * Checks if the app has been used before. If a device runs this app for the first time, return true.
-     * The way first startup is determined is by checking SharedPreferences for any user information.
-     *
-     * @return
-     */
-    public boolean firstStartUp()
-    {
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-
-        if(prefs.contains("firstName") && prefs.contains("lastName") && prefs.contains("email") && prefs.contains("password") && prefs.contains("datestamp"))
-            return false;
-
-        return true;
     }
 }
 

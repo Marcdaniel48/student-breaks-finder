@@ -125,27 +125,45 @@ public class SettingsActivity extends Activity
     @Override
     public void onBackPressed()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 
-        builder.setPositiveButton(R.string.settings_back_dialog_yes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-                SettingsActivity.super.onBackPressed();
-            }
-        });
+        if(prefs.contains(FIRST_NAME) && prefs.contains(LAST_NAME) && prefs.contains(EMAIL) && prefs.contains(PASSWORD))
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setNegativeButton(R.string.settings_back_dialog_no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-                dialogInterface.dismiss();
-            }
-        });
+            builder.setPositiveButton(R.string.settings_back_dialog_yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    SettingsActivity.super.onBackPressed();
+                }
+            });
 
-        builder.setMessage(R.string.settings_back_dialog_message).setTitle(R.string.settings_back_dialog_title);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            builder.setNegativeButton(R.string.settings_back_dialog_no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.setMessage(R.string.settings_back_dialog_message).setTitle(R.string.settings_back_dialog_title);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setNegativeButton(R.string.settings_back_dialog_ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.setMessage(R.string.settings_back_dialog_message_no_input).setTitle(R.string.settings_back_dialog_title);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     /**
