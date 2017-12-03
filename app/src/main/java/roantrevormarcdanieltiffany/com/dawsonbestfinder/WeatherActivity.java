@@ -59,11 +59,16 @@ public class WeatherActivity extends MenuActivity {
         spinner = findViewById(R.id.spinner);
         etCityName = findViewById(R.id.etCityName);
 
-        // Only show weather on button click
+        // Prep spinner
         setISOCodes();
+
+        // Only show weather on button click
         llWeather.setVisibility(LinearLayout.GONE);
     }
 
+    /**
+     * Set ISO codes in the spinner and default to CA
+     */
     private void setISOCodes() {
         String[] locales = Locale.getISOCountries();
 
@@ -93,6 +98,11 @@ public class WeatherActivity extends MenuActivity {
         new OpenWeatherForecast().execute(etCityName.getText().toString(), spinner.getSelectedItem().toString());
     }
 
+    /**
+     * Forecast button handler
+     *
+     * @param view
+     */
     public void clickForecast(View view) {
         loadUVIData();
     }

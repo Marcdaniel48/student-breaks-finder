@@ -197,6 +197,13 @@ public class OpenWeather {
         return new String[] {uviJSON.getString(VALUE_KEY)};
     }
 
+    /**
+     * Parses JSON and returns a list of Forecasts
+     *
+     * @param jsonResponse
+     * @return List<Forecast>
+     * @throws JSONException
+     */
     public static List<Forecast> getForecastFromJSON(String jsonResponse) throws JSONException {
         Log.d(TAG, "called getForecastFromJSON()");
 
