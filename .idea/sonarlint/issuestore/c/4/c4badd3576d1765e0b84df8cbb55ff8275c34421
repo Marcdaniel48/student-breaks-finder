@@ -1,0 +1,15 @@
+
+dsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°™¤
+lsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(İ¢êÍıÿÿÿÿ
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯½¸Šøÿÿÿÿ
+csquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼²å
+Xsquid:S00107"BConstructor has 12 parameters, which is greater than 7 authorized.(ë¥åÀ
+gsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°™¤
+jsquid:S00116"TRename this field "last_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(šø´¯
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´Î¸ñÿÿÿÿÿ
+isquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(İí‚Æùÿÿÿÿ
+dsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ìşæ
+lsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯½¸Šøÿÿÿÿ
+jsquid:S00116"TRename this field "full_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(®š¬Í
+ksquid:S00116"URename this field "first_name" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(è•Ûì
+fsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¼²å

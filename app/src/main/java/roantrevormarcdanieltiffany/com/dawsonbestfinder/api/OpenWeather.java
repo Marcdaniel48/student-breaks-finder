@@ -25,9 +25,14 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
 
 
 /**
- * Created by sirMerr on 2017-11-28.
+ * Methods that are used to communicate with the openweather api and
+ * handle the JSON data response
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class OpenWeather {
     private static final String TAG = OpenWeather.class.getSimpleName();
 

@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
@@ -32,9 +36,11 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
 public class WeatherActivity extends MenuActivity {
     private static final String TAG = WeatherActivity.class.getSimpleName();
 
-    private TextView tvTestData;
+    private TextView tvTestData, tvForecast;
     private ListView lvForecast;
     private LinearLayout llWeather;
+    private Spinner spinner;
+    private EditText etCityName;
 
     /**
      *
@@ -46,14 +52,26 @@ public class WeatherActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
 
-        tvTestData = findViewById(R.id.tvTestData);
+        tvTestData = findViewById(R.id.tvUVI);
+        tvForecast = findViewById(R.id.tvForecast);
         lvForecast = findViewById(R.id.lvForecast);
         llWeather = findViewById(R.id.llWeather);
+        spinner = findViewById(R.id.spinner);
+        etCityName = findViewById(R.id.etCityName);
 
         // Only show weather on button click
+        setISOCodes();
         llWeather.setVisibility(LinearLayout.GONE);
     }
 
+    private void setISOCodes() {
+        String[] locales = Locale.getISOCountries();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locales);
+
+        spinner.setAdapter(adapter);
+        spinner.setSelection(adapter.getPosition(getString(R.string.canada_code)));
+    }
     /**
      * This method will get the user's location to get
      * a ultraviolet index from the openweather api in the
@@ -61,12 +79,18 @@ public class WeatherActivity extends MenuActivity {
      */
     private void loadUVIData() {
         Log.d(TAG, "called loadUVIData()");
+        if (etCityName.getText().toString().trim().equals("")) {
+            Log.d(TAG, "No city name specified");
+            etCityName.setError("The city name is required!");
+            return;
+        }
+
         // @todo Replace lat/lon with non-fake data
         double lat = 37.75;
         double lon = -122.37;
 
         new OpenWeatherTask().execute(String.valueOf(lat),String.valueOf(lon));
-        new OpenWeatherForecast().execute("Montreal", "CA");
+        new OpenWeatherForecast().execute(etCityName.getText().toString(), spinner.getSelectedItem().toString());
     }
 
     public void clickForecast(View view) {
@@ -185,8 +209,13 @@ public class WeatherActivity extends MenuActivity {
         protected void onPostExecute(List<Forecast> forecasts) {
             Log.d(TAG, "called onPostExecute()");
 
-            Log.d(TAG, "Forecast list: " + forecasts);
-
+            if (forecasts.isEmpty()) {
+                Log.d(TAG, "forecasts.isEmpty");
+                Toast.makeText(WeatherActivity.this, "City name/Country code Invalid!",
+                        Toast.LENGTH_LONG).show();
+                lvForecast.setVisibility(ListView.GONE);
+                return;
+            }
             ArrayAdapter<Forecast> adapter = new ArrayAdapter<>(WeatherActivity.this, android.R.layout.simple_list_item_1, forecasts);
 
             lvForecast.setAdapter(adapter);

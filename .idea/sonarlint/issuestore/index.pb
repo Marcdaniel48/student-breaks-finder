@@ -1,0 +1,21 @@
+
+„
+Tapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/MainActivity.java,9/2/9279ad97d28f8ef70a8a9723c79fbe55549d83c7
+P
+ app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
+…
+Uapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/beans/Teacher.java,c/4/c4badd3576d1765e0b84df8cbb55ff8275c34421
+ˆ
+Xapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/SettingsActivity.java,c/1/c160b8dd8630206ff64b263b61f6064acabc8d42
+ˆ
+Xapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/CalendarActivity.java,d/c/dc4482550d88a1b6cd6868fba54784d882fcba6a
+”
+dapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/fragments/DatePickerFragment.java,c/5/c5022131ee45f49995d4da6af2b11556b06a980c
+†
+Vapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/beans/Forecast.java,f/1/f1949e8c9225c21e54cc8624d4b3d684dac22df7
+˜
+happ/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/fragments/TeacherContactFragment.java,0/4/04a8ecdde6d1040520856e0e4df80389a1c829b2
+‡
+Wapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/api/OpenWeather.java,d/0/d0048b7eed3a6ac3f936623076a4cbaf9d9729ac
+‡
+Wapp/src/main/java/roantrevormarcdanieltiffany/com/dawsonbestfinder/WeatherActivity.java,d/1/d16cc7813575b7c02560226b5a0fbaa64aae511f

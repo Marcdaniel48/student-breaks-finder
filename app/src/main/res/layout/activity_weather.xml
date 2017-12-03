@@ -10,6 +10,7 @@
 
         <EditText
             android:id="@+id/etCityName"
+            android:text="@string/default_city_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -51,7 +52,7 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/tvTestData"
+                    android:id="@+id/tvUVI"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -1,0 +1,6 @@
+
+Tsquid:UselessImportCheck"+Remove this unused import 'java.util.Date'.(¸…¼ü8É‚šĞ,
+Œsquid:UselessImportCheck"cRemove this unused import 'roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity'.(´Ò“ê8¥”Ğ,
+]squid:S00107"BConstructor has 18 parameters, which is greater than 7 authorized.(Ø‰ı¡üÿÿÿÿ
+ssquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(İ¢êÍıÿÿÿÿ8ÇôÏ,
+|squid:S00115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(Ûşçûÿÿÿÿ8§‹óÏ,
