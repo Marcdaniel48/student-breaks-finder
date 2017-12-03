@@ -43,6 +43,7 @@ public class WeatherActivity extends MenuActivity {
     private EditText etCityName;
 
     /**
+     * Overrides {@code onCreate} to prep the layout
      *
      * @param savedInstanceState
      */
@@ -82,8 +83,8 @@ public class WeatherActivity extends MenuActivity {
      * a ultraviolet index from the openweather api in the
      * background
      */
-    private void loadUVIData() {
-        Log.d(TAG, "called loadUVIData()");
+    private void loadOpenWeatherData() {
+        Log.d(TAG, "called loadOpenWeatherData()");
         if (etCityName.getText().toString().trim().equals("")) {
             Log.d(TAG, "No city name specified");
             etCityName.setError("The city name is required!");
@@ -94,8 +95,8 @@ public class WeatherActivity extends MenuActivity {
         double lat = 37.75;
         double lon = -122.37;
 
-        new OpenWeatherTask().execute(String.valueOf(lat),String.valueOf(lon));
-        new OpenWeatherForecast().execute(etCityName.getText().toString(), spinner.getSelectedItem().toString());
+        new OpenWeatherUVITask().execute(String.valueOf(lat),String.valueOf(lon));
+        new OpenWeatherForecastTask().execute(etCityName.getText().toString(), spinner.getSelectedItem().toString());
     }
 
     /**
@@ -104,22 +105,21 @@ public class WeatherActivity extends MenuActivity {
      * @param view
      */
     public void clickForecast(View view) {
-        loadUVIData();
+        loadOpenWeatherData();
     }
 
     /**
      * Class that extends AsyncTask to perform network requests
      */
-    public class OpenWeatherTask extends AsyncTask<String, Void, String[]> {
-        private final String TAG = OpenWeatherTask.class.getSimpleName();
+    public class OpenWeatherUVITask extends AsyncTask<String, Void, String[]> {
+        private final String TAG = OpenWeatherUVITask.class.getSimpleName();
 
         /**
-         * Override this method to perform a computation on a background thread. The
+         * Retrieves the UVI data from the api.
+         *
+         * Overrides {@code doInBackground} to perform a computation on a background thread. The
          * specified parameters are the parameters passed to {@link #execute}
          * by the caller of this task.
-         * <p>
-         * This method can call {@link #publishProgress} to publish updates
-         * on the UI thread.
          *
          * @param strings The parameters of the task.
          * @return A result, defined by the subclass of this task.
@@ -150,6 +150,8 @@ public class WeatherActivity extends MenuActivity {
         }
 
         /**
+         * Displays UVI data inside layout
+         *
          * Overrides {@code onPostExecute} to display results
          *
          * @param strings
@@ -170,19 +172,18 @@ public class WeatherActivity extends MenuActivity {
     /**
      * Class that extends AsyncTask to perform network requests
      */
-    public class OpenWeatherForecast extends AsyncTask<String, Void, List<Forecast>> {
-        private final String TAG = OpenWeatherForecast.class.getSimpleName();
+    public class OpenWeatherForecastTask extends AsyncTask<String, Void, List<Forecast>> {
+        private final String TAG = OpenWeatherForecastTask.class.getSimpleName();
 
         /**
-         * Override this method to perform a computation on a background thread. The
+         * Find forecasts for the 3h interval closest to the current hour
+         *
+         * Overrides {@code doInBackground} to perform a computation on a background thread. The
          * specified parameters are the parameters passed to {@link #execute}
          * by the caller of this task.
-         * <p>
-         * This method can call {@link #publishProgress} to publish updates
-         * on the UI thread.
          *
          * @param strings The parameters of the task.
-         * @return A result, defined by the subclass of this task.
+         * @return List of {@code Forecasts}
          * @see #onPreExecute()
          * @see #onPostExecute
          * @see #publishProgress
@@ -212,6 +213,7 @@ public class WeatherActivity extends MenuActivity {
 
         /**
          * Overrides {@code onPostExecute} to display results
+         * or a toast if no data was found
          *
          * @param forecasts
          */
