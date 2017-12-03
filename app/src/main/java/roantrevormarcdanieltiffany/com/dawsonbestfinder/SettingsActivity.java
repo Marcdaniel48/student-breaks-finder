@@ -26,12 +26,19 @@ public class SettingsActivity extends Activity
     EditText etFirstName, etLastName, etEmail, etPassword, etDatestamp;
     TextView tvValidationMessage;
 
-    // For retrieving data from SharedPreferences.
+    // For retrieving data from Settings SharedPreferences.
     protected static final String FIRST_NAME = "firstName";
     protected static final String LAST_NAME = "lastName";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";
     protected static final String DATESTAMP = "datestamp";
+
+    // Name for Settings SharedPreferences
+    protected static final String SETTINGS = "settings";
+
+    // For storing and setting validation message and text color using saved instance state
+    protected static final String VALIDATION_MESSAGE = "validationMessage";
+    protected static final String VALIDATION_MESSAGE_COLOR = "validationMessageColor";
 
     /**
      * When the activity is created, call super.onCreate, then look into SharedPreferences for saved user information.
@@ -54,13 +61,13 @@ public class SettingsActivity extends Activity
         tvValidationMessage = findViewById(R.id.validationMessageTextView);
 
         // Restores state for validation message and validation message text color
-        if(savedInstanceState != null && savedInstanceState.getString("validationMessage") != null && savedInstanceState.getInt("validationMessageColor") != 0)
+        if(savedInstanceState != null && savedInstanceState.getString(VALIDATION_MESSAGE) != null && savedInstanceState.getInt(VALIDATION_MESSAGE_COLOR) != 0)
         {
-            tvValidationMessage.setTextColor(savedInstanceState.getInt("validationMessageColor"));
-            tvValidationMessage.setText(savedInstanceState.getString("validationMessage"));
+            tvValidationMessage.setTextColor(savedInstanceState.getInt(VALIDATION_MESSAGE_COLOR));
+            tvValidationMessage.setText(savedInstanceState.getString(VALIDATION_MESSAGE));
         }
 
-        SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(SETTINGS,MODE_PRIVATE);
 
         if(prefs.contains(FIRST_NAME))
             etFirstName.setText(prefs.getString(FIRST_NAME, ""));
@@ -88,7 +95,7 @@ public class SettingsActivity extends Activity
         if(!emptyInputFields())
         {
             if(isEmail(etEmail.getText().toString())) {
-                SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
+                SharedPreferences prefs = getSharedPreferences(SETTINGS,MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
 
                 editor.putString(FIRST_NAME, etFirstName.getText().toString());
@@ -125,7 +132,7 @@ public class SettingsActivity extends Activity
     @Override
     public void onBackPressed()
     {
-        SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(SETTINGS,MODE_PRIVATE);
 
         if(prefs.contains(FIRST_NAME) && prefs.contains(LAST_NAME) && prefs.contains(EMAIL) && prefs.contains(PASSWORD))
         {
@@ -208,8 +215,8 @@ public class SettingsActivity extends Activity
     {
         super.onSaveInstanceState(outState);
 
-        outState.putString("validationMessage", tvValidationMessage.getText().toString());
-        outState.putInt("validationMessageColor", tvValidationMessage.getCurrentTextColor());
+        outState.putString(VALIDATION_MESSAGE, tvValidationMessage.getText().toString());
+        outState.putInt(VALIDATION_MESSAGE_COLOR, tvValidationMessage.getCurrentTextColor());
     }
 
 }
