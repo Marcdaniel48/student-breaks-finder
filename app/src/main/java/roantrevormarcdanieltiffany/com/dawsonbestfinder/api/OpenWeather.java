@@ -1,6 +1,5 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.api;
 
-import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -13,11 +12,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Array;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,7 +37,7 @@ public class OpenWeather {
 
     // Open Weather API url
     private static final String OPEN_WEATHER_UVI_URL = "http://api.openweathermap.org/data/2.5/uvi?appid="+APP_ID;
-    private static String OPEN_WEATHER_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric&appid="+APP_ID;
+    private static final String OPEN_WEATHER_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric&appid="+APP_ID;
 
     // The format we want our API to return
     private static final String FORMAT = "json";
@@ -50,37 +46,37 @@ public class OpenWeather {
     private static final String ERROR_MESSAGE = "cod";
 
     // Params to pass to uvi query
-    static final String LAT_PARAM = "lat";
-    static final String LON_PARAM = "lon";
+    private static final String LAT_PARAM = "lat";
+    private static final String LON_PARAM = "lon";
 
     // Params to pass to forecast query
-    static final String Q_PARAM = "q";
+    private static final String Q_PARAM = "q";
 
     // Response keys
-    static final String VALUE_KEY = "value";
-    static final String MAIN_KEY = "main";
-    static final String TEMP_KEY = "temp_min";
-    static final String TEMP_MAX_KEY = "temp_max";
-    static final String TEMP_MIN_KEY = "temp_min";
-    static final String PRESSURE_KEY = "pressure";
-    static final String SEA_LEVEL_KEY = "sea_level";
-    static final String GRND_LEVEL_KEY = "grnd_level";
-    static final String HUMIDITY_KEY = "humidity";
-    static final String TEMP_KF_KEY = "temp_kf";
-    static final String WEATHER_KEY = "weather";
-    static final String WEATHER_ID_KEY = "id";
-    static final String WEATHER_DESCRIPTION_KEY = "description";
-    static final String WEATHER_ICON_KEY = "icon";
-    static final String CLOUDS_KEY = "clouds";
-    static final String CLOUDS_ALL_KEY = "all";
-    static final String WIND_KEY = "wind";
-    static final String WIND_SPEED_KEY = "speed";
-    static final String WIND_DEG_KEY = "deg";
-    static final String RAIN_KEY = "rain";
-    static final String H3_KEY = "3h";
-    static final String SNOW_KEY = "snow";
-    static final String LIST_KEY = "list";
-    static final String DT_TXT_KEY = "dt_txt";
+    private static final String VALUE_KEY = "value";
+    private static final String MAIN_KEY = "main";
+    private static final String TEMP_KEY = "temp_min";
+    private static final String TEMP_MAX_KEY = "temp_max";
+    private static final String TEMP_MIN_KEY = "temp_min";
+    private static final String PRESSURE_KEY = "pressure";
+    private static final String SEA_LEVEL_KEY = "sea_level";
+    private static final String GRND_LEVEL_KEY = "grnd_level";
+    private static final String HUMIDITY_KEY = "humidity";
+    private static final String TEMP_KF_KEY = "temp_kf";
+    private static final String WEATHER_KEY = "weather";
+    private static final String WEATHER_ID_KEY = "id";
+    private static final String WEATHER_DESCRIPTION_KEY = "description";
+    private static final String WEATHER_ICON_KEY = "icon";
+    private static final String CLOUDS_KEY = "clouds";
+    private static final String CLOUDS_ALL_KEY = "all";
+    private static final String WIND_KEY = "wind";
+    private static final String WIND_SPEED_KEY = "speed";
+    private static final String WIND_DEG_KEY = "deg";
+    private static final String RAIN_KEY = "rain";
+    private static final String H3_KEY = "3h";
+    private static final String SNOW_KEY = "snow";
+    private static final String LIST_KEY = "list";
+    private static final String DT_TXT_KEY = "dt_txt";
 
     /**
      * Instantiate class that will handle OpenWeather API calls
