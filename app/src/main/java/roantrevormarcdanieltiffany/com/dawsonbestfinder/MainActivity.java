@@ -17,7 +17,18 @@ import android.view.View;
  * @author Trevor Eames
  */
 public class MainActivity extends MenuActivity {
+
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+
+    // For retrieving data from Settings SharedPreferences.
+    protected static final String FIRST_NAME = "firstName";
+    protected static final String LAST_NAME = "lastName";
+    protected static final String EMAIL = "email";
+    protected static final String PASSWORD = "password";
+
+    // Name for Settings SharedPreferences
+    protected static final String SETTINGS = "settings";
+
     /**
      * When invoke, will set up the activity
      *
@@ -27,6 +38,17 @@ public class MainActivity extends MenuActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // SharedPreferences for the Settings activity are stored in "settings"
+        SharedPreferences prefs = getSharedPreferences(SETTINGS, MODE_PRIVATE);
+
+        // If the user has no account credentials stored, open the settings activity so that he or she can enter and save them.
+        if(!prefs.contains(FIRST_NAME) && !prefs.contains(LAST_NAME) && !prefs.contains(EMAIL) && !prefs.contains(PASSWORD))
+        {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
+        }
+
     }
 
     /**
@@ -84,22 +106,6 @@ public class MainActivity extends MenuActivity {
      */
     public void onAcademicCalendar(View v) {
         //Intent i = new Intent();
-    }
-
-    /**
-     * Checks if the app has been used before. If a device runs this app for the first time, return true.
-     * The way first startup is determined is by checking SharedPreferences for any user information.
-     *
-     * @return
-     */
-    public boolean firstStartUp()
-    {
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-
-        if(prefs.contains("firstName") && prefs.contains("lastName") && prefs.contains("email") && prefs.contains("password") && prefs.contains("datestamp"))
-            return false;
-
-        return true;
     }
 }
 

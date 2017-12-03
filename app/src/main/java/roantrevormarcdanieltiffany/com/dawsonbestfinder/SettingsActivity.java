@@ -26,12 +26,19 @@ public class SettingsActivity extends Activity
     EditText etFirstName, etLastName, etEmail, etPassword, etDatestamp;
     TextView tvValidationMessage;
 
-    // For retrieving data from SharedPreferences.
+    // For retrieving data from Settings SharedPreferences.
     protected static final String FIRST_NAME = "firstName";
     protected static final String LAST_NAME = "lastName";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";
     protected static final String DATESTAMP = "datestamp";
+
+    // Name for Settings SharedPreferences
+    protected static final String SETTINGS = "settings";
+
+    // For storing and setting validation message and text color using saved instance state
+    protected static final String VALIDATION_MESSAGE = "validationMessage";
+    protected static final String VALIDATION_MESSAGE_COLOR = "validationMessageColor";
 
     /**
      * When the activity is created, call super.onCreate, then look into SharedPreferences for saved user information.
@@ -53,7 +60,14 @@ public class SettingsActivity extends Activity
         etDatestamp = findViewById(R.id.datestampEditText);
         tvValidationMessage = findViewById(R.id.validationMessageTextView);
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        // Restores state for validation message and validation message text color
+        if(savedInstanceState != null && savedInstanceState.getString(VALIDATION_MESSAGE) != null && savedInstanceState.getInt(VALIDATION_MESSAGE_COLOR) != 0)
+        {
+            tvValidationMessage.setTextColor(savedInstanceState.getInt(VALIDATION_MESSAGE_COLOR));
+            tvValidationMessage.setText(savedInstanceState.getString(VALIDATION_MESSAGE));
+        }
+
+        SharedPreferences prefs = getSharedPreferences(SETTINGS,MODE_PRIVATE);
 
         if(prefs.contains(FIRST_NAME))
             etFirstName.setText(prefs.getString(FIRST_NAME, ""));
@@ -81,7 +95,7 @@ public class SettingsActivity extends Activity
         if(!emptyInputFields())
         {
             if(isEmail(etEmail.getText().toString())) {
-                SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                SharedPreferences prefs = getSharedPreferences(SETTINGS,MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
 
                 editor.putString(FIRST_NAME, etFirstName.getText().toString());
@@ -118,27 +132,46 @@ public class SettingsActivity extends Activity
     @Override
     public void onBackPressed()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        SharedPreferences prefs = getSharedPreferences(SETTINGS,MODE_PRIVATE);
 
-        builder.setPositiveButton(R.string.settings_back_dialog_yes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-                SettingsActivity.super.onBackPressed();
-            }
-        });
+        if(prefs.contains(FIRST_NAME) && prefs.contains(LAST_NAME) && prefs.contains(EMAIL) && prefs.contains(PASSWORD))
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        builder.setNegativeButton(R.string.settings_back_dialog_no, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-                dialogInterface.dismiss();
-            }
-        });
+            builder.setPositiveButton(R.string.settings_back_dialog_yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    SettingsActivity.super.onBackPressed();
+                }
+            });
 
-        builder.setMessage(R.string.settings_back_dialog_message).setTitle(R.string.settings_back_dialog_title);
-        AlertDialog dialog = builder.create();
-        dialog.show();
+            builder.setNegativeButton(R.string.settings_back_dialog_no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.setMessage(R.string.settings_back_dialog_message).setTitle(R.string.settings_back_dialog_title);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        // The user cannot leave the settings activity to go to the main menu, if he hasn't successfully entered and saved user settings.
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setNegativeButton(R.string.settings_back_dialog_ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            builder.setMessage(R.string.settings_back_dialog_message_no_input).setTitle(R.string.settings_back_dialog_title);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
     /**
@@ -171,6 +204,19 @@ public class SettingsActivity extends Activity
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
 
         return email.matches(emailRegex);
+    }
+
+    /**
+     * Puts the current validation message and its text color into saved instance state.
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(VALIDATION_MESSAGE, tvValidationMessage.getText().toString());
+        outState.putInt(VALIDATION_MESSAGE_COLOR, tvValidationMessage.getCurrentTextColor());
     }
 
 }
