@@ -28,6 +28,7 @@ public class MainActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // SharedPreferences for the Settings activity are stored in "settings"
         SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
 
         // If the user has no account credentials stored, open the settings activity so that he or she can enter and save them.

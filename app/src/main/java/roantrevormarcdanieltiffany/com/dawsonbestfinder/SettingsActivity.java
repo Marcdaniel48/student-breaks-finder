@@ -149,6 +149,7 @@ public class SettingsActivity extends Activity
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+        // The user cannot leave the settings activity to go to the main menu, if he hasn't successfully entered and saved user settings.
         else
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
