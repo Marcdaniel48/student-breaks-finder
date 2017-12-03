@@ -45,4 +45,5 @@
     <string name="city_name">City Name</string>
     <string name="show_forecast">Show Forecast</string>
     <string name="uvi">Ultraviolet Index</string>
+    <string name="forecast">Forecast</string>
 </resources>
