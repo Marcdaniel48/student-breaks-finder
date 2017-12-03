@@ -60,7 +60,7 @@ public class SettingsActivity extends Activity
             tvValidationMessage.setText(savedInstanceState.getString("validationMessage"));
         }
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
 
         if(prefs.contains(FIRST_NAME))
             etFirstName.setText(prefs.getString(FIRST_NAME, ""));
@@ -88,7 +88,7 @@ public class SettingsActivity extends Activity
         if(!emptyInputFields())
         {
             if(isEmail(etEmail.getText().toString())) {
-                SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+                SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefs.edit();
 
                 editor.putString(FIRST_NAME, etFirstName.getText().toString());
@@ -125,7 +125,7 @@ public class SettingsActivity extends Activity
     @Override
     public void onBackPressed()
     {
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
 
         if(prefs.contains(FIRST_NAME) && prefs.contains(LAST_NAME) && prefs.contains(EMAIL) && prefs.contains(PASSWORD))
         {

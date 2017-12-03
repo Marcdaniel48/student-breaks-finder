@@ -28,15 +28,11 @@ public class MainActivity extends MenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("settings",MODE_PRIVATE);
 
-        // If it's the first time the user has started the app, open the settings activity so that the user can input his or her account information.
-        if(!prefs.contains("first_startup"))
+        // If the user has no account credentials stored, open the settings activity so that he or she can enter and save them.
+        if(!prefs.contains("firstName") && !prefs.contains("lastName") && !prefs.contains("email") && !prefs.contains("password"))
         {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("first_startup", false);
-            editor.commit();
-
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
