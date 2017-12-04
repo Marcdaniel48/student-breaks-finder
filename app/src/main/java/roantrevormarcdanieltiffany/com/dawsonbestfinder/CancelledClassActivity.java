@@ -206,7 +206,7 @@ public class CancelledClassActivity extends MenuActivity {
                     return null;
                     //return "Got error code : " + response;
                 }
-
+                Log.i(TAG, "doInBackground: RSS feed retrieved");
                 InputStream is = conn.getInputStream();
 
                 cancelledClasses = parseXML(is);
