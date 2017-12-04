@@ -5,14 +5,35 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+/**
+ * CancelledClassInfo activity to display information about specific cancelled classes
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
+ *
+ */
 public class CancelledClassInfoActivity extends MenuActivity {
 
-    private final String TAG = "CC Info Activity";
+    private final String TAG = CancelledClassInfoActivity.class.getSimpleName();
+
+    private final String TEACHER_EXTRA_KEY = "teacher";
+    private final String TITLE_EXTRA_KEY = "title";
+    private final String DATE_EXTRA_KEY = "date";
+    private final String CODE_EXTRA_KEY = "code";
 
     TextView courseTitleTV, courseNumberTV, courseTeacherTV, dateCancelledTV;
 
 
-
+    /**
+     * Create the activity and fill the info
+     * @author Tiffany Le-Nguyen
+     * @author Roan Chamberlain
+     * @author Marc-Daniel Dialogo
+     * @author Trevor Eames
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +44,10 @@ public class CancelledClassInfoActivity extends MenuActivity {
         courseTitleTV = (TextView) findViewById(R.id.course_title);
         dateCancelledTV = (TextView) findViewById(R.id.course_date_cancelled);
 
-        courseTeacherTV.setText(getIntent().getExtras().getString("teacher"));
-        courseTitleTV.setText(getIntent().getExtras().getString("title"));
-        dateCancelledTV.setText(getIntent().getExtras().getString("date"));
-        courseNumberTV.setText(getIntent().getExtras().getString("course"));
+        courseTeacherTV.setText(getIntent().getExtras().getString(TEACHER_EXTRA_KEY));
+        courseTitleTV.setText(getIntent().getExtras().getString(TITLE_EXTRA_KEY));
+        dateCancelledTV.setText(getIntent().getExtras().getString(DATE_EXTRA_KEY));
+        courseNumberTV.setText(getIntent().getExtras().getString(CODE_EXTRA_KEY));
 
         //set a click event for the teacher to launch a teacher info activity
 
