@@ -287,6 +287,12 @@ public class FindTeacherActivity extends MenuActivity {
             }
         }
 
+        //new
+        if (teachers.isEmpty()) {
+            authFirebase();
+            getDB();
+        }
+
         return teacherIndexes;
     }
 
