@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="roantrevormarcdanieltiffany.com.dawsonbestfinder">
-
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,16 +10,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="roantrevormarcdanieltiffany.com.dawsonbestfinder.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-                <!-- Include the host attribute if you want your app to respond
-                     only to URLs with your app's domain. -->
-                <data android:scheme="http" android:host="www.dawsoncollege.qc.ca" />
+                <!--
+                     Include the host attribute if you want your app to respond
+                     only to URLs with your app's domain.
+                -->
+                <data
+                    android:host="www.dawsoncollege.qc.ca"
+                    android:scheme="http" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <!-- The BROWSABLE category is required to get links from web pages. -->
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -28,6 +33,8 @@
 
         <activity android:name=".AcademicCalendarActivity" />
         <activity android:name=".SettingsActivity" />
+        <activity android:name=".CancelledClassActivity" />
+        <activity android:name=".CancelledClassInfoActivity"></activity>
         <activity android:name=".FindTeacherActivity" />
         <activity android:name=".TeacherContactActivity" />
         <activity android:name=".ChooseTeacherActivity" />
