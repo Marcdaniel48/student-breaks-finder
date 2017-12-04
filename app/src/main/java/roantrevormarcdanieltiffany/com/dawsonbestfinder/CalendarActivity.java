@@ -71,12 +71,12 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
 
-//        etDate = findViewById(R.id.etDate);
-//        etStartTime = findViewById(R.id.etStartTime);
-//        etStopTime = findViewById(R.id.etStopTime);
-//        etTitle = findViewById(R.id.etEventTitle);
-//        etDescription = findViewById(R.id.etEventDescription);
-//        etLocation = findViewById(R.id.etEventLocation);
+        etDate = findViewById(R.id.etDate);
+        etStartTime = findViewById(R.id.etStartTime);
+        etStopTime = findViewById(R.id.etStopTime);
+        etTitle = findViewById(R.id.etEventTitle);
+        etDescription = findViewById(R.id.etEventDescription);
+        etLocation = findViewById(R.id.etEventLocation);
 
         if (savedInstanceState != null) {
             year = savedInstanceState.getInt(CAL_YEAR);

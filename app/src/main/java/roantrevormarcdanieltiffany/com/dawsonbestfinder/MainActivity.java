@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import java.net.URL;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenTemperature;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 
 
 /**
@@ -37,6 +37,9 @@ public class MainActivity extends MenuActivity {
     protected static final String LAST_NAME = "lastName";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";
+
+    protected final String LAT = "lat";
+    protected final String LON = "lon";
 
     // Name for Settings SharedPreferences
     protected static final String SETTINGS = "settings";
@@ -157,8 +160,8 @@ public class MainActivity extends MenuActivity {
      */
     public void loadTempData() {
         Log.d(TAG, "loadTempData()");
-        double lat = PreferenceManager.getDefaultSharedPreferences(this).getFloat("lat", 0);
-        double lon = PreferenceManager.getDefaultSharedPreferences(this).getFloat("lon", 0);
+        double lat = PreferenceManager.getDefaultSharedPreferences(this).getFloat(LAT, 0);
+        double lon = PreferenceManager.getDefaultSharedPreferences(this).getFloat(LON, 0);
 
         new GetTempTask().execute(String.valueOf(lat), String.valueOf(lon));
     }
@@ -166,7 +169,7 @@ public class MainActivity extends MenuActivity {
     /**
      * Class that extends AsyncTask so as to perform network ops on a non-main thread
      */
-    public class GetTempTask extends AsyncTask<String, Void, String[]> {
+    public class GetTempTask extends AsyncTask<String, Void, String> {
 
         /**
          * Using a background thread will take the parameters passed, which
@@ -177,11 +180,11 @@ public class MainActivity extends MenuActivity {
          * @return Temperature
          */
         @Override
-        protected String[] doInBackground(String... strings) {
+        protected String doInBackground(String... strings) {
             Log.d(TAG, "doInBackground()");
             if(strings.length == 0) {
                 Log.d(TAG, "No params:");
-                return new String[] {"failed"};
+                return new String("failed");
             }
 
             String lat = strings[0];
@@ -189,39 +192,39 @@ public class MainActivity extends MenuActivity {
 
             if(lat == null || lon == null){
                 Log.e(TAG, "Null params");
-                return new String[] {"failed"};
+                return new String("failed");
             }
 
-            URL url = OpenTemperature.buildTempUrl(lat, lon);
+            URL url = OpenWeather.buildTempUrl(lat, lon);
 
             try {
-                String response = OpenTemperature.getResponseFromHttpUrl(url);
+                String response = OpenWeather.getResponseFromHttpUrl(url);
                 Log.d(TAG, response);
 
-                String temp = OpenTemperature.getTempValueFromJSON(response);
+                String temp = OpenWeather.getTempValueFromJSON(response);
                 Log.d(TAG, temp);
 
-                return new String[] {temp};
+                return new String(temp);
             } catch (Exception e) {
                 e.printStackTrace();
-                return new String[] {"failed"};
+                return new String("failed");
             }
         }
 
         /**
          * Will set the tempView
-         * @param strings
+         * @param string
          */
         @Override
-        protected void onPostExecute(String[] strings) {
+        protected void onPostExecute(String string) {
             Log.d(TAG, "onPostExecute()");
-            Log.d(TAG, strings[0]);
+            Log.d(TAG, string);
 
-            double temp = Double.parseDouble(strings[0]);
+            double temp = Double.parseDouble(string);
             temp = temp - 273.15;
             int roundTemp = (int) Math.round(temp);
 
-            if(strings[0] != null) {
+            if(string != null) {
                 tempView.setText(roundTemp + "\u00b0" + "C");
             }
         }

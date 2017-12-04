@@ -33,11 +33,11 @@
     <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>
 
-    <string name="calendarButton">Submit</string>
-    <string name="yearHint">Year...</string>
-    <string name="fallButton">Fall</string>
-    <string name="winterButton">Winter</string>
-    <string name="summerButton">Summer</string>
+    <string name="tempplaceholder">Temperature Unattainable</string>
+    <string name="calendarbutton">Submit</string>
+    <string name="yearhint">Year...</string>
+    <string name="fallbutton">Fall</string>
+    <string name="winterbutton">Winter</string>
     <string-array name="years">
         <item>2014</item>
         <item>2015</item>

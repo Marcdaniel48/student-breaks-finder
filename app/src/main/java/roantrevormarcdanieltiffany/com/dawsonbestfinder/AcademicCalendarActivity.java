@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -22,14 +21,14 @@ import android.widget.RadioGroup;
  * @author Trevor Eames
  */
 public class AcademicCalendarActivity extends Activity {
-    private final static String TAG = "FRAG-CALENDARACTIVITY";
+    private final static String TAG = AcademicCalendarActivity.class.getSimpleName();
 
     private WebView webview;
     private RadioGroup rGroup;
     private EditText yearText;
 
-    String url = "https://www.dawsoncollege.qc.ca/registrar/";
-    String fullUrl = "https://www.dawsoncollege.qc.ca/registrar/fall-2017-day-division/";
+    private final String url = "https://www.dawsoncollege.qc.ca/registrar/";
+    private final String fullUrl = "https://www.dawsoncollege.qc.ca/registrar/fall-2017-day-division/";
 
     /**
      * Will load a new url with the user input
@@ -47,6 +46,12 @@ public class AcademicCalendarActivity extends Activity {
         webview.loadUrl(url+text+"-"+year+"-day-division/");
     }
 
+    /**
+     * When invoked will display the widgets,
+     * and display the webview page
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,45 +62,6 @@ public class AcademicCalendarActivity extends Activity {
         rGroup = findViewById(R.id.seasonGroup);
         yearText = findViewById(R.id.yearText);
 
-        WebSettings webSettings = webview.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-
         webview.loadUrl(fullUrl);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart()");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause()");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy()");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d(TAG, "onRestart()");
     }
 }

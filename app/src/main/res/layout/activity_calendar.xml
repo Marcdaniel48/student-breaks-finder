@@ -22,7 +22,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:duplicateParentState="false"
-                android:text="@string/fallButton" />
+                android:text="@string/fallbutton" />
 
             <RadioButton
                 android:id="@+id/winterButton"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="false"
-                android:text="@string/winterButton" />
+                android:text="@string/winterbutton" />
 
         </RadioGroup>
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/yearHint"
+            android:hint="@string/yearhint"
             android:inputType="number" />
 
         <Button
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onSubmit"
-            android:text="@string/calendarButton" />
+            android:text="@string/calendarbutton" />
 
     </LinearLayout>
 
