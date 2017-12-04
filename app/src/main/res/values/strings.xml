@@ -47,4 +47,10 @@
     <string name="arrow">→</string>
     <string name="event_description">Description</string>
     <string name="event_location">Location</string>
+    <string name="city_name">City Name</string>
+    <string name="show_forecast">Show Forecast</string>
+    <string name="uvi">Ultraviolet Index</string>
+    <string name="forecast">Forecast</string>
+    <string name="default_city_name">Montreal</string>
+    <string name="canada_code">CA</string>
 </resources>

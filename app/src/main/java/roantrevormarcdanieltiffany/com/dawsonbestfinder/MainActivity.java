@@ -17,8 +17,7 @@ import android.view.View;
  * @author Trevor Eames
  */
 public class MainActivity extends MenuActivity {
-
-    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     // For retrieving data from Settings SharedPreferences.
     protected static final String FIRST_NAME = "firstName";
@@ -28,7 +27,7 @@ public class MainActivity extends MenuActivity {
 
     // Name for Settings SharedPreferences
     protected static final String SETTINGS = "settings";
-
+  
     /**
      * When invoke, will set up the activity
      *
@@ -98,7 +97,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to weather activity
      */
     public void onWeather(View v) {
-        //Intent i = new Intent();
+        Intent i = new Intent(this, WeatherActivity.class);
+        startActivity(i);
     }
 
     /**
