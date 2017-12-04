@@ -67,7 +67,6 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to class cancellations activity
      */
     public void onClassCancellations(View v) {
-        Log.d("BUTTON PRESS HANDLER", "Button clicked");
         Intent cci = new Intent(MainActivity.this, CancelledClassActivity.class);
         MainActivity.this.startActivity(cci);
     }
