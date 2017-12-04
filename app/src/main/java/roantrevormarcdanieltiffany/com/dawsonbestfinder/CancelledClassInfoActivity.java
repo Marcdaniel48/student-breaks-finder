@@ -3,7 +3,10 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 /**
  * CancelledClassInfo activity to display information about specific cancelled classes
@@ -14,7 +17,7 @@ import android.widget.TextView;
  * @author Trevor Eames
  *
  */
-public class CancelledClassInfoActivity extends MenuActivity {
+public class CancelledClassInfoActivity extends FindTeacherActivity {
 
     private final String TAG = CancelledClassInfoActivity.class.getSimpleName();
 
@@ -48,6 +51,19 @@ public class CancelledClassInfoActivity extends MenuActivity {
         courseTitleTV.setText(getIntent().getExtras().getString(TITLE_EXTRA_KEY));
         dateCancelledTV.setText(getIntent().getExtras().getString(DATE_EXTRA_KEY));
         courseNumberTV.setText(getIntent().getExtras().getString(CODE_EXTRA_KEY));
+
+        courseTeacherTV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
+                String teacherfname = teachername.split(" ")[0];
+                String teacherlname = teachername.split(" ")[1];
+
+                int teacherIndex = search(true, teacherfname, teacherlname).get(0);
+                Teacher teacher = teachers.get(teacherIndex);
+                showTeacherContactActivity(teacher, 0);
+            }
+        });
 
         //set a click event for the teacher to launch a teacher info activity
 
