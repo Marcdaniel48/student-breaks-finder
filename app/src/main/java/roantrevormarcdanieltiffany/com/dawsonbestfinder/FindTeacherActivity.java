@@ -170,7 +170,7 @@ public class FindTeacherActivity extends MenuActivity {
      * like will implement a search such as SQL's LIKE
      * @param view
      */
-    private void searchClick(View view) {
+    public void searchClick(View view) {
         Log.d(TAG, "Called searchClick()");
         // Make sure search isn't called before teachers is filled
         if (teachers.isEmpty()) {
@@ -285,6 +285,12 @@ public class FindTeacherActivity extends MenuActivity {
                     teacherIndexes.add(i);
                 }
             }
+        }
+
+        //if teachers has not been loaded yet, load them.
+        if (teachers.isEmpty()) {
+            authFirebase();
+            getDB();
         }
 
         return teacherIndexes;
