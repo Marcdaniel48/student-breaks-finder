@@ -31,7 +31,9 @@ import java.util.List;
 import static android.content.ContentValues.TAG;
 
 /**
- * Cancelled class activity to show a list of all cancelled classes
+ * Activity that displays a list of cancelled classes.
+ *
+ * Classes are retrieved from an RSS feed provided by Dawson College.
  *
  * @author Tiffany Le-Nguyen
  * @author Roan Chamberlain
@@ -45,7 +47,7 @@ public class CancelledClassActivity extends MenuActivity {
     Context context;
 
     /**
-     * lifecycle method to create the activity
+     * Override onCreate to initialize the ui
      * @param savedInstanceState
      */
     @Override
