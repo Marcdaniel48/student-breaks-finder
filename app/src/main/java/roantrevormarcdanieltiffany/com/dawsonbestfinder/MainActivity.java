@@ -2,6 +2,7 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,8 +30,17 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenTemperature;
 public class MainActivity extends MenuActivity {
 
     TextView tempView = null;
-    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
+    // For retrieving data from Settings SharedPreferences.
+    protected static final String FIRST_NAME = "firstName";
+    protected static final String LAST_NAME = "lastName";
+    protected static final String EMAIL = "email";
+    protected static final String PASSWORD = "password";
+
+    // Name for Settings SharedPreferences
+    protected static final String SETTINGS = "settings";
+  
     /**
      * When invoke, will set up the activity
      *
@@ -50,6 +60,16 @@ public class MainActivity extends MenuActivity {
                 Log.d(TAG, "Can get location!");
                 loadTempData();
             }
+        }
+
+        // SharedPreferences for the Settings activity are stored in "settings"
+        SharedPreferences prefs = getSharedPreferences(SETTINGS, MODE_PRIVATE);
+
+        // If the user has no account credentials stored, open the settings activity so that he or she can enter and save them.
+        if(!prefs.contains(FIRST_NAME) && !prefs.contains(LAST_NAME) && !prefs.contains(EMAIL) && !prefs.contains(PASSWORD))
+        {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -84,7 +104,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to add to calendar activity
      */
     public void onAddToCalendar(View v) {
-        //Intent i = new Intent();
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -99,7 +120,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to weather activity
      */
     public void onWeather(View v) {
-        //Intent i = new Intent();
+        Intent i = new Intent(this, WeatherActivity.class);
+        startActivity(i);
     }
 
     /**

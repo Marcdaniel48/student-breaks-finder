@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="roantrevormarcdanieltiffany.com.dawsonbestfinder">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +13,6 @@
         <activity android:name="roantrevormarcdanieltiffany.com.dawsonbestfinder.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
@@ -26,13 +26,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SettingsActivity" />
         <activity android:name=".AcademicCalendarViewActivity" />
-        <activity android:name=".NotesActivity"></activity>
-        <activity android:name=".ItemNoteActivity"></activity>
-        <activity android:name=".FindTeacherActivity"></activity>
-        <activity android:name=".TeacherContactActivity"></activity>
-        <activity android:name=".ChooseTeacherActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".FindTeacherActivity" />
+        <activity android:name=".TeacherContactActivity" />
+        <activity android:name=".ChooseTeacherActivity" />
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".NotesActivity" />
+        <activity android:name=".ItemNoteActivity" />
+        <activity android:name=".WeatherActivity" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
