@@ -1,5 +1,8 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +10,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Menu;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 /**
  * Menu Activity containing about, and settings items
@@ -18,6 +26,7 @@ import android.view.View;
  */
 
 public class MenuActivity extends AppCompatActivity {
+    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

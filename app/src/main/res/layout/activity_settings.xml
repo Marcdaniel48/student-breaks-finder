@@ -93,7 +93,8 @@
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></EditText>
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"></EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -118,7 +119,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
@@ -131,4 +132,11 @@
             android:onClick="saveSettings"
             android:text="@string/settings_save" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/validationMessageTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@color/colorRed"/>
 </LinearLayout>
