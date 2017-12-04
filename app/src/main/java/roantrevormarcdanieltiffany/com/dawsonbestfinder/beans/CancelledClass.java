@@ -1,4 +1,4 @@
-package roantrevormarcdanieltiffany.com.dawsonbestfinder;
+package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
 
 /**
  * CancelledClass

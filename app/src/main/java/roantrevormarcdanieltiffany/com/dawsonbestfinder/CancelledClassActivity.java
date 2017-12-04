@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.ContentValues.TAG;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.CancelledClass;
 
 /**
  * Activity that displays a list of cancelled classes.
@@ -316,7 +314,7 @@ public class CancelledClassActivity extends MenuActivity {
                 classes.add(c3);
                 classes.add(c4);
 */
-                Log.i(TAG, "parseXML: 4 classes have been cancelled");
+                Log.i(TAG, "parseXML: " + classes.size() + " classes have been cancelled");
                 return classes;
             } finally {
                 stream.close();
