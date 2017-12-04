@@ -170,7 +170,7 @@ public class FindTeacherActivity extends MenuActivity {
      * like will implement a search such as SQL's LIKE
      * @param view
      */
-    public void searchClick(View view) {
+    private void searchClick(View view) {
         Log.d(TAG, "Called searchClick()");
         // Make sure search isn't called before teachers is filled
         if (teachers.isEmpty()) {
@@ -257,7 +257,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @param lastName
      * @return Array of integers or empty array
      */
-    private ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
+    protected ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
         Log.d(TAG, "Called search(boolean exactSearch, String firstName, String lastName)");
         ArrayList<Integer> teacherIndexes = new ArrayList<>();
 
