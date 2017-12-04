@@ -55,7 +55,7 @@ public class AcademicCalendarActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_academic_calendar);
         Log.d(TAG, "onCreate()");
 
         webview = findViewById(R.id.webview);

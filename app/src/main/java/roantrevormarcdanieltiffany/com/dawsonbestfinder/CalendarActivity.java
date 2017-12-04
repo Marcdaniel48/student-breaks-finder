@@ -69,7 +69,7 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "called onCreate()");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendar);
+        setContentView(R.layout.activity_academic_calendar);
 
         etDate = findViewById(R.id.etDate);
         etStartTime = findViewById(R.id.etStartTime);
