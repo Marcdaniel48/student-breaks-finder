@@ -10,6 +10,7 @@
         android:orientation="horizontal">
 
         <RadioGroup
+            android:id="@+id/seasonGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1">
@@ -31,13 +32,6 @@
                 android:checked="false"
                 android:text="@string/winterButton" />
 
-            <RadioButton
-                android:id="@+id/summerButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/summerButton" />
-
         </RadioGroup>
 
         <EditText
@@ -53,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="onSubmit"
             android:text="@string/calendarButton" />
 
     </LinearLayout>

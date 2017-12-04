@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AcademicCalendarViewActivity" />
+        <activity android:name=".AcademicCalendarActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".FindTeacherActivity" />
         <activity android:name=".TeacherContactActivity" />

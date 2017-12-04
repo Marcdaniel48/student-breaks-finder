@@ -21,7 +21,7 @@ import android.widget.RadioGroup;
  * @author Marc-Daniel Dialogo
  * @author Trevor Eames
  */
-public class AcademicCalendarViewActivity extends Activity {
+public class AcademicCalendarActivity extends Activity {
     private final static String TAG = "FRAG-CALENDARACTIVITY";
 
     private WebView webview;
@@ -34,7 +34,7 @@ public class AcademicCalendarViewActivity extends Activity {
     /**
      * Will load a new url with the user input
      */
-    public void onSubmit() {
+    public void onSubmit(View v) {
         int rId = rGroup.getCheckedRadioButtonId();
         View radioButton = rGroup.findViewById(rId);
         int idx = rGroup.indexOfChild(radioButton);
@@ -44,11 +44,7 @@ public class AcademicCalendarViewActivity extends Activity {
 
         String year = yearText.getText().toString();
 
-        if(text == "summer") {
-            webview.loadUrl(url+text+"-"+year+"/");
-        } else {
-            webview.loadUrl(url+text+"-"+year+"-day-division/");
-        }
+        webview.loadUrl(url+text+"-"+year+"-day-division/");
     }
 
     @Override
