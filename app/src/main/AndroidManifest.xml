@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="roantrevormarcdanieltiffany.com.dawsonbestfinder">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -33,7 +34,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".CancelledClassActivity"></activity>
+        <activity android:name=".CancelledClassActivity" />
+        <activity android:name=".CancelledClassInfoActivity"></activity>
     </application>
 
 </manifest>

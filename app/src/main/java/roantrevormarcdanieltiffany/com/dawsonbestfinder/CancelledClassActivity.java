@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -52,29 +53,29 @@ public class CancelledClassActivity extends AppCompatActivity {
     }
 
     private void loadClasses() {
-        Log.d(TAG, "load classes called");
         String url = "https://www.dawsoncollege.qc.ca/wp-content/external-includes/cancellations/feed.xml";
-        Log.d(TAG, "right before cman");
         ConnectivityManager cman = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        Log.d(TAG, "right after cman");
         NetworkInfo neti = cman.getActiveNetworkInfo();
         if (neti != null && neti.isConnected()) {
             new DownloadXMLRSSThread().execute(url);
         } else {
-            Log.d(TAG, "not connected?");
+            Log.d(TAG, "not connected to the internet");
         }
 
     }
 
-    public class DownloadXMLRSSThread extends AsyncTask<String, Void, List> {
+    public class DownloadXMLRSSThread extends AsyncTask<String, Void, List<CancelledClass>> {
 
         private final String TAG = "Cancelled RSS Thread";
 
 
-        protected void onPostExecute(final List result) {
+        protected void onPostExecute(final List<CancelledClass> result) {
 
             super.onPostExecute(result);
-            lv.setAdapter(new CCAdapter(this, result));
+            
+            if(result.size() == 0){
+                Toast.makeText(context, "There are no cancelled classes", Toast.LENGTH_LONG).show();
+            }
             lv.setAdapter(new BaseAdapter() {
                 LayoutInflater inflater = null;
                 @Override
@@ -94,6 +95,7 @@ public class CancelledClassActivity extends AppCompatActivity {
 
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
+                    /*
                     View rowView;
                     rowView = inflater.inflate(R.layout.cancelled_class_list_item, null);
                     lv = rowView.findViewById(R.id.CancelledClassLV);
@@ -101,9 +103,24 @@ public class CancelledClassActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Toast.makeText(context, "you tapped a thing", Toast.LENGTH_LONG);
+
                         }
                     });
-                    return null;
+                    */
+                   //return null;
+                    inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    Holder holder;
+                    convertView = inflater.inflate(R.layout.cancelled_class_list_item, null);
+                    holder = new Holder();
+                    convertView.setTag(holder);
+                    holder.tv = (TextView) convertView.findViewById(R.id.CancelledClassTV);
+                    holder.tv.setText(result.get(position).getName());
+
+                    return convertView;
+                }
+
+                class Holder{
+                    TextView tv;
                 }
             });
         }
@@ -207,6 +224,20 @@ public class CancelledClassActivity extends AppCompatActivity {
                         isClass = false;
                     }
                 }
+
+                //only run the following lines of code for demo porpoises if the rss is empty
+
+                CancelledClass c1 = new CancelledClass("title1", "course1", "teacher1", "date1");
+                CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2");
+                CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3");
+                CancelledClass c4 = new CancelledClass("title4", "course4", "teacher4", "date4");
+
+                classes.add(c1);
+                classes.add(c2);
+                classes.add(c3);
+                classes.add(c4);
+
+
                 return classes;
             } finally {
                 stream.close();
