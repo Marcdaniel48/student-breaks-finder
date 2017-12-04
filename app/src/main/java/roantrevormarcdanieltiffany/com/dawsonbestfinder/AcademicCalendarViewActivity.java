@@ -1,14 +1,10 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 /**
  * Created by mrtvor on 2017-11-24.
@@ -17,41 +13,25 @@ import android.widget.Spinner;
 public class AcademicCalendarViewActivity extends Activity {
     private final static String TAG = "FRAG-CALENDARACTIVITY";
 
-    Spinner spinner;
-    ArrayAdapter<CharSequence> adapter;
+    private WebView webview;
+    String url = "https://www.dawsoncollege.qc.ca/registrar/";
+    String fullUrl = "https://www.dawsoncollege.qc.ca/registrar/fall-2017-day-division/";
+
+    public void onSubmit() {
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_calendarfragment);
+        setContentView(R.layout.activity_calendar);
         Log.d(TAG, "onCreate()");
 
-//        spinner = findViewById(R.id.yearSpinner);
-//        adapter = ArrayAdapter.createFromResource(this, R.array.years, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-//
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+        webview = findViewById(R.id.webview);
+        WebSettings webSettings = webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
-//        if(savedInstanceState == null) {
-//            AcademicCalendarFragment calendar = new AcademicCalendarFragment();
-//            calendar.setArguments(getIntent().getExtras());
-//
-//            FragmentManager fm = getFragmentManager();
-//            FragmentTransaction ft = fm.beginTransaction();
-//            ft.add(android.R.id.content, calendar);
-//            ft.commit();
-//        }
+        webview.loadUrl(fullUrl);
     }
 
     @Override

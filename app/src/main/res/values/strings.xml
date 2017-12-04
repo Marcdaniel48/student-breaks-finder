@@ -28,6 +28,8 @@
     <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>
 
+    <string name="calendarButton">Submit</string>
+    <string name="yearHint">Year...</string>
     <string name="fallButton">Fall</string>
     <string name="winterButton">Winter</string>
     <string name="summerButton">Summer</string>
