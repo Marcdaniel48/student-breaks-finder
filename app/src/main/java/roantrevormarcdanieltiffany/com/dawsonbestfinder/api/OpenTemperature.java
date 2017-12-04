@@ -27,12 +27,10 @@ import java.util.Scanner;
  * @author Trevor Eames
  */
 
-public class OpenWeather {
-    private static final String TAG = OpenWeather.class.getSimpleName();
+public class OpenTemperature {
+    private static final String TAG = OpenTemperature.class.getSimpleName();
 
     private static final String OPEN_WEATHER_TEMP_URL = "http://api.openweathermap.org/data/2.5/weather?appid=8116230ada270186d54714add001180f";
-    // The format we want our API to return
-    private static final String FORMAT = "json";
     // If there is error openweather api will have this in json
     private static final String ERROR_MESSAGE = "cod";
 
@@ -44,12 +42,12 @@ public class OpenWeather {
     private Context context;
 
     /**
-     * Instantiate class that will handle OpenWeather API calls
+     * Instantiate class that will handle OpenTemperature API calls
      *
      * @param context
      */
-    public OpenWeather(Context context) {
-        Log.d(TAG, "called OpenWeather()");
+    public OpenTemperature(Context context) {
+        Log.d(TAG, "called OpenTemperature()");
         this.context = context;
     }
 

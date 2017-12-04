@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import java.net.URL;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenTemperature;
 
 
 /**
@@ -170,13 +170,13 @@ public class MainActivity extends MenuActivity {
                 return new String[] {"failed"};
             }
 
-            URL url = OpenWeather.buildTempUrl(lat, lon);
+            URL url = OpenTemperature.buildTempUrl(lat, lon);
 
             try {
-                String response = OpenWeather.getResponseFromHttpUrl(url);
+                String response = OpenTemperature.getResponseFromHttpUrl(url);
                 Log.d(TAG, response);
 
-                String temp = OpenWeather.getTempValueFromJSON(response);
+                String temp = OpenTemperature.getTempValueFromJSON(response);
                 Log.d(TAG, temp);
 
                 return new String[] {temp};
