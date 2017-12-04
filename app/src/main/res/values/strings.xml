@@ -14,4 +14,11 @@
     <string name="settings_back_dialog_no">No</string>
 
     <string name="about">About</string>
+
+    <string name="course_number_label">Course Number :</string>
+    <string name="course_title_label">Course Title :</string>
+    <string name="course_teacher_label">Course Teacher :</string>
+    <string name="course_date_label">Course Date :</string>
+
+
 </resources>

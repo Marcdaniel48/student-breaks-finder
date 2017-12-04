@@ -1,6 +1,7 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -29,10 +30,9 @@ import java.util.List;
 
 import static android.content.ContentValues.TAG;
 
-public class CancelledClassActivity extends AppCompatActivity {
+public class CancelledClassActivity extends MenuActivity {
 
     private ListView lv;
-    private ArrayAdapter<String> adapter;
     private final String TAG = "Canceled Class Activity";
     Context context;
 
@@ -47,16 +47,17 @@ public class CancelledClassActivity extends AppCompatActivity {
 
         lv = (ListView)findViewById(R.id.CancelledClassLV);
 
-        //adapter = new ArrayAdapter<String>();
-
         loadClasses();
     }
 
     private void loadClasses() {
+        //url for dawsons cancelled classes
         String url = "https://www.dawsoncollege.qc.ca/wp-content/external-includes/cancellations/feed.xml";
         ConnectivityManager cman = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo neti = cman.getActiveNetworkInfo();
+        //check if the device is connected to the internet before trying to download the rss feed
         if (neti != null && neti.isConnected()) {
+            //launch a new thread to perform network IO
             new DownloadXMLRSSThread().execute(url);
         } else {
             Log.d(TAG, "not connected to the internet");
@@ -64,18 +65,27 @@ public class CancelledClassActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Async Task to download xml from a given url and parse it into class objects before displaying it in a listview.
+     */
     public class DownloadXMLRSSThread extends AsyncTask<String, Void, List<CancelledClass>> {
 
         private final String TAG = "Cancelled RSS Thread";
 
 
+        /**
+         * display the list of cancelled classes on the ui
+         * @param result list of cancelled classes
+         */
         protected void onPostExecute(final List<CancelledClass> result) {
 
             super.onPostExecute(result);
-            
+
             if(result.size() == 0){
                 Toast.makeText(context, "There are no cancelled classes", Toast.LENGTH_LONG).show();
             }
+
+            //sets the adapter
             lv.setAdapter(new BaseAdapter() {
                 LayoutInflater inflater = null;
                 @Override
@@ -94,20 +104,8 @@ public class CancelledClassActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
-                    /*
-                    View rowView;
-                    rowView = inflater.inflate(R.layout.cancelled_class_list_item, null);
-                    lv = rowView.findViewById(R.id.CancelledClassLV);
-                    rowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(context, "you tapped a thing", Toast.LENGTH_LONG);
+                public View getView(final int position, View convertView, ViewGroup parent) {
 
-                        }
-                    });
-                    */
-                   //return null;
                     inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     Holder holder;
                     convertView = inflater.inflate(R.layout.cancelled_class_list_item, null);
@@ -116,8 +114,23 @@ public class CancelledClassActivity extends AppCompatActivity {
                     holder.tv = (TextView) convertView.findViewById(R.id.CancelledClassTV);
                     holder.tv.setText(result.get(position).getName());
 
+                    holder.tv.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(context, "you tapped a thing", Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(CancelledClassActivity.this, CancelledClassInfoActivity.class);
+                            i.putExtra("title", result.get(position).getTitle());
+                            i.putExtra("course", result.get(position).getName());
+                            i.putExtra("teacher", result.get(position).getTeacher());
+                            i.putExtra("date", result.get(position).getDate());
+                            CancelledClassActivity.this.startActivity(i);
+                        }
+                    });
+
                     return convertView;
                 }
+
+
 
                 class Holder{
                     TextView tv;
@@ -125,6 +138,11 @@ public class CancelledClassActivity extends AppCompatActivity {
             });
         }
 
+        /**
+         * download and parse the xml in the background
+         * @param url
+         * @return
+         */
         @Override
         protected List<CancelledClass> doInBackground(String... url) {
             Log.i(TAG, "doInBackground Called with url : " + url[0]);
@@ -146,7 +164,7 @@ public class CancelledClassActivity extends AppCompatActivity {
                 InputStream is = conn.getInputStream();
 
                 cancelledClasses = parseXML(is);
-                //return cancelledClasses;
+
             } catch (IOException e) {
                 Log.e(TAG, "you got an exception: " + e);
             } catch (XmlPullParserException e) {
@@ -156,12 +174,14 @@ public class CancelledClassActivity extends AppCompatActivity {
         }
 
         private List<CancelledClass> parseXML(InputStream stream) throws XmlPullParserException, IOException {
+            //temp fields to be filled in and added to class objects
             String title = null;
             String course = null;
             String date = null;
             String teacher = null;
 
             boolean isClass = false;
+            //list of cancelled classes
             List<CancelledClass> classes = new ArrayList<>();
             try {
                 XmlPullParser parser = Xml.newPullParser();
@@ -169,11 +189,14 @@ public class CancelledClassActivity extends AppCompatActivity {
                 parser.setInput(stream, null);
                 parser.nextTag();
 
+                //while the parser has not reached the end of the document
                 while (parser.next() != parser.END_DOCUMENT) {
+                    //typeOfTag can be start, end or text
                     int typeOfTag = parser.getEventType();
                     String name = parser.getName();
                     if (name == null)
                         continue;
+                    //checks if a start or end tag correspond to a class
                     switch (typeOfTag) {
                         case XmlPullParser.START_TAG:
                             if (name.equalsIgnoreCase("item")) {
@@ -188,11 +211,12 @@ public class CancelledClassActivity extends AppCompatActivity {
                             continue;
                     }
                     String result = " ";
+                    //if the next tag contains text
                     if (parser.next() == XmlPullParser.TEXT) {
                         result = parser.getText();
                         parser.nextTag();
                     }
-
+                    //check what the current tag represents and set the fields accordingly
                     switch (name) {
                         case "title":
                             title = result;
@@ -207,15 +231,14 @@ public class CancelledClassActivity extends AppCompatActivity {
                             date = result;
                             break;
                     }
-
-                /*if(name.equalsIgnoreCase("title")){
-                    title = result;
-                }*/
+                    //if all fields have been filled in add the class to the list
                     if (title != null && course != null && teacher != null && date != null) {
                         if (isClass) {
                             CancelledClass cancelledClass = new CancelledClass(title, course, teacher, date);
                             classes.add(cancelledClass);
+                            Log.i(TAG, "the followign class has been extracted from the xml: " + cancelledClass.getTitle());
                         }
+                        //and reset the fields to null before filling them in for the next class
                         title = null;
                         course = null;
                         teacher = null;
@@ -225,8 +248,9 @@ public class CancelledClassActivity extends AppCompatActivity {
                     }
                 }
 
-                //only run the following lines of code for demo porpoises if the rss is empty
 
+                //only run the following lines of code for demo porpoises if the rss is empty
+                /*
                 CancelledClass c1 = new CancelledClass("title1", "course1", "teacher1", "date1");
                 CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2");
                 CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3");
@@ -236,8 +260,8 @@ public class CancelledClassActivity extends AppCompatActivity {
                 classes.add(c2);
                 classes.add(c3);
                 classes.add(c4);
-
-
+*/
+                Log.i(TAG, "parseXML: 4 classes have been cancelled");
                 return classes;
             } finally {
                 stream.close();
