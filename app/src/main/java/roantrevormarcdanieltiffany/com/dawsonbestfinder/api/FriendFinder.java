@@ -7,14 +7,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
 
@@ -40,6 +37,8 @@ public class FriendFinder
 
     public static List<Friend> getFriendsFromJSON(String jsonResponse) throws JSONException
     {
+        Log.d(TAG, "Called getFriendsFromJSON(String jsonResponse)");
+
         List<Friend> friendsList = new ArrayList<>();
         JSONObject json = new JSONObject(jsonResponse);
 
@@ -80,6 +79,8 @@ public class FriendFinder
 
     private static Friend parseJSONToFriend(JSONObject friendJSON) throws JSONException
     {
+        Log.d(TAG, "Called parseJSONToFriend(JSONObject friendJSON)");
+
         Friend friend = new Friend();
 
         JSONObject jsonObject = friendJSON.getJSONObject(MAIN_KEY);
@@ -96,6 +97,8 @@ public class FriendFinder
 
     public static URL buildFindFriendsURL(String email, String password) throws MalformedURLException
     {
+        Log.d(TAG, "Called buildFindFriendsURL(String email, String password)");
+
         Uri uri = Uri.parse(FIND_FRIENDS_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password).build();
         URL url = new URL(uri.toString());
         return url;
