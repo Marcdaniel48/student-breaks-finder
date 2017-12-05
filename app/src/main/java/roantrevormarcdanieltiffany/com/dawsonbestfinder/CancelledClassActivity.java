@@ -272,11 +272,12 @@ public class CancelledClassActivity extends MenuActivity {
                     }
                     //check what the current tag represents and set the fields accordingly
                     switch (name) {
+                        //in the xml, title is the code
                         case "title":
-                            title = result;
+                            code = result;
                             break;
                         case "course":
-                            code = result;
+                            title = result;
                             break;
                         case "teacher":
                             teacher = result;
