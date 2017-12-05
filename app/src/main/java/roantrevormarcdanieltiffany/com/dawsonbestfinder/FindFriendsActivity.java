@@ -54,7 +54,7 @@ public class FindFriendsActivity extends MenuActivity
             {
                 URL url = FriendFinder.buildFindFriendsURL(email, password);
                 String json = OpenWeather.getResponseFromHttpUrl(url);
-                System.out.println(json);
+
                 return FriendFinder.getFriendsFromJSON(json);
             }
             catch (MalformedURLException e)
@@ -77,12 +77,8 @@ public class FindFriendsActivity extends MenuActivity
         protected void onPostExecute(List<Friend> friends)
         {
             Log.d(TAG, "Called FindFriendsAsyncTask.onPostExecute()");
-for(int i = 0; i < friends.size(); i++)
-{
-    System.out.println(friends.get(i).getFirstname());
-}
+            
            ArrayAdapter<Friend> adapter = new ArrayAdapter<>(FindFriendsActivity.this, android.R.layout.simple_list_item_1, friends);
-System.out.println(adapter.getItem(0));
            friendsLV.setAdapter(adapter);
         }
     }

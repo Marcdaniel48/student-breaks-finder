@@ -72,7 +72,6 @@ public class FriendFinder
         Log.d(TAG, "Called buildFindFriendsURL(String email, String password)");
 
         Uri uri = Uri.parse(FIND_FRIENDS_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password).build();
-        System.out.println(uri.toString());
         URL url = new URL(uri.toString());
         return url;
     }
