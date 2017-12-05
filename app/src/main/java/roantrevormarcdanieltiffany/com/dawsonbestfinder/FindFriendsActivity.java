@@ -77,7 +77,7 @@ public class FindFriendsActivity extends MenuActivity
         protected void onPostExecute(List<Friend> friends)
         {
             Log.d(TAG, "Called FindFriendsAsyncTask.onPostExecute()");
-            
+
            ArrayAdapter<Friend> adapter = new ArrayAdapter<>(FindFriendsActivity.this, android.R.layout.simple_list_item_1, friends);
            friendsLV.setAdapter(adapter);
         }
