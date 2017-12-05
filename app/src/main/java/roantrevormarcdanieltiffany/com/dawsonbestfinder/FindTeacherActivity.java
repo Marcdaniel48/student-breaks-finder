@@ -257,7 +257,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @param lastName
      * @return Array of integers or empty array
      */
-    private ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
+    protected ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
         Log.d(TAG, "Called search(boolean exactSearch, String firstName, String lastName)");
         ArrayList<Integer> teacherIndexes = new ArrayList<>();
 
@@ -285,6 +285,12 @@ public class FindTeacherActivity extends MenuActivity {
                     teacherIndexes.add(i);
                 }
             }
+        }
+
+        //if teachers has not been loaded yet, load them.
+        if (teachers.isEmpty()) {
+            authFirebase();
+            getDB();
         }
 
         return teacherIndexes;
