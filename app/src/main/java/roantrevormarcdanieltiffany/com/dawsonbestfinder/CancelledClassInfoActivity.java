@@ -55,9 +55,12 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         courseTeacherTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
                 String teacherfname = teachername.split(" ")[0];
                 String teacherlname = teachername.split(" ")[1];
+
+                Log.i(TAG, "onClick: " + teachername + " was tapped");
 
                 int teacherIndex = search(true, teacherfname, teacherlname).get(0);
                 Teacher teacher = teachers.get(teacherIndex);

@@ -80,6 +80,7 @@ public class CancelledClassActivity extends MenuActivity {
         if (neti != null && neti.isConnected()) {
             //launch a new thread to perform network IO
             new DownloadXMLRSSThread().execute(url);
+            Log.i(TAG, "Classes have been loaded");
         } else {
             Log.e(TAG, "not connected to the internet");
         }
