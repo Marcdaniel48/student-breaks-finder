@@ -38,32 +38,6 @@ public class FriendFinder
         Log.d(TAG, "Instance of FriendFinder initiated.");
     }
 
-    /**
-     * Returns entire result from HTTP response
-     *
-     * @param url
-     *      The URL to fetch
-     * @return The contents of the HTTP response
-     * @throws IOException
-     */
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
-        Log.d(TAG, "called getResponseFromHttpUrl()");
-        Log.d(TAG, "URL: " + url);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-        // try-with-resources ensures the resources will be closed
-        try
-        (
-            InputStream in = urlConnection.getInputStream();
-            Scanner scanner = new Scanner(in)
-        )
-        {
-            scanner.useDelimiter("\\A");
-            boolean hasInput = scanner.hasNext();
-            return hasInput? scanner.next() : null;
-        }
-    }
-
     public static List<Friend> getFriendsFromJSON(String jsonResponse) throws JSONException
     {
         List<Friend> friendsList = new ArrayList<>();
