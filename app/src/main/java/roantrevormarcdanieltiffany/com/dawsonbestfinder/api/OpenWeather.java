@@ -36,6 +36,7 @@ public class OpenWeather {
     private static final String APP_ID = "8116230ada270186d54714add001180f";
 
     // Open Weather API url
+    private static final String OPEN_WEATHER_TEMP_URL = "http://api.openweathermap.org/data/2.5/weather?appid=8116230ada270186d54714add001180f";
     private static final String OPEN_WEATHER_UVI_URL = "http://api.openweathermap.org/data/2.5/uvi?appid="+APP_ID;
     private static final String OPEN_WEATHER_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric&appid="+APP_ID;
 
@@ -97,6 +98,30 @@ public class OpenWeather {
     public static URL buildUrl(String lat, String lon) {
         Log.d(TAG, "called buildUrl()");
         Uri builtUri = Uri.parse(OPEN_WEATHER_UVI_URL).buildUpon()
+                .appendQueryParameter(LAT_PARAM, lat)
+                .appendQueryParameter(LON_PARAM, lon)
+                .build();
+
+        try {
+            URL url = new URL(builtUri.toString());
+            Log.d(TAG, "Built URI" + url);
+            return url;
+        } catch (MalformedURLException err) {
+            Log.d(TAG, err.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Builds URL request for the open weather api
+     *
+     * @param lat user latitude
+     * @param lon user longitude
+     * @return URL used to query the weather api
+     */
+    public static URL buildTempUrl(String lat, String lon) {
+        Log.d(TAG, "called buildTempUrl()");
+        Uri builtUri = Uri.parse(OPEN_WEATHER_TEMP_URL).buildUpon()
                 .appendQueryParameter(LAT_PARAM, lat)
                 .appendQueryParameter(LON_PARAM, lon)
                 .build();
@@ -257,6 +282,38 @@ public class OpenWeather {
         }
 
         return forecasts;
+    }
+
+    /**
+     * Parses JSON and gets the current temperature
+     *
+     * @param jsonResponse JSON response from api
+     * @return double temp value
+     * @throws JSONException
+     */
+    public static String getTempValueFromJSON(String jsonResponse) throws JSONException {
+        JSONObject tempJSON = new JSONObject(jsonResponse);
+
+        if(tempJSON.has(ERROR_MESSAGE)) {
+            int errorCode = tempJSON.getInt(ERROR_MESSAGE);
+
+            switch (errorCode) {
+                case HttpURLConnection.HTTP_OK:
+                    break;
+                case HttpURLConnection.HTTP_NOT_FOUND:
+                    Log.e(TAG, "Could not find location");
+                    break;
+                default:
+                    Log.e(TAG, "Something is wrong on their side");
+                    break;
+            }
+        }
+
+        JSONObject main = tempJSON.getJSONObject("main");
+        String temp = main.getString("temp");
+        Log.d(TAG, "TEMPERATURE: " + temp);
+
+        return temp;
     }
 
     /**

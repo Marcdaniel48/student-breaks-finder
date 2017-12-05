@@ -32,6 +32,22 @@
     <string name="notes_add">Add note</string>
     <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>
+    <string name="tempplaceholder">Temperature Unattainable</string>
+    <string name="calendarbutton">Submit</string>
+    <string name="yearhint">Year...</string>
+    <string name="fallbutton">Fall</string>
+    <string name="winterbutton">Winter</string>
+    <string-array name="years">
+        <item>2014</item>
+        <item>2015</item>
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+    </string-array>
+    <string name="course_number_label">Course Number :</string>
+    <string name="course_title_label">Course Title :</string>
+    <string name="course_teacher_label">Course Teacher :</string>
+    <string name="course_date_label">Course Date :</string>
     <string name="auth_failed">Failed to Sign In to Firebase</string>
     <string name="like_search">Like Search</string>
     <string name="default_none" />
