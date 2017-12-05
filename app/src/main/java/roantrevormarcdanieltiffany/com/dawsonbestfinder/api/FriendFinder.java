@@ -1,5 +1,6 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.api;
 
+import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -9,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,9 @@ public class FriendFinder
     private static final String FIRSTNAME_KEY = "firstname";
     private static final String LASTNAME_KEY = "lastname";
     private static final String EMAIL_KEY = "email";
+    private static final String PASSWORD_KEY = "password";
 
-
-    private String email;
-    private String password;
-    private String find_friends_url = "friendfinder02.app/api/api/allfriends?email=" + email + "&password=" + password;
+    private static final String FIND_FRIENDS_URL = "friendfinder02.app/api/api/allfriends";
 
     private static final String API_RESULT_FORMAT = "json";
 
@@ -93,4 +93,13 @@ public class FriendFinder
 
         return friend;
     }
+
+    public static URL buildFindFriendsURL(String email, String password) throws MalformedURLException
+    {
+        Uri uri = Uri.parse(FIND_FRIENDS_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password).build();
+        URL url = new URL(uri.toString());
+        return url;
+    }
+
+
 }
