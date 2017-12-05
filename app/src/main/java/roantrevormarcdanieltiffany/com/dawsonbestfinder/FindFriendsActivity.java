@@ -13,7 +13,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
@@ -33,6 +32,7 @@ public class FindFriendsActivity extends MenuActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
+        friendsLV = findViewById(R.id.friendsListView);
         new FindFriendsAsyncTask().execute();
 
     }
@@ -54,6 +54,7 @@ public class FindFriendsActivity extends MenuActivity
             {
                 URL url = FriendFinder.buildFindFriendsURL(email, password);
                 String json = OpenWeather.getResponseFromHttpUrl(url);
+                System.out.println(json);
                 return FriendFinder.getFriendsFromJSON(json);
             }
             catch (MalformedURLException e)
@@ -76,9 +77,13 @@ public class FindFriendsActivity extends MenuActivity
         protected void onPostExecute(List<Friend> friends)
         {
             Log.d(TAG, "Called FindFriendsAsyncTask.onPostExecute()");
-
-            ArrayAdapter<Friend> adapter = new ArrayAdapter<>(FindFriendsActivity.this, android.R.layout.simple_list_item_1, friends);
-            friendsLV.setAdapter(adapter);
+for(int i = 0; i < friends.size(); i++)
+{
+    System.out.println(friends.get(i).getFirstname());
+}
+           ArrayAdapter<Friend> adapter = new ArrayAdapter<>(FindFriendsActivity.this, android.R.layout.simple_list_item_1, friends);
+System.out.println(adapter.getItem(0));
+           friendsLV.setAdapter(adapter);
         }
     }
 
