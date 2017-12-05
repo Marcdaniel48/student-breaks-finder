@@ -52,6 +52,6 @@ public class Friend
 
     public String toString()
     {
-        return firstname + ", " + lastname + ", " + email;
+        return firstname + " " + lastname + ", " + email;
     }
 }
