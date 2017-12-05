@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="roantrevormarcdanieltiffany.com.dawsonbestfinder.MainActivity">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <!-- Include the host attribute if you want your app to respond
@@ -33,7 +33,12 @@
         <activity android:name=".NotesActivity" />
         <activity android:name=".ItemNoteActivity" />
         <activity android:name=".WeatherActivity" />
-        <activity android:name=".FindFriendsActivity"/>
+        <activity android:name=".FindFriendsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

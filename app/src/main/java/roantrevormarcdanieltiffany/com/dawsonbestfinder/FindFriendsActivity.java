@@ -33,6 +33,8 @@ public class FindFriendsActivity extends MenuActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
+        new FindFriendsAsyncTask().execute();
+
     }
 
     public class FindFriendsAsyncTask extends AsyncTask<Void, Void, List<Friend>>
@@ -52,7 +54,6 @@ public class FindFriendsActivity extends MenuActivity
             {
                 URL url = FriendFinder.buildFindFriendsURL(email, password);
                 String json = OpenWeather.getResponseFromHttpUrl(url);
-
                 return FriendFinder.getFriendsFromJSON(json);
             }
             catch (MalformedURLException e)
@@ -67,7 +68,8 @@ public class FindFriendsActivity extends MenuActivity
                 Log.e(TAG, "JSONException in FindFriendsAsyncTask.doInBackground");
             }
 
-            return new ArrayList<>();
+            Log.e(TAG, "doInBackground Returning null");
+            return null;
         }
 
         @Override

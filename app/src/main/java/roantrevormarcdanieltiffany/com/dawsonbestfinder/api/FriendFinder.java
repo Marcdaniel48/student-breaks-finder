@@ -26,9 +26,7 @@ public class FriendFinder
     private static final String EMAIL_KEY = "email";
     private static final String PASSWORD_KEY = "password";
 
-    private static final String FIND_FRIENDS_URL = "friendfinder02.app/api/api/allfriends";
-
-    private static final String API_RESULT_FORMAT = "json";
+    private static final String FIND_FRIENDS_URL = "http://friendfinder02.app/api/api/allfriends?";
 
     public FriendFinder()
     {
@@ -100,6 +98,7 @@ public class FriendFinder
         Log.d(TAG, "Called buildFindFriendsURL(String email, String password)");
 
         Uri uri = Uri.parse(FIND_FRIENDS_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password).build();
+        System.out.println(uri.toString());
         URL url = new URL(uri.toString());
         return url;
     }
