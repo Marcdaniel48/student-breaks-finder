@@ -28,6 +28,8 @@ public class FindFriendsActivity extends MenuActivity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        Log.d(TAG, "Called onCreate(Bundle savedInstanceState)");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
@@ -38,6 +40,8 @@ public class FindFriendsActivity extends MenuActivity
         @Override
         protected List<Friend> doInBackground(Void... voids)
         {
+            Log.d(TAG, "Called FindFriendsAsyncTask.doInBackground()");
+
             // SharedPreferences for the Settings activity are stored in "settings"
             SharedPreferences prefs = getSharedPreferences(SettingsActivity.SETTINGS, MODE_PRIVATE);
 
@@ -69,6 +73,8 @@ public class FindFriendsActivity extends MenuActivity
         @Override
         protected void onPostExecute(List<Friend> friends)
         {
+            Log.d(TAG, "Called FindFriendsAsyncTask.onPostExecute()");
+
             ArrayAdapter<Friend> adapter = new ArrayAdapter<>(FindFriendsActivity.this, android.R.layout.simple_list_item_1, friends);
             friendsLV.setAdapter(adapter);
         }
