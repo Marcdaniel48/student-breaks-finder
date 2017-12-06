@@ -1,7 +1,9 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,6 +43,10 @@ public class WeatherActivity extends MenuActivity {
     private LinearLayout llWeather;
     private Spinner spinner;
     private EditText etCityName;
+    private final String LAT_KEY = "lat";
+    private final String LON_KEY = "lon";
+    private Float lat, lon;
+
 
     /**
      * Overrides {@code onCreate} to prep the layout
@@ -60,17 +66,37 @@ public class WeatherActivity extends MenuActivity {
         spinner = findViewById(R.id.spinner);
         etCityName = findViewById(R.id.etCityName);
 
+        // Get lat/lon
+        getSharedPreferences();
+
         // Prep spinner
         setISOCodes();
 
         // Only show weather on button click
         llWeather.setVisibility(LinearLayout.GONE);
+
+    }
+
+    /**
+     * Get Lat and Lon from shared preferences
+     */
+    private void getSharedPreferences() {
+        Log.d(TAG, "called getSharedPreferences()");
+        SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (prefs.contains(LAT_KEY) && prefs.contains(LON_KEY)) {
+            // Should never give default value
+            lat = prefs.getFloat(LAT_KEY, 0);
+            lon = prefs.getFloat(LON_KEY, 0);
+        }
+
     }
 
     /**
      * Set ISO codes in the spinner and default to CA
      */
     private void setISOCodes() {
+        Log.d(TAG, "called setISOCodes()");
         String[] locales = Locale.getISOCountries();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locales);
@@ -91,12 +117,16 @@ public class WeatherActivity extends MenuActivity {
             return;
         }
 
-        // @todo Replace lat/lon with non-fake data
-        double lat = 37.75;
-        double lon = -122.37;
+        if (lat == null || lon == null) {
+            Toast.makeText(WeatherActivity.this, "No latitude/longitude!",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            new OpenWeatherUVITask().execute(String.valueOf(lat),String.valueOf(lon));
+        }
 
-        new OpenWeatherUVITask().execute(String.valueOf(lat),String.valueOf(lon));
         new OpenWeatherForecastTask().execute(etCityName.getText().toString(), spinner.getSelectedItem().toString());
+
+        llWeather.setVisibility(LinearLayout.VISIBLE);
     }
 
     /**
