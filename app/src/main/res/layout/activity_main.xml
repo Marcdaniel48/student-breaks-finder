@@ -17,12 +17,13 @@
         android:scaleType="fitXY"
         app:srcCompat="@drawable/dawsonlogo" />
 
-    <ImageView
-        android:id="@+id/teamLogo"
+    <ImageButton
+        android:id="@+id/teamLogoButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/dabestlogo" />
 
     <LinearLayout
@@ -110,11 +111,39 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/findFriendsButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:cropToPadding="true"
+            android:onClick="onFindFriendsButton"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/findfriendsbtn" />
+
+        <ImageButton
+            android:id="@+id/whosFreeButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:onClick="onWhereIsFriendButton"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/whoisfreebtn" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/temperatureTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:text="@string/tempplaceholder"
         android:textAlignment="center"
         android:textSize="35sp" />
