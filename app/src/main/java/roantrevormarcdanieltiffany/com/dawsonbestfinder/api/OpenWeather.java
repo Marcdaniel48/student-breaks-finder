@@ -52,6 +52,10 @@ public class OpenWeather {
 
     // Params to pass to forecast query
     public static final String Q_PARAM = "q";
+    public static final String UNITS_PARAM = "units";
+
+    // Value to pass to forecast query
+    public static final String METRIC_VALUE = "metric";
 
     // Response keys
     private static final String VALUE_KEY = "value";

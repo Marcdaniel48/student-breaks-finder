@@ -207,6 +207,8 @@ public class WeatherActivity extends MenuActivity {
             List<QueryParam> queryParams = new ArrayList<>();
             queryParams.add(new QueryParam(OpenWeather.Q_PARAM, cityName + "," + countryCode));
             queryParams.add(new QueryParam(OpenWeather.APP_ID_PARAM, OpenWeather.APP_ID));
+            queryParams.add(new QueryParam(OpenWeather.UNITS_PARAM, OpenWeather.METRIC_VALUE));
+            
             URL url = NetworkUtils.buildUrl(OpenWeather.OPEN_WEATHER_FORECAST_URL, queryParams);
 
             try {
