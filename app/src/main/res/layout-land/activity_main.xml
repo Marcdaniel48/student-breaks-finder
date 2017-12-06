@@ -70,7 +70,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:onClick="onFindFriendsButton"
+            android:onClick="onFindFriends"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/findfriendsbtn" />
     </LinearLayout>
@@ -117,7 +117,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:onClick="onWhereIsFriendButton"
+            android:onClick="onWhereIsFriend"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/whoisfreebtn" />
     </LinearLayout>

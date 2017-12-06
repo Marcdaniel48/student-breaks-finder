@@ -140,7 +140,7 @@ public class MainActivity extends MenuActivity {
     /**
      * Will fire an intent taking user to find friends activity
      */
-    public void onFindFriendsButton(View v) {
+    public void onFindFriends(View v) {
 //        Intent i = new Intent(this, );
 //        startActivity(i);
     }
@@ -148,7 +148,7 @@ public class MainActivity extends MenuActivity {
     /**
      * Will fire an intent taking user to where is friend activity
      */
-    public void onWhereIsFriendButton(View v) {
+    public void onWhereIsFriend(View v) {
 //        Intent i = new Intent(this, );
 //        startActivity(i);
     }
