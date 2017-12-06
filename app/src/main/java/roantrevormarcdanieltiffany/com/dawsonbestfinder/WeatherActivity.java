@@ -45,6 +45,10 @@ public class WeatherActivity extends MenuActivity {
     private EditText etCityName;
     private final String LAT_KEY = "lat";
     private final String LON_KEY = "lon";
+    private final String FORECAST_CLICKED = "forecastClicked";
+    private final String FORECASTS_LIST = "forecastsList";
+    private final String UVI = "uvi";
+    private ArrayList<String> loadedForecasts = new ArrayList<>();
     private Float lat, lon;
 
 
@@ -75,6 +79,16 @@ public class WeatherActivity extends MenuActivity {
         // Only show weather on button click
         llWeather.setVisibility(LinearLayout.GONE);
 
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getInt(FORECAST_CLICKED) == LinearLayout.VISIBLE) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(WeatherActivity.this, android.R.layout.simple_list_item_1, savedInstanceState.getStringArrayList(FORECASTS_LIST));
+
+                lvForecast.setAdapter(adapter);
+                llWeather.setVisibility(savedInstanceState.getInt(FORECAST_CLICKED, LinearLayout.GONE));
+                tvTestData.setText(savedInstanceState.getString(UVI, ""));
+            }
+        }
+
     }
 
     /**
@@ -89,7 +103,6 @@ public class WeatherActivity extends MenuActivity {
             lat = prefs.getFloat(LAT_KEY, 0);
             lon = prefs.getFloat(LON_KEY, 0);
         }
-
     }
 
     /**
@@ -135,7 +148,23 @@ public class WeatherActivity extends MenuActivity {
      * @param view
      */
     public void clickForecast(View view) {
+        Log.d(TAG, "called clickForecast()");
         loadOpenWeatherData();
+    }
+
+    /**
+     * Save uvi and forecast to state bundle
+     *
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "called onSaveInstanceState()");
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(FORECAST_CLICKED, llWeather.getVisibility());
+        outState.putStringArrayList(FORECASTS_LIST, loadedForecasts);
+        outState.putString(UVI, tvTestData.getText().toString());
     }
 
     /**
@@ -250,6 +279,12 @@ public class WeatherActivity extends MenuActivity {
         @Override
         protected void onPostExecute(List<Forecast> forecasts) {
             Log.d(TAG, "called onPostExecute()");
+
+            loadedForecasts = new ArrayList<>();
+
+            for(Forecast forecast: forecasts) {
+                loadedForecasts.add(forecast.toString());
+            }
 
             if (forecasts.isEmpty()) {
                 Log.d(TAG, "forecasts.isEmpty");
