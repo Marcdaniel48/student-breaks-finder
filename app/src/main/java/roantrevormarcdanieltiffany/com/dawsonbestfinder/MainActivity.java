@@ -137,6 +137,22 @@ public class MainActivity extends MenuActivity {
     }
 
     /**
+     * Will fire an intent taking user to find friends activity
+     */
+    public void onFindFriends(View v) {
+//        Intent i = new Intent(this, );
+//        startActivity(i);
+    }
+
+    /**
+     * Will fire an intent taking user to where is friend activity
+     */
+    public void onWhereIsFriend(View v) {
+//        Intent i = new Intent(this, );
+//        startActivity(i);
+    }
+
+    /**
      * Verifies whether or not the user has required permission for accessing
      * locaiton, if not will request them.
      * @return

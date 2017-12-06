@@ -60,8 +60,8 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
                 String teacherfname = teachername.split(" ")[0];
                 String teacherlname = teachername.split(" ")[1];
 
-                Log.i(TAG, "onClick: " + teachername + " was tapped");
 
+                Log.i(TAG, "onClick: " + teachername + " was tapped");
                 int teacherIndex = search(true, teacherfname, teacherlname).get(0);
                 Teacher teacher = teachers.get(teacherIndex);
                 showTeacherContactActivity(teacher, 0);

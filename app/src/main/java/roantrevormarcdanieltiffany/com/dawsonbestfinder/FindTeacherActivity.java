@@ -85,7 +85,7 @@ public class FindTeacherActivity extends MenuActivity {
      * Initiate FirebaseAuth and AUthStateListener to track
      * whenever a user signs in or out
      */
-    private void authFirebase() {
+    public void authFirebase() {
         mAuth = FirebaseAuth.getInstance();
         signIn(email, password);
 
@@ -110,7 +110,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @param email
      * @param password
      */
-    private void signIn(String email, String password) {
+    public void signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -133,7 +133,7 @@ public class FindTeacherActivity extends MenuActivity {
      * Connects to and gets the teachers from the
      * firebase database
      */
-    private void getDB() {
+    public void getDB() {
         Log.d(TAG, "Called getDB()");
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -199,7 +199,7 @@ public class FindTeacherActivity extends MenuActivity {
      *
      * @return true if one is filled, false if both are empty
      */
-    private boolean checkFields() {
+    public boolean checkFields() {
         Log.d(TAG, "Called checkFields()");
         if (etFirstName.getText().length() == 0 && etLastName.getText().length() == 0) {
             Log.d(TAG, "Both first and last name fields are empty.");
@@ -230,7 +230,7 @@ public class FindTeacherActivity extends MenuActivity {
      *
      * @param teacherIndexes array of indexes of found teachers
      */
-    private void startCorrectActivity(ArrayList<Integer> teacherIndexes) {
+    public void startCorrectActivity(ArrayList<Integer> teacherIndexes) {
         Log.d(TAG, "Called startCorrectActivity(ArrayList<Integer> teacherIndexes)");
         Log.d(TAG, "Teacher Indexes size: " + teacherIndexes.size());
 
@@ -257,7 +257,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @param lastName
      * @return Array of integers or empty array
      */
-    protected ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
+      protected ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
         Log.d(TAG, "Called search(boolean exactSearch, String firstName, String lastName)");
         ArrayList<Integer> teacherIndexes = new ArrayList<>();
 
@@ -313,7 +313,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @param teacher
      * @param teacherIndex
      */
-    protected void showTeacherContactActivity(Teacher teacher, int teacherIndex) {
+    public void showTeacherContactActivity(Teacher teacher, int teacherIndex) {
         Intent i = new Intent(context,TeacherContactActivity.class);
         i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndex);
         i.putExtra(TeacherContactActivity.FULL_NAME, teacher.getFull_name());
