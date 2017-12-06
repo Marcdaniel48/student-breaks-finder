@@ -17,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
 /**
  * Activity which has a widget to input the city & uses a spinner
@@ -111,7 +113,7 @@ public class WeatherActivity extends MenuActivity {
     /**
      * Class that extends AsyncTask to perform network requests
      */
-    public class OpenWeatherUVITask extends AsyncTask<String, Void, String[]> {
+    public class OpenWeatherUVITask extends AsyncTask<String, Void, String> {
         private final String TAG = OpenWeatherUVITask.class.getSimpleName();
 
         /**
@@ -128,24 +130,28 @@ public class WeatherActivity extends MenuActivity {
          * @see #publishProgress
          */
         @Override
-        protected String[] doInBackground(String... strings) {
+        protected String doInBackground(String... strings) {
             Log.d(TAG, "called doInBackground()");
             if (strings.length == 0) {
                 Log.d(TAG, "No params");
-                return new String[]{};
+                return "";
             }
 
             String lat = strings[0];
             String lon = strings[1];
 
-            URL url = OpenWeather.buildUrl(lat, lon);
+            List<QueryParam> queryParams = new ArrayList<>();
+            queryParams.add(new QueryParam(OpenWeather.LAT_PARAM, lat));
+            queryParams.add(new QueryParam(OpenWeather.LON_PARAM, lon));
+
+            URL url = NetworkUtils.buildUrl(OpenWeather.OPEN_WEATHER_UVI_URL, queryParams);
 
             try {
-                String json = OpenWeather.getResponseFromHttpUrl(url);
+                String json = NetworkUtils.getResponseFromHttpUrl(url);
                 return OpenWeather.getUviValueFromJSON(json);
             } catch (Exception err) {
                 Log.e(TAG, err.getLocalizedMessage());
-                return new String[]{};
+                return "";
             }
         }
 
@@ -154,18 +160,16 @@ public class WeatherActivity extends MenuActivity {
          *
          * Overrides {@code onPostExecute} to display results
          *
-         * @param strings
+         * @param string
          */
         @Override
-        protected void onPostExecute(String[] strings) {
+        protected void onPostExecute(String string) {
             Log.d(TAG, "called onPostExecute()");
 
-            for (String data: strings) {
-                Log.d(TAG, data);
-            }
+            Log.d(TAG, "Data found: " + string);
 
             llWeather.setVisibility(LinearLayout.VISIBLE);
-            tvTestData.setText(strings[0]);
+            tvTestData.setText(string);
         }
     }
 
@@ -199,11 +203,13 @@ public class WeatherActivity extends MenuActivity {
             String cityName = strings[0];
             String countryCode = strings[1];
 
-            URL url = OpenWeather.buildForecastUrl(cityName, countryCode);
+            List<QueryParam> queryParams = new ArrayList<>();
+            queryParams.add(new QueryParam(OpenWeather.Q_PARAM, cityName + "," + countryCode));
+            URL url = NetworkUtils.buildUrl(OpenWeather.OPEN_WEATHER_FORECAST_URL, queryParams);
 
             try {
                 Log.d(TAG, "Url!!: " + url);
-                String json = OpenWeather.getResponseFromHttpUrl(url);
+                String json = NetworkUtils.getResponseFromHttpUrl(url);
                 return OpenWeather.getForecastFromJSON(json);
             } catch (Exception err) {
                 Log.e(TAG, err.getLocalizedMessage());
