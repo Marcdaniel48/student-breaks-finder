@@ -1,5 +1,9 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
 
+/**
+ * Bean class representing a Friend.
+ * Used alongside the FriendFinder API.
+ */
 public class Friend
 {
     private static final String TAG = Friend.class.getSimpleName();
@@ -50,6 +54,7 @@ public class Friend
         return lastname;
     }
 
+    @Override
     public String toString()
     {
         return firstname + " " + lastname + ", " + email;

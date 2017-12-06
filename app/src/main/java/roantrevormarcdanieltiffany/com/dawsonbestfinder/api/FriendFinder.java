@@ -15,9 +15,13 @@ import java.util.List;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.FriendLocation;
 
+/**
+ * API class that's used to make Friend Finder API calls.
+ */
 public class FriendFinder
 {
     private static final String TAG = FriendFinder.class.getSimpleName();
+
     private static final String FIRSTNAME_KEY = "firstname";
     private static final String LASTNAME_KEY = "lastname";
     private static final String EMAIL_KEY = "email";
@@ -33,11 +37,21 @@ public class FriendFinder
     private static final String FIND_FRIENDS_URL = "http://dawsonbestfinder.herokuapp.com/api/api/allfriends?";
     private static final String FRIEND_LOCATION_URL = "http://dawsonbestfinder.herokuapp.com/api/api/whereisfriend?";
 
+    /**
+     * Instantiates FriendFinder
+     */
     public FriendFinder()
     {
         Log.d(TAG, "Instance of FriendFinder initiated.");
     }
 
+    /**
+     * Takes in a JSON Response in the form of a String and parses it to return a list of Friends.
+     *
+     * @param jsonResponse
+     * @return
+     * @throws JSONException
+     */
     public static List<Friend> getFriendsFromJSON(String jsonResponse) throws JSONException
     {
         Log.d(TAG, "Called getFriendsFromJSON(String jsonResponse)");
@@ -57,6 +71,13 @@ public class FriendFinder
         return friendsList;
     }
 
+    /**
+     * Takes in a JSON response in the form of a String and parses it to return a FriendLocation.
+     *
+     * @param jsonResponse
+     * @return
+     * @throws JSONException
+     */
     public static FriendLocation getFriendLocationFromJSON(String jsonResponse) throws JSONException
     {
         Log.d(TAG, "Called getFriendLocationFromJSON(String jsonResponse)");
@@ -68,6 +89,13 @@ public class FriendFinder
         return location;
     }
 
+    /**
+     * Takes in a JSONObject and parses it into a Friend object.
+     *
+     * @param friendJSON
+     * @return
+     * @throws JSONException
+     */
     private static Friend parseJSONToFriend(JSONObject friendJSON) throws JSONException
     {
         Log.d(TAG, "Called parseJSONToFriend(JSONObject friendJSON)");
@@ -86,6 +114,12 @@ public class FriendFinder
         return friend;
     }
 
+    /**
+     * Takes in a JSONObject and parses it into a FriendLocation object.
+     * @param locationJSON
+     * @return
+     * @throws JSONException
+     */
     private static FriendLocation parseJSONToFriendLocation(JSONObject locationJSON) throws JSONException
     {
         Log.d(TAG, "Called parseJSONToFriendLocation(JSONObject locationJSON)");
@@ -103,6 +137,13 @@ public class FriendFinder
         return location;
     }
 
+    /**
+     * Takes in an email and password Strings and builds an API call URL that's supposed to return a JSON response listing the user's friends.
+     * @param email
+     * @param password
+     * @return
+     * @throws MalformedURLException
+     */
     public static URL buildFindFriendsURL(String email, String password) throws MalformedURLException
     {
         Log.d(TAG, "Called buildFindFriendsURL(String email, String password)");
@@ -112,6 +153,17 @@ public class FriendFinder
         return url;
     }
 
+    /**
+     * Takes in a number of String parameters and uses it to build an API call URL to return a JSON response describing the location of a user's friend.
+     *
+     * @param email
+     * @param password
+     * @param friendEmail
+     * @param day
+     * @param time
+     * @return
+     * @throws MalformedURLException
+     */
     public static URL buildFriendLocationURL(String email, String password, String friendEmail, String day, String time) throws MalformedURLException
     {
         Log.d(TAG, "buildFriendLocationURL(String email, String password, String friendEmail, int day, int time)");

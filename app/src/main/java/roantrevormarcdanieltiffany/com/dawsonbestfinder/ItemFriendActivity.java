@@ -62,11 +62,7 @@ public class ItemFriendActivity extends Activity
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(today);
             int dayInt = calendar.get(Calendar.DAY_OF_WEEK);
-            if(dayInt == 1)
-                dayInt = 7;
-            else
-                dayInt--;
-
+            dayInt = dayInt==1 ? 7 : dayInt-1;
             String day = String.valueOf(dayInt);
 
             DateFormat dateFormat = new SimpleDateFormat("HHmm");

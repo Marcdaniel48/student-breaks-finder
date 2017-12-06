@@ -10,13 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -30,6 +28,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
 public class FindFriendsActivity extends MenuActivity
 {
     private static final String TAG = FindFriendsActivity.class.getSimpleName();
+
     ListView friendsLV;
 
     @Override
@@ -41,8 +40,8 @@ public class FindFriendsActivity extends MenuActivity
         setContentView(R.layout.activity_find_friends);
 
         friendsLV = findViewById(R.id.friendsListView);
+        
         new FindFriendsAsyncTask().execute();
-
     }
 
     public class FindFriendsAsyncTask extends AsyncTask<Void, Void, List<Friend>>

@@ -1,6 +1,9 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
 
-
+/**
+ * Bean class representing the current location of a user --> current course & section.
+ * Used alongside the FriendFinder API.
+ */
 public class FriendLocation
 {
     private static final String TAG = FriendLocation.class.getSimpleName();
@@ -38,5 +41,11 @@ public class FriendLocation
     public String getSection()
     {
         return section;
+    }
+
+    @Override
+    public String toString()
+    {
+        return course + ", " + section;
     }
 }
