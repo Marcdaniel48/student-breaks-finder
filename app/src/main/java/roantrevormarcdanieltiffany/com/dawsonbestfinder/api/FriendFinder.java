@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.FriendLocation;
 
 public class FriendFinder
 {
@@ -21,6 +22,9 @@ public class FriendFinder
     private static final String LASTNAME_KEY = "lastname";
     private static final String EMAIL_KEY = "email";
     private static final String PASSWORD_KEY = "password";
+
+    private static final String COURSE_KEY = "course";
+    private static final String SECTION_KEY = "section";
 
     private static final String FRIEND_EMAIL_KEY = "friendemail";
     private static final String DAY_KEY = "day";
@@ -53,6 +57,17 @@ public class FriendFinder
         return friendsList;
     }
 
+    public static FriendLocation getFriendLocationFromJSON(String jsonResponse) throws JSONException
+    {
+        Log.d(TAG, "Called getFriendLocationFromJSON(String jsonResponse)");
+
+        JSONArray friendsJSONArray = new JSONArray(jsonResponse);
+        JSONObject jsonObject = friendsJSONArray.getJSONObject(0);
+        FriendLocation location = parseJSONToFriendLocation(jsonObject);
+
+        return location;
+    }
+
     private static Friend parseJSONToFriend(JSONObject friendJSON) throws JSONException
     {
         Log.d(TAG, "Called parseJSONToFriend(JSONObject friendJSON)");
@@ -69,6 +84,23 @@ public class FriendFinder
         }
 
         return friend;
+    }
+
+    private static FriendLocation parseJSONToFriendLocation(JSONObject locationJSON) throws JSONException
+    {
+        Log.d(TAG, "Called parseJSONToFriendLocation(JSONObject locationJSON)");
+
+        FriendLocation location = new FriendLocation();
+
+        JSONObject jsonObject = locationJSON;
+
+        if(jsonObject.has(COURSE_KEY) && jsonObject.has(SECTION_KEY))
+        {
+            location.setCourse(jsonObject.getString(COURSE_KEY));
+            location.setSection(jsonObject.getString(SECTION_KEY));
+        }
+
+        return location;
     }
 
     public static URL buildFindFriendsURL(String email, String password) throws MalformedURLException
