@@ -22,7 +22,12 @@ public class FriendFinder
     private static final String EMAIL_KEY = "email";
     private static final String PASSWORD_KEY = "password";
 
+    private static final String FRIEND_EMAIL_KEY = "friendemail";
+    private static final String DAY_KEY = "day";
+    private static final String TIME_KEY = "time";
+
     private static final String FIND_FRIENDS_URL = "http://dawsonbestfinder.herokuapp.com/api/api/allfriends?";
+    private static final String FRIEND_LOCATION_URL = "http://dawsonbestfinder.herokuapp.com/api/api/whereisfriend?";
 
     public FriendFinder()
     {
@@ -71,6 +76,17 @@ public class FriendFinder
         Log.d(TAG, "Called buildFindFriendsURL(String email, String password)");
 
         Uri uri = Uri.parse(FIND_FRIENDS_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password).build();
+        URL url = new URL(uri.toString());
+        return url;
+    }
+
+    public static URL buildFriendLocationURL(String email, String password, String friendEmail, String day, String time) throws MalformedURLException
+    {
+        Log.d(TAG, "buildFriendLocationURL(String email, String password, String friendEmail, int day, int time)");
+
+        Uri uri = Uri.parse(FRIEND_LOCATION_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password)
+        .appendQueryParameter(FRIEND_EMAIL_KEY, friendEmail).appendQueryParameter(DAY_KEY, day).appendQueryParameter(TIME_KEY, time).build();
+
         URL url = new URL(uri.toString());
         return url;
     }

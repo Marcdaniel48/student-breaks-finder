@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import org.json.JSONException;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -85,48 +86,58 @@ public class FindFriendsActivity extends MenuActivity
         {
             Log.d(TAG, "Called FindFriendsAsyncTask.onPostExecute()");
 
-           ArrayAdapter<Friend> adapter = new ArrayAdapter<>(FindFriendsActivity.this, R.layout.listview_friend, R.id.friendTextView, friends);
-
-           //friendsLV.setAdapter(adapter);
-
             friendsLV.setAdapter(new BaseAdapter()
             {
+                private final String EMAIL_KEY = "email";
+
                 @Override
                 public int getCount() {
-                    return 0;
+                    return friends.size();
                 }
 
                 @Override
                 public Object getItem(int i) {
-                    return null;
+                    return i;
                 }
 
                 @Override
                 public long getItemId(int i) {
-                    return 0;
+                    return i;
                 }
 
                 @Override
-                public View getView(int i, View view, ViewGroup viewGroup)
+                public View getView(final int i, View view, ViewGroup viewGroup)
                 {
                     LayoutInflater inf = (LayoutInflater) FindFriendsActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     view = inf.inflate(R.layout.listview_friend, null);
 
-                    TextView tv = view.findViewById(R.id.friendTextView);;
-                    view.setTag(tv);
-                    tv.setText(friends.get(i).toString());
+                    Holder holder = new Holder();
 
-                    tv.setOnClickListener(new View.OnClickListener()
+                    view.setTag(holder);
+
+                    holder.tv = view.findViewById(R.id.friendTextView);
+                    holder.tv.setText(friends.get(i).toString());
+
+                    holder.tv.setOnClickListener(new View.OnClickListener()
                     {
 
                         @Override
                         public void onClick(View view)
                         {
-                            Intent intent = new Intent(FindFriendsActivity.this, null);
+                            Intent intent = new Intent(FindFriendsActivity.this, ItemFriendActivity.class);
+
+                            intent.putExtra(EMAIL_KEY, friends.get(i).getEmail());
+
+                            startActivity(intent);
                         }
                     });
 
                     return view;
+                }
+
+                class Holder
+                {
+                    TextView tv;
                 }
             });
         }
