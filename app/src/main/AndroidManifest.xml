@@ -34,7 +34,7 @@
         <activity android:name=".AcademicCalendarActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".CancelledClassActivity" />
-        <activity android:name=".CancelledClassInfoActivity"></activity>
+        <activity android:name=".CancelledClassInfoActivity" />
         <activity android:name=".FindTeacherActivity" />
         <activity android:name=".TeacherContactActivity" />
         <activity android:name=".ChooseTeacherActivity" />
@@ -42,6 +42,7 @@
         <activity android:name=".NotesActivity" />
         <activity android:name=".ItemNoteActivity" />
         <activity android:name=".WeatherActivity" />
+        <activity android:name=".WhoIsFreeActivity" />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

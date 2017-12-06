@@ -69,4 +69,7 @@
     <string name="forecast">Forecast</string>
     <string name="default_city_name">Montreal</string>
     <string name="canada_code">CA</string>
+    <string name="break_start">Break Start</string>
+    <string name="break_end">Break End</string>
+    <string name="friends_on_break">Friends on Break</string>
 </resources>
