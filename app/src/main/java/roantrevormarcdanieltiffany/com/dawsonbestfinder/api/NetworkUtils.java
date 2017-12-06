@@ -19,8 +19,6 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
-    private static final String APP_ID = "8116230ada270186d54714add001180f";
-
 
     /**
      * Returns entire result from HTTP response
@@ -59,8 +57,7 @@ public class NetworkUtils {
         Uri.Builder builder = new Uri.Builder();
 
         builder.scheme("http")
-                .encodedAuthority(apiUrl)
-                .appendQueryParameter("appid", APP_ID);
+                .encodedAuthority(apiUrl);
 
         for (QueryParam qp: params) {
             builder.appendQueryParameter(qp.getKey(), qp.getValue());

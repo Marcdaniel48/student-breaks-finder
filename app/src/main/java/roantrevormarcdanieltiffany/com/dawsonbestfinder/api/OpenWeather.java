@@ -33,15 +33,15 @@ public class OpenWeather {
     private static final String TAG = OpenWeather.class.getSimpleName();
 
     // API app id
-    private static final String APP_ID = "8116230ada270186d54714add001180f";
+    public static final String APP_ID = "8116230ada270186d54714add001180f";
 
     // Open Weather API url
     public static final String OPEN_WEATHER_TEMP_URL = "http://api.openweathermap.org/data/2.5/weather?appid=8116230ada270186d54714add001180f";
     public static final String OPEN_WEATHER_UVI_URL = "api.openweathermap.org/data/2.5/uvi";
     public static final String OPEN_WEATHER_FORECAST_URL = "api.openweathermap.org/data/2.5/forecast";
 
-    // The format we want our API to return
-    private static final String FORMAT = "json";
+    // APP ID query param
+    public static final String APP_ID_PARAM = "appid";
 
     // If there is error openweather api will have this in json
     private static final String ERROR_MESSAGE = "cod";
