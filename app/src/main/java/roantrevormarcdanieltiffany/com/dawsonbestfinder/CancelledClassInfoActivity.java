@@ -42,10 +42,10 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancelled_class_info);
         Log.d(TAG, "onCreate: was called");
-        courseNumberTV = (TextView) findViewById(R.id.course_number);
-        courseTeacherTV = (TextView) findViewById(R.id.course_teacher);
-        courseTitleTV = (TextView) findViewById(R.id.course_title);
-        dateCancelledTV = (TextView) findViewById(R.id.course_date_cancelled);
+        courseNumberTV = findViewById(R.id.course_number);
+        courseTeacherTV = findViewById(R.id.course_teacher);
+        courseTitleTV = findViewById(R.id.course_title);
+        dateCancelledTV = findViewById(R.id.course_date_cancelled);
 
         courseTeacherTV.setText(getIntent().getExtras().getString(TEACHER_EXTRA_KEY));
         courseTitleTV.setText(getIntent().getExtras().getString(TITLE_EXTRA_KEY));
@@ -55,10 +55,13 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         courseTeacherTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
                 String teacherfname = teachername.split(" ")[0];
                 String teacherlname = teachername.split(" ")[1];
 
+
+                Log.i(TAG, "onClick: " + teachername + " was tapped");
                 int teacherIndex = search(true, teacherfname, teacherlname).get(0);
                 Teacher teacher = teachers.get(teacherIndex);
                 showTeacherContactActivity(teacher, 0);
