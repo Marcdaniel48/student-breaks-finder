@@ -90,6 +90,16 @@ public class MainActivity extends MenuActivity {
     }
 
     /**
+     * Will fire an intent taking the user to the About activity.
+     */
+    public void onTeamLogoButton(View v)
+    {
+        Intent intent = new Intent(this, AboutActivity.class);
+
+        startActivity(intent);
+    }
+
+    /**
      * Will fire an intent taking user to class cancellations activity
      */
     public void onClassCancellations(View v) {
