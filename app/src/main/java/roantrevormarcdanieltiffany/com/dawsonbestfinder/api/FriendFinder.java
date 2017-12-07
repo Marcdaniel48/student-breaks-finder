@@ -50,7 +50,7 @@ public class FriendFinder
      * Takes in a JSON Response in the form of a String and parses it to return a list of Friends.
      *
      * @param jsonResponse
-     * @return
+     * @return A list of the user's friends.
      * @throws JSONException
      */
     public static List<Friend> getFriendsFromJSON(String jsonResponse) throws JSONException
@@ -79,7 +79,7 @@ public class FriendFinder
      * Takes in a JSON response in the form of a String and parses it to return a FriendLocation.
      *
      * @param jsonResponse
-     * @return
+     * @return The location of the user's requested friend
      * @throws JSONException
      */
     public static FriendLocation getFriendLocationFromJSON(String jsonResponse) throws JSONException
@@ -97,7 +97,7 @@ public class FriendFinder
      * Takes in a JSONObject and parses it into a Friend object.
      *
      * @param friendJSON
-     * @return
+     * @return A Friend object parsed from a JSON object
      * @throws JSONException
      */
     private static Friend parseJSONToFriend(JSONObject friendJSON) throws JSONException
@@ -122,7 +122,7 @@ public class FriendFinder
     /**
      * Takes in a JSONObject and parses it into a FriendLocation object.
      * @param locationJSON
-     * @return
+     * @return The location of a requested friend parsed from a JSON object.
      * @throws JSONException
      */
     private static FriendLocation parseJSONToFriendLocation(JSONObject locationJSON) throws JSONException
