@@ -1,5 +1,7 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
 
+import android.util.Log;
+
 /**
  * Bean class representing a Friend.
  * Used alongside the FriendFinder API.
@@ -19,6 +21,7 @@ public class Friend
 
     public Friend(String email, String firstname, String lastname)
     {
+        Log.d(TAG, "Friend bean instantiated.");
         this.email = email;
         this.firstname = firstname;
         this.lastname = lastname;
