@@ -20,6 +20,7 @@
     <string name="settings_password">Password:</string>
     <string name="settings_datestamp">Updated:</string>
     <string name="settings_save">Save</string>
+    <string name="settings_main_menu">Main menu</string>
     <string name="settings_back_dialog_message">Are you sure you want to quit? Any unsaved changes will be discarded.</string>
     <string name="settings_back_dialog_title">Quit</string>
     <string name="settings_back_dialog_yes">Yes</string>

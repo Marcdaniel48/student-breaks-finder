@@ -127,6 +127,19 @@ public class SettingsActivity extends Activity
     }
 
     /**
+     * Takes the user to the Main activity, as long as the user was able to correctly input and save
+     * account credentials.
+     *
+     * Uses the same logic as the onBackPressed method, but adapted for the "Main Menu" button as on onClick.
+     *
+     * @param view
+     */
+    public void onMainMenu(View view)
+    {
+        onBackPressed();
+    }
+
+    /**
      * When the back button is pressed, an alert dialog will appear asking for exit confirmation.
      */
     @Override

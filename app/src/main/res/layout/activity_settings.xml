@@ -124,10 +124,17 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="onMainMenu"
+            android:text="@string/settings_main_menu" />
+
+        <Button
             android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
             android:layout_weight="1"
             android:onClick="saveSettings"
             android:text="@string/settings_save" />
