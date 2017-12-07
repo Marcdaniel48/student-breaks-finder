@@ -24,7 +24,6 @@ import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
