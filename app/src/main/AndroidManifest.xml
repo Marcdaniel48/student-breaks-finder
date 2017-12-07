@@ -44,6 +44,7 @@
         <activity android:name=".WeatherActivity" />
         <activity android:name=".FindFriendsActivity" />
         <activity android:name=".ItemFriendActivity"/>
+        <activity android:name=".AboutActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
