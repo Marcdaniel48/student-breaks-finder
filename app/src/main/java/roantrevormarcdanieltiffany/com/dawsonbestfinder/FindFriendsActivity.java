@@ -25,12 +25,24 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
 
+/**
+ * Class that handles retrieving a list of the current user's friends (according to the settings activity) and displaying that
+ * list of friends into the FindFriends activity.
+ */
 public class FindFriendsActivity extends MenuActivity
 {
     private static final String TAG = FindFriendsActivity.class.getSimpleName();
 
     ListView friendsLV;
 
+    /**
+     * onCreate
+     *
+     * Loads the layout elements of the FindFriend activity and makes an Async call to get the current user's friends and display them
+     * in the FindFriends list view.
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -40,10 +52,13 @@ public class FindFriendsActivity extends MenuActivity
         setContentView(R.layout.activity_find_friends);
 
         friendsLV = findViewById(R.id.friendsListView);
-        
+
         new FindFriendsAsyncTask().execute();
     }
 
+    /**
+     * Async Task class for the FriendFinder API.
+     */
     public class FindFriendsAsyncTask extends AsyncTask<Void, Void, List<Friend>>
     {
         @Override
@@ -54,6 +69,7 @@ public class FindFriendsActivity extends MenuActivity
             // SharedPreferences for the Settings activity are stored in "settings"
             SharedPreferences prefs = getSharedPreferences(SettingsActivity.SETTINGS, MODE_PRIVATE);
 
+            // Retrieves the email and password values
             String email = prefs.getString(SettingsActivity.EMAIL, "");
             String password = prefs.getString(SettingsActivity.PASSWORD, "");
 

@@ -33,24 +33,29 @@ public class OpenWeather {
     private static final String TAG = OpenWeather.class.getSimpleName();
 
     // API app id
-    private static final String APP_ID = "8116230ada270186d54714add001180f";
+    public static final String APP_ID = "8116230ada270186d54714add001180f";
 
     // Open Weather API url
-    private static final String OPEN_WEATHER_UVI_URL = "http://api.openweathermap.org/data/2.5/uvi?appid="+APP_ID;
-    private static final String OPEN_WEATHER_FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast?units=metric&appid="+APP_ID;
+    public static final String OPEN_WEATHER_TEMP_URL = "http://api.openweathermap.org/data/2.5/weather?appid=8116230ada270186d54714add001180f";
+    public static final String OPEN_WEATHER_UVI_URL = "api.openweathermap.org/data/2.5/uvi";
+    public static final String OPEN_WEATHER_FORECAST_URL = "api.openweathermap.org/data/2.5/forecast";
 
-    // The format we want our API to return
-    private static final String FORMAT = "json";
+    // APP ID query param
+    public static final String APP_ID_PARAM = "appid";
 
     // If there is error openweather api will have this in json
     private static final String ERROR_MESSAGE = "cod";
 
     // Params to pass to uvi query
-    private static final String LAT_PARAM = "lat";
-    private static final String LON_PARAM = "lon";
+    public static final String LAT_PARAM = "lat";
+    public static final String LON_PARAM = "lon";
 
     // Params to pass to forecast query
-    private static final String Q_PARAM = "q";
+    public static final String Q_PARAM = "q";
+    public static final String UNITS_PARAM = "units";
+
+    // Value to pass to forecast query
+    public static final String METRIC_VALUE = "metric";
 
     // Response keys
     private static final String VALUE_KEY = "value";
@@ -86,17 +91,15 @@ public class OpenWeather {
     }
 
     /**
-     * Builds the URL request for the open weather api
+     * Builds URL request for the open weather api
      *
-     * @param lat
-     *      latitude of location
-     * @param lon
-     *      longitude of location
-     * @return The URL used to query the weather api
+     * @param lat user latitude
+     * @param lon user longitude
+     * @return URL used to query the weather api
      */
-    public static URL buildUrl(String lat, String lon) {
-        Log.d(TAG, "called buildUrl()");
-        Uri builtUri = Uri.parse(OPEN_WEATHER_UVI_URL).buildUpon()
+    public static URL buildTempUrl(String lat, String lon) {
+        Log.d(TAG, "called buildTempUrl()");
+        Uri builtUri = Uri.parse(OPEN_WEATHER_TEMP_URL).buildUpon()
                 .appendQueryParameter(LAT_PARAM, lat)
                 .appendQueryParameter(LON_PARAM, lon)
                 .build();
@@ -104,22 +107,6 @@ public class OpenWeather {
         try {
             URL url = new URL(builtUri.toString());
             Log.d(TAG, "Built URI" + url);
-            return url;
-        } catch (MalformedURLException err) {
-            Log.d(TAG, err.getMessage());
-            return null;
-        }
-    }
-
-    public static URL buildForecastUrl(String cityName, String code) {
-        Log.d(TAG, "called buildForecastUrl()");
-        Uri builtUri = Uri.parse(OPEN_WEATHER_FORECAST_URL).buildUpon()
-                .appendQueryParameter(Q_PARAM, cityName + "," + code)
-                .build();
-
-        try {
-            URL url = new URL(builtUri.toString());
-            Log.d(TAG, "Built URI: " + url);
             return url;
         } catch (MalformedURLException err) {
             Log.d(TAG, err.getMessage());
@@ -162,7 +149,7 @@ public class OpenWeather {
      * @return double UVI value
      * @throws JSONException
      */
-    public static String[] getUviValueFromJSON(String jsonResponse) throws JSONException{
+    public static String getUviValueFromJSON(String jsonResponse) throws JSONException{
         Log.d(TAG, "called getUviValueFromJSON()");
         JSONObject uviJSON = new JSONObject(jsonResponse);
 
@@ -185,7 +172,7 @@ public class OpenWeather {
             }
         }
 
-        return new String[] {uviJSON.getString(VALUE_KEY)};
+        return uviJSON.getString(VALUE_KEY);
     }
 
     /**
@@ -257,6 +244,38 @@ public class OpenWeather {
         }
 
         return forecasts;
+    }
+
+    /**
+     * Parses JSON and gets the current temperature
+     *
+     * @param jsonResponse JSON response from api
+     * @return double temp value
+     * @throws JSONException
+     */
+    public static String getTempValueFromJSON(String jsonResponse) throws JSONException {
+        JSONObject tempJSON = new JSONObject(jsonResponse);
+
+        if(tempJSON.has(ERROR_MESSAGE)) {
+            int errorCode = tempJSON.getInt(ERROR_MESSAGE);
+
+            switch (errorCode) {
+                case HttpURLConnection.HTTP_OK:
+                    break;
+                case HttpURLConnection.HTTP_NOT_FOUND:
+                    Log.e(TAG, "Could not find location");
+                    break;
+                default:
+                    Log.e(TAG, "Something is wrong on their side");
+                    break;
+            }
+        }
+
+        JSONObject main = tempJSON.getJSONObject("main");
+        String temp = main.getString("temp");
+        Log.d(TAG, "TEMPERATURE: " + temp);
+
+        return temp;
     }
 
     /**
