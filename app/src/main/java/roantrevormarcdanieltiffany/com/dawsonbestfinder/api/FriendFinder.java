@@ -7,8 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,10 @@ public class FriendFinder
     public static final String DAY_KEY = "day";
     public static final String TIME_KEY = "time";
 
+    // For API calling.
+    // Find all friends of the current user.
     public static final String FIND_FRIENDS_URL = "dawsonbestfinder.herokuapp.com/api/api/allfriends";
+    // Find the current location of one of the current user's friends.
     public static final String FRIEND_LOCATION_URL = "dawsonbestfinder.herokuapp.com/api/api/whereisfriend";
 
     /**
@@ -59,7 +60,10 @@ public class FriendFinder
         List<Friend> friendsList = new ArrayList<>();
 
         JSONArray friendsJSONArray = new JSONArray(jsonResponse);
+
+        // Logs the JSON Array of Friends
         Log.d(TAG, "friendJSONArray: " + friendsJSONArray.toString());
+
         for (int i = 0; i < friendsJSONArray.length(); i++)
         {
             JSONObject jsonObject = friendsJSONArray.getJSONObject(i);
@@ -104,6 +108,7 @@ public class FriendFinder
 
         JSONObject jsonObject = friendJSON;
 
+        // The JSON should have a first name, last name, and email
         if(jsonObject.has(FIRSTNAME_KEY) && jsonObject.has(LASTNAME_KEY) && jsonObject.has(EMAIL_KEY))
         {
             friend.setFirstname(jsonObject.getString(FIRSTNAME_KEY));
@@ -128,6 +133,7 @@ public class FriendFinder
 
         JSONObject jsonObject = locationJSON;
 
+        // The JSON should have a course and section.
         if(jsonObject.has(COURSE_KEY) && jsonObject.has(SECTION_KEY))
         {
             location.setCourse(jsonObject.getString(COURSE_KEY));
@@ -136,44 +142,4 @@ public class FriendFinder
 
         return location;
     }
-
-    /**
-     * Takes in an email and password Strings and builds an API call URL that's supposed to return a JSON response listing the user's friends.
-     * @param email
-     * @param password
-     * @return
-     * @throws MalformedURLException
-     */
-    public static URL buildFindFriendsURL(String email, String password) throws MalformedURLException
-    {
-        Log.d(TAG, "Called buildFindFriendsURL(String email, String password)");
-
-        Uri uri = Uri.parse(FIND_FRIENDS_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password).build();
-        URL url = new URL(uri.toString());
-        return url;
-    }
-
-    /**
-     * Takes in a number of String parameters and uses it to build an API call URL to return a JSON response describing the location of a user's friend.
-     *
-     * @param email
-     * @param password
-     * @param friendEmail
-     * @param day
-     * @param time
-     * @return
-     * @throws MalformedURLException
-     */
-    public static URL buildFriendLocationURL(String email, String password, String friendEmail, String day, String time) throws MalformedURLException
-    {
-        Log.d(TAG, "buildFriendLocationURL(String email, String password, String friendEmail, int day, int time)");
-
-        Uri uri = Uri.parse(FRIEND_LOCATION_URL).buildUpon().appendQueryParameter(EMAIL_KEY, email).appendQueryParameter(PASSWORD_KEY, password)
-        .appendQueryParameter(FRIEND_EMAIL_KEY, friendEmail).appendQueryParameter(DAY_KEY, day).appendQueryParameter(TIME_KEY, time).build();
-
-        URL url = new URL(uri.toString());
-        return url;
-    }
-
-
 }

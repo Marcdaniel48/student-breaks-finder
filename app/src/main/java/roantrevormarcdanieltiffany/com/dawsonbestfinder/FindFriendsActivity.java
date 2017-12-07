@@ -77,13 +77,16 @@ public class FindFriendsActivity extends MenuActivity
 
             try
             {
+                // Creates a list of query parameters.
                 List<QueryParam> queryParams = new ArrayList<>();
                 queryParams.add(new QueryParam(FriendFinder.EMAIL_KEY, email));
                 queryParams.add(new QueryParam(FriendFinder.PASSWORD_KEY, password));
 
+                // Builds a URL to make the API call to find the location of a friend.
                 URL url = NetworkUtils.buildUrl(FriendFinder.FIND_FRIENDS_URL, queryParams);
                 String json = NetworkUtils.getResponseFromHttpUrl(url);
 
+                // Uses the JSON response from the API call to make and return a list of Friend objects.
                 return FriendFinder.getFriendsFromJSON(json);
             }
             catch (MalformedURLException e)
@@ -98,10 +101,14 @@ public class FindFriendsActivity extends MenuActivity
                 Log.e(TAG, "JSONException in FindFriendsAsyncTask.doInBackground");
             }
 
-            Log.e(TAG, "doInBackground Returning null");
             return null;
         }
 
+        /**
+         * Populates the list view in the FindFriends activity with a list of Friend objects.
+         * The first name, last name, email of each Friend is what's being displayed.
+         * @param friends
+         */
         @Override
         protected void onPostExecute(final List<Friend> friends)
         {
@@ -136,12 +143,17 @@ public class FindFriendsActivity extends MenuActivity
 
                     view.setTag(holder);
 
+                    // Populates the friend list view with a bunch of friends.
                     holder.tv = view.findViewById(R.id.friendTextView);
                     holder.tv.setText(friends.get(i).toString());
 
                     holder.tv.setOnClickListener(new View.OnClickListener()
                     {
 
+                        /**
+                         * When the user clicks on a Friend, start an activity which displays the current location (current course & section) of that Friend
+                         * @param view
+                         */
                         @Override
                         public void onClick(View view)
                         {

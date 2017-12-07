@@ -24,6 +24,9 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.FriendLocation;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
+/**
+ * Displays the location of a friend.
+ */
 public class ItemFriendActivity extends Activity
 {
     private static final String TAG = ItemFriendActivity.class.getSimpleName();
@@ -32,6 +35,12 @@ public class ItemFriendActivity extends Activity
 
     TextView tvFriendCourse, tvFriendSection;
 
+    /**
+     * onCreate for the ItemFriendActivity class
+     * Executes an Async Task class to display the current course and section location of the
+     * user's friend.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -46,8 +55,16 @@ public class ItemFriendActivity extends Activity
         new FindFriendLocationAsyncTask().execute();
     }
 
+    /**
+     * Async Task class that makes API calls to get the current course and section location of one of the current user's friends.
+     */
     public class FindFriendLocationAsyncTask extends AsyncTask<Void, Void, FriendLocation>
     {
+        /**
+         * Attempts to get the current location of the requested friend.
+         * @param voids
+         * @return
+         */
         @Override
         protected FriendLocation doInBackground(Void... voids)
         {
@@ -56,11 +73,14 @@ public class ItemFriendActivity extends Activity
             // SharedPreferences for the Settings activity are stored in "settings"
             SharedPreferences prefs = getSharedPreferences(SettingsActivity.SETTINGS, MODE_PRIVATE);
 
+            // Goes through the SharedPreferences of the Settings activity to get the user's email and password.
             String email = prefs.getString(SettingsActivity.EMAIL, "");
             String password = prefs.getString(SettingsActivity.PASSWORD, "");
 
+            // getExtras to get the email of the requested user.
             String friendEmail = getIntent().getExtras().getString(EMAIL_KEY);
 
+            // Gets the current day where 1 is monday and 7 is sunday.
             Date today = new Date();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(today);
@@ -68,18 +88,30 @@ public class ItemFriendActivity extends Activity
             dayInt = dayInt==1 ? 7 : dayInt-1;
             String day = String.valueOf(dayInt);
 
+            // Gets the current time in HourseMinute format.
             DateFormat dateFormat = new SimpleDateFormat("HHmm");
             String time = dateFormat.format(today);
+
+            // Logs the query parameters.
             Log.d(TAG, email + " " + password + " " + friendEmail + " " + day + " " + time);
+
             try
             {
+                // Query parameters needed to make a friend location API call.
                 List<QueryParam> queryParams = new ArrayList<>();
+
+                // The current user's email and password, according to the Settings SharedPreferences.
                 queryParams.add(new QueryParam(FriendFinder.EMAIL_KEY, email));
                 queryParams.add(new QueryParam(FriendFinder.PASSWORD_KEY, password));
+
+                // The email of the current user's friend.
                 queryParams.add(new QueryParam(FriendFinder.FRIEND_EMAIL_KEY, friendEmail));
+
+                // Current day (1 to 7) and time (HHmm)
                 queryParams.add(new QueryParam(FriendFinder.DAY_KEY, day));
                 queryParams.add(new QueryParam(FriendFinder.TIME_KEY, time));
 
+                //
                 URL url = NetworkUtils.buildUrl(FriendFinder.FRIEND_LOCATION_URL, queryParams);
                 String json = NetworkUtils.getResponseFromHttpUrl(url);
 
@@ -102,6 +134,7 @@ public class ItemFriendActivity extends Activity
             return null;
         }
 
+        // onPostExecute, display the current course and section of the requested friend.
         @Override
         protected void onPostExecute(FriendLocation location)
         {
