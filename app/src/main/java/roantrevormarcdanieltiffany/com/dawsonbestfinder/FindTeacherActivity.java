@@ -257,7 +257,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @param lastName
      * @return Array of integers or empty array
      */
-    public ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
+      protected ArrayList<Integer> search(boolean exactSearch, String firstName, String lastName) {
         Log.d(TAG, "Called search(boolean exactSearch, String firstName, String lastName)");
         ArrayList<Integer> teacherIndexes = new ArrayList<>();
 

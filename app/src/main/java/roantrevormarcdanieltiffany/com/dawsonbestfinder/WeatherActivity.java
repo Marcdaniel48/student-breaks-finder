@@ -1,7 +1,9 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -17,8 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
 /**
  * Activity which has a widget to input the city & uses a spinner
@@ -41,6 +45,14 @@ public class WeatherActivity extends MenuActivity {
     private LinearLayout llWeather;
     private Spinner spinner;
     private EditText etCityName;
+    private final String LAT_KEY = "lat";
+    private final String LON_KEY = "lon";
+    private final String FORECAST_CLICKED = "forecastClicked";
+    private final String FORECASTS_LIST = "forecastsList";
+    private final String UVI = "uvi";
+    private ArrayList<String> loadedForecasts = new ArrayList<>();
+    private Float lat, lon;
+
 
     /**
      * Overrides {@code onCreate} to prep the layout
@@ -60,17 +72,44 @@ public class WeatherActivity extends MenuActivity {
         spinner = findViewById(R.id.spinner);
         etCityName = findViewById(R.id.etCityName);
 
+        // Get lat/lon
+        getSharedPreferences();
+
         // Prep spinner
         setISOCodes();
 
         // Only show weather on button click
         llWeather.setVisibility(LinearLayout.GONE);
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getInt(FORECAST_CLICKED) == LinearLayout.VISIBLE) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(WeatherActivity.this, android.R.layout.simple_list_item_1, savedInstanceState.getStringArrayList(FORECASTS_LIST));
+
+                lvForecast.setAdapter(adapter);
+                llWeather.setVisibility(savedInstanceState.getInt(FORECAST_CLICKED, LinearLayout.GONE));
+                tvTestData.setText(savedInstanceState.getString(UVI, ""));
+            }
+        }
+
+    }
+
+    /**
+     * Get Lat and Lon from shared preferences
+     */
+    private void getSharedPreferences() {
+        Log.d(TAG, "called getSharedPreferences()");
+        SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
+
+        // 0 is not a valid lat/lon for openweathermap
+        lat = prefs.getFloat(LAT_KEY, 0);
+        lon = prefs.getFloat(LON_KEY, 0);
     }
 
     /**
      * Set ISO codes in the spinner and default to CA
      */
     private void setISOCodes() {
+        Log.d(TAG, "called setISOCodes()");
         String[] locales = Locale.getISOCountries();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locales);
@@ -91,12 +130,18 @@ public class WeatherActivity extends MenuActivity {
             return;
         }
 
-        // @todo Replace lat/lon with non-fake data
-        double lat = 37.75;
-        double lon = -122.37;
+        Log.d(TAG, "LAT: " + lat);
+        Log.d(TAG, "LON: " + lon);
+        if (lat == 0 || lon == 0) {
+            Toast.makeText(WeatherActivity.this, "No latitude/longitude!",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            new OpenWeatherUVITask().execute(String.valueOf(lat),String.valueOf(lon));
+        }
 
-        new OpenWeatherUVITask().execute(String.valueOf(lat),String.valueOf(lon));
         new OpenWeatherForecastTask().execute(etCityName.getText().toString(), spinner.getSelectedItem().toString());
+
+        llWeather.setVisibility(LinearLayout.VISIBLE);
     }
 
     /**
@@ -105,13 +150,29 @@ public class WeatherActivity extends MenuActivity {
      * @param view
      */
     public void clickForecast(View view) {
+        Log.d(TAG, "called clickForecast()");
         loadOpenWeatherData();
+    }
+
+    /**
+     * Save uvi and forecast to state bundle
+     *
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "called onSaveInstanceState()");
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(FORECAST_CLICKED, llWeather.getVisibility());
+        outState.putStringArrayList(FORECASTS_LIST, loadedForecasts);
+        outState.putString(UVI, tvTestData.getText().toString());
     }
 
     /**
      * Class that extends AsyncTask to perform network requests
      */
-    public class OpenWeatherUVITask extends AsyncTask<String, Void, String[]> {
+    public class OpenWeatherUVITask extends AsyncTask<String, Void, String> {
         private final String TAG = OpenWeatherUVITask.class.getSimpleName();
 
         /**
@@ -128,24 +189,29 @@ public class WeatherActivity extends MenuActivity {
          * @see #publishProgress
          */
         @Override
-        protected String[] doInBackground(String... strings) {
+        protected String doInBackground(String... strings) {
             Log.d(TAG, "called doInBackground()");
             if (strings.length == 0) {
                 Log.d(TAG, "No params");
-                return new String[]{};
+                return "";
             }
 
             String lat = strings[0];
             String lon = strings[1];
 
-            URL url = OpenWeather.buildUrl(lat, lon);
+            List<QueryParam> queryParams = new ArrayList<>();
+            queryParams.add(new QueryParam(OpenWeather.LAT_PARAM, lat));
+            queryParams.add(new QueryParam(OpenWeather.LON_PARAM, lon));
+            queryParams.add(new QueryParam(OpenWeather.APP_ID_PARAM, OpenWeather.APP_ID));
+
+            URL url = NetworkUtils.buildUrl(OpenWeather.OPEN_WEATHER_UVI_URL, queryParams);
 
             try {
-                String json = OpenWeather.getResponseFromHttpUrl(url);
+                String json = NetworkUtils.getResponseFromHttpUrl(url);
                 return OpenWeather.getUviValueFromJSON(json);
             } catch (Exception err) {
                 Log.e(TAG, err.getLocalizedMessage());
-                return new String[]{};
+                return "";
             }
         }
 
@@ -154,18 +220,16 @@ public class WeatherActivity extends MenuActivity {
          *
          * Overrides {@code onPostExecute} to display results
          *
-         * @param strings
+         * @param string
          */
         @Override
-        protected void onPostExecute(String[] strings) {
+        protected void onPostExecute(String string) {
             Log.d(TAG, "called onPostExecute()");
 
-            for (String data: strings) {
-                Log.d(TAG, data);
-            }
+            Log.d(TAG, "Data found: " + string);
 
             llWeather.setVisibility(LinearLayout.VISIBLE);
-            tvTestData.setText(strings[0]);
+            tvTestData.setText(string);
         }
     }
 
@@ -199,11 +263,16 @@ public class WeatherActivity extends MenuActivity {
             String cityName = strings[0];
             String countryCode = strings[1];
 
-            URL url = OpenWeather.buildForecastUrl(cityName, countryCode);
+            List<QueryParam> queryParams = new ArrayList<>();
+            queryParams.add(new QueryParam(OpenWeather.Q_PARAM, cityName + "," + countryCode));
+            queryParams.add(new QueryParam(OpenWeather.APP_ID_PARAM, OpenWeather.APP_ID));
+            queryParams.add(new QueryParam(OpenWeather.UNITS_PARAM, OpenWeather.METRIC_VALUE));
+            
+            URL url = NetworkUtils.buildUrl(OpenWeather.OPEN_WEATHER_FORECAST_URL, queryParams);
 
             try {
                 Log.d(TAG, "Url!!: " + url);
-                String json = OpenWeather.getResponseFromHttpUrl(url);
+                String json = NetworkUtils.getResponseFromHttpUrl(url);
                 return OpenWeather.getForecastFromJSON(json);
             } catch (Exception err) {
                 Log.e(TAG, err.getLocalizedMessage());
@@ -220,6 +289,12 @@ public class WeatherActivity extends MenuActivity {
         @Override
         protected void onPostExecute(List<Forecast> forecasts) {
             Log.d(TAG, "called onPostExecute()");
+
+            loadedForecasts = new ArrayList<>();
+
+            for(Forecast forecast: forecasts) {
+                loadedForecasts.add(forecast.toString());
+            }
 
             if (forecasts.isEmpty()) {
                 Log.d(TAG, "forecasts.isEmpty");

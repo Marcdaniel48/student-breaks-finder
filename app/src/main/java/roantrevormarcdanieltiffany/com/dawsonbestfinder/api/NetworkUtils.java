@@ -5,7 +5,6 @@ import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -14,7 +13,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.WhoIsFreeActivity;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend2;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
 /**
@@ -98,11 +97,10 @@ public class NetworkUtils {
         }
     }
 
-    public static String[][] getWhoIsFreeFromJson(String jsonResponse) throws JSONException {
+    public static List<Friend2> getWhoIsFreeFromJson(String jsonResponse) throws JSONException {
+        Log.d(TAG, "getWhoIsFreeFromJson()");
+
         JSONObject tempJSON = new JSONObject(jsonResponse);
 
-        if(tempJSON.has(ERROR_MESSAGE)) {
-
-        }
     }
 }
