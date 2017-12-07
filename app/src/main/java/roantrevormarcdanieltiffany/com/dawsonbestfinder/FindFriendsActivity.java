@@ -101,7 +101,8 @@ public class FindFriendsActivity extends MenuActivity
                 Log.e(TAG, "JSONException in FindFriendsAsyncTask.doInBackground");
             }
 
-            return null;
+            // If no friends found, return an empty list.
+            return new ArrayList<Friend>();
         }
 
         /**
