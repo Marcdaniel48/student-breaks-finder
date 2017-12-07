@@ -15,7 +15,7 @@
         tools:layout_editor_absoluteX="16dp">
 
         <Spinner
-            android:id="@+id/dayspinenr"
+            android:id="@+id/daySpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -25,14 +25,14 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/etStartTime"
+                android:id="@+id/etBreakStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:focusable="false"
                 android:hint="@string/break_start"
                 android:inputType="time"
-                android:onClick="clickStartTime" />
+                android:onClick="clickBreakStart" />
 
             <TextView
                 android:id="@+id/tvArrow"
@@ -44,14 +44,14 @@
                 android:textSize="24sp" />
 
             <EditText
-                android:id="@+id/etStopTime"
+                android:id="@+id/etBreakEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:focusable="false"
                 android:hint="@string/break_end"
                 android:inputType="time"
-                android:onClick="clickEndTime" />
+                android:onClick="clickBreakEnd" />
         </LinearLayout>
 
         <Button
