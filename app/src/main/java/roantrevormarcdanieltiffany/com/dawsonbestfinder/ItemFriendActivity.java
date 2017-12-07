@@ -108,8 +108,15 @@ public class ItemFriendActivity extends Activity
         {
             Log.d(TAG, "Called FindFriendsAsyncTask.onPostExecute()");
 
-            tvFriendCourse.setText(location.getCourse());
-            tvFriendSection.setText(location.getSection());
+            if(!location.getCourse().isEmpty())
+                tvFriendCourse.setText(location.getCourse());
+            else
+                tvFriendCourse.setText(R.string.itemfriend_nocourse);
+
+            if(!location.getSection().isEmpty())
+                tvFriendSection.setText(location.getSection());
+            else
+                tvFriendSection.setText(R.string.itemfriend_nosection);
         }
     }
 
