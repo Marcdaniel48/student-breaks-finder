@@ -22,20 +22,20 @@ public class FriendFinder
 {
     private static final String TAG = FriendFinder.class.getSimpleName();
 
-    private static final String FIRSTNAME_KEY = "firstname";
-    private static final String LASTNAME_KEY = "lastname";
-    private static final String EMAIL_KEY = "email";
-    private static final String PASSWORD_KEY = "password";
+    public static final String FIRSTNAME_KEY = "firstname";
+    public static final String LASTNAME_KEY = "lastname";
+    public static final String EMAIL_KEY = "email";
+    public static final String PASSWORD_KEY = "password";
 
     private static final String COURSE_KEY = "course";
     private static final String SECTION_KEY = "section";
 
-    private static final String FRIEND_EMAIL_KEY = "friendemail";
-    private static final String DAY_KEY = "day";
-    private static final String TIME_KEY = "time";
+    public static final String FRIEND_EMAIL_KEY = "friendemail";
+    public static final String DAY_KEY = "day";
+    public static final String TIME_KEY = "time";
 
-    private static final String FIND_FRIENDS_URL = "http://dawsonbestfinder.herokuapp.com/api/api/allfriends?";
-    private static final String FRIEND_LOCATION_URL = "http://dawsonbestfinder.herokuapp.com/api/api/whereisfriend?";
+    public static final String FIND_FRIENDS_URL = "dawsonbestfinder.herokuapp.com/api/api/allfriends";
+    public static final String FRIEND_LOCATION_URL = "dawsonbestfinder.herokuapp.com/api/api/whereisfriend";
 
     /**
      * Instantiates FriendFinder

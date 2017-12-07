@@ -14,12 +14,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.FriendLocation;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
 public class ItemFriendActivity extends Activity
 {
@@ -70,8 +74,15 @@ public class ItemFriendActivity extends Activity
             Log.d(TAG, email + " " + password + " " + friendEmail + " " + day + " " + time);
             try
             {
-                URL url = FriendFinder.buildFriendLocationURL(email, password, friendEmail, day, time);
-                String json = OpenWeather.getResponseFromHttpUrl(url);
+                List<QueryParam> queryParams = new ArrayList<>();
+                queryParams.add(new QueryParam(FriendFinder.EMAIL_KEY, email));
+                queryParams.add(new QueryParam(FriendFinder.PASSWORD_KEY, password));
+                queryParams.add(new QueryParam(FriendFinder.FRIEND_EMAIL_KEY, friendEmail));
+                queryParams.add(new QueryParam(FriendFinder.DAY_KEY, day));
+                queryParams.add(new QueryParam(FriendFinder.TIME_KEY, time));
+
+                URL url = NetworkUtils.buildUrl(FriendFinder.FRIEND_LOCATION_URL, queryParams);
+                String json = NetworkUtils.getResponseFromHttpUrl(url);
 
                 return FriendFinder.getFriendLocationFromJSON(json);
             }

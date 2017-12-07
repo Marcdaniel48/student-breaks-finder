@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import java.net.URL;
 
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 
 
@@ -140,8 +141,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to find friends activity
      */
     public void onFindFriends(View v) {
-//        Intent i = new Intent(this, );
-//        startActivity(i);
+        Intent i = new Intent(this, FindFriendsActivity.class);
+        startActivity(i);
     }
 
     /**

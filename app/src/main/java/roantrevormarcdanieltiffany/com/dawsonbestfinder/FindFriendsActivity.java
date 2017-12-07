@@ -19,11 +19,14 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
 /**
  * Class that handles retrieving a list of the current user's friends (according to the settings activity) and displaying that
@@ -75,8 +78,12 @@ public class FindFriendsActivity extends MenuActivity
 
             try
             {
-                URL url = FriendFinder.buildFindFriendsURL(email, password);
-                String json = OpenWeather.getResponseFromHttpUrl(url);
+                List<QueryParam> queryParams = new ArrayList<>();
+                queryParams.add(new QueryParam(FriendFinder.EMAIL_KEY, email));
+                queryParams.add(new QueryParam(FriendFinder.PASSWORD_KEY, password));
+
+                URL url = NetworkUtils.buildUrl(FriendFinder.FIND_FRIENDS_URL, queryParams);
+                String json = NetworkUtils.getResponseFromHttpUrl(url);
 
                 return FriendFinder.getFriendsFromJSON(json);
             }
