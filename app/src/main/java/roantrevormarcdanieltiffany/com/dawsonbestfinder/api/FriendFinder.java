@@ -37,15 +37,7 @@ public class FriendFinder
     public static final String FIND_FRIENDS_URL = "dawsonbestfinder.herokuapp.com/api/api/allfriends";
     // Find the current location of one of the current user's friends.
     public static final String FRIEND_LOCATION_URL = "dawsonbestfinder.herokuapp.com/api/api/whereisfriend";
-
-    /**
-     * Instantiates FriendFinder
-     */
-    public FriendFinder()
-    {
-        Log.d(TAG, "Instance of FriendFinder initiated.");
-    }
-
+    
     /**
      * Takes in a JSON Response in the form of a String and parses it to return a list of Friends.
      *
