@@ -98,11 +98,9 @@ public class WeatherActivity extends MenuActivity {
         Log.d(TAG, "called getSharedPreferences()");
         SharedPreferences prefs =  PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (prefs.contains(LAT_KEY) && prefs.contains(LON_KEY)) {
-            // Should never give default value
-            lat = prefs.getFloat(LAT_KEY, 0);
-            lon = prefs.getFloat(LON_KEY, 0);
-        }
+        // 0 is not a valid lat/lon for openweathermap
+        lat = prefs.getFloat(LAT_KEY, 0);
+        lon = prefs.getFloat(LON_KEY, 0);
     }
 
     /**
@@ -130,7 +128,9 @@ public class WeatherActivity extends MenuActivity {
             return;
         }
 
-        if (lat == null || lon == null) {
+        Log.d(TAG, "LAT: " + lat);
+        Log.d(TAG, "LON: " + lon);
+        if (lat == 0 || lon == 0) {
             Toast.makeText(WeatherActivity.this, "No latitude/longitude!",
                     Toast.LENGTH_LONG).show();
         } else {
