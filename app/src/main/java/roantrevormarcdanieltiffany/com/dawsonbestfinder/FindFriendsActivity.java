@@ -115,65 +115,73 @@ public class FindFriendsActivity extends MenuActivity
         {
             Log.d(TAG, "Called FindFriendsAsyncTask.onPostExecute()");
 
-            friendsLV.setAdapter(new BaseAdapter()
+            // If the friends list is empty, then the user has no friends. Indicate that to the user, by displaying
+            // a no friends found message in the activity's header.
+            if(friends.isEmpty())
             {
-                private final String EMAIL_KEY = "email";
+                TextView activityHeader = findViewById(R.id.findFriendsHeaderTextView);
+                String noFriends = getResources().getString(R.string.findfriends_nofriends);
+                activityHeader.setText(noFriends);
+            }
+            // If the list of Friend objects isn't empty, then display to the list view the user's friends.
+            // Set an adapter for the Friends ListView...
+            else
+            {
+                friendsLV.setAdapter(new BaseAdapter() {
+                    private final String EMAIL_KEY = "email";
 
-                @Override
-                public int getCount() {
-                    return friends.size();
-                }
+                    @Override
+                    public int getCount() {
+                        return friends.size();
+                    }
 
-                @Override
-                public Object getItem(int i) {
-                    return i;
-                }
+                    @Override
+                    public Object getItem(int i) {
+                        return i;
+                    }
 
-                @Override
-                public long getItemId(int i) {
-                    return i;
-                }
+                    @Override
+                    public long getItemId(int i) {
+                        return i;
+                    }
 
-                @Override
-                public View getView(final int i, View view, ViewGroup viewGroup)
-                {
-                    LayoutInflater inf = (LayoutInflater) FindFriendsActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                    view = inf.inflate(R.layout.listview_friend, null);
+                    @Override
+                    public View getView(final int i, View view, ViewGroup viewGroup) {
+                        LayoutInflater inf = (LayoutInflater) FindFriendsActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        view = inf.inflate(R.layout.listview_friend, null);
 
-                    Holder holder = new Holder();
+                        Holder holder = new Holder();
 
-                    view.setTag(holder);
+                        view.setTag(holder);
 
-                    // Populates the friend list view with a bunch of friends.
-                    holder.tv = view.findViewById(R.id.friendTextView);
-                    holder.tv.setText(friends.get(i).toString());
+                        // Populates the friend list view with a bunch of friends.
+                        holder.tv = view.findViewById(R.id.friendTextView);
+                        holder.tv.setText(friends.get(i).toString());
 
-                    holder.tv.setOnClickListener(new View.OnClickListener()
-                    {
+                        holder.tv.setOnClickListener(new View.OnClickListener() {
 
-                        /**
-                         * When the user clicks on a Friend, start an activity which displays the current location (current course & section) of that Friend
-                         * @param view
-                         */
-                        @Override
-                        public void onClick(View view)
-                        {
-                            Intent intent = new Intent(FindFriendsActivity.this, ItemFriendActivity.class);
+                            /**
+                             * When the user clicks on a Friend, start an activity which displays the current location (current course & section) of that Friend
+                             * @param view
+                             */
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(FindFriendsActivity.this, ItemFriendActivity.class);
 
-                            intent.putExtra(EMAIL_KEY, friends.get(i).getEmail());
+                                intent.putExtra(EMAIL_KEY, friends.get(i).getEmail());
 
-                            startActivity(intent);
-                        }
-                    });
+                                startActivity(intent);
+                            }
+                        });
 
-                    return view;
-                }
+                        return view;
+                    }
 
-                class Holder
-                {
-                    TextView tv;
-                }
-            });
+                    class Holder {
+                        TextView tv;
+                    }
+                });
+            }
         }
     }
 
