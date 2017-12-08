@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlueVariant">
+    android:background="@color/color_blue_variant">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/about"
                     android:textSize="32sp"
-                    android:textColor="@color/colorWhite"/>
+                    android:textColor="@color/color_white"/>
 
                 <TextView
                     android:id="@+id/textView10"
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="28sp"
                     android:text="@string/about_text"
-                    android:textColor="@color/colorWhite"/>
+                    android:textColor="@color/color_white"/>
 
                 <TextView
                     android:id="@+id/courseidTextView"
@@ -45,7 +45,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/about_courseid"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/color_white"
                     android:textSize="32sp" />
 
             </LinearLayout>
@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/about_credits"
                     android:textSize="32sp"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/color_white"
                     android:layout_marginBottom="10dp"/>
 
                 <LinearLayout
@@ -83,7 +83,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/about_marcdaniel"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/color_white"
                         android:textSize="28sp" />
 
                 </LinearLayout>
@@ -107,7 +107,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/about_tiffany"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/color_white"
                         android:textSize="28sp" />
 
                 </LinearLayout>
@@ -131,7 +131,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/about_trevor"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/color_white"
                         android:textSize="28sp" />
 
                 </LinearLayout>
@@ -154,7 +154,7 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="@string/about_roan"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/color_white"
                         android:textSize="28sp" />
                 </LinearLayout>
             </LinearLayout>

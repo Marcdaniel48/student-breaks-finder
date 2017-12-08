@@ -108,20 +108,20 @@ public class SettingsActivity extends Activity
                 editor.putString(DATESTAMP, etDatestamp.getText().toString());
                 editor.commit();
 
-                tvValidationMessage.setTextColor(getResources().getColor(R.color.colorBlack));
+                tvValidationMessage.setTextColor(getResources().getColor(R.color.color_black));
                 tvValidationMessage.setText(getResources().getString(R.string.settings_validation_saved));
             }
             // If the entered email is invalid, warn the user and don't save.
             else
             {
-                tvValidationMessage.setTextColor(getResources().getColor(R.color.colorRed));
+                tvValidationMessage.setTextColor(getResources().getColor(R.color.color_red));
                 tvValidationMessage.setText(getResources().getString(R.string.settings_validation_invalidEmail));
             }
         }
         // If any input fields are empty, warn the user and don't save.
         else
         {
-            tvValidationMessage.setTextColor(getResources().getColor(R.color.colorRed));
+            tvValidationMessage.setTextColor(getResources().getColor(R.color.color_red));
             tvValidationMessage.setText(getResources().getString(R.string.settings_validation_emptyfields));
         }
     }
