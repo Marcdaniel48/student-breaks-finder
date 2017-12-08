@@ -245,7 +245,8 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
          * Populates the list of friends.
          * On click it will open an email intent,
          * with the clicked friend as the filled
-         * in recipient email.
+         * in recipient email and app name as the
+         * subject
          *
          * @param friends
          */
@@ -286,6 +287,7 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
                             Intent intent = new Intent(Intent.ACTION_SENDTO);
                             intent.setData(Uri.parse("mailto:"));
                             intent.putExtra(Intent.EXTRA_EMAIL, address);
+                            intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
                             if(intent.resolveActivity(getPackageManager()) != null)
                                 startActivity(intent);
                         }
