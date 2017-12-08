@@ -74,6 +74,6 @@
     <string name="default_city_name">Montreal</string>
     <string name="canada_code">CA</string>
     <string name="cancelled_class_friends">Friends in that Class</string>
-
+    <string name="course_section_label">Course Section:</string>
 
 </resources>

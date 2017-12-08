@@ -25,8 +25,9 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
     private final String TITLE_EXTRA_KEY = "title";
     private final String DATE_EXTRA_KEY = "date";
     private final String CODE_EXTRA_KEY = "code";
+    private final String SECTION_EXTRA_KEY = "section";
 
-    TextView courseTitleTV, courseNumberTV, courseTeacherTV, dateCancelledTV;
+    TextView courseTitleTV, courseNumberTV, courseTeacherTV, dateCancelledTV, courseSectionTV;
 
 
     /**
@@ -46,23 +47,25 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         courseTeacherTV = findViewById(R.id.course_teacher);
         courseTitleTV = findViewById(R.id.course_title);
         dateCancelledTV = findViewById(R.id.course_date_cancelled);
+        courseSectionTV = findViewById(R.id.course_section);
 
         courseTeacherTV.setText(getIntent().getExtras().getString(TEACHER_EXTRA_KEY));
         courseTitleTV.setText(getIntent().getExtras().getString(TITLE_EXTRA_KEY));
         dateCancelledTV.setText(getIntent().getExtras().getString(DATE_EXTRA_KEY));
         courseNumberTV.setText(getIntent().getExtras().getString(CODE_EXTRA_KEY));
+        courseSectionTV.setText(getIntent().getExtras().getString(SECTION_EXTRA_KEY));
 
         courseTeacherTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
-                String teacherfname = teachername.split(" ")[0];
-                String teacherlname = teachername.split(" ")[1];
+                String teacherName = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
+                String teacherFirstName = teacherName.split(" ")[0];
+                String teacherLastName = teacherName.split(" ")[1];
 
 
-                Log.i(TAG, "onClick: " + teachername + " was tapped");
-                int teacherIndex = search(true, teacherfname, teacherlname).get(0);
+                Log.i(TAG, "onClick: " + teacherName + " was tapped");
+                int teacherIndex = search(true, teacherFirstName, teacherLastName).get(0);
                 Teacher teacher = teachers.get(teacherIndex);
                 showTeacherContactActivity(teacher, 0);
             }
