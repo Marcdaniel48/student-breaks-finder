@@ -40,9 +40,17 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.WhoIsFreeTimePickerFragment;
 
 /**
- * Created by mrtvor on 2017-12-06.
+ * Activity which will allow the user to specify a day of the week
+ * and a start time and end time. A list of friends will display
+ * with the option to click on any of them, firing an intent to
+ * launch an email activity with the email being automatically
+ * set as the recipient
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.OnTimeSetListener {
 
     private static final String TAG = WhoIsFreeActivity.class.getSimpleName();
@@ -51,10 +59,16 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
     private Spinner daySpinner;
     private EditText etBreakStart, etBreakEnd;
     private ListView lvFriends;
-    private ArrayList<Friend> friendsList = new ArrayList<>();
 
     private int hStart, hEnd, mStart, mEnd;
 
+    /**
+     * Will set up the activity.
+     * Instantiates fields and calls
+     * method to set up the spinner
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate()");
@@ -67,10 +81,12 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         lvFriends = findViewById(R.id.lvFriends);
 
         setDaySpinner();
-
-//        lvFriends.setVisibility(ListView.GONE);
     }
 
+    /**
+     * Set the values of the spinner to be
+     * the days of the week
+     */
     private void setDaySpinner() {
         String[] days = getResources().getStringArray(R.array.days);
 
@@ -80,12 +96,25 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         daySpinner.setSelection(adapter.getPosition(getString(R.string.def_day)));
     }
 
+    /**
+     * Displays the time picker dialog
+     *
+     * @param v
+     */
     public void showTimePickerDialog(View v) {
         Log.d(TAG, "showTimePickerDialog()");
         DialogFragment timeFragment = new WhoIsFreeTimePickerFragment();
         timeFragment.show(getFragmentManager(), "timePicker");
     }
 
+    /**
+     * set the fields to the values of
+     * the widgets.
+     *
+     * @param view
+     * @param hourOfDay
+     * @param minute
+     */
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Log.d(TAG, "onTimeSet()");
@@ -128,6 +157,11 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         clickedStart = false;
     }
 
+    /**
+     * Grab data from shared preferences, as well
+     * as widgets. Then call OpenFriendsFreeTask
+     * with all of the data
+     */
     private void loadFriendsFreeData() {
         Log.d(TAG, "loadFriendsFreeData()");
         if(etBreakStart.getText().toString().trim().equals("") || etBreakEnd.getText().toString().trim().equals("")) {
@@ -150,6 +184,9 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
                 etBreakEnd.getText().toString().replace(":",""));
     }
 
+    /**
+     * Async Task class for retrieving the who is free data
+     */
     public class OpenFriendsFreeTask extends AsyncTask<String, Void, List<Friend>> {
         private final String TAG = OpenFriendsFreeTask.class.getSimpleName();
 
@@ -157,16 +194,12 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         protected List<Friend> doInBackground(String... strings) {
             Log.d(TAG, "doInBackground()");
 
-
             if (strings.length == 0) {
                 Log.d(TAG, "No params");
                 return null;
             }
 
-            // SharedPreferences for the Settings activity are stored in "settings"
             SharedPreferences prefs = getSharedPreferences(SettingsActivity.SETTINGS, MODE_PRIVATE);
-
-            // Retrieves the email and password values
             String email = prefs.getString(SettingsActivity.EMAIL, "");
             String password = prefs.getString(SettingsActivity.PASSWORD, "");
 
@@ -207,9 +240,17 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
             } catch (JSONException je) {
                 Log.e(TAG, je.getMessage());
             }
-            return new ArrayList<Friend>();
+            return new ArrayList<>();
         }
 
+        /**
+         * Populates the list of friends.
+         * On click it will open an email intent,
+         * with the clicked friend as the filled
+         * in recipient email.
+         *
+         * @param friends
+         */
         @Override
         protected void onPostExecute(final List<Friend> friends) {
             Log.d(TAG, "onPostExecute()");
@@ -234,9 +275,7 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
                 public View getView(final int position, View convertView, ViewGroup parent) {
                     LayoutInflater inflater = (LayoutInflater) WhoIsFreeActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     convertView = inflater.inflate(R.layout.listview_friend, null);
-
                     Holder holder = new Holder();
-
                     convertView.setTag(holder);
 
                     holder.tv = convertView.findViewById(R.id.friendTextView);
@@ -244,20 +283,20 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
 
                     holder.tv.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
+                            String[] address = new String[1];
+                            address[0] = friends.get(position).getEmail().trim();
                             Intent intent = new Intent(Intent.ACTION_SENDTO);
                             intent.setData(Uri.parse("mailto:"));
-                            intent.putExtra(Intent.EXTRA_EMAIL, friends.get(position).getEmail());
+                            intent.putExtra(Intent.EXTRA_EMAIL, address);
                             if(intent.resolveActivity(getPackageManager()) != null)
                                 startActivity(intent);
                         }
                     });
-
                     return convertView;
                 }
                 class Holder {
                     TextView tv;
                 }
-
             });
         }
     }
