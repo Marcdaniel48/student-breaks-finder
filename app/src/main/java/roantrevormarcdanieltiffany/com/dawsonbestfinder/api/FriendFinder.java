@@ -39,7 +39,7 @@ public class FriendFinder
     // Find the current location of one of the current user's friends.
     public static final String FRIEND_LOCATION_URL = "dawsonbestfinder.herokuapp.com/api/api/whereisfriend";
     // Find all friends in the current course
-    public static final String MUTUAL_CLASS_URL = "dawsonbestfinder.herokuapp.com/api/api/coursefriend";
+    public static final String MUTUAL_CLASS_URL = "dawsonbestfinder.herokuapp.com/api/api/coursefriends";
 
 
     /**

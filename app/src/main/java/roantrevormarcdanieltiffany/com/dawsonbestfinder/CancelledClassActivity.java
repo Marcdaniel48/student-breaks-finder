@@ -177,12 +177,17 @@ public class CancelledClassActivity extends MenuActivity {
                             Log.i(TAG, "onLongClick: long click");
                             Intent lci = new Intent(CancelledClassActivity.this, CancelledFriendActivity.class);
                             lci.putExtra("coursename", result.get(position).getTitle());
-                            return false;
+                            lci.putExtra(SECTION_EXTRA_KEY, result.get(position).getSection());
+                            CancelledClassActivity.this.startActivity(lci);
+
+                            return true;
                         }
                     });
 
                     return convertView;
                 }
+
+                
 
 
 

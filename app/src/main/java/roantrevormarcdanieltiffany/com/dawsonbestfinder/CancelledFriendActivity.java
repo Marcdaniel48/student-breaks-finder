@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,19 +34,28 @@ public class CancelledFriendActivity extends MenuActivity {
     private static final String COURSENAME_KEY = "coursename";
     private static final String SECTION_KEY = "section";
 
+    Context context;
 
     ListView friendInClassLV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "onCreate: called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancelled_friend);
 
+        context = this;
+
         friendInClassLV = findViewById(R.id.cancelledFriendsListView);
 
-        String coursename = savedInstanceState.getString(COURSENAME_KEY);
-        String section = savedInstanceState.getString(SECTION_KEY);
+        //String coursename = savedInstanceState.getString(COURSENAME_KEY);
+        //String section = savedInstanceState.getString(SECTION_KEY);
+        String coursename = getIntent().getExtras().getString(COURSENAME_KEY);
+        String section = getIntent().getExtras().getString(SECTION_KEY);
 
+        String[] params = {coursename, section};
+
+        new FindFriendsAsyncTask().execute(params);
 
     }
 
@@ -89,6 +99,12 @@ public class CancelledFriendActivity extends MenuActivity {
         protected void onPostExecute(final List<Friend> friends){
             Log.d(TAG, "onPostExecute: called");
 
+            if(friends.isEmpty()){
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage(R.string.no_friends_in_course);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
             friendInClassLV.setAdapter(new BaseAdapter() {
                 @Override
                 public int getCount() {
