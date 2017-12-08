@@ -49,52 +49,28 @@ public class AboutActivity extends Activity
         });
 
         // When the user clicks on any of the authors' names, their individual blurbs appear.
-        marcdanielTextView.setOnClickListener(new View.OnClickListener()
+        setOnClickBlurb(marcdanielTextView, R.string.about_blurb_marcdaniel);
+        setOnClickBlurb(tiffanyTextView, R.string.about_blurb_tiffany);
+        setOnClickBlurb(trevorTextView, R.string.about_blurb_trevor);
+        setOnClickBlurb(roanTextView, R.string.about_blurb_roan);
+    }
+
+    /**
+     * Used for seeting an OnClickListener to each of the team members' Text Views. When the name of one of the authors gets clicked, a blurb about them will appear
+     * in an AlertDialog.
+     *
+     * @param tv
+     * @param blurbID
+     */
+    private void setOnClickBlurb(TextView tv, final int blurbID)
+    {
+        tv.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View view)
             {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
 
-                builder.setMessage(getResources().getString(R.string.about_blurb_marcdaniel)).setTitle(R.string.about_blurb);
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        tiffanyTextView.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
-
-                builder.setMessage(getResources().getString(R.string.about_blurb_tiffany)).setTitle(R.string.about_blurb);
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        trevorTextView.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
-
-                builder.setMessage(getResources().getString(R.string.about_blurb_trevor)).setTitle(R.string.about_blurb);
-
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
-
-        roanTextView.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
-                AlertDialog.Builder builder = new AlertDialog.Builder(AboutActivity.this);
-
-                builder.setMessage(getResources().getString(R.string.about_blurb_roan)).setTitle(R.string.about_blurb);
+                builder.setMessage(getResources().getString(blurbID)).setTitle(R.string.about_blurb);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
