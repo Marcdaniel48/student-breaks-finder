@@ -48,19 +48,30 @@ public class CancelledFriendActivity extends MenuActivity {
 
         friendInClassLV = findViewById(R.id.cancelledFriendsListView);
 
-        //String coursename = savedInstanceState.getString(COURSENAME_KEY);
-        //String section = savedInstanceState.getString(SECTION_KEY);
+        //parameters to be sent with the request to the API
         String coursename = getIntent().getExtras().getString(COURSENAME_KEY);
         String section = getIntent().getExtras().getString(SECTION_KEY);
 
+        //put variables into an array
         String[] params = {coursename, section};
 
+        //create a new thread and pass the array of params to it
         new FindFriendsAsyncTask().execute(params);
 
     }
 
+    /**
+     * Async task to get a list of friends who are also taking the cancelled class and update the ui from the background
+     *
+     * @author Roan Chamberlain
+     */
     public class FindFriendsAsyncTask extends AsyncTask<String, Void, List<Friend>>{
-        
+
+        /**
+         * get the list of friends from the API call in the background given a course name and section number
+         * @param params course name and section
+         * @return List of friends to be used when updating the ui
+         */
         @Override
         protected List<Friend> doInBackground(String ... params){
 
@@ -77,6 +88,7 @@ public class CancelledFriendActivity extends MenuActivity {
             String password = prefs.getString(SettingsActivity.PASSWORD, "");
 
             try{
+                //set up the url to send to the api
                 List<QueryParam> queryParams = new ArrayList<>();
                 queryParams.add(new QueryParam(FriendFinder.EMAIL_KEY, email));
                 queryParams.add(new QueryParam(FriendFinder.PASSWORD_KEY, password));
@@ -95,16 +107,23 @@ public class CancelledFriendActivity extends MenuActivity {
             return new ArrayList<Friend>();
         }
 
+        /**
+         * update the UI with the list of friends that doInBackground returns
+         * @param friends
+         */
         @Override
         protected void onPostExecute(final List<Friend> friends){
             Log.d(TAG, "onPostExecute: called");
 
+            //pop up a dialog if the user has no friends on break
             if(friends.isEmpty()){
+                Log.i(TAG, "onPostExecute: The user has no friends on break");
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage(R.string.no_friends_in_course);
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
+            //fill the listview with data from the list
             friendInClassLV.setAdapter(new BaseAdapter() {
                 @Override
                 public int getCount() {
@@ -145,6 +164,7 @@ public class CancelledFriendActivity extends MenuActivity {
                         @Override
                         public void onClick(View view)
                         {
+                            Log.i(TAG, "onClick: the follwoing friend was just tapped : " + friends.get(position).getFirstname());
                             if (friends.get(position).getEmail().length() > 0) {
                                 Intent i = new Intent(Intent.ACTION_SENDTO);
                                 i.setData(Uri.parse("mailto:"));

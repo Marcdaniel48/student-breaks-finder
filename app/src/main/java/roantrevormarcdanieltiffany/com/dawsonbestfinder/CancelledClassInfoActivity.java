@@ -74,4 +74,6 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         //set a click event for the teacher to launch a teacher info activity
 
     }
+
+
 }
