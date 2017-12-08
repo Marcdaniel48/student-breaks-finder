@@ -3,8 +3,6 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder.api;
 import android.net.Uri;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -13,7 +11,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend2;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
 /**
@@ -76,31 +73,5 @@ public class NetworkUtils {
             Log.d(TAG, err.getMessage());
             return null;
         }
-    }
-
-    public static URL buildWhoIsFreeUrl(String[] params) {
-        Log.d(TAG, "buildWhoIsFreeUrl()");
-        String rootUrl = "friendfinder02.app/api/api/breakfriends?";
-
-
-        String fullUrl = rootUrl + "email=" + params[0] +
-                "&password=" + params[1] + "&day=" + params[2] +
-                "$start=" + params[3] + "&end=" + params[4];
-
-        try {
-            URL url = new URL(fullUrl);
-            Log.d(TAG, "URL: " + url);
-            return url;
-        } catch (MalformedURLException mue) {
-            Log.e(TAG, mue.getMessage());
-            return null;
-        }
-    }
-
-    public static List<Friend2> getWhoIsFreeFromJson(String jsonResponse) throws JSONException {
-        Log.d(TAG, "getWhoIsFreeFromJson()");
-
-        JSONObject tempJSON = new JSONObject(jsonResponse);
-
     }
 }

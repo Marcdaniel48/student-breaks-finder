@@ -25,7 +25,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
  * @author Marc-Daniel Dialogo
  * @author Trevor Eames
  */
-public class TimePickerFragment extends DialogFragment {
+public class TeacherTimePickerFragment extends DialogFragment {
     private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
 
     /**

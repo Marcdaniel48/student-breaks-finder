@@ -77,11 +77,11 @@
     <string name="break_end">Break End</string>
     <string name="friends_on_break">Friends on Break</string>
     <string-array name="days">
-        <string>Monday</string>
-        <string>Tuesday</string>
-        <string>Wednesday</string>
-        <string>Thursday</string>
-        <string>Friday</string>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
     </string-array>
     <string name="def_day">Monday</string>
 </resources>

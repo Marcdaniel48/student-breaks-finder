@@ -149,8 +149,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to where is friend activity
      */
     public void onWhereIsFriend(View v) {
-//        Intent i = new Intent(this, );
-//        startActivity(i);
+        Intent i = new Intent(this, WhoIsFreeActivity.class);
+        startActivity(i);
     }
 
     /**

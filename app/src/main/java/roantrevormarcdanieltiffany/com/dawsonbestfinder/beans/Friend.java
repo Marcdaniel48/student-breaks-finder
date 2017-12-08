@@ -58,8 +58,36 @@ public class Friend
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(!(obj instanceof Friend))
+            return false;
+
+        Friend fren = (Friend) obj;
+
+        if (getEmail() != null ? !getEmail().equals(fren.getEmail()) : fren.getEmail() != null)
+            return false;
+        if (getFirstname() != null ? !getFirstname().equals(fren.getFirstname()) : fren.getFirstname() != null)
+            return false;
+        if (getLastname() != null ? !getLastname().equals(fren.getLastname()) : fren.getLastname() != null)
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getEmail() != null ? getEmail().hashCode() : 0;
+        result = 42 * result + (getFirstname() != null ? getFirstname().hashCode() : 0);
+        result = 42 * result + (getLastname() != null ? getLastname().hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString()
     {
         return firstname + " " + lastname + ", " + email;
     }
+
+
 }
