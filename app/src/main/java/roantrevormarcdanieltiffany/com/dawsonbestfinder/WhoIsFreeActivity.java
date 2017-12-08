@@ -235,10 +235,8 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
                 String json = NetworkUtils.getResponseFromHttpUrl(url);
 
                 return FriendFinder.getFriendsFromJSON(json);
-            } catch (IOException ioe) {
-                Log.e(TAG, ioe.getMessage());
-            } catch (JSONException je) {
-                Log.e(TAG, je.getMessage());
+            } catch (IOException | JSONException err) {
+                Log.e(TAG, err.getMessage());
             }
             return new ArrayList<>();
         }

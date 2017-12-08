@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.DatePickerFragment;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherTimePickerFragment;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TimePickerFragment;
 
 /**
  * Activity which adds an event to the calendar.
@@ -94,14 +94,14 @@ public class CalendarActivity extends MenuActivity implements DatePickerDialog.O
     }
 
     /**
-     * Shows  {@code DialogFragment}, {@code TeacherTimePickerFragment},
+     * Shows  {@code DialogFragment}, {@code TimePickerFragment},
      * in which the user can select a time
      *
      * @param view
      */
     public void showTimePickerDialog(View view) {
         Log.d(TAG, "called showTimePickerDialog()");
-        DialogFragment newFragment = new TeacherTimePickerFragment();
+        DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
 

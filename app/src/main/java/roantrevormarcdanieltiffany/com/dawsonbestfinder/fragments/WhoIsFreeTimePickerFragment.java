@@ -13,7 +13,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.WhoIsFreeActivity;
 
 /**
  * Fragment that extends {@code DialogFragment} and returns a {@code TimePickerDialog}
- * from the fragment's {@code onCreateDialogMethod()} with the parent's {@code CalendarActivity}
+ * from the fragment's {@code onCreateDialogMethod()} with the parent's {@code WhoIsFreeActivity}
  * listener
  *
  * In part from {@see https://developer.android.com/guide/topics/ui/controls/pickers.html}
