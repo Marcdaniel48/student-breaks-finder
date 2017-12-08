@@ -73,4 +73,7 @@
     <string name="forecast">Forecast</string>
     <string name="default_city_name">Montreal</string>
     <string name="canada_code">CA</string>
+    <string name="cancelled_class_friends">Friends in that Class</string>
+
+
 </resources>
