@@ -59,6 +59,12 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
     private Spinner daySpinner;
     private EditText etBreakStart, etBreakEnd;
     private ListView lvFriends;
+    private final String SEARCH_CLICKED = "searchClicker";
+    private final String FRIENDS_LIST = "friendsList";
+    private final String DAY = "day";
+    private final String START_TIME = "startTime";
+    private final String END_TIME = "endTime";
+    private ArrayList<String> loadedFriends = new ArrayList<>();
 
     private int hStart, hEnd, mStart, mEnd;
 
@@ -81,6 +87,15 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         lvFriends = findViewById(R.id.lvFriends);
 
         setDaySpinner();
+
+        if(savedInstanceState != null) {
+            if(savedInstanceState.getInt(SEARCH_CLICKED) == ListView.VISIBLE) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(WhoIsFreeActivity.this,
+                        android.R.layout.simple_list_item_1, savedInstanceState.getStringArrayList(FRIENDS_LIST));
+
+                lvFriends.setAdapter(adapter);
+            }
+        }
     }
 
     /**
@@ -155,6 +170,23 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         Log.d(TAG, "clickBreakEnd()");
         showTimePickerDialog(v);
         clickedStart = false;
+    }
+
+    /**
+     * Save uvi and forecast to state bundle
+     *
+     * @param outState
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "called onSaveInstanceState()");
+        super.onSaveInstanceState(outState);
+
+        outState.putInt(SEARCH_CLICKED, lvFriends.getVisibility());
+        outState.putStringArrayList(FRIENDS_LIST, loadedFriends);
+        outState.putString(DAY, daySpinner.getSelectedItem().toString());
+        outState.putString(START_TIME, etBreakStart.getText().toString());
+        outState.putString(END_TIME, etBreakEnd.getText().toString());
     }
 
     /**
@@ -253,6 +285,12 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         @Override
         protected void onPostExecute(final List<Friend> friends) {
             Log.d(TAG, "onPostExecute()");
+
+            loadedFriends = new ArrayList<>();
+
+            for(Friend fren : friends)
+                loadedFriends.add(fren.toString());
+
             lvFriends.setAdapter(new BaseAdapter() {
 
                 @Override
