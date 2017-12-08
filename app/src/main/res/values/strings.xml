@@ -37,12 +37,13 @@
     <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>
     <string name="about_text">This application is meant to give a good amount of utility to students of Dawson College by providing them with neat and useful features. Features include looking up the cancelled classes for the current day, looking up teacher information, etc.</string>
-    <string name="about_credits">Credits</string>
+    <string name="about_credits">Credits – DaBesTeam</string>
     <string name="about_blurb">Blurb</string>
     <string name="about_blurb_marcdaniel"> 	(￣▽￣)ノ Hi, my name is Marc-Daniel and I like anime</string>
     <string name="about_blurb_tiffany">(╯°□°）╯︵ ┻━ʌǝp ǝɹɐʍʇɟos━┻</string>
     <string name="about_blurb_roan">Grad :,)</string>
     <string name="about_blurb_trevor">There’s no time to rush</string>
+    <string name="about_courseid">Dawson College 420.A0</string>
     <string name="about_marcdaniel">Marc-Daniel Dialogo</string>
     <string name="about_trevor">Trevor Eames</string>
     <string name="about_roan">Roan Chamberlain</string>

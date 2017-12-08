@@ -2,6 +2,8 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -12,7 +14,7 @@ import android.widget.TextView;
  */
 public class AboutActivity extends Activity
 {
-    TextView marcdanielTextView, tiffanyTextView, trevorTextView, roanTextView;
+    TextView marcdanielTextView, tiffanyTextView, trevorTextView, roanTextView, courseidTextView;
 
     /**
      * onCreate. Sets up the About activity's text views and clickable elements.
@@ -28,6 +30,23 @@ public class AboutActivity extends Activity
         tiffanyTextView = findViewById(R.id.tiffanyTextView);
         trevorTextView = findViewById(R.id.trevorTextView);
         roanTextView = findViewById(R.id.roanTextView);
+
+        courseidTextView = findViewById(R.id.courseidTextView);
+
+        // Clicking on the Dawson College Course ID will launch the Dawson Computer Science page
+        courseidTextView.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view)
+            {
+                String url = "https://www.dawsoncollege.qc.ca/computer-science-technology/";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                if (i.resolveActivity(getPackageManager()) != null)
+                {
+                    startActivity(i);
+                }
+            }
+        });
 
         // When the user clicks on any of the authors' names, their individual blurbs appear.
         marcdanielTextView.setOnClickListener(new View.OnClickListener()
