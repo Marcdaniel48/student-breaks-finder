@@ -56,7 +56,7 @@ public class AboutActivity extends Activity
     }
 
     /**
-     * Used for seeting an OnClickListener to each of the team members' Text Views. When the name of one of the authors gets clicked, a blurb about them will appear
+     * Used for setting an OnClickListener to each of the team members' Text Views. When the name of one of the authors gets clicked, a blurb about them will appear
      * in an AlertDialog.
      *
      * @param tv
