@@ -22,7 +22,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.database.NotesDBHelper;
  *
  * The user can click on a note to open the ItemNoteActivity to see the full note or to delete it.
  */
-public class NotesActivity extends Activity
+public class NotesActivity extends MenuActivity
 {
     // SQLite database helper class for the notes.
     private NotesDBHelper notesDBH;
