@@ -111,8 +111,8 @@ public class ItemFriendActivity extends Activity
                 queryParams.add(new QueryParam(FriendFinder.DAY_KEY, day));
                 queryParams.add(new QueryParam(FriendFinder.TIME_KEY, time));
 
-                //
                 URL url = NetworkUtils.buildUrl(FriendFinder.FRIEND_LOCATION_URL, queryParams);
+
                 String json = NetworkUtils.getResponseFromHttpUrl(url);
 
                 return FriendFinder.getFriendLocationFromJSON(json);
@@ -130,8 +130,8 @@ public class ItemFriendActivity extends Activity
                 Log.e(TAG, "JSONException in FindFriendsAsyncTask.doInBackground");
             }
 
-            Log.e(TAG, "doInBackground Returning null");
-            return null;
+            Log.e(TAG, "doInBackground Returning empty location. If that happens, then something in the PHP side is not working correctly.");
+            return new FriendLocation();
         }
 
         // onPostExecute, display the current course and section of the requested friend.
