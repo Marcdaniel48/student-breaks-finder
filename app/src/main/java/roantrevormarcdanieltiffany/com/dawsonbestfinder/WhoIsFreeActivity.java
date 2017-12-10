@@ -59,6 +59,7 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
     private Spinner daySpinner;
     private EditText etBreakStart, etBreakEnd;
     private ListView lvFriends;
+    private String appName;;
     private final String SEARCH_CLICKED = "searchClicker";
     private final String FRIENDS_LIST = "friendsList";
     private final String DAY = "day";
@@ -88,6 +89,7 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         etBreakEnd = findViewById(R.id.etBreakEnd);
         daySpinner = findViewById(R.id.daySpinner);
         lvFriends = findViewById(R.id.lvFriends);
+        appName = getResources().getString(R.string.app_name);
 
         setDaySpinner();
 
@@ -348,7 +350,7 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
                             Intent intent = new Intent(Intent.ACTION_SENDTO);
                             intent.setData(Uri.parse("mailto:"));
                             intent.putExtra(Intent.EXTRA_EMAIL, address);
-                            intent.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+                            intent.putExtra(Intent.EXTRA_SUBJECT, appName);
                             if(intent.resolveActivity(getPackageManager()) != null)
                                 startActivity(intent);
                         }
