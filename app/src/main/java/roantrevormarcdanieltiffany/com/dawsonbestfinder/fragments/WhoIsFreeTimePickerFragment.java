@@ -10,11 +10,11 @@ import android.util.Log;
 import java.util.Calendar;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.CalendarActivity;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.WhoIsFreeActivity;
 
 /**
  * Fragment that extends {@code DialogFragment} and returns a {@code TimePickerDialog}
- * from the fragment's {@code onCreateDialogMethod()} with the parent's {@code CalendarActivity}
+ * from the fragment's {@code onCreateDialogMethod()} with the parent's {@code WhoIsFreeActivity}
  * listener
  *
  * In part from {@see https://developer.android.com/guide/topics/ui/controls/pickers.html}
@@ -24,8 +24,8 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
  * @author Marc-Daniel Dialogo
  * @author Trevor Eames
  */
-public class TimePickerFragment extends DialogFragment {
-    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+public class WhoIsFreeTimePickerFragment extends DialogFragment {
+    private static final String TAG = WhoIsFreeActivity.class.getSimpleName();
 
     /**
      * Custom {@code Dialog} Container
@@ -36,14 +36,14 @@ public class TimePickerFragment extends DialogFragment {
      */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Log.d(TAG, "Called onCreateDialog");
+        Log.d(TAG, "onCreateDialog()");
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
 
         // Create a new instance of TimePickerDialog and return it
-        return new TimePickerDialog(getActivity(), (CalendarActivity) getActivity(), hour, minute,
+        return new TimePickerDialog(getActivity(), (WhoIsFreeActivity) getActivity(), hour, minute,
                 DateFormat.is24HourFormat(getActivity()));
     }
 }
