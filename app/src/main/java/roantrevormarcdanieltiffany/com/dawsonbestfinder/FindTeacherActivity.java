@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
 
 /**
  * Activity which allows the user to search for a teacher with a first name,
@@ -46,15 +47,10 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
  */
 public class FindTeacherActivity extends MenuActivity {
     private static final String TAG = FindTeacherActivity.class.getSimpleName();
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private String email = "letiffany.nguyen@gmail.com";
-    private String password = "admindsa-dabesteam";
     private Context context;
     private EditText etFirstName, etLastName;
     private RadioButton rbExactSearch;
     private Button bSearch;
-    protected static List<Teacher> teachers = new ArrayList<>();
 
     /**
      * When invoked, will set up the activity.
@@ -73,93 +69,6 @@ public class FindTeacherActivity extends MenuActivity {
         etLastName =  findViewById(R.id.etLastName);
         rbExactSearch = findViewById(R.id.rbExactSearch);
         bSearch = findViewById(R.id.btnSearch);
-
-        if (teachers.isEmpty()) {
-            bSearch.setEnabled(false);
-            authFirebase();
-            getDB();
-        }
-    }
-
-    /**
-     * Initiate FirebaseAuth and AUthStateListener to track
-     * whenever a user signs in or out
-     */
-    public void authFirebase() {
-        mAuth = FirebaseAuth.getInstance();
-        signIn(email, password);
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-    }
-
-    /**
-     * Signs into firebase with email and password
-     *
-     * @param email
-     * @param password
-     */
-    public void signIn(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(FindTeacherActivity.this, R.string.auth_failed,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    /**
-     * Connects to and gets the teachers from the
-     * firebase database
-     */
-    public void getDB() {
-        Log.d(TAG, "Called getDB()");
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("teachers");
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Log.d(TAG, "Snapshot: " + dataSnapshot);
-
-                for (DataSnapshot teacherSnap: dataSnapshot.getChildren()) {
-                    teachers.add(teacherSnap.getValue(Teacher.class));
-                }
-
-                bSearch.setEnabled(true);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
     }
 
     /**
@@ -174,7 +83,7 @@ public class FindTeacherActivity extends MenuActivity {
         Log.d(TAG, "Called searchClick()");
         // Make sure search isn't called before teachers is filled
         if (teachers.isEmpty()) {
-            Log.d(TAG, "The teachers array is empty. Getting out.");
+            Log.d(TAG, "The teachers array is empty. Please wait a few seconds.");
             return;
         } else if (!checkFields()) {
             return;
@@ -243,8 +152,8 @@ public class FindTeacherActivity extends MenuActivity {
             showTeacherContactActivity(teacher, 0);
         } else {
             // At this point, there are more than 1 teacher found
-            Intent i = new Intent(context, ChooseTeacherActivity.class);
-            i.putIntegerArrayListExtra(ChooseTeacherActivity.TEACHER_INDEXES, teacherIndexes);
+            Intent i = new Intent(context, TeachersActivity.class);
+            i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
             startActivity(i);
         }
     }

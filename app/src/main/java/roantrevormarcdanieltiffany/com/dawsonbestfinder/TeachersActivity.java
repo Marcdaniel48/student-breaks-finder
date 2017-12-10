@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherDetailFragment;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
@@ -14,47 +17,61 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFra
  * Created by sirMerr on 2017-12-10.
  */
 
-public class TeachersActivity extends AppCompatActivity implements TeacherMenuFragment.OnItemSelectedListener {
+public class TeachersActivity extends MenuActivity implements TeacherMenuFragment.OnItemSelectedListener {
+    private final String TAG = MenuActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_teachers_main);
         TeacherMenuFragment firstFragment;
         FragmentTransaction ft =
                 getSupportFragmentManager().beginTransaction();// begin  FragmentTransaction
         firstFragment = new TeacherMenuFragment();
 
-        Log.d("DEBUG", getResources().getConfiguration().orientation + "");
+        Log.d(TAG, getResources().getConfiguration().orientation + "");
 
         if (savedInstanceState == null) {
+            ArrayList<Integer> indexes = getIntent().getIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES);
+            Log.d(TAG, "Indexes: " + indexes);
+            Bundle args = new Bundle();
+            args.putIntegerArrayList(TeacherMenuFragment.TEACHER_INDEXES, indexes);
             // Instance of first fragment
             // Add Fragment to FrameLayout (flContainer), using FragmentManager
-            ft.add(R.id.flContainer, firstFragment);                                // add    Fragment
-            ft.commit();                                                            // commit FragmentTransaction
+            firstFragment.setArguments(args);
+            ft.add(R.id.flContainer, firstFragment);
+            ft.commit();
         } else {
-            // if this is not done, the menu fragment ended up duplicate
-            //  on rotate back to landscape, only when the menu activity was
-            //  last active
-            ft.replace(R.id.flContainer, firstFragment);                                // add    Fragment
-            ft.commit();                                                            // commit FragmentTransaction
+            ArrayList<Integer> indexes = getIntent().getIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES);
+            Log.d(TAG, "Indexes: " + indexes);
+            Bundle args = new Bundle();
+            args.putIntegerArrayList(TeacherMenuFragment.TEACHER_INDEXES, indexes);
+            // If this is not done, the menu fragment ended up duplicate
+            // on rotate back to landscape, only when the menu activity was
+            // last active
+            firstFragment.setArguments(args);
+            ft.replace(R.id.flContainer, firstFragment);
+            ft.commit();
         }
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             TeacherDetailFragment secondFragment = new TeacherDetailFragment();
             Bundle args = new Bundle();
             args.putInt("position", 0);
-            secondFragment.setArguments(args);          // (1) Communicate with Fragment using Bundle
-            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();// begin  FragmentTransaction
-            ft2.add(R.id.flContainer2, secondFragment);                               // add    Fragment
-            ft2.commit();                                                            // commit FragmentTransaction
+            // Communicate with Fragment using Bundle
+            secondFragment.setArguments(args);
+            // Begin  FragmentTransaction
+            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+            ft2.add(R.id.flContainer2, secondFragment);
+            ft2.commit();
         }
     }
 
     @Override
-    public void onPizzaItemSelected(int position) {
+    public void onTeacherClick(int position) {
         Toast.makeText(this, "Called By Fragment A: position - "+ position, Toast.LENGTH_SHORT).show();
 
-        // Load Pizza Detail Fragment
+        // Load Detail Fragment
         TeacherDetailFragment secondFragment = new TeacherDetailFragment();
 
         Bundle args = new Bundle();
