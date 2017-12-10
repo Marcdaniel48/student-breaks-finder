@@ -45,6 +45,7 @@
         <activity android:name=".FindFriendsActivity" />
         <activity android:name=".ItemFriendActivity"/>
         <activity android:name=".AboutActivity"/>
+        <activity android:name=".TeachersActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

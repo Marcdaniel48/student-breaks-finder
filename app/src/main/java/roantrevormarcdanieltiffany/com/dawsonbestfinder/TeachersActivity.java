@@ -3,6 +3,7 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,7 +14,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFra
  * Created by sirMerr on 2017-12-10.
  */
 
-public class TeachersActivity extends MenuActivity implements TeacherMenuFragment.OnItemSelectedListener {
+public class TeachersActivity extends AppCompatActivity implements TeacherMenuFragment.OnItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

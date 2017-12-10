@@ -21,6 +21,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
 
 public class TeacherMenuFragment extends Fragment {
     ArrayAdapter<String> itemsAdapter;
+    private OnItemSelectedListener listener;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -30,7 +31,29 @@ public class TeacherMenuFragment extends Fragment {
         String[] example = {"Tiff", "Me!"};
         String[] exampleDetails = {"Girl", "lol!"};
 
-        itemsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, example);
+        itemsAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, example);
+    }
+
+    //--OnItemSelectedListener listener;
+    // This event fires 1st, before creation of fragment or any views
+    // The onAttach method is called when the Fragment instance is associated with an Activity.
+    // This does not mean the Activity is fully initialized.
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof OnItemSelectedListener){      // context instanceof YourActivity
+            this.listener = (OnItemSelectedListener) context; // = (YourActivity) context
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement PizzaMenuFragment.OnItemSelectedListener");
+        }
+    }
+
+
+    // Define the events that the fragment will use to communicate
+    public interface OnItemSelectedListener {
+        // This can be any number of events to be sent to the activity
+        void onPizzaItemSelected(int position);
     }
 
     @Override
@@ -54,27 +77,4 @@ public class TeacherMenuFragment extends Fragment {
         });
     }
 
-    private AdapterView.OnItemSelectedListener listener;
-
-    //--OnItemSelectedListener listener;
-    // This event fires 1st, before creation of fragment or any views
-    // The onAttach method is called when the Fragment instance is associated with an Activity.
-    // This does not mean the Activity is fully initialized.
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof OnItemSelectedListener){      // context instanceof YourActivity
-            this.listener = (OnItemSelectedListener) context; // = (YourActivity) context
-        } else {
-            throw new ClassCastException(context.toString()
-                    + " must implement PizzaMenuFragment.OnItemSelectedListener");
-        }
-    }
-
-
-    // Define the events that the fragment will use to communicate
-    public interface OnItemSelectedListener {
-        // This can be any number of events to be sent to the activity
-        void onPizzaItemSelected(int position);
-    }
 }
