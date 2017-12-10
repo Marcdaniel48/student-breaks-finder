@@ -66,8 +66,6 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
     private final String END_TIME = "endTime";
     private ArrayList<String> loadedFriends = new ArrayList<>();
 
-    private int hStart, hEnd, mStart, mEnd;
-
     /**
      * Will set up the activity.
      * Instantiates fields and calls
@@ -146,12 +144,8 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
 
         if(clickedStart) {
             etBreakStart.setText(time);
-            this.hStart = hourOfDay;
-            this.mStart = minute;
         } else {
             etBreakEnd.setText(time);
-            this.hEnd = hourOfDay;
-            this.mEnd = minute;
         }
     }
 
