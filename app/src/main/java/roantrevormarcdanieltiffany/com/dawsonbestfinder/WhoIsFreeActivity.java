@@ -64,7 +64,12 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
     private final String DAY = "day";
     private final String START_TIME = "startTime";
     private final String END_TIME = "endTime";
+    private final String START_HOUR = "startHour";
+    private final String START_MIN = "startMin";
+    private final String END_HOUR = "endHour";
+    private final String END_MIN = "endMin";
     private ArrayList<String> loadedFriends = new ArrayList<>();
+    private int startHour, startMinute, endHour, endMinute;
 
     /**
      * Will set up the activity.
@@ -87,12 +92,27 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
         setDaySpinner();
 
         if(savedInstanceState != null) {
-            if(savedInstanceState.getInt(SEARCH_CLICKED) == ListView.VISIBLE) {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(WhoIsFreeActivity.this,
+            if(savedInstanceState.containsKey(SEARCH_CLICKED)) {
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(WhoIsFreeActivity.this,
                         android.R.layout.simple_list_item_1, savedInstanceState.getStringArrayList(FRIENDS_LIST));
-
+                loadedFriends = savedInstanceState.getStringArrayList(FRIENDS_LIST);
                 lvFriends.setAdapter(adapter);
             }
+            if(savedInstanceState.containsKey(START_TIME))
+                etBreakStart.setText( savedInstanceState.getString(START_TIME));
+            if(savedInstanceState.containsKey(END_TIME))
+                etBreakEnd.setText(savedInstanceState.getString(END_TIME));
+            if(savedInstanceState.containsKey(START_HOUR))
+                startHour = savedInstanceState.getInt(START_HOUR);
+            if(savedInstanceState.containsKey(START_MIN))
+                startMinute = savedInstanceState.getInt(START_MIN);
+            if(savedInstanceState.containsKey(END_HOUR))
+                endHour = savedInstanceState.getInt(END_HOUR);
+            if(savedInstanceState.containsKey(END_MIN))
+                endMinute = savedInstanceState.getInt(END_MIN);
+            if(savedInstanceState.containsKey(DAY))
+                daySpinner.setSelection(savedInstanceState.getInt(DAY));
+
         }
     }
 
@@ -144,8 +164,12 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
 
         if(clickedStart) {
             etBreakStart.setText(time);
+            startHour = hourOfDay;
+            startMinute = minute;
         } else {
             etBreakEnd.setText(time);
+            endHour = hourOfDay;
+            endMinute = minute;
         }
     }
 
@@ -178,9 +202,14 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
 
         outState.putInt(SEARCH_CLICKED, lvFriends.getVisibility());
         outState.putStringArrayList(FRIENDS_LIST, loadedFriends);
-        outState.putString(DAY, daySpinner.getSelectedItem().toString());
+        outState.putInt(DAY, daySpinner.getSelectedItemPosition());
         outState.putString(START_TIME, etBreakStart.getText().toString());
         outState.putString(END_TIME, etBreakEnd.getText().toString());
+        outState.putInt(START_HOUR, startHour);
+        outState.putInt(START_MIN, startMinute);
+        outState.putInt(END_HOUR, endHour);
+        outState.putInt(END_MIN, endMinute);
+
     }
 
     /**
@@ -206,8 +235,8 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
             return;
         }
         new OpenFriendsFreeTask().execute(daySpinner.getSelectedItem().toString(),
-                etBreakStart.getText().toString().replace(":",""),
-                etBreakEnd.getText().toString().replace(":",""));
+                "" + startHour + startMinute,
+                "" + endHour + endMinute);
     }
 
     /**

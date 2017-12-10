@@ -9,6 +9,7 @@ import android.util.Log;
 
 import java.util.Calendar;
 
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.CalendarActivity;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.WhoIsFreeActivity;
 
 /**
@@ -35,7 +36,7 @@ public class WhoIsFreeTimePickerFragment extends DialogFragment {
      */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Log.d(TAG, "Called onCreateDialog");
+        Log.d(TAG, "onCreateDialog()");
         // Use the current time as the default values for the picker
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
