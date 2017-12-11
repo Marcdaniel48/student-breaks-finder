@@ -38,6 +38,7 @@ public class MainActivity extends MenuActivity {
     protected static final String LAST_NAME = "lastName";
     protected static final String EMAIL = "email";
     protected static final String PASSWORD = "password";
+    private static final String FAILED = "FAILED";
 
     protected final String LAT = "lat";
     protected final String LON = "lon";
@@ -166,29 +167,25 @@ public class MainActivity extends MenuActivity {
     /**
      * Verifies whether or not the user has required permission for accessing
      * locaiton, if not will request them.
-     * @return
      */
-    public boolean permissionCheck() {
+    public void permissionCheck() {
         if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true;
         } else {
             ActivityCompat.requestPermissions(this, new String[] {
                     android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION },
                     0);
         }
-        return true;
     }
 
     public void setTemp() {
-        if(permissionCheck()) {
-            GPSTracker gps = new GPSTracker(this);
-            if (gps.canGetLocation()) {
-                Log.d(TAG, "Can get location!");
-                loadTempData();
-            }
+        permissionCheck();
+        GPSTracker gps = new GPSTracker(this);
+        if (gps.canGetLocation()) {
+            Log.d(TAG, "Can get location!");
+            loadTempData();
         }
     }
 
@@ -222,7 +219,7 @@ public class MainActivity extends MenuActivity {
             Log.d(TAG, "doInBackground()");
             if(strings.length == 0) {
                 Log.d(TAG, "No params:");
-                return new String("failed");
+                return FAILED;
             }
 
             String lat = strings[0];
@@ -230,7 +227,7 @@ public class MainActivity extends MenuActivity {
 
             if(lat == null || lon == null){
                 Log.e(TAG, "Null params");
-                return new String("failed");
+                return FAILED;
             }
 
             URL url = OpenWeather.buildTempUrl(lat, lon);
@@ -242,10 +239,10 @@ public class MainActivity extends MenuActivity {
                 String temp = OpenWeather.getTempValueFromJSON(response);
                 Log.d(TAG, temp);
 
-                return new String(temp);
+                return temp;
             } catch (Exception e) {
-                e.printStackTrace();
-                return new String("failed");
+                Log.e(TAG, e.getMessage());
+                return FAILED;
             }
         }
 
