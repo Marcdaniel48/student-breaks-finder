@@ -20,6 +20,7 @@
     <string name="settings_password">Password:</string>
     <string name="settings_datestamp">Updated:</string>
     <string name="settings_save">Save</string>
+    <string name="settings_main_menu">Main menu</string>
     <string name="settings_back_dialog_message">Are you sure you want to quit? Any unsaved changes will be discarded.</string>
     <string name="settings_back_dialog_title">Quit</string>
     <string name="settings_back_dialog_yes">Yes</string>
@@ -30,24 +31,31 @@
     <string name="settings_validation_invalidEmail">Entered email address is invalid!</string>
     <string name="settings_back_dialog_message_no_input">Please enter and save your user credentials.</string>
     <string name="findfriends_header">Your friends</string>
+    <string name="findfriends_nofriends">No friends found.</string>
     <string name="itemfriend_header">Location</string>
     <string name="itemfriend_nocourse">No course to display at this time.</string>
     <string name="itemfriend_nosection">No section to display at this time.</string>
     <string name="notes_add">Add note</string>
     <string name="itemnotes_delete">Delete note</string>
     <string name="about">About</string>
+    <string name="about_text">This application is meant to give a good amount of utility to students of Dawson College by providing them with neat and useful features. Features include looking up the cancelled classes for the current day, looking up teacher information, etc.</string>
+    <string name="about_credits">Credits – DaBesTeam</string>
+    <string name="about_blurb">Blurb</string>
+    <string name="about_blurb_marcdaniel"> 	(￣▽￣)ノ Hi, my name is Marc-Daniel and I like anime</string>
+    <string name="about_blurb_tiffany">(╯°□°）╯︵ ┻━ʌǝp ǝɹɐʍʇɟos━┻</string>
+    <string name="about_blurb_roan">Grad :,)</string>
+    <string name="about_blurb_trevor">There’s no time to rush</string>
+    <string name="about_courseid">Dawson College 420.A0</string>
+    <string name="about_marcdaniel">Marc-Daniel Dialogo</string>
+    <string name="about_trevor">Trevor Eames</string>
+    <string name="about_roan">Roan Chamberlain</string>
+    <string name="about_tiffany">Tiffany Le-Nguyen</string>
     <string name="tempplaceholder">Temperature Unattainable</string>
     <string name="calendarbutton">Submit</string>
     <string name="yearhint">Year...</string>
     <string name="fallbutton">Fall</string>
     <string name="winterbutton">Winter</string>
-    <string-array name="years">
-        <item>2014</item>
-        <item>2015</item>
-        <item>2016</item>
-        <item>2017</item>
-        <item>2018</item>
-    </string-array>
+
     <string name="course_number_label">Course Number :</string>
     <string name="course_title_label">Course Title :</string>
     <string name="course_teacher_label">Course Teacher :</string>
@@ -59,6 +67,8 @@
     <string name="website">Website</string>
     <string name="bio">Bio</string>
     <string name="image">Image</string>
+
+    <!-- Calendar -->
     <string name="pick_start_time">Pick Start Time</string>
     <string name="pick_end_time">Pick End Time</string>
     <string name="pick_date">Pick Date</string>
@@ -67,15 +77,33 @@
     <string name="arrow">→</string>
     <string name="event_description">Description</string>
     <string name="event_location">Location</string>
+
+    <!-- Weather -->
     <string name="city_name">City Name</string>
     <string name="show_forecast">Show Forecast</string>
     <string name="uvi">Ultraviolet Index</string>
     <string name="forecast">Forecast</string>
     <string name="default_city_name">Montreal</string>
     <string name="canada_code">CA</string>
+<<<<<<< HEAD
     <string name="cancelled_class_friends">Friends in that Class</string>
     <string name="course_section_label">Course Section:</string>
     <string name="no_friends_in_course">You have no friends in this course</string>
 
 
+=======
+
+    <!-- WhoIsFree -->
+    <string name="break_start">Break Start</string>
+    <string name="break_end">Break End</string>
+    <string name="friends_on_break">Friends on Break</string>
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
+    <string name="def_day">Monday</string>
+>>>>>>> 7b8bbb47ad7f3f9207fa374b404d98cc7715d566
 </resources>

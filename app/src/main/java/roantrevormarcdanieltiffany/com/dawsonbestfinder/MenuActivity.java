@@ -70,8 +70,8 @@ public class MenuActivity extends AppCompatActivity {
      * Display about activity
      */
     private void displayAbout() {
-//        Intent intent = new Intent(this, AboutActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
 
     /**

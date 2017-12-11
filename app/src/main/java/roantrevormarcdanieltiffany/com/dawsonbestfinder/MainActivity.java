@@ -57,14 +57,7 @@ public class MainActivity extends MenuActivity {
 
         tempView = findViewById(R.id.temperatureTextView);
 
-
-        if(permissionCheck()) {
-            GPSTracker gps = new GPSTracker(this);
-            if (gps.canGetLocation()) {
-                Log.d(TAG, "Can get location!");
-                loadTempData();
-            }
-        }
+        setTemp();
 
         // SharedPreferences for the Settings activity are stored in "settings"
         SharedPreferences prefs = getSharedPreferences(SETTINGS, MODE_PRIVATE);
@@ -77,6 +70,13 @@ public class MainActivity extends MenuActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setTemp();
+    }
+
     /**
      * Will fire an intent taking user to dawson homepage
      */
@@ -87,6 +87,16 @@ public class MainActivity extends MenuActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    /**
+     * Will fire an intent taking the user to the About activity.
+     */
+    public void onTeamLogoButton(View v)
+    {
+        Intent intent = new Intent(this, AboutActivity.class);
+
+        startActivity(intent);
     }
 
     /**
@@ -149,8 +159,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to where is friend activity
      */
     public void onWhereIsFriend(View v) {
-//        Intent i = new Intent(this, );
-//        startActivity(i);
+        Intent i = new Intent(this, WhoIsFreeActivity.class);
+        startActivity(i);
     }
 
     /**
@@ -170,6 +180,16 @@ public class MainActivity extends MenuActivity {
                     0);
         }
         return true;
+    }
+
+    public void setTemp() {
+        if(permissionCheck()) {
+            GPSTracker gps = new GPSTracker(this);
+            if (gps.canGetLocation()) {
+                Log.d(TAG, "Can get location!");
+                loadTempData();
+            }
+        }
     }
 
     /**
