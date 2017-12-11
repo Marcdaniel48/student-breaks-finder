@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="roantrevormarcdanieltiffany.com.dawsonbestfinder">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <!--
+                     Include the host attribute if you want your app to respond
+                     only to URLs with your app's domain.
+                -->
+                <data
+                    android:host="www.dawsoncollege.qc.ca"
+                    android:scheme="http" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <!-- The BROWSABLE category is required to get links from web pages. -->
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AcademicCalendarActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".CancelledClassActivity" />
+        <activity android:name=".CancelledClassInfoActivity" />
+        <activity android:name=".FindTeacherActivity" />
+        <activity android:name=".CalendarActivity" />
+        <activity android:name=".NotesActivity" />
+        <activity android:name=".ItemNoteActivity" />
+        <activity android:name=".WeatherActivity" />
+        <activity android:name=".WhoIsFreeActivity" />
+        <activity android:name=".FindFriendsActivity" />
+        <activity android:name=".ItemFriendActivity" />
+        <activity android:name=".CancelledFriendActivity"></activity>
+        <activity android:name=".AboutActivity"/>
+        <activity android:name=".ChooseTeacherActivity"/>
+    </application>
+
+</manifest>
