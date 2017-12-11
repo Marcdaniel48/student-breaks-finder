@@ -15,15 +15,20 @@ import android.widget.TextView;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.MenuActivity;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.TeachersActivity;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 /**
- * Created by sirMerr on 2017-12-10.
+ * Fragment which displays all information about a teacher
+ * and allows the user to launch an intent to call them (ACTION_DIAL)
+ * or email them if they have the proper information
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
-public class TeacherDetailFragment extends Fragment{
-    private final String TAG = TeacherDetailFragment.class.getSimpleName();
+public class TeacherContactFragment extends Fragment{
+    private final String TAG = TeacherContactFragment.class.getSimpleName();
     public final static String POSITION_PARAM = "position";
     int position = 0;
 

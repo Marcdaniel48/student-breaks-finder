@@ -3,23 +3,28 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherDetailFragment;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherContactFragment;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
 
 /**
- * Created by sirMerr on 2017-12-10.
- */
+ *
+ * Activity which displays a ListView of teachers
+ * matching the search done by the user in FindTeacherActivity.
+ * The user can choose which teacher they want to see more information about,
+ * which will open TeacherContactActivity
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
 
-public class TeachersActivity extends MenuActivity implements TeacherMenuFragment.OnItemSelectedListener {
-    private final String TAG = TeachersActivity.class.getSimpleName();
+ */
+public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFragment.OnItemSelectedListener {
+    private final String TAG = ChooseTeacherActivity.class.getSimpleName();
     ArrayList<Integer> indexes;
 
     @Override
@@ -61,9 +66,9 @@ public class TeachersActivity extends MenuActivity implements TeacherMenuFragmen
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 Log.d(TAG, "Orientation landscape ");
-                TeacherDetailFragment secondFragment = new TeacherDetailFragment();
+                TeacherContactFragment secondFragment = new TeacherContactFragment();
                 Bundle args2 = new Bundle();
-                args2.putInt(TeacherDetailFragment.POSITION_PARAM, indexes.get(0));
+                args2.putInt(TeacherContactFragment.POSITION_PARAM, indexes.get(0));
                 // Communicate with Fragment using Bundle
                 secondFragment.setArguments(args2);
                 // Begin  FragmentTransaction
@@ -77,11 +82,11 @@ public class TeachersActivity extends MenuActivity implements TeacherMenuFragmen
     public void onTeacherClick(int position) {
         Log.d(TAG, "called onTeacherClick");
         // Load Detail Fragment
-        TeacherDetailFragment secondFragment = new TeacherDetailFragment();
+        TeacherContactFragment secondFragment = new TeacherContactFragment();
         TeacherMenuFragment firstFragment = new TeacherMenuFragment();
 
         Bundle args = new Bundle();
-        args.putInt(TeacherDetailFragment.POSITION_PARAM, position);
+        args.putInt(TeacherContactFragment.POSITION_PARAM, position);
         secondFragment.setArguments(args);          // (1) Communicate with Fragment using Bundle
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){

@@ -2,7 +2,6 @@ package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
 
 /**
@@ -83,7 +81,7 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
                     Toast.makeText(CancelledClassInfoActivity.this, "No teacher with this name found in firebase db",
                             Toast.LENGTH_LONG).show();
                 } else {
-                    Intent i = new Intent(context, TeachersActivity.class);
+                    Intent i = new Intent(context, ChooseTeacherActivity.class);
                     i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, indexes);
                     startActivity(i);
                 }

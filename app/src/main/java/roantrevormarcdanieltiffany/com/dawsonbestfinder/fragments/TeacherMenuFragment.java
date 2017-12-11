@@ -21,9 +21,13 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 /**
- * Created by sirMerr on 2017-12-10.
+ * Fragment which displays a list of teachers to choose from
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class TeacherMenuFragment extends Fragment {
     private final String TAG = TeacherMenuFragment.class.getSimpleName();
 
@@ -63,6 +67,7 @@ public class TeacherMenuFragment extends Fragment {
     // This does not mean the Activity is fully initialized.
     @Override
     public void onAttach(Context context) {
+        Log.d(TAG, "onAttach");
         super.onAttach(context);
         if(context instanceof OnItemSelectedListener){      // context instanceof YourActivity
             this.listener = (OnItemSelectedListener) context; // = (YourActivity) context
@@ -82,13 +87,14 @@ public class TeacherMenuFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView");
         // Inflate the xml file for the fragment
         return inflater.inflate(R.layout.teachers_menu_fragment, parent, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
+        Log.d(TAG, "onViewCreated");
         ListView lvItems = view.findViewById(R.id.lvItems);
         lvItems.setAdapter(itemsAdapter);
 
