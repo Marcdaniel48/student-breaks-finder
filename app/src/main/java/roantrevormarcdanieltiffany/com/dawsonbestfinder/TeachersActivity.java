@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -18,11 +19,12 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFra
  */
 
 public class TeachersActivity extends MenuActivity implements TeacherMenuFragment.OnItemSelectedListener {
-    private final String TAG = MenuActivity.class.getSimpleName();
+    private final String TAG = TeachersActivity.class.getSimpleName();
     ArrayList<Integer> indexes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "called onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teachers_main);
         TeacherMenuFragment firstFragment;
@@ -73,8 +75,7 @@ public class TeachersActivity extends MenuActivity implements TeacherMenuFragmen
 
     @Override
     public void onTeacherClick(int position) {
-        Toast.makeText(this, "Called By Fragment A: position - "+ position, Toast.LENGTH_SHORT).show();
-
+        Log.d(TAG, "called onTeacherClick");
         // Load Detail Fragment
         TeacherDetailFragment secondFragment = new TeacherDetailFragment();
         TeacherMenuFragment firstFragment = new TeacherMenuFragment();
@@ -84,6 +85,7 @@ public class TeachersActivity extends MenuActivity implements TeacherMenuFragmen
         secondFragment.setArguments(args);          // (1) Communicate with Fragment using Bundle
 
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+
             if (indexes.size() == 1) {
                 Bundle args2 = new Bundle();
                 ArrayList<Integer> indexes = new ArrayList<>();

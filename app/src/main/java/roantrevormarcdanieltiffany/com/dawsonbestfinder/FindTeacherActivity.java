@@ -99,8 +99,13 @@ public class FindTeacherActivity extends MenuActivity {
         // Find teachers with a search
         ArrayList<Integer> teacherIndexes = search(exactSearch, firstName, lastName);
 
-        // Start appropriate activity
-        startCorrectActivity(teacherIndexes);
+        if (teacherIndexes.isEmpty()) {
+            Toast.makeText(FindTeacherActivity.this, "No teacher with this name found in firebase db",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            // Start appropriate activity
+            startCorrectActivity(teacherIndexes);
+        }
     }
 
     /**
@@ -185,12 +190,6 @@ public class FindTeacherActivity extends MenuActivity {
                     teacherIndexes.add(i);
                 }
             }
-        }
-
-        //if teachers has not been loaded yet, load them.
-        if (teachers.isEmpty()) {
-            authFirebase();
-            getDB();
         }
 
         return teacherIndexes;

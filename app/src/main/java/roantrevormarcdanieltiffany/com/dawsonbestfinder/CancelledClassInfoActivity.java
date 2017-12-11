@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -64,17 +65,23 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
             public void onClick(View view) {
 
                 String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
-                String teacherfname = teachername.split(" ")[0];
-                String teacherlname = teachername.split(" ")[1];
+                String teacherfname = teachername.substring(teachername.lastIndexOf(" ") + 1);
+                String teacherlname = teachername.substring(0, teachername.lastIndexOf(" ") + 1);
 
 
                 Log.i(TAG, "onClick: " + teachername + " was tapped");
 
                 ArrayList<Integer> indexes = search(true, teacherfname, teacherlname);
 
-                Intent i = new Intent(context, TeachersActivity.class);
-                i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, indexes);
-                startActivity(i);
+                Log.d(TAG, "indexes: "  + indexes);
+                if (indexes.isEmpty()) {
+                    Toast.makeText(CancelledClassInfoActivity.this, "No teacher with this name found in firebase db",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Intent i = new Intent(context, TeachersActivity.class);
+                    i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, indexes);
+                    startActivity(i);
+                }
 
             }
         });
