@@ -144,21 +144,9 @@ public class FindTeacherActivity extends MenuActivity {
         Log.d(TAG, "Called startCorrectActivity(ArrayList<Integer> teacherIndexes)");
         Log.d(TAG, "Teacher Indexes size: " + teacherIndexes.size());
 
-        if (teacherIndexes.isEmpty()) {
-            Intent i = new Intent(context, TeachersActivity.class);
-            i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
-            startActivity(i);
-        } else if (teacherIndexes.size() == 1) {
-            Intent i = new Intent(context, TeachersActivity.class);
-            i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
-
-            startActivity(i);
-        } else {
-            // At this point, there are more than 1 teacher found
-            Intent i = new Intent(context, TeachersActivity.class);
-            i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
-            startActivity(i);
-        }
+        Intent i = new Intent(context, TeachersActivity.class);
+        i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
+        startActivity(i);
     }
 
     /**

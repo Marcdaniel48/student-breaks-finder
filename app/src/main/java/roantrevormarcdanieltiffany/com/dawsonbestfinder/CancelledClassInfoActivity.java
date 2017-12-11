@@ -1,12 +1,17 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
 
 /**
  * CancelledClassInfo activity to display information about specific cancelled classes
@@ -25,6 +30,7 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
     private final String TITLE_EXTRA_KEY = "title";
     private final String DATE_EXTRA_KEY = "date";
     private final String CODE_EXTRA_KEY = "code";
+    private Context context;
 
     TextView courseTitleTV, courseNumberTV, courseTeacherTV, dateCancelledTV;
 
@@ -39,6 +45,7 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this.getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancelled_class_info);
         Log.d(TAG, "onCreate: was called");
@@ -62,9 +69,13 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
 
 
                 Log.i(TAG, "onClick: " + teachername + " was tapped");
-                int teacherIndex = search(true, teacherfname, teacherlname).get(0);
-                Teacher teacher = teachers.get(teacherIndex);
-                showTeacherContactActivity(teacher, 0);
+
+                ArrayList<Integer> indexes = search(true, teacherfname, teacherlname);
+
+                Intent i = new Intent(context, TeachersActivity.class);
+                i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, indexes);
+                startActivity(i);
+
             }
         });
 
