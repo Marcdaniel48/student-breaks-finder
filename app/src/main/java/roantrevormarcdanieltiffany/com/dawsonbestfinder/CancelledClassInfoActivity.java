@@ -30,8 +30,9 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
     private final String DATE_EXTRA_KEY = "date";
     private final String CODE_EXTRA_KEY = "code";
     private Context context;
+    private final String SECTION_EXTRA_KEY = "section";
 
-    TextView courseTitleTV, courseNumberTV, courseTeacherTV, dateCancelledTV;
+    TextView courseTitleTV, courseNumberTV, courseTeacherTV, dateCancelledTV, courseSectionTV;
 
 
     /**
@@ -52,16 +53,17 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         courseTeacherTV = findViewById(R.id.course_teacher);
         courseTitleTV = findViewById(R.id.course_title);
         dateCancelledTV = findViewById(R.id.course_date_cancelled);
+        courseSectionTV = findViewById(R.id.course_section);
 
         courseTeacherTV.setText(getIntent().getExtras().getString(TEACHER_EXTRA_KEY));
         courseTitleTV.setText(getIntent().getExtras().getString(TITLE_EXTRA_KEY));
         dateCancelledTV.setText(getIntent().getExtras().getString(DATE_EXTRA_KEY));
         courseNumberTV.setText(getIntent().getExtras().getString(CODE_EXTRA_KEY));
+        courseSectionTV.setText(getIntent().getExtras().getString(SECTION_EXTRA_KEY));
 
         courseTeacherTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
                 String teacherfname = "";
                 String teacherlname = "";
@@ -85,11 +87,12 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
                     i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, indexes);
                     startActivity(i);
                 }
-
             }
         });
 
         //set a click event for the teacher to launch a teacher info activity
 
     }
+
+
 }
