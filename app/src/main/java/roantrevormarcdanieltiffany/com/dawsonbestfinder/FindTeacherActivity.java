@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,21 +15,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
 
 /**
  * Activity which allows the user to search for a teacher with a first name,
@@ -46,15 +33,10 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
  */
 public class FindTeacherActivity extends MenuActivity {
     private static final String TAG = FindTeacherActivity.class.getSimpleName();
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private String email = "letiffany.nguyen@gmail.com";
-    private String password = "admindsa-dabesteam";
     private Context context;
     private EditText etFirstName, etLastName;
     private RadioButton rbExactSearch;
     private Button bSearch;
-    protected static List<Teacher> teachers = new ArrayList<>();
 
     /**
      * When invoked, will set up the activity.
@@ -73,93 +55,6 @@ public class FindTeacherActivity extends MenuActivity {
         etLastName =  findViewById(R.id.etLastName);
         rbExactSearch = findViewById(R.id.rbExactSearch);
         bSearch = findViewById(R.id.btnSearch);
-
-        if (teachers.isEmpty()) {
-            bSearch.setEnabled(false);
-            authFirebase();
-            getDB();
-        }
-    }
-
-    /**
-     * Initiate FirebaseAuth and AUthStateListener to track
-     * whenever a user signs in or out
-     */
-    public void authFirebase() {
-        mAuth = FirebaseAuth.getInstance();
-        signIn(email, password);
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-    }
-
-    /**
-     * Signs into firebase with email and password
-     *
-     * @param email
-     * @param password
-     */
-    public void signIn(String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(FindTeacherActivity.this, R.string.auth_failed,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    /**
-     * Connects to and gets the teachers from the
-     * firebase database
-     */
-    public void getDB() {
-        Log.d(TAG, "Called getDB()");
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("teachers");
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Log.d(TAG, "Snapshot: " + dataSnapshot);
-
-                for (DataSnapshot teacherSnap: dataSnapshot.getChildren()) {
-                    teachers.add(teacherSnap.getValue(Teacher.class));
-                }
-
-                bSearch.setEnabled(true);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
     }
 
     /**
@@ -174,7 +69,7 @@ public class FindTeacherActivity extends MenuActivity {
         Log.d(TAG, "Called searchClick()");
         // Make sure search isn't called before teachers is filled
         if (teachers.isEmpty()) {
-            Log.d(TAG, "The teachers array is empty. Getting out.");
+            Log.d(TAG, "The teachers array is empty. Please wait a few seconds.");
             return;
         } else if (!checkFields()) {
             return;
@@ -189,8 +84,13 @@ public class FindTeacherActivity extends MenuActivity {
         // Find teachers with a search
         ArrayList<Integer> teacherIndexes = search(exactSearch, firstName, lastName);
 
-        // Start appropriate activity
-        startCorrectActivity(teacherIndexes);
+        if (teacherIndexes.isEmpty()) {
+            Toast.makeText(FindTeacherActivity.this, "No teacher with this name found in firebase db",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            // Start appropriate activity
+            startCorrectActivity(teacherIndexes);
+        }
     }
 
     /**
@@ -234,19 +134,9 @@ public class FindTeacherActivity extends MenuActivity {
         Log.d(TAG, "Called startCorrectActivity(ArrayList<Integer> teacherIndexes)");
         Log.d(TAG, "Teacher Indexes size: " + teacherIndexes.size());
 
-        if (teacherIndexes.isEmpty()) {
-            Intent i = new Intent(context, TeacherContactActivity.class);
-            i.putExtra(TeacherContactActivity.TEACHER_ID, -1);
-            startActivity(i);
-        } else if (teacherIndexes.size() == 1) {
-            Teacher teacher = teachers.get(teacherIndexes.get(0));
-            showTeacherContactActivity(teacher, 0);
-        } else {
-            // At this point, there are more than 1 teacher found
-            Intent i = new Intent(context, ChooseTeacherActivity.class);
-            i.putIntegerArrayListExtra(ChooseTeacherActivity.TEACHER_INDEXES, teacherIndexes);
-            startActivity(i);
-        }
+        Intent i = new Intent(context, ChooseTeacherActivity.class);
+        i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
+        startActivity(i);
     }
 
     /**
@@ -287,12 +177,6 @@ public class FindTeacherActivity extends MenuActivity {
             }
         }
 
-        //if teachers has not been loaded yet, load them.
-        if (teachers.isEmpty()) {
-            authFirebase();
-            getDB();
-        }
-
         return teacherIndexes;
     }
 
@@ -305,27 +189,5 @@ public class FindTeacherActivity extends MenuActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.teachersContent, fragment);
         transaction.commit();
-    }
-
-    /**
-     * Displays info about the teacher
-     *
-     * @param teacher
-     * @param teacherIndex
-     */
-    public void showTeacherContactActivity(Teacher teacher, int teacherIndex) {
-        Intent i = new Intent(context,TeacherContactActivity.class);
-        i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndex);
-        i.putExtra(TeacherContactActivity.FULL_NAME, teacher.getFull_name());
-        i.putExtra(TeacherContactActivity.BIO, teacher.getBio());
-        i.putExtra(TeacherContactActivity.LOCAL, teacher.getLocal());
-        i.putExtra(TeacherContactActivity.WEBSITE, teacher.getWebsite());
-        i.putExtra(TeacherContactActivity.OFFICE, teacher.getOffice());
-        i.putExtra(TeacherContactActivity.EMAIL, teacher.getEmail());
-        i.putStringArrayListExtra(TeacherContactActivity.DEPARTMENTS, (ArrayList<String>) teacher.getDepartments());
-        i.putStringArrayListExtra(TeacherContactActivity.SECTORS, (ArrayList<String>) teacher.getSectors());
-        i.putStringArrayListExtra(TeacherContactActivity.POSITIONS, (ArrayList<String>) teacher.getPositions());
-
-        startActivity(i);
     }
 }
