@@ -44,6 +44,11 @@ public class TeacherContactFragment extends Fragment{
     private TextView tvBio;
     private TableLayout tl;
 
+    /**
+     * Get the teacher clicked on or searched
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +61,13 @@ public class TeacherContactFragment extends Fragment{
         }
     }
 
+    /**
+     * Inflates the {@code teacher_detail_fragment} layout
+     * @param inflater
+     * @param parent
+     * @param savedInstanceState
+     * @return View
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
 
@@ -63,6 +75,12 @@ public class TeacherContactFragment extends Fragment{
         return inflater.inflate(R.layout.teacher_detail_fragment, parent, false);
     }
 
+    /**
+     * Once the view is created, find views by id and update the view
+     * with the teacher's information
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Set values for view here
@@ -81,7 +99,11 @@ public class TeacherContactFragment extends Fragment{
         updateView(position);
     }
 
-    // Activity is calling this to update view on Fragment
+    /**
+     * Updates the teacher's information on the view
+     *
+     * @param position
+     */
     public void updateView(int position){
         final Teacher teacher = MenuActivity.teachers.get(position);
         // Set text views to the teacher's info

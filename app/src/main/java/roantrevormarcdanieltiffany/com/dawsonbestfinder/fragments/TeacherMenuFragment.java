@@ -38,6 +38,11 @@ public class TeacherMenuFragment extends Fragment {
     private ArrayList<String> searchedTeachersNames = new ArrayList<>();
     private ArrayList<Integer> searchedTeachersIndexes = new ArrayList<>();
 
+    /**
+     * Override onCreate. Sets the teachers list
+     *
+     * @param savedInstanceState
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,15 +67,17 @@ public class TeacherMenuFragment extends Fragment {
         itemsAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, searchedTeachersNames);
     }
 
-    // This event fires 1st, before creation of fragment or any views
-    // The onAttach method is called when the Fragment instance is associated with an Activity.
-    // This does not mean the Activity is fully initialized.
+    /**
+     * Before the fragment gets created or any views, called to set the context
+     *
+     * @param context
+     */
     @Override
     public void onAttach(Context context) {
         Log.d(TAG, "onAttach");
         super.onAttach(context);
-        if(context instanceof OnItemSelectedListener){      // context instanceof YourActivity
-            this.listener = (OnItemSelectedListener) context; // = (YourActivity) context
+        if (context instanceof OnItemSelectedListener) {
+            this.listener = (OnItemSelectedListener) context;
         } else {
             throw new ClassCastException(context.toString()
                     + " must implement TeacherMenuFragment.OnItemSelectedListener");
@@ -85,6 +92,14 @@ public class TeacherMenuFragment extends Fragment {
 
     }
 
+    /**
+     * Inflates the {@code teachers_menu_fragment} layout
+     *
+     * @param inflater
+     * @param parent
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup parent, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView");
@@ -92,6 +107,11 @@ public class TeacherMenuFragment extends Fragment {
         return inflater.inflate(R.layout.teachers_menu_fragment, parent, false);
     }
 
+    /**
+     * Sets the onclick listeners for teacher once the view is created
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         Log.d(TAG, "onViewCreated");

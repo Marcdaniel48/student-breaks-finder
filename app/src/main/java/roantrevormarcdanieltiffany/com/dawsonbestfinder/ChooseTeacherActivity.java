@@ -17,6 +17,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFra
  * The user can choose which teacher they want to see more information about,
  * which will open TeacherContactActivity
  *
+ *
  * @author Tiffany Le-Nguyen
  * @author Roan Chamberlain
  * @author Marc-Daniel Dialogo
@@ -27,6 +28,11 @@ public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFr
     private final String TAG = ChooseTeacherActivity.class.getSimpleName();
     ArrayList<Integer> indexes;
 
+    /**
+     * Overrides onCreate to set up the list of teachers to choose from
+     * and handle the fragment building
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "called onCreate");
@@ -78,6 +84,11 @@ public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFr
             }
     }
 
+    /**
+     * Starts the TeacherContactFragment with the teacher the user clicked on
+     *
+     * @param position
+     */
     @Override
     public void onTeacherClick(int position) {
         Log.d(TAG, "called onTeacherClick");
@@ -117,8 +128,13 @@ public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFr
         }
     }
 
+    /**
+     * Save the teacher indexes, overrides onSaveInstanceState
+     * @param outState
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+        Log.d(TAG, "onSaveInstanceState");
         super.onSaveInstanceState(outState);
 
         outState.putIntegerArrayList(TeacherMenuFragment.TEACHER_INDEXES, indexes);
