@@ -37,10 +37,6 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
 
     /**
      * Create the activity and fill the info
-     * @author Tiffany Le-Nguyen
-     * @author Roan Chamberlain
-     * @author Marc-Daniel Dialogo
-     * @author Trevor Eames
      * @param savedInstanceState
      */
     @Override
@@ -61,6 +57,7 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         courseNumberTV.setText(getIntent().getExtras().getString(CODE_EXTRA_KEY));
         courseSectionTV.setText(getIntent().getExtras().getString(SECTION_EXTRA_KEY));
 
+        // Set a click event for the teacher to launch a teacher info activity
         courseTeacherTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,9 +86,6 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
                 }
             }
         });
-
-        //set a click event for the teacher to launch a teacher info activity
-
     }
 
 
