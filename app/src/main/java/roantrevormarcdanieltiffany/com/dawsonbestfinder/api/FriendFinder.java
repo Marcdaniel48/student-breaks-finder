@@ -25,8 +25,9 @@ public class FriendFinder
     public static final String EMAIL_KEY = "email";
     public static final String PASSWORD_KEY = "password";
 
-    private static final String COURSE_KEY = "course";
-    private static final String SECTION_KEY = "section";
+    public static final String COURSE_KEY = "course";
+    public static final String SECTION_KEY = "section";
+    public static final String COURSE_NAME_KEY="coursename";
 
     public static final String FRIEND_EMAIL_KEY = "friendemail";
     public static final String DAY_KEY = "day";
@@ -39,6 +40,10 @@ public class FriendFinder
     public static final String FIND_FRIENDS_URL = "dawsonbestfinder.herokuapp.com/api/api/allfriends";
     // Find the current location of one of the current user's friends.
     public static final String FRIEND_LOCATION_URL = "dawsonbestfinder.herokuapp.com/api/api/whereisfriend";
+    // Find all friends in the current course
+    public static final String MUTUAL_CLASS_URL = "dawsonbestfinder.herokuapp.com/api/api/coursefriends";
+
+
     //Find all friends on break during a provided day and time interval
     public static final String WHO_IS_FREE_URL = "dawsonbestfinder.herokuapp.com/api/api/breakfriends";
     
@@ -138,4 +143,8 @@ public class FriendFinder
 
         return location;
     }
+
+
+
+
 }
