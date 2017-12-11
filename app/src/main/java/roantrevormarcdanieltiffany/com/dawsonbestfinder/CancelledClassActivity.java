@@ -304,6 +304,10 @@ public class CancelledClassActivity extends MenuActivity {
                         case "datecancelled":
                             date = result;
                             break;
+                        default:
+                            Log.e(TAG, "parseXML: if you are reading this please stop trying to break our app");
+                            break;
+
                     }
                     //if all fields have been filled in add the class to the list
                     if (title != null && code != null && teacher != null && date != null && section != null) {
