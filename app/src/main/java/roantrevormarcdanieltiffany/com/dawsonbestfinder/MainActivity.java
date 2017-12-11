@@ -57,14 +57,7 @@ public class MainActivity extends MenuActivity {
 
         tempView = findViewById(R.id.temperatureTextView);
 
-
-        if(permissionCheck()) {
-            GPSTracker gps = new GPSTracker(this);
-            if (gps.canGetLocation()) {
-                Log.d(TAG, "Can get location!");
-                loadTempData();
-            }
-        }
+        setTemp();
 
         // SharedPreferences for the Settings activity are stored in "settings"
         SharedPreferences prefs = getSharedPreferences(SETTINGS, MODE_PRIVATE);
@@ -75,6 +68,13 @@ public class MainActivity extends MenuActivity {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        setTemp();
     }
 
     /**
@@ -159,8 +159,8 @@ public class MainActivity extends MenuActivity {
      * Will fire an intent taking user to where is friend activity
      */
     public void onWhereIsFriend(View v) {
-//        Intent i = new Intent(this,  );
-//        startActivity(i);
+        Intent i = new Intent(this, WhoIsFreeActivity.class);
+        startActivity(i);
     }
 
     /**
@@ -180,6 +180,16 @@ public class MainActivity extends MenuActivity {
                     0);
         }
         return true;
+    }
+
+    public void setTemp() {
+        if(permissionCheck()) {
+            GPSTracker gps = new GPSTracker(this);
+            if (gps.canGetLocation()) {
+                Log.d(TAG, "Can get location!");
+                loadTempData();
+            }
+        }
     }
 
     /**

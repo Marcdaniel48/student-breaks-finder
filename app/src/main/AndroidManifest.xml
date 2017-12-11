@@ -34,12 +34,13 @@
         <activity android:name=".AcademicCalendarActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".CancelledClassActivity" />
-        <activity android:name=".CancelledClassInfoActivity"></activity>
+        <activity android:name=".CancelledClassInfoActivity" />
         <activity android:name=".FindTeacherActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".NotesActivity" />
         <activity android:name=".ItemNoteActivity" />
         <activity android:name=".WeatherActivity" />
+        <activity android:name=".WhoIsFreeActivity" />
         <activity android:name=".FindFriendsActivity" />
         <activity android:name=".ItemFriendActivity"/>
         <activity android:name=".AboutActivity"/>
