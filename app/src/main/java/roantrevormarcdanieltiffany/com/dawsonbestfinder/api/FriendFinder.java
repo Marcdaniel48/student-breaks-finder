@@ -48,7 +48,7 @@ public class FriendFinder
     public static final String MUTUAL_CLASS_URL = "dawsonbestfinder.herokuapp.com/api/api/coursefriends";
 
 
-    //Find all friends on break during a provided day and time interval
+    // Find all friends on break during a provided day and time interval
     public static final String WHO_IS_FREE_URL = "dawsonbestfinder.herokuapp.com/api/api/breakfriends";
     
     /**
