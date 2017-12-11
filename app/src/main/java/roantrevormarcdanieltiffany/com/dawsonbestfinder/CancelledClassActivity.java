@@ -120,6 +120,7 @@ public class CancelledClassActivity extends MenuActivity {
                 private final String TITLE_EXTRA_KEY = "title";
                 private final String DATE_EXTRA_KEY = "date";
                 private final String CODE_EXTRA_KEY = "code";
+                private final String SECTION_EXTRA_KEY = "section";
 
                 LayoutInflater inflater = null;
                 @Override
@@ -165,12 +166,28 @@ public class CancelledClassActivity extends MenuActivity {
                             i.putExtra(CODE_EXTRA_KEY, result.get(position).getCode());
                             i.putExtra(TEACHER_EXTRA_KEY, result.get(position).getTeacher());
                             i.putExtra(DATE_EXTRA_KEY, result.get(position).getDate());
+                            i.putExtra(SECTION_EXTRA_KEY, result.get(position).getSection());
                             CancelledClassActivity.this.startActivity(i);
+                        }
+                    });
+
+                    holder.tv.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View v) {
+                            Log.i(TAG, "onLongClick: long click");
+                            Intent lci = new Intent(CancelledClassActivity.this, CancelledFriendActivity.class);
+                            lci.putExtra("coursename", result.get(position).getTitle());
+                            lci.putExtra(SECTION_EXTRA_KEY, result.get(position).getSection());
+                            CancelledClassActivity.this.startActivity(lci);
+
+                            return true;
                         }
                     });
 
                     return convertView;
                 }
+
+                
 
 
 
@@ -221,7 +238,7 @@ public class CancelledClassActivity extends MenuActivity {
         }
 
         /**
-         * helper method to parse the xml stram into a list of cancelled classes
+         * helper method to parse the xml stream into a list of cancelled classes
          * @param stream
          * @return list of cancelled classes
          * @throws XmlPullParserException
@@ -233,6 +250,7 @@ public class CancelledClassActivity extends MenuActivity {
             String code = null;
             String date = null;
             String teacher = null;
+            String section = null;
 
             boolean isClass = false;
             //list of cancelled classes
@@ -274,7 +292,8 @@ public class CancelledClassActivity extends MenuActivity {
                     switch (name) {
                         //in the xml, title is the code
                         case "title":
-                            code = result;
+                            code = result.split(" ")[0];
+                            section = result.split(" ")[1];
                             break;
                         case "course":
                             title = result;
@@ -285,11 +304,15 @@ public class CancelledClassActivity extends MenuActivity {
                         case "datecancelled":
                             date = result;
                             break;
+                        default:
+                            Log.e(TAG, "parseXML: if you are reading this please stop trying to break our app");
+                            break;
+
                     }
                     //if all fields have been filled in add the class to the list
-                    if (title != null && code != null && teacher != null && date != null) {
+                    if (title != null && code != null && teacher != null && date != null && section != null) {
                         if (isClass) {
-                            CancelledClass cancelledClass = new CancelledClass(title, code, teacher, date);
+                            CancelledClass cancelledClass = new CancelledClass(title, code, teacher, date, section);
                             classes.add(cancelledClass);
                             Log.i(TAG, "the following class has been extracted from the xml: " + cancelledClass.getTitle());
                         }
@@ -298,6 +321,7 @@ public class CancelledClassActivity extends MenuActivity {
                         code = null;
                         teacher = null;
                         date = null;
+                        section = null;
 
                         isClass = false;
                     }
@@ -306,10 +330,10 @@ public class CancelledClassActivity extends MenuActivity {
 
                 //only run the following lines of code for demo porpoises if the rss is empty
 /*
-                CancelledClass c1 = new CancelledClass("title1", "course1", "teacher1", "date1");
-                CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2");
-                CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3");
-                CancelledClass c4 = new CancelledClass("title4", "course4", "teacher4", "date4");
+                CancelledClass c1 = new CancelledClass("title1", "course1", "teacher1", "date1", "00001");
+                CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2", "00002");
+                CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3", "00003");
+                CancelledClass c4 = new CancelledClass("title4", "course4", "teacher4", "date4", "00004");
 
                 classes.add(c1);
                 classes.add(c2);

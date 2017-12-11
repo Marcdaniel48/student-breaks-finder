@@ -16,6 +16,7 @@ public class CancelledClass {
     private final String code;
     private final String teacher;
     private final String date;
+    private final String section;
 
 
     /**
@@ -25,11 +26,12 @@ public class CancelledClass {
      * @param teacher
      * @param date
      */
-    public CancelledClass(String title, String code, String teacher, String date){
+    public CancelledClass(String title, String code, String teacher, String date, String section){
         this.title = title;
         this.code = code;
         this.teacher = teacher;
         this.date = date;
+        this.section = section;
     }
 
     /**
@@ -64,7 +66,11 @@ public class CancelledClass {
         return date;
     }
 
-
-
-
+    /**
+     * getter for the section number of a course
+     * @return
+     */
+    public String getSection(){
+        return section;
+    }
 }

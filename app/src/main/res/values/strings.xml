@@ -85,6 +85,11 @@
     <string name="forecast">Forecast</string>
     <string name="default_city_name">Montreal</string>
     <string name="canada_code">CA</string>
+    <string name="cancelled_class_friends">Friends in that Class</string>
+    <string name="course_section_label">Course Section:</string>
+    <string name="no_friends_in_course">You have no friends in this course</string>
+
+
 
     <!-- WhoIsFree -->
     <string name="break_start">Break Start</string>
