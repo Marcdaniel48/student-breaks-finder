@@ -59,7 +59,7 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
     private Spinner daySpinner;
     private EditText etBreakStart, etBreakEnd;
     private ListView lvFriends;
-    private String appName;;
+    private String appName;
     private final String SEARCH_CLICKED = "searchClicker";
     private final String FRIENDS_LIST = "friendsList";
     private final String DAY = "day";

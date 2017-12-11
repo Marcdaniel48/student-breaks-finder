@@ -14,6 +14,11 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.FriendLocation;
 
 /**
  * API class that's used to make Friend Finder API calls.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class FriendFinder
 {
