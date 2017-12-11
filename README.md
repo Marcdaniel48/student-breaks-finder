@@ -1,5 +1,5 @@
 # DawsonBestFinder - Dawson Student App 2017
-For all specs and information about this project, please consult our [Wiki](https://github.com/sirMerr/dsa-dabesteam/wiki) or go [here](https://sirmerr.github.io/compsci-notes/Mobile-Development/assignments/final-assignment/overview/)!
+For all specs and information about this project, please consult our [Wiki](https://github.com/sirMerr/dsa-dabesteam/wiki)!
 
 ## Overview
 This android application is intended to be used by Dawson students to give an easy way to see which classes are cancelled, coordinate with their friends' schedule, take notes, check the weather forecast, and more. In order to use all of its features, the user should make an account at https://dawsonbestfinder.herokuapp.com and use their credentials in this application.
