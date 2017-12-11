@@ -85,13 +85,11 @@
     <string name="forecast">Forecast</string>
     <string name="default_city_name">Montreal</string>
     <string name="canada_code">CA</string>
-<<<<<<< HEAD
     <string name="cancelled_class_friends">Friends in that Class</string>
     <string name="course_section_label">Course Section:</string>
     <string name="no_friends_in_course">You have no friends in this course</string>
 
 
-=======
 
     <!-- WhoIsFree -->
     <string name="break_start">Break Start</string>
@@ -105,5 +103,4 @@
         <item>Friday</item>
     </string-array>
     <string name="def_day">Monday</string>
->>>>>>> 7b8bbb47ad7f3f9207fa374b404d98cc7715d566
 </resources>

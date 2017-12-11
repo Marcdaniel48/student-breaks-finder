@@ -326,10 +326,10 @@ public class CancelledClassActivity extends MenuActivity {
 
                 //only run the following lines of code for demo porpoises if the rss is empty
 /*
-                CancelledClass c1 = new CancelledClass("title1", "course1", "teacher1", "date1");
-                CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2");
-                CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3");
-                CancelledClass c4 = new CancelledClass("title4", "course4", "teacher4", "date4");
+                CancelledClass c1 = new CancelledClass("title1", "course1", "teacher1", "date1", "00001");
+                CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2", "00002");
+                CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3", "00003");
+                CancelledClass c4 = new CancelledClass("title4", "course4", "teacher4", "date4", "00004");
 
                 classes.add(c1);
                 classes.add(c2);

@@ -40,16 +40,13 @@ public class FriendFinder
     public static final String FIND_FRIENDS_URL = "dawsonbestfinder.herokuapp.com/api/api/allfriends";
     // Find the current location of one of the current user's friends.
     public static final String FRIEND_LOCATION_URL = "dawsonbestfinder.herokuapp.com/api/api/whereisfriend";
-<<<<<<< HEAD
     // Find all friends in the current course
     public static final String MUTUAL_CLASS_URL = "dawsonbestfinder.herokuapp.com/api/api/coursefriends";
 
 
-=======
     //Find all friends on break during a provided day and time interval
     public static final String WHO_IS_FREE_URL = "dawsonbestfinder.herokuapp.com/api/api/breakfriends";
     
->>>>>>> 7b8bbb47ad7f3f9207fa374b404d98cc7715d566
     /**
      * Takes in a JSON Response in the form of a String and parses it to return a list of Friends.
      *
