@@ -39,8 +39,6 @@
         <activity android:name=".CancelledClassActivity" />
         <activity android:name=".CancelledClassInfoActivity" />
         <activity android:name=".FindTeacherActivity" />
-        <activity android:name=".TeacherContactActivity" />
-        <activity android:name=".ChooseTeacherActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".NotesActivity" />
         <activity android:name=".ItemNoteActivity" />
@@ -50,6 +48,7 @@
         <activity android:name=".ItemFriendActivity" />
         <activity android:name=".CancelledFriendActivity"></activity>
         <activity android:name=".AboutActivity"/>
+        <activity android:name=".ChooseTeacherActivity"/>
     </application>
 
 </manifest>

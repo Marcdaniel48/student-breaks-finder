@@ -1,12 +1,16 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
+import java.util.ArrayList;
+
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
 
 /**
  * CancelledClassInfo activity to display information about specific cancelled classes
@@ -25,6 +29,7 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
     private final String TITLE_EXTRA_KEY = "title";
     private final String DATE_EXTRA_KEY = "date";
     private final String CODE_EXTRA_KEY = "code";
+    private Context context;
     private final String SECTION_EXTRA_KEY = "section";
 
     TextView courseTitleTV, courseNumberTV, courseTeacherTV, dateCancelledTV, courseSectionTV;
@@ -40,6 +45,7 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this.getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancelled_class_info);
         Log.d(TAG, "onCreate: was called");
@@ -58,16 +64,29 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
         courseTeacherTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
+                String teacherfname = "";
+                String teacherlname = "";
+                try {
+                    teacherfname = teachername.substring(0, teachername.lastIndexOf(" "));
+                    teacherlname = teachername.substring(teachername.lastIndexOf(" ") + 1, teachername.length());
+                } catch (NullPointerException | StringIndexOutOfBoundsException err) {
+                    Log.i(TAG, "NullPointerException for: " + teacherfname + " " + teacherlname);
+                }
 
-                String teacherName = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
-                String teacherFirstName = teacherName.split(" ")[0];
-                String teacherLastName = teacherName.split(" ")[1];
+                Log.i(TAG, "onClick: " + teacherfname + " " + teacherlname + " was tapped");
 
+                ArrayList<Integer> indexes = search(true, teacherfname, teacherlname);
 
-                Log.i(TAG, "onClick: " + teacherName + " was tapped");
-                int teacherIndex = search(true, teacherFirstName, teacherLastName).get(0);
-                Teacher teacher = teachers.get(teacherIndex);
-                showTeacherContactActivity(teacher, 0);
+                Log.d(TAG, "indexes: "  + indexes);
+                if (indexes.isEmpty()) {
+                    Toast.makeText(CancelledClassInfoActivity.this, "No teacher with this name found in firebase db",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    Intent i = new Intent(context, ChooseTeacherActivity.class);
+                    i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, indexes);
+                    startActivity(i);
+                }
             }
         });
 

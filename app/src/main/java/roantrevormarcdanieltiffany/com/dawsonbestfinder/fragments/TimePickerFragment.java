@@ -10,7 +10,6 @@ import android.util.Log;
 import java.util.Calendar;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.CalendarActivity;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
 
 /**
  * Fragment that extends {@code DialogFragment} and returns a {@code TimePickerDialog}
@@ -25,7 +24,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.ChooseTeacherActivity;
  * @author Trevor Eames
  */
 public class TimePickerFragment extends DialogFragment {
-    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+    private static final String TAG = TimePickerFragment.class.getSimpleName();
 
     /**
      * Custom {@code Dialog} Container

@@ -65,11 +65,6 @@ public class CancelledClassActivity extends MenuActivity {
     /**
      * When invoked, will check the devices network connection and launch a thread to load the cancelled classes
      *
-     * @author Tiffany Le-Nguyen
-     * @author Roan Chamberlain
-     * @author Marc-Daniel Dialogo
-     * @author Trevor Eames
-     *
      */
     private void loadClasses() {
         //url for dawsons cancelled classes
@@ -328,18 +323,17 @@ public class CancelledClassActivity extends MenuActivity {
                 }
 
 
-                //only run the following lines of code for demo porpoises if the rss is empty
-/*
-                CancelledClass c1 = new CancelledClass("title1", "course1", "teacher1", "date1", "00001");
-                CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2", "00002");
-                CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3", "00003");
-                CancelledClass c4 = new CancelledClass("title4", "course4", "teacher4", "date4", "00004");
+                // Only run the following lines of code for demo porpoises if the rss is empty
+//                CancelledClass c1 = new CancelledClass("title1", "course1", "Colin Schleeh", "date1", "00001");
+//                CancelledClass c2 = new CancelledClass("title2", "course2", "teacher2", "date2", "00002");
+//                CancelledClass c3 = new CancelledClass("title3", "course3", "teacher3", "date3", "00003");
+//                CancelledClass c4 = new CancelledClass("title4", "course4", "teacher4", "date4", "00004");
+//
+//                classes.add(c1);
+//                classes.add(c2);
+//                classes.add(c3);
+//                classes.add(c4);
 
-                classes.add(c1);
-                classes.add(c2);
-                classes.add(c3);
-                classes.add(c4);
-*/
                 Log.i(TAG, "parseXML: " + classes.size() + " classes have been cancelled");
                 return classes;
             } finally {
