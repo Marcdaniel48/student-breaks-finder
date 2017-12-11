@@ -40,7 +40,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
  */
 
 public class MenuActivity extends AppCompatActivity {
-    private static final String TAG = ChooseTeacherActivity.class.getSimpleName();
+    private static final String TAG = MenuActivity.class.getSimpleName();
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String email = "letiffany.nguyen@gmail.com";

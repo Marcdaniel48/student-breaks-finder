@@ -37,7 +37,6 @@
         <activity android:name=".CancelledClassInfoActivity"></activity>
         <activity android:name=".FindTeacherActivity" />
         <activity android:name=".TeacherContactActivity" />
-        <activity android:name=".ChooseTeacherActivity" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".NotesActivity" />
         <activity android:name=".ItemNoteActivity" />

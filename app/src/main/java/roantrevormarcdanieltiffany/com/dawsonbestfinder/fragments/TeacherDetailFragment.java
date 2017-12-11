@@ -24,6 +24,7 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
 
 public class TeacherDetailFragment extends Fragment{
     private final String TAG = TeacherDetailFragment.class.getSimpleName();
+    public final static String POSITION_PARAM = "position";
     int position = 0;
 
     private TextView tvFullName;
@@ -45,7 +46,7 @@ public class TeacherDetailFragment extends Fragment{
         if(savedInstanceState == null){
             // Get back arguments
             if(getArguments() != null) {
-                position = getArguments().getInt("position", 0);
+                position = getArguments().getInt(POSITION_PARAM, 0);
             }
         }
     }

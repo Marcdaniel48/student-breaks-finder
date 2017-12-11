@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherDetailFragment;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.TeacherMenuFragment;
 
 /**
@@ -144,12 +145,14 @@ public class FindTeacherActivity extends MenuActivity {
         Log.d(TAG, "Teacher Indexes size: " + teacherIndexes.size());
 
         if (teacherIndexes.isEmpty()) {
-            Intent i = new Intent(context, TeacherContactActivity.class);
-            i.putExtra(TeacherContactActivity.TEACHER_ID, -1);
+            Intent i = new Intent(context, TeachersActivity.class);
+            i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
             startActivity(i);
         } else if (teacherIndexes.size() == 1) {
-            Teacher teacher = teachers.get(teacherIndexes.get(0));
-            showTeacherContactActivity(teacher, 0);
+            Intent i = new Intent(context, TeachersActivity.class);
+            i.putIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES, teacherIndexes);
+
+            startActivity(i);
         } else {
             // At this point, there are more than 1 teacher found
             Intent i = new Intent(context, TeachersActivity.class);
@@ -223,7 +226,7 @@ public class FindTeacherActivity extends MenuActivity {
      * @param teacherIndex
      */
     public void showTeacherContactActivity(Teacher teacher, int teacherIndex) {
-        Intent i = new Intent(context,TeacherContactActivity.class);
+        Intent i = new Intent(context,TeachersActivity.class);
         i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndex);
         i.putExtra(TeacherContactActivity.FULL_NAME, teacher.getFull_name());
         i.putExtra(TeacherContactActivity.BIO, teacher.getBio());
