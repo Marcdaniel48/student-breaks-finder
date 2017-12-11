@@ -205,26 +205,4 @@ public class FindTeacherActivity extends MenuActivity {
         transaction.add(R.id.teachersContent, fragment);
         transaction.commit();
     }
-
-    /**
-     * Displays info about the teacher
-     *
-     * @param teacher
-     * @param teacherIndex
-     */
-    public void showTeacherContactActivity(Teacher teacher, int teacherIndex) {
-        Intent i = new Intent(context,TeachersActivity.class);
-        i.putExtra(TeacherContactActivity.TEACHER_ID, teacherIndex);
-        i.putExtra(TeacherContactActivity.FULL_NAME, teacher.getFull_name());
-        i.putExtra(TeacherContactActivity.BIO, teacher.getBio());
-        i.putExtra(TeacherContactActivity.LOCAL, teacher.getLocal());
-        i.putExtra(TeacherContactActivity.WEBSITE, teacher.getWebsite());
-        i.putExtra(TeacherContactActivity.OFFICE, teacher.getOffice());
-        i.putExtra(TeacherContactActivity.EMAIL, teacher.getEmail());
-        i.putStringArrayListExtra(TeacherContactActivity.DEPARTMENTS, (ArrayList<String>) teacher.getDepartments());
-        i.putStringArrayListExtra(TeacherContactActivity.SECTORS, (ArrayList<String>) teacher.getSectors());
-        i.putStringArrayListExtra(TeacherContactActivity.POSITIONS, (ArrayList<String>) teacher.getPositions());
-
-        startActivity(i);
-    }
 }

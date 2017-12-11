@@ -65,11 +65,16 @@ public class CancelledClassInfoActivity extends FindTeacherActivity {
             public void onClick(View view) {
 
                 String teachername = getIntent().getExtras().getString(TEACHER_EXTRA_KEY);
-                String teacherfname = teachername.substring(teachername.lastIndexOf(" ") + 1);
-                String teacherlname = teachername.substring(0, teachername.lastIndexOf(" ") + 1);
+                String teacherfname = "";
+                String teacherlname = "";
+                try {
+                    teacherfname = teachername.substring(0, teachername.lastIndexOf(" "));
+                    teacherlname = teachername.substring(teachername.lastIndexOf(" ") + 1, teachername.length());
+                } catch (NullPointerException | StringIndexOutOfBoundsException err) {
+                    Log.i(TAG, "NullPointerException for: " + teacherfname + " " + teacherlname);
+                }
 
-
-                Log.i(TAG, "onClick: " + teachername + " was tapped");
+                Log.i(TAG, "onClick: " + teacherfname + " " + teacherlname + " was tapped");
 
                 ArrayList<Integer> indexes = search(true, teacherfname, teacherlname);
 
