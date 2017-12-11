@@ -46,7 +46,7 @@
         <activity android:name=".WhoIsFreeActivity" />
         <activity android:name=".FindFriendsActivity" />
         <activity android:name=".ItemFriendActivity" />
-        <activity android:name=".CancelledFriendActivity"></activity>
+        <activity android:name=".CancelledFriendActivity"/>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".ChooseTeacherActivity"/>
     </application>

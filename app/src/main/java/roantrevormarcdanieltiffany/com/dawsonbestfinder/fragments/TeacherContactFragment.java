@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.MenuActivity;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.R;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Teacher;
 
 /**
  * Fragment which displays all information about a teacher

@@ -35,8 +35,8 @@ import java.util.Locale;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Friend;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.QueryParam;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.fragments.WhoIsFreeTimePickerFragment;
 
 /**
@@ -59,7 +59,7 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
     private Spinner daySpinner;
     private EditText etBreakStart, etBreakEnd;
     private ListView lvFriends;
-    private String appName;;
+    private String appName;
     private final String SEARCH_CLICKED = "searchClicker";
     private final String FRIENDS_LIST = "friendsList";
     private final String DAY = "day";

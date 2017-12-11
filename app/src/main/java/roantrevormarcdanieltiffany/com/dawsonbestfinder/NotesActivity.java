@@ -1,6 +1,5 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,6 +20,11 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.database.NotesDBHelper;
  * in the ItemNoteActivity.
  *
  * The user can click on a note to open the ItemNoteActivity to see the full note or to delete it.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class NotesActivity extends MenuActivity
 {

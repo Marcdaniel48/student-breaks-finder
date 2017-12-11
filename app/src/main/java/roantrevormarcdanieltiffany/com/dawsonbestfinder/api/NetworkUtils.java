@@ -11,12 +11,16 @@ import java.net.URL;
 import java.util.List;
 import java.util.Scanner;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.QueryParam;
 
 /**
- * Created by sirMerr on 2017-12-06.
+ * Utility methods used for network operations for our api calls.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
 

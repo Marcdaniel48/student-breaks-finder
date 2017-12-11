@@ -44,6 +44,7 @@ public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFr
 
         Bundle args = new Bundle();
 
+        // Check is bundle has indexes otherwise use intent
         if (savedInstanceState == null) {
             indexes = getIntent().getIntegerArrayListExtra(TeacherMenuFragment.TEACHER_INDEXES);
         } else {
@@ -53,35 +54,36 @@ public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFr
         Log.d(TAG, "Indexes: " + indexes);
         args.putIntegerArrayList(TeacherMenuFragment.TEACHER_INDEXES, indexes);
 
-            FragmentTransaction ft =
-                    getSupportFragmentManager().beginTransaction();// begin  FragmentTransaction
-            firstFragment = new TeacherMenuFragment();
+        FragmentTransaction ft =
+                getSupportFragmentManager().beginTransaction();
+        firstFragment = new TeacherMenuFragment();
 
-            if (indexes.size() == 1) {
-                Log.d(TAG, "Index 1");
-                onTeacherClick(indexes.get(0));
-            } else {
-                Log.d(TAG, "Index not 1");
-                // Instance of first fragment
-                // Add Fragment to FrameLayout (flContainer), using FragmentManager
-                firstFragment.setArguments(args);
-                ft.add(R.id.flContainer, firstFragment);
-                ft.commit();
+        if (indexes.size() == 1) {
+            Log.d(TAG, "Index 1");
+            onTeacherClick(indexes.get(0));
+        } else {
+            Log.d(TAG, "Index not 1");
+            // Instance of first fragment
+            // Add Fragment to FrameLayout (flContainer), using FragmentManager
+            firstFragment.setArguments(args);
+            ft.add(R.id.flContainer, firstFragment);
+            ft.commit();
 
-            }
+        }
 
-            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                Log.d(TAG, "Orientation landscape ");
-                TeacherContactFragment secondFragment = new TeacherContactFragment();
-                Bundle args2 = new Bundle();
-                args2.putInt(TeacherContactFragment.POSITION_PARAM, indexes.get(0));
-                // Communicate with Fragment using Bundle
-                secondFragment.setArguments(args2);
-                // Begin  FragmentTransaction
-                FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
-                ft2.add(R.id.flContainer2, secondFragment);
-                ft2.commit();
-            }
+        // Load landscape orientation if necessary
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.d(TAG, "Orientation landscape ");
+            TeacherContactFragment secondFragment = new TeacherContactFragment();
+            Bundle args2 = new Bundle();
+            args2.putInt(TeacherContactFragment.POSITION_PARAM, indexes.get(0));
+            // Communicate with Fragment using Bundle
+            secondFragment.setArguments(args2);
+            // Begin  FragmentTransaction
+            FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
+            ft2.add(R.id.flContainer2, secondFragment);
+            ft2.commit();
+        }
     }
 
     /**
@@ -98,11 +100,11 @@ public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFr
 
         Bundle args = new Bundle();
         args.putInt(TeacherContactFragment.POSITION_PARAM, position);
-        secondFragment.setArguments(args);          // (1) Communicate with Fragment using Bundle
+        secondFragment.setArguments(args);
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
-
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             if (indexes.size() == 1) {
+                // Make sure the teacher name shows up in the first left fragment
                 Bundle args2 = new Bundle();
                 ArrayList<Integer> indexes = new ArrayList<>();
                 indexes.add(position);
@@ -115,15 +117,16 @@ public class ChooseTeacherActivity extends MenuActivity implements TeacherMenuFr
                         .commit();
             }
 
+            // Replace second fragment which has teacher info
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flContainer2, secondFragment) // replace flContainer
-                    //.addToBackStack(null)
+                    .replace(R.id.flContainer2, secondFragment)
                     .commit();
-        }else{
+        } else {
+            // Only have teacher info
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.flContainer, secondFragment) // replace flContainer
+                    .replace(R.id.flContainer, secondFragment)
                     .commit();
         }
     }

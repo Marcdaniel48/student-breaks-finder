@@ -1,10 +1,15 @@
-package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
+package roantrevormarcdanieltiffany.com.dawsonbestfinder.entities;
 
 import android.util.Log;
 
 /**
  * Bean class representing a Friend.
  * Used alongside the FriendFinder API.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class Friend
 {

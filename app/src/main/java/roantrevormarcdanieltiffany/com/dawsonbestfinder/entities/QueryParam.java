@@ -1,9 +1,14 @@
-package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
+package roantrevormarcdanieltiffany.com.dawsonbestfinder.entities;
 
 /**
- * Created by sirMerr on 2017-12-06.
+ * Class that defined a QueryParam object to pass to the url builder
+ * for making API calls
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
-
 public class QueryParam {
     private String key;
     private String value;

@@ -1,6 +1,5 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.api;
 
-import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -10,11 +9,16 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.FriendLocation;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Friend;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.FriendLocation;
 
 /**
  * API class that's used to make Friend Finder API calls.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class FriendFinder
 {
@@ -44,7 +48,7 @@ public class FriendFinder
     public static final String MUTUAL_CLASS_URL = "dawsonbestfinder.herokuapp.com/api/api/coursefriends";
 
 
-    //Find all friends on break during a provided day and time interval
+    // Find all friends on break during a provided day and time interval
     public static final String WHO_IS_FREE_URL = "dawsonbestfinder.herokuapp.com/api/api/breakfriends";
     
     /**
