@@ -28,6 +28,13 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
 
+
+/**
+ * Activity that shows the user a list of friends who are also in a class that has been cancelled.
+ *
+ * @Author Roan Chamberlain
+ *
+ */
 public class CancelledFriendActivity extends MenuActivity {
 
     private static final String TAG = CancelledFriendActivity.class.getSimpleName();
@@ -38,6 +45,10 @@ public class CancelledFriendActivity extends MenuActivity {
 
     ListView friendInClassLV;
 
+    /**
+     * create the activity and get the info about who is in a cancelled class
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate: called");
