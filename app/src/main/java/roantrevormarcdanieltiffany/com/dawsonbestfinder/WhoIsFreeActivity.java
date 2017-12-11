@@ -236,6 +236,8 @@ public class WhoIsFreeActivity extends MenuActivity implements TimePickerDialog.
                     Toast.LENGTH_LONG).show();
             return;
         }
+        Toast.makeText(WhoIsFreeActivity.this, "Searching",
+                Toast.LENGTH_LONG).show();
         new OpenFriendsFreeTask().execute(daySpinner.getSelectedItem().toString(),
                 "" + startHour + startMinute,
                 "" + endHour + endMinute);
