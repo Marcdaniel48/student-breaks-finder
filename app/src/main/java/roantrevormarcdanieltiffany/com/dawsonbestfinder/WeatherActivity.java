@@ -21,8 +21,8 @@ import java.util.Locale;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.OpenWeather;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Forecast;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.QueryParam;
 
 /**
  * Activity which has a widget to input the city & uses a spinner

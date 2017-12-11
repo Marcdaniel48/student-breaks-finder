@@ -24,12 +24,17 @@ import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Friend;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.QueryParam;
 
 /**
  * Class that handles retrieving a list of the current user's friends (according to the settings activity) and displaying that
  * list of friends into the FindFriends activity.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class FindFriendsActivity extends MenuActivity
 {

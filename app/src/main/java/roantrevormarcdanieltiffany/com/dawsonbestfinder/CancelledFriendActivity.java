@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,22 +16,23 @@ import android.widget.TextView;
 import android.net.Uri;
 
 
-import org.json.JSONException;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Friend;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.QueryParam;
 
 
 /**
  * Activity that shows the user a list of friends who are also in a class that has been cancelled.
  *
- * @Author Roan Chamberlain
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  *
  */
 public class CancelledFriendActivity extends MenuActivity {
@@ -59,14 +59,14 @@ public class CancelledFriendActivity extends MenuActivity {
 
         friendInClassLV = findViewById(R.id.cancelledFriendsListView);
 
-        //parameters to be sent with the request to the API
+        // Parameters to be sent with the request to the API
         String coursename = getIntent().getExtras().getString(COURSENAME_KEY);
         String section = getIntent().getExtras().getString(SECTION_KEY);
 
-        //put variables into an array
+        // Put variables into an array
         String[] params = {coursename, section};
 
-        //create a new thread and pass the array of params to it
+        // Create a new thread and pass the array of params to it
         new FindFriendsAsyncTask().execute(params);
 
     }
@@ -126,7 +126,7 @@ public class CancelledFriendActivity extends MenuActivity {
         protected void onPostExecute(final List<Friend> friends){
             Log.d(TAG, "onPostExecute: called");
 
-            //pop up a dialog if the user has no friends on break
+            // Pop up a dialog if the user has no friends on break
             if(friends.isEmpty()){
                 Log.i(TAG, "onPostExecute: The user has no friends on break");
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -134,7 +134,7 @@ public class CancelledFriendActivity extends MenuActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
             }
-            //fill the listview with data from the list
+            // Fill the listview with data from the list
             friendInClassLV.setAdapter(new BaseAdapter() {
                 @Override
                 public int getCount() {

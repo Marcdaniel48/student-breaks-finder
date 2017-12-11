@@ -1,4 +1,4 @@
-package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
+package roantrevormarcdanieltiffany.com.dawsonbestfinder.entities;
 
 import android.text.Html;
 

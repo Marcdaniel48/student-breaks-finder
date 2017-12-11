@@ -9,6 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * SQLiteOpenHelper class.
  * Creates a database and table used for storing notes & Provides CRUD implementation.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class NotesDBHelper extends SQLiteOpenHelper
 {

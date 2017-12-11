@@ -21,11 +21,16 @@ import java.util.List;
 
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.FriendFinder;
 import roantrevormarcdanieltiffany.com.dawsonbestfinder.api.NetworkUtils;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.FriendLocation;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.QueryParam;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.FriendLocation;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.QueryParam;
 
 /**
  * Displays the location of a friend.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class ItemFriendActivity extends Activity
 {
