@@ -1,6 +1,5 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder.api;
 
-import android.net.Uri;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -10,8 +9,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Friend;
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.FriendLocation;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Friend;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.FriendLocation;
 
 /**
  * API class that's used to make Friend Finder API calls.

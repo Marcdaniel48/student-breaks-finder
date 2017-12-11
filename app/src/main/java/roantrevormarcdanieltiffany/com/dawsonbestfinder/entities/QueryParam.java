@@ -1,4 +1,4 @@
-package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
+package roantrevormarcdanieltiffany.com.dawsonbestfinder.entities;
 
 /**
  * Created by sirMerr on 2017-12-06.

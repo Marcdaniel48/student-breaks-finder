@@ -9,6 +9,11 @@ import roantrevormarcdanieltiffany.com.dawsonbestfinder.database.NotesDBHelper;
 
 /**
  * Displays a complete note and allows the user to delete it, through a button.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class ItemNoteActivity extends Activity
 {

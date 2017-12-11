@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.CancelledClass;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.CancelledClass;
 
 /**
  * Activity that displays a list of cancelled classes.

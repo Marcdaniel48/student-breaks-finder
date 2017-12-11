@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Forecast;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Forecast;
 
 
 /**

@@ -1,8 +1,5 @@
 package roantrevormarcdanieltiffany.com.dawsonbestfinder;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +8,6 @@ import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Menu;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import roantrevormarcdanieltiffany.com.dawsonbestfinder.beans.Teacher;
+import roantrevormarcdanieltiffany.com.dawsonbestfinder.entities.Teacher;
 
 /**
  * Menu Activity containing about, and settings items

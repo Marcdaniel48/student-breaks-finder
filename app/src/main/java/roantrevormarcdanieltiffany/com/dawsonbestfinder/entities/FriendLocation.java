@@ -1,4 +1,4 @@
-package roantrevormarcdanieltiffany.com.dawsonbestfinder.beans;
+package roantrevormarcdanieltiffany.com.dawsonbestfinder.entities;
 
 /**
  * Bean class representing the current location of a user --> current course & section.
