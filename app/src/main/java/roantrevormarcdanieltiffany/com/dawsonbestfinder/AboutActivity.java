@@ -11,6 +11,11 @@ import android.widget.TextView;
 
 /**
  * Java class for the About activity.
+ *
+ * @author Tiffany Le-Nguyen
+ * @author Roan Chamberlain
+ * @author Marc-Daniel Dialogo
+ * @author Trevor Eames
  */
 public class AboutActivity extends Activity
 {
